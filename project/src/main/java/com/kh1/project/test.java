@@ -11,7 +11,7 @@ public class test {
 =======
 
 		int cc =20;
-	
+		int d =20;
 
 		
 >>>>>>> refs/remotes/origin/main
