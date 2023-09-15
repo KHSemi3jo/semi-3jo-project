@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>나의 홈페이지</title>
+<title>고기어때</title>
 
 <!-- css 파일을 불러오는 코드 -->
 
