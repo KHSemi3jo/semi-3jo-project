@@ -19,11 +19,11 @@ td {
 	text-align: center;
 }
 </style>
-<a href="/notice/list">공지사항 목록</a>
+<button><a href="/notice/list">공지사항 목록</a></button>
 <br>
-<a href="/notice/fix?noticeNo=${noticeDto.noticeNo}">공지사항 수정</a>
+<button><a href="/notice/fix?noticeNo=${noticeDto.noticeNo}">공지사항 수정</a></button>
 <br>
-<a href="/notice/delete?noticeNo=${noticeDto.noticeNo}">공지사항 삭제</a>
+<button><a href="/notice/delete?noticeNo=${noticeDto.noticeNo}">공지사항 삭제</a></button>
 
 
 <div class="container w-600">

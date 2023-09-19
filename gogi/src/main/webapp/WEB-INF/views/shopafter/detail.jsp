@@ -19,11 +19,11 @@ td {
 	text-align: center;
 }
 </style>
-<a href="/shopafter/list">쇼핑후기 목록</a>
+<button><a href="/shopafter/list">쇼핑후기 목록</a></button>
 <br>
-<a href="/shopafter/fix?shopAfterNo=${shopAfterDto.shopAfterNo}">쇼핑후기 수정</a>
+<button><a href="/shopafter/fix?shopAfterNo=${shopAfterDto.shopAfterNo}">쇼핑후기 수정</a></button>
 <br>
-<a href="/shopafter/delete">쇼핑후기 삭제</a>
+<button><a href="/shopafter/delete">쇼핑후기 삭제</a></button>
 
 
 <div class="container w-600">

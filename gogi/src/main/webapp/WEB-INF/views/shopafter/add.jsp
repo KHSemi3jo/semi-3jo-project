@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<a href="/shopafter/list">쇼핑후기 목록</a>
-<a href="/shopafter/delete">쇼핑후기 삭제</a>
+<button><a href="/shopafter/list">쇼핑후기 목록</a></button>
+
 
 
 <div class="container w-600">

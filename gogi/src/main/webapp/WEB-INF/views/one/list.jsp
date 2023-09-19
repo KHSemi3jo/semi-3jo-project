@@ -20,10 +20,10 @@ td {
 }
 </style>
 
-<a href="/one/add">1대1 등록</a>
+<button><a href="/one/add">1대1 등록</a></button>
 <br>
-<a href="/one/delete">1대1 삭제</a>
-<table>
+
+<table class="w-600">
 	<div class="container w-600">
 		<div class="row">
 			<h1>1대1 목록1</h1>
