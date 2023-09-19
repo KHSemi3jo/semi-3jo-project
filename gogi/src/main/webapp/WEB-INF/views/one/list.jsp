@@ -26,7 +26,7 @@ td {
 <table>
 	<div class="container w-600">
 		<div class="row">
-			<h1>1대1 목록</h1>
+			<h1>1대1 목록1</h1>
 		</div>
 		<tr>
 			<th>1대1 번호</th>
