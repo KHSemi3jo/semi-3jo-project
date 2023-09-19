@@ -20,27 +20,27 @@ td {
 }
 </style>
 
-<a href="/one/add">1대1 등록</a>
+<a href="/notice/add">공지사항 등록</a>
 <br>
-<a href="/one/delete">1대1 삭제</a>
+<a href="/notice/delete">공지사항 삭제</a>
 <table>
 	<div class="container w-600">
 		<div class="row">
-			<h1>1대1 목록1</h1>
+			<h1>공지 사항 목록</h1>
 		</div>
 		<tr>
-			<th>1대1 번호</th>
-			<th>1대1 제목</th>
-			<th>1대1 내용</th>
+			<th>공지사항 번호</th>
+			<th>공지사항 제목</th>
+			<th>공지사항 내용</th>
 			<th>삭제</th>
 		</tr>
 
-		<c:forEach var="OneOnOneDto" items="${list}">
+		<c:forEach var="noticeDto" items="${list}">
 			<tr>
-				<td>${OneOnOneDto.oneNo}</td>
-				<td><a href="detail?oneNo=${OneOnOneDto.oneNo}">${OneOnOneDto.oneTitle}</a></td>
-				<td>${OneOnOneDto.oneContent}</td>
-				<td><a href="delete?oneNo=${OneOnOneDto.oneNo}">삭제</a></td>
+				<td>${noticeDto.noticeNo}</td>
+				<td><a href="detail?noticeNo=${noticeDto.noticeNo}">${noticeDto.noticeTitle}</a></td>
+				<td>${noticeDto.noticeContent}</td>
+				<td><a href="delete?noticeNo=${noticeDto.noticeNo}">삭제</a></td>
 			</tr>
 		</c:forEach>
 
