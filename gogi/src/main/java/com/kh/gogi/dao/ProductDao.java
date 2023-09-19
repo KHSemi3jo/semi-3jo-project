@@ -11,7 +11,7 @@ public interface ProductDao {
 	ProductDto selectOne(int productNo);
 	boolean delete(int productNo);
 	boolean update(ProductDto productDto);
-	List<ProductDto>selectList();
+	List<ProductDto> selectList();
 	
 	void connect(int productNo, int attachNo);
 	AttachDto findImage(int productNo);
