@@ -28,19 +28,21 @@ td {
 		<div class="row">
 			<h1>쇼핑 후기 목록</h1>
 		</div>
-	<tr>
-		<th>쇼핑후기 번호</th>
-		<th>쇼핑후기 제목</th>
-		<th>쇼핑후기 내용</th>
-	</tr>
-
-	<c:forEach var="shopAfterDto" items="${list}">
 		<tr>
-			<td>${shopAfterDto.shopAfterNo}</td>
-			<td><a href="detail?shopAfterNo=${shopAfterDto.shopAfterNo}">${shopAfterDto.shopAfterName}</a></td>
-			<td>${shopAfterDto.shopAfterContent}</td>
+			<th>쇼핑후기 번호</th>
+			<th>쇼핑후기 제목</th>
+			<th>쇼핑후기 내용</th>
+			<th>삭제</th>
 		</tr>
-	</c:forEach>
+
+		<c:forEach var="shopAfterDto" items="${list}">
+			<tr>
+				<td>${shopAfterDto.shopAfterNo}</td>
+				<td><a href="detail?shopAfterNo=${shopAfterDto.shopAfterNo}">${shopAfterDto.shopAfterName}</a></td>
+				<td>${shopAfterDto.shopAfterContent}</td>
+				<td><a href="delete?shopAfterNo=${shopAfterDto.shopAfterNo}">삭제</a></td>
+			</tr>
+		</c:forEach>
 
 	</div>
 </table>
