@@ -19,27 +19,27 @@ td {
 	text-align: center;
 }
 </style>
-<a href="/one/list">1대1 목록</a>
+<a href="/notice/list">공지사항 목록</a>
 <br>
-<a href="/one/fix?oneNo=${oneOnOneDto.oneNo}">1대1 수정</a>
+<a href="/notice/fix?noticeNo=${noticeDto.noticeNo}">공지사항 수정</a>
 <br>
-<a href="/one/delete?oneNo=${oneOnOneDto.oneNo}"">1대1 삭제</a>
+<a href="/notice/delete?noticeNo=${noticeDto.noticeNo}">공지사항 삭제</a>
 
 
 <div class="container w-600">
 	<div class="row">
-		<h1>1대1 상세</h1>
+		<h1>공지사항 상세</h1>
 	</div>
 	<table border="1" style="border-color: black;">
 		<tr>
-			<th>1대1 번호</th>
-			<th>1대1 제목</th>
-			<th>1대1 내용</th>
+			<th>공지사항 번호</th>
+			<th>공지사항 제목</th>
+			<th>공지사항 내용</th>
 		</tr>
 	</table>
-	<td>${oneOnOneDto.oneNo}</td>
-	<td>${oneOnOneDto.oneTitle}</td>
-	<td>${oneOnOneDto.oneContent}</td>
+	<td>${noticeDto.noticeNo}</td>
+	<td>${noticeDto.noticeTitle}</td>
+	<td>${noticeDto.noticeContent}</td>
 </div>
 
 

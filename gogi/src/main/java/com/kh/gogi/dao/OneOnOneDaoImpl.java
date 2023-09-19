@@ -38,7 +38,7 @@ public class OneOnOneDaoImpl implements OneOnOneDao {
 
 	@Override
 	public boolean delete(int OneOnOneNo) {
-		String sql ="select * from OneOnOne where one_no =?";
+		String sql ="delete from OneOnOne where one_no =?";
 		Object[] data = {OneOnOneNo};
 		return tem.update(sql, data)>0;
 	}
@@ -59,7 +59,7 @@ public class OneOnOneDaoImpl implements OneOnOneDao {
 
 	@Override
 	public OneOnOneDto detail(int OneOnOneNo) {
-		String sql = "select * from OneOnOne where oneNo = ?";
+		String sql = "select * from OneOnOne where one_no = ?";
 		Object[] data = {OneOnOneNo};
 	 List<OneOnOneDto> list = tem.query(sql, oneOnOneMapper, data);
  		return list.isEmpty() ? null : list.get(0);

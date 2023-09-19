@@ -40,7 +40,7 @@ public class OneOnOneController {
 		int oneNo = oneOnOneDao.sequence();
 		oneOnOneDto.setOneNo(oneNo);
 		oneOnOneDao.add(oneOnOneDto);
-		return "redirect:detail?oneNo=" + oneNo;
+		return "redirect:detail?oneNo="+oneNo;
 	}
 
 	@RequestMapping("/detail")

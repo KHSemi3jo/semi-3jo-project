@@ -2,10 +2,26 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<style>
+table {
+	border: 1px solid black;
+	margin-left: auto;
+	margin-right: auto;
+}
 
+th {
+	border: 1px solid black;
+	text-align: center;
+}
+
+td {
+	border: 1px solid black;
+	text-align: center;
+}
+</style>
 <a href="/shopafter/list">쇼핑후기 목록</a>
 <br>
-<a href="/shopafter/fix?shopAfterNo=${shopafterDto.shopAfterNo}">쇼핑후기 수정</a>
+<a href="/shopafter/fix?shopAfterNo=${shopAfterDto.shopAfterNo}">쇼핑후기 수정</a>
 <br>
 <a href="/shopafter/delete">쇼핑후기 삭제</a>
 

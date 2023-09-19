@@ -34,7 +34,7 @@ public class ShopAfterDaoImpl implements ShopAfterDao {
 
 	@Override
 	public boolean delete(int shopAfterNo) {
-		String sql ="select * from shopAfter where shopAfter_no =?";
+		String sql ="delete from shopAfter where shopAfter_no =?";
 		Object[] data = {shopAfterNo};
 		return tem.update(sql, data)>0;
 	}
