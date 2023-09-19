@@ -20,27 +20,28 @@ td {
 }
 </style>
 
-<button><a href="/shopafter/add">쇼핑후기 등록</a><button>
+<button><a href="/qna/add">Qna 등록</a></button>
 <br>
 
 <table class="w-600">
-	<div class="container">
+	<div class="container ">
 		<div class="row">
-			<h1>쇼핑 후기 목록</h1>
+			<h1>자주하는 질문 목록</h1>
 		</div>
+		<div class="row w-100">
 		<tr>
-			<th>쇼핑후기 번호</th>
-			<th>쇼핑후기 제목</th>
-			<th>쇼핑후기 내용</th>
+			<th>Qna 번호</th>
+			<th>Qna 제목</th>
+			<th>Qna 내용</th>
 			<th>삭제</th>
 		</tr>
-
-		<c:forEach var="shopAfterDto" items="${list}">
+</div>
+		<c:forEach var="qnaDto" items="${list}">
 			<tr>
-				<td>${shopAfterDto.shopAfterNo}</td>
-				<td><a href="detail?shopAfterNo=${shopAfterDto.shopAfterNo}">${shopAfterDto.shopAfterName}</a></td>
-				<td>${shopAfterDto.shopAfterContent}</td>
-				<td><a href="delete?shopAfterNo=${shopAfterDto.shopAfterNo}">삭제</a></td>
+				<td>${qnaDto.qnaNo}</td>
+				<td><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></td>
+				<td>${qnaDto.qnaAnswer}</td>
+				<td><a href="delete?qnaNo=${qnaDto.qnaNo}">삭제</a></td>
 			</tr>
 		</c:forEach>
 

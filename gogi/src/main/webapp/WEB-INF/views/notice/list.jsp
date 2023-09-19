@@ -20,11 +20,11 @@ td {
 }
 </style>
 
-<a href="/notice/add">공지사항 등록</a>
+<button><a href="/notice/add">공지사항 등록</a></button>
 <br>
-<a href="/notice/delete">공지사항 삭제</a>
-<table>
-	<div class="container w-600">
+
+<table class="w-600">
+	<div class="container ">
 		<div class="row">
 			<h1>공지 사항 목록</h1>
 		</div>

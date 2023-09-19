@@ -19,27 +19,27 @@ td {
 	text-align: center;
 }
 </style>
-<button><a href="/one/list">1대1 목록</a></button>
+<button><a href="/qna/list">Qna 목록</a></button>
 <br>
-<button><a href="/one/fix?oneNo=${oneOnOneDto.oneNo}">1대1 수정</a></button>
+<button><a href="/qna/fix?qnaNo=${qnaDto.qnaNo}">Qna 수정</a></button>
 <br>
-<button><a href="/one/delete?oneNo=${oneOnOneDto.oneNo}"">1대1 삭제</a></button>
+<button><a href="/qna/delete?qnaNo=${qnaDto.qnaNo}"">Qna 삭제</a></button>
 
 
 <div class="container w-600">
 	<div class="row">
-		<h1>1대1 상세</h1>
+		<h1>Qna 상세</h1>
 	</div>
 	<table border="1" style="border-color: black;">
 		<tr>
-			<th>1대1 번호</th>
-			<th>1대1 제목</th>
-			<th>1대1 내용</th>
+			<th>Qna 번호</th>
+			<th>Qna 제목</th>
+			<th>Qna 내용</th>
 		</tr>
 	</table>
-	<td>${oneOnOneDto.oneNo}</td>
-	<td>${oneOnOneDto.oneTitle}</td>
-	<td>${oneOnOneDto.oneContent}</td>
+	<td>${qnaDto.qnaNo}</td>
+	<td>${qnaDto.qnaTitle}</td>
+	<td>${qnaDto.qnaAnswer}</td>
 </div>
 
 
