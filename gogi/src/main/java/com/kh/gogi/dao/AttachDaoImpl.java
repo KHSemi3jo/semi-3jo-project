@@ -31,7 +31,7 @@ public class AttachDaoImpl implements AttachDao {
 		String sql = "insert into attach( "
 						+ "attach_no, attach_name, "
 						+ "attach_size, attach_type) "
-						+ "values(?,?,?,?";
+						+ "values(?,?,?,?)";
 		Object[] data = {
 				attachDto.getAttachNo(),attachDto.getAttachName(),
 				attachDto.getAttachSize(),attachDto.getAttachType()
