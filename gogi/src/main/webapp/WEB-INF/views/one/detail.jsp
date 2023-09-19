@@ -3,11 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<a href="/OneOnOne/list">1대1 목록</a>
+<a href="/one/list">1대1 목록</a>
 <br>
-<a href="/OneOnOne/fix?oneNo=${OneOnOneDto.oneNo}">1대1 수정</a>
+<a href="/one/fix?oneNo=${OneOnOneDto.oneNo}">1대1 수정</a>
 <br>
-<a href="/OneOnOne/delete">1대1 삭제</a>
+<a href="/one/delete?oneNo=${OneOnOneDto.oneNo}"">1대1 삭제</a>
 
 
 <div class="container w-600">

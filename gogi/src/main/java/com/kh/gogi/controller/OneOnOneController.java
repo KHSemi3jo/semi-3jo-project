@@ -16,7 +16,7 @@ import com.kh.gogi.dto.OneOnOneDto;
 import com.kh.gogi.mapper.OneOnOneMapper;
 
 @Controller
-@RequestMapping("/OneOnOne")
+@RequestMapping("/one")
 public class OneOnOneController {
 	@Autowired
 	OneOnOneDao oneOnOneDao;
@@ -27,12 +27,12 @@ public class OneOnOneController {
 	private String list(Model model) {
 		List<OneOnOneDto> list = oneOnOneDao.list();
 		model.addAttribute("list", list);
-		return "WEB-INF/views/one/list.jsp";
+		return "/WEB-INF/views/one/list.jsp";
 	}
 
 	@GetMapping("/add")
 	private String add() {
-		return "WEB-INF/views/one/add.jsp";
+		return "/WEB-INF/views/one/add.jsp";
 	}
 
 	@PostMapping("/add")
@@ -47,14 +47,14 @@ public class OneOnOneController {
 	private String detail(@RequestParam int oneNo, Model model) {
 		OneOnOneDto oneOnOneDto = oneOnOneDao.detail(oneNo);
 		model.addAttribute("oneOnOneDto", oneOnOneDto);
-		return "WEB-INF/views/one/detail.jsp";
+		return "/WEB-INF/views/one/detail.jsp";
 	}
 
 	@GetMapping("/fix")
 	private String fix(@RequestParam int oneNo, Model model) {
 		OneOnOneDto oneOnOneDto = oneOnOneDao.detail(oneNo);
 		model.addAttribute("oneOnOneDto", oneOnOneDto);
-		return "WEB-INF/views/one/fix.jsp";
+		return "/WEB-INF/views/one/fix.jsp";
 	}
 
 	@PostMapping("/fix")
