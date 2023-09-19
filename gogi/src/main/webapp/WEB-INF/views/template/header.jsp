@@ -46,7 +46,7 @@
     <main>
         <header>
             <div class="logo">
-                <a href="/main"><img src="./images/logo/GogiLogo-main.png"width=150 height="150"></a>
+                <a href="/main"><img src="/images/logo/GogiLogo-main.png"width=150 height="150"></a>
             </div>
             <div class="title flex-container ">
                 <div class="row input-search">
