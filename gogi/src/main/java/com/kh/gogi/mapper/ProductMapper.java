@@ -1,0 +1,28 @@
+package com.kh.gogi.mapper;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
+
+import com.kh.gogi.dto.ProductDto;
+
+@Component
+public class ProductMapper implements RowMapper<ProductDto> {
+
+	@Override
+	public ProductDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+		ProductDto productDto= new ProductDto();
+		productDto.setProductNo(rs.getInt("product_no"));
+		productDto.setProductName(rs.getString("product_name"));
+		productDto.setProductPrice(rs.getInt("product_price"));
+		productDto.setProductWeight(rs.getInt("product_weight"));
+		productDto.setProductOrigin(rs.getString("product_origin"));
+		productDto.setProductExprie(rs.getDate("product_expire"));
+		productDto.setProductType(rs.getString("product_type"));
+		productDto.setProductDate(rs.getDate("product_date"));
+		return productDto;
+	}
+
+}
