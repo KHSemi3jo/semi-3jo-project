@@ -57,7 +57,7 @@ public class ProductController {
 				int attachNo = attachDao.sequence();
 				
 				String home=System.getProperty("user.home");
-				File dir = new File(home, "upload");
+				File dir = new File(home, "Gogi");
 				dir.mkdirs();
 				File target = new File(dir, String.valueOf(attachNo));
 				attach.transferTo(target);
@@ -85,7 +85,7 @@ public class ProductController {
 				return ResponseEntity.notFound().build();//파일번호가 없으면 404 반환
 			}
 			String home=System.getProperty("user.home");
-			File dir = new File(home, "upload");
+			File dir = new File(home, "Gogi");
 			File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
 			
 			byte[] data = FileUtils.readFileToByteArray(target);//실제 파일 불러오기
