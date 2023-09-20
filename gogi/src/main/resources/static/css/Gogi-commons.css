@@ -44,35 +44,22 @@
     버튼 메인 색상
 */
 
-.form-input, 
-.btn-orange 
+.btn.btn-orange 
 {
-    /* a 태그 때문에 추가한 속성 */
-    display: inline-block;
-    text-decoration: none;
-    vertical-align: bottom;
-
-    font-size: 20px;
-    padding: 0.5em 1em;
-    outline: none; /*outline은 입력 창 선택 시 강조 효과 */
-    border: 1px solid #FA9F5F;
-    border-radius: 0.1em;
-    line-height: 1.2em;
+ font-weight: bold;
+    border-color: #FA9F5F;
+    background-color: #FA9F5F;
+    color: white;
+    cursor: pointer;
 }
-.form-input, 
-.btn-navy 
-{
-    /* a 태그 때문에 추가한 속성 */
-    display: inline-block;
-    text-decoration: none;
-    vertical-align: bottom;
 
-    font-size: 20px;
-    padding: 0.5em 1em;
-    outline: none; /*outline은 입력 창 선택 시 강조 효과 */
-    border: 1px solid #012D5C;
-    border-radius: 0.1em;
-    line-height: 1.2em;
+.btn.btn-navy 
+{
+   font-weight: bold;
+    border-color: #012D5C;
+    background-color: #012D5C;
+    color: white;
+    cursor: pointer;
 }
 
 /*
