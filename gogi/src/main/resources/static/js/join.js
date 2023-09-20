@@ -37,9 +37,6 @@ $(function(){
                         status.memberId = false;
                     }
                 },
-                error : function(){
-                    alert("서버와의 통신이 원활하지 않습니다");
-                }
             });
         }
         else{//유효하지 않다면(1차 실패)
