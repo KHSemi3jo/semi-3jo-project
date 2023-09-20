@@ -70,7 +70,7 @@ public class ProductDaoImpl implements ProductDao {
 		String sql="select p.*, pd.attach_no from "
 				+ " product p left outer join product_image pd "
 				+ " on p.product_no = pd.product_no "
-				+ " where product_no=?";
+				+ " where p.product_no=?";
 		Object[] data = {productNo};
 		List<ProductDto>list = jdbcTemplate.query(sql, productMapper, data);
 		return list.isEmpty() ? null : list.get(0);
@@ -79,10 +79,10 @@ public class ProductDaoImpl implements ProductDao {
 //	상품 목록조회
 	@Override
 	public List<ProductDto> selectList() {
-		String sql = "select p.* , pd.attach_no from "
+		String sql = "select  p.*, pd.attach_no from "
 				+ " product p left outer join product_image pd "
-				+ " on p.product_no = pd.product_no "
-				+ " order by product_no asc";
+				+ "on p.product_no = pd.product_no "
+				+ "order by p.product_no asc";
 		return jdbcTemplate.query(sql, productMapper);
 	}
 	
