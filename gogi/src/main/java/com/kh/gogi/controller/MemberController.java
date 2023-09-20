@@ -192,7 +192,7 @@ public class MemberController {
 				//이메일 발송 코드
 				SimpleMailMessage message = new SimpleMailMessage();
 				message.setTo(findDto.getMemberEmail());
-				message.setSubject("비밀번호찾기결과");
+				message.setSubject("[고기어때]비밀번호찾기결과");
 				message.setText(findDto.getMemberPw());
 				sender.send(message);
 				
