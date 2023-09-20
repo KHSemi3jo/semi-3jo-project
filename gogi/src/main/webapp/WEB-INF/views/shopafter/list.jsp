@@ -20,7 +20,7 @@ td {
 }
 </style>
 
-<button><a href="/shopafter/add">쇼핑후기 등록</a><button>
+<button  class="btn btn-navy"><a href="/shopafter/add">쇼핑후기 등록</a></button>
 <br>
 
 <table class="w-600">
@@ -46,6 +46,36 @@ td {
 
 	</div>
 </table>
+
+
+<br><br><br><br>
+
+<div align="center" class="container">
+	<form  action="list" method="get">
+
+		<c:choose>
+			<c:when test="${param.type == 'shopAfterId'}">
+				<select name="type" 
+					required="required" class="form-input">
+					<option value="board_title">제목</option>
+					<option value="board_writer" selected="selected">작성자</option>
+				</select>
+			</c:when>
+			<c:otherwise>
+				<select name="type"
+					required="required" class="form-input">
+					<option value="board_title" selected="selected">제목</option>
+					<option value="board_writer">작성자</option>
+				</select>
+			</c:otherwise>
+		</c:choose>
+
+		<input type="search" name="keyword" required="required"
+			class="form-input" placeholder="검색하실 값을 입력해주세요"
+			value="${vo.keyword}">
+		<button class="btn btn-navy">검색</button>
+	</form>
+</div>
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

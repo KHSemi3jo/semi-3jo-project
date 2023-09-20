@@ -65,7 +65,7 @@ public class NoticeController {
 	private String fix(@ModelAttribute NoticeDto noticeDto) {
 		boolean result = noticeDao.fix(noticeDto);
 		if(result) {
-			return "redirect : detail?noticeNo=?"+noticeDto.getNoticeNo();
+			return "redirect:detail?noticeNo="+noticeDto.getNoticeNo();
 		}
 		else {
 			 return "redirect:error";
