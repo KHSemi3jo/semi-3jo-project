@@ -104,7 +104,7 @@ $(function(){
                 },
         });
     }
-        else {//형식이 유효하지 않다면(1차실패)
+       else {//형식이 유효하지 않다면(1차실패)
             $(e.target).removeClass("success fail fail2");  
             $(e.target).addClass("fail");
             status.memberNickname = false;
@@ -163,20 +163,20 @@ $(function(){
 });
             //페이지 이탈 방지
             //- window에 beforeunload 이벤트 설정
-            $(window).on("beforeunload", function(){
-                return false;
-            });
+            //$(window).on("beforeunload", function(){
+            //    return false;
+            //});
 
             //- form 전송할 때는 beforeunload 이벤트를 제거
-            $(".join-form").submit(function(e){
-                $(".form-input").blur();
-                console.table(status);
-                console.log(status.ok());
-                if(!status.ok()){
-                    e.preventDefault();
-                }
-            else{
-                $(window).off("beforeunload");
-            }
-    });
+           // $(".join-form").submit(function(e){
+             //   $(".form-input").blur();
+              //  console.table(status);
+              //  console.log(status.ok());
+              //  if(!status.ok()){
+             //       e.preventDefault();
+               // }
+           // else{
+              //  $(window).off("beforeunload");
+          //  }
+  //  });
 });

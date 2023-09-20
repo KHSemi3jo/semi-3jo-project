@@ -24,7 +24,8 @@ public class MemberMapper implements RowMapper<MemberDto> {
 		memberDto.setMemberAddr1(rs.getString("member_addr1"));
 		memberDto.setMemberAddr2(rs.getString("member_addr2"));
 		memberDto.setMemberLevel(rs.getString("member_level"));
-		memberDto.setMemberPoint(rs.getInt("member_point"));
+		memberDto.setMemberPoint(rs.getLong("member_point"));
+		memberDto.setMemberGmoney(rs.getLong("member_gmoney"));
 		memberDto.setMemberJoin(rs.getDate("member_join"));
 		memberDto.setMemberLogin(rs.getDate("member_login"));
 		memberDto.setMemberChange(rs.getDate("member_change"));
