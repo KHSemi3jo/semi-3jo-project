@@ -69,6 +69,7 @@
             z-index: 1;
         }
         .custom-service a {
+			text-decoration: none;
             display:inline-block;
             background-color: white;
             color: #012D5C;
@@ -84,7 +85,10 @@
         .etc-menu:hover{
             color: #FA9F5F;
         }
-                .member-menu{
+        .etc a{
+			text-decoration: none;
+		}
+       .member-menu{
             position: relative;
             display: inline-block;
         }

@@ -9,13 +9,13 @@
                     <h2>이 상품 어때요?</h2>
                 </div>
                 <div class="row">
-                    <img src="./images/main-body(sample-image).png"width="900">
+                    <img src="/images/main-body(sample-image).png"width="900">
                 </div>
                 <div class="row">
                     <h2>지금 가장 핫한 상품</h2>
                 </div>
                 <div class="row">
-                    <img src="./images/main-body(sample-image).png"width="900">
+                    <img src="/images/main-body(sample-image).png"width="900">
                 </div>
             </div>
       </section>

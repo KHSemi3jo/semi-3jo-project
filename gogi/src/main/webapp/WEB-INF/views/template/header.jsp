@@ -30,7 +30,9 @@
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <style>
-
+.btn.btn-search{
+	padding: 0.5em 0.7em;
+}
 </style>
 
 </head>
@@ -52,7 +54,7 @@
                 <div class="row input-search">
                     <input type="search" name="keyword" class="form-input search-navy" value="${param.keyword}" 
                                 placeholder="검색어를 입력해주세요" autocomplete="off">
-                    <button type="submit" class="btn btn-search"><i class="fa-solid fa-magnifying-glass navy"></i></button>
+                    <button type="submit" class="btn btn-search"><i class="fa-solid fa-magnifying-glass orange"></i></button>
                 </div>
             </div>
         <div class="etc">
@@ -72,8 +74,8 @@
 							                    </div>
 							                </div>								        	
 									</c:when>							        	
-						        	<%--비회원일시 보이는 etc 메뉴 --%>
 						        	<c:otherwise>     	
+						        	<%--비회원일시 보이는 etc 메뉴 --%>
 								            <%--비회원이 장바구니를 눌렀을 땐 로그인 화면으로 이동하거나 로그인 필요 팝업 --%>
 								                <div class="row pr-30"><a href="/basket/list"><i class="cart fa-solid fa-cart-shopping fa-xl navy"></i></a></div>
 										                <div class="row pr-20"><a href="/member/join" class="orange">회원가입</a></div>
@@ -101,6 +103,10 @@
                 <li><a href="#">신상품</a></li>
                 <li><a href="#">베스트</a></li>
                 <li><a href="#">알뜰쇼핑</a></li>
+                <%-- 관리자인 경우 추가 메뉴 출력 --%>
+	   				<c:if test = "${sessionScope.level == '관리자'}">
+	   					<li><a href="/admin/home">관리자메뉴</a></li>
+	   				</c:if>
             </ul>
         </nav>
         <section>

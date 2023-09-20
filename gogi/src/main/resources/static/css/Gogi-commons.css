@@ -34,6 +34,11 @@
     padding-right: 0px;
     border-color:#012D5C soild 1px;
 }
+.title.input-search{
+    padding-bottom: 0px;
+
+}
+
 /*
     고기 어때 
     버튼 메인 색상
@@ -91,6 +96,7 @@ ul.menu-orange li {
 ul.menu-orange li:hover {
     background-color: #cf9164;
 }
+
 ul.menu,
 ul.menu-navy ul
 {
@@ -105,17 +111,8 @@ ul.menu-navy li {
 
 /* 메뉴에 마우스가 올라가면 하이라이트 효과 */
 ul.menu-navy li:hover {
-    background-color: #194e86;
+   color: #FA9F5F;
 }
-
-
-
-
-
-
-
-
-
 
 
 * {
@@ -140,13 +137,15 @@ ul.menu-navy li:hover {
     - 최소 300px, 최대 1200px까지 100px 단위로 설정
     - 100부터는 비율(%)로 설정
 */
-.w-16, .col-6 { width:16.66666%; }
-.w-20, .col-5 { width:20%; }
-.w-25, .col-4 { width:25%; }
-.w-33, .col-3 { width:33.3333%; }
-.w-50, .col-2 { width:50%; }
-.w-75 { width:75%; }
-.w-100 { width:100%; }
+.w-16, .col-6 {width: 16.66666%; }
+.w-20, .col-5 {width: 20%; }
+.w-25, .col-4 {width: 25%; }
+.w-33, .col-3 {width: 33.3333%; }
+.w-40{width: 40%;}
+.w-50, .col-2 {width: 50%; }
+.w-60{width: 60%;}
+.w-75 {width: 75%; }
+.w-100 {width: 100%; }
 
 .w-300 { width:300px; }
 .w-400 { width:400px; }
@@ -268,22 +267,6 @@ textarea.form-input.fixed {
     filter:brightness(98%);
 }
 
-/*
-    버튼은 역할에 따라 구분
-    - 긍정버튼 - 페이지의 목적을 달성할 수 있도록 하는 버튼
-    - 중립버튼 - 페이지의 목적과 아무 상관 없는 버튼(기본값)
-    - 부정버튼 - 페이지의 목적을 달성할 수 없도록 하는 버튼
-*/
-.btn.btn-positive {
-    border-color: #0984e3;
-    background-color: #0984e3;
-    color: white;
-}
-.btn.btn-negative {
-    border-color: #e17055;
-    background-color: #e17055;
-    color: white;
-}
 
 /*
     간격 스타일(spacing)
@@ -334,6 +317,29 @@ textarea.form-input.fixed {
 .me-40 { margin-right: 40px;}
 .me-50 { margin-right: 50px;}
 
+.pt-10{padding-top: 10px;}
+.pt-20{padding-top: 20px;}
+.pt-30{padding-top: 30px;}
+.pt-40{padding-top: 40px;}
+.pt-50{padding-top: 50px;}
+
+.pb-10{padding-bottom: 10px;}
+.pb-20{padding-bottom: 20px;}
+.pb-30{padding-bottom: 30px;}
+.pb-40{padding-bottom: 40px;}
+.pb-50{padding-bottom: 50px;}
+
+.pl-10{padding-left: 10px;}
+.pl-20{padding-left: 20px;}
+.pl-30{padding-left: 30px;}
+.pl-40{padding-left: 40px;}
+.pl-50{padding-left: 50px;}
+
+.pr-10{padding-right: 10px;}
+.pr-20{padding-right: 20px;}
+.pr-30{padding-right: 30px;}
+.pr-40{padding-right: 40px;}
+.pr-50{padding-right: 50px;}
 
 /*
     테이블 디자인
@@ -349,6 +355,12 @@ textarea.form-input.fixed {
     border-spacing: 0px;
     border-collapse: collapse;
 }
+/* th, td{border: 1px solid #2d3436 ;}  아래와 같이 지정해야함.*/
+/* .table th,
+.table td{
+    border: 1px solid #2d3436 ;
+    padding: 0.25em;/*여백은 25%~35% 적당
+} */
 .table > thead > tr > th,
 .table > thead > tr > td,
 .table > tbody > tr > th, 
@@ -356,7 +368,7 @@ textarea.form-input.fixed {
 .table > tfoot > tr > th, 
 .table > tfoot > tr > td 
 {
-    padding:0.25em;
+    padding:0.25em;/*여백은 25%~35% 적당*/
 }
 
 /*
@@ -388,7 +400,7 @@ textarea.form-input.fixed {
 .table.table-stripe > thead {
     background-color: #dfe6e9;
 }
-.table.table-stripe > tbody > tr:nth-child(2n) {
+.table.table-stripe > tbody > tr:nth-child(2n) {/*짝수(2n) / 홀수라면 (2n-1)*/
     background-color: #dfe6e9;
 }
 
@@ -569,23 +581,6 @@ ul.menu > li {
     display: inline-block;
 }
 
-/* 색상 변경 및 크기 설정 */
-ul.menu,
-ul.menu ul
-{
-    font-size: 24px;
-    background-color: #2d3436;
-}
-ul.menu li {
-    color: white;
-    background-color: #2d3436;
-    width: 150px;
-}
-
-/* 메뉴에 마우스가 올라가면 하이라이트 효과 */
-ul.menu li:hover {
-    background-color: #636e72;
-}
 
 /* 
     1차메뉴의 아래쪽에 2차메뉴가 위치하도록 position 변경
@@ -597,7 +592,7 @@ ul.menu ul {
     position: absolute;
     z-index: 99999;
     top: 100%;
-    left: 0;
+    left: 0;/* 1차 메뉴 바로 아래 붙도록 배치 */
 }
 
 /*
@@ -613,6 +608,25 @@ ul.menu > li ul {
 ul.menu li:hover > ul {
     display: block;
 }
+
+/*메인 메뉴바 하단 메뉴 - 카테고리*/
+
+ul.menu-navy ul > li
+{
+    font-size: 20px;
+    background-color: white;
+}
+ul.menu-navy ul > li {
+    color: #012D5C;
+    background-color: white;
+    width: 150px;
+}
+
+/* 메뉴에 마우스가 올라가면 하이라이트 효과 */
+ul.menu-navy li:hover {
+   color: #FA9F5F;
+}
+
 
 /*
     a 태그에 말줄임표 처리 구현
@@ -657,9 +671,9 @@ ul.menu.fixed {
 /*
     추가 : 메뉴 Flex로 변경
 */
-ul.menu {
+/* ul.menu {
     display: flex;
-}
+} */
 ul.menu > .menu-right {
     margin-left: auto;
 }
@@ -741,7 +755,7 @@ a.link:hover
 
 .flex-container.allow-wrap,
 .inline-flex-container.allow-wrap
-{
+{/*줄바꿈 허용*/
     flex-wrap: wrap;
 }
 
@@ -820,8 +834,14 @@ a.link:hover
 .fail2
 {
     border-color: #d63031 !important;
+}
+.fail:not([type=date]), 
+.fail2:not([type=date])
+{
     background-image: url("../image/invalid.png");
     background-repeat: no-repeat;
+    /* background-position-x: right;
+    background-position-y: center; */
     background-position: center right 1em;
     background-size: 1em;
 }
