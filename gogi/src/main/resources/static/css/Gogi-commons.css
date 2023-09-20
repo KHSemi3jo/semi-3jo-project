@@ -793,7 +793,7 @@ a.link:hover
 .fail-feedback,
 .fail2-feedback
 {
-    color: #d63031;
+    color: #FA9F5F;
     display: none;
 }
 .success ~ .success-feedback {
@@ -820,7 +820,7 @@ a.link:hover
 .fail, 
 .fail2
 {
-    border-color: #d63031 !important;
+    border-color: #FA9F5F !important;
 }
 .fail:not([type=date]), 
 .fail2:not([type=date])

@@ -8,7 +8,7 @@ public interface ReplyDao {
 
 	int sequence();
 
-	public void insert(ReplyDto replyDto);
+	public void add(ReplyDto replyDto);
 
 	List<ReplyDto> selectList(int replyList);
 

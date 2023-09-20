@@ -20,7 +20,7 @@ td {
 }
 </style>
 
-<button><a href="/notice/add">공지사항 등록</a></button>
+<button  class="btn btn-navy"><a href="/notice/add">공지사항 등록</a></button>
 <br>
 
 <table class="w-600">

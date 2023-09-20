@@ -65,7 +65,7 @@ public class QnaController {
 	private String fix(@ModelAttribute QnaDto qnaDto) {
 		boolean result = qnaDao.fix(qnaDto);
 		if(result) {
-			return "redirect : detail?qnaNo=?"+qnaDto.getQnaNo();
+			return "redirect:detail?qnaNo="+qnaDto.getQnaNo();
 		}
 		else {
 			 return "redirect:error";

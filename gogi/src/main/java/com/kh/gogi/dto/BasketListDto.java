@@ -1,13 +1,13 @@
 package com.kh.gogi.dto;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-public class BasketDto {
+public class BasketListDto {
 	private int basketListNo;
 	private String basketMember;
 	private int basketCount;
-
+	private int productNo;
+	private String productName;
+	private int productPrice;
 }
