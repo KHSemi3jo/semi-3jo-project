@@ -19,7 +19,7 @@ public class ProductMapper implements RowMapper<ProductDto> {
 		productDto.setProductPrice(rs.getInt("product_price"));
 		productDto.setProductWeight(rs.getInt("product_weight"));
 		productDto.setProductOrigin(rs.getString("product_origin"));
-		productDto.setProductExprie(rs.getDate("product_expire"));
+		productDto.setProductExpire(rs.getDate("product_expire"));
 		productDto.setProductType(rs.getString("product_type"));
 		productDto.setProductDate(rs.getDate("product_date"));
 		return productDto;
