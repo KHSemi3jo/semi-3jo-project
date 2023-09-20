@@ -24,7 +24,7 @@
                 </div>
                 <div class="row">
                     <input type="password" name="memberPw" class="form-input"
-                        placeholder="아이디를 입력해주세요" >
+                        placeholder="비밀번호를 입력해주세요" >
                 </div>
                 <div class="row right">
                     <a href="findPw" class="link">비밀번호 찾기</a>
