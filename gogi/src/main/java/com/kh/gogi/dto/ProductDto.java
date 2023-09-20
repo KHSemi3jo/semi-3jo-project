@@ -14,4 +14,5 @@ public class ProductDto {
 	private Date productExpire;
 	private String productType;
 	private Date productDate;
+	private boolean image;
 }

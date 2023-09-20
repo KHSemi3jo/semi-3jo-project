@@ -3,6 +3,8 @@ package com.kh.gogi.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +25,8 @@ public class MemberController {
 	@Autowired
 	private MemberDao memberDao;
 	
-	
+	@Autowired
+	private JavaMailSender sender;
 	
 	@GetMapping("/join")
 	public String join() {
@@ -72,7 +75,8 @@ public class MemberController {
 			//로그인시간 갱신
 			memberDao.updateMemberLogin(inputDto.getMemberId());
 			//메인페이지로 이동
-			return "redirect:/"; //절대경로 - 자동으로 초기페이지로 이동
+//			return "redirect:/"; //절대경로 - 자동으로 초기페이지로 이동
+			return "/WEB-INF/views/member/join.jsp";
 		}
 		//[4]비밀번호가 일치하지 않으면 로그인페이지로 이동
 	else {
@@ -116,9 +120,9 @@ public class MemberController {
 		return "/WEB-INF/views/member/passwordFinish.jsp";
 	}
 	
-	//개인정보 변경
+//	//개인정보 변경
 		@GetMapping("/change")
-		public String nickname(HttpSession session, Model model) {
+		public String name(HttpSession session, Model model) {
 			String memberId = (String) session.getAttribute("name");
 			MemberDto memberDto = memberDao.selectOne(memberId);
 			model.addAttribute("memberDto", memberDto);
@@ -176,31 +180,31 @@ public class MemberController {
 		public String findPw() {
 			return "/WEB-INF/views/member/findPw.jsp";
 		}
-//		
-//		@PostMapping("/findPw")
-//		public String findPw(@ModelAttribute MemberDto memberDto) {
-//			//[1] 아이디로 모든 정보를 불러오고
-//			MemberDto findDto = memberDao.selectOne(memberDto.getMemberId());
-//			//[2] 이메일이 일치하는지 확인한다
-//			boolean isValid = findDto != null  //아이디 존재+이메일 일치;
-//						&& findDto.getMemberEmail().equals(memberDto.getMemberEmail());
-//			if(isValid) { //이메일이 같다면
-//				//이메일 발송 코드
-//				SimpleMailMessage message = new SimpleMailMessage();
-//				message.setTo(findDto.getMemberEmail());
-//				message.setSubject("비밀번호찾기결과");
-//				message.setText(findDto.getMemberPw());
-//				sender.send(message);
-//				
-//				return "redirect:findPwFinish";
-//				
-//			}
-//			else { //이메일이 다르다면
-//				return "redirect:findPw?error";
-//			}
-//		}
-//		@RequestMapping("/findPwFinish")
-//		public String findPwFinish() {
-//			return "/WEB-INF/views/member/findPwFinish.jsp";
-//		}
+		
+		@PostMapping("/findPw")
+		public String findPw(@ModelAttribute MemberDto memberDto) {
+			//[1] 아이디로 모든 정보를 불러오고
+			MemberDto findDto = memberDao.selectOne(memberDto.getMemberId());
+			//[2] 이메일이 일치하는지 확인한다
+			boolean isValid = findDto != null  //아이디 존재+이메일 일치;
+						&& findDto.getMemberEmail().equals(memberDto.getMemberEmail());
+			if(isValid) { //이메일이 같다면
+				//이메일 발송 코드
+				SimpleMailMessage message = new SimpleMailMessage();
+				message.setTo(findDto.getMemberEmail());
+				message.setSubject("[고기어때]비밀번호찾기결과");
+				message.setText(findDto.getMemberPw());
+				sender.send(message);
+				
+				return "redirect:findPwFinish";
+				
+			}
+			else { //이메일이 다르다면
+				return "redirect:findPw?error";
+			}
+		}
+		@RequestMapping("/findPwFinish")
+		public String findPwFinish() {
+			return "/WEB-INF/views/member/findPwFinish.jsp";
+		}
 	}

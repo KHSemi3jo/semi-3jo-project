@@ -37,9 +37,6 @@ $(function(){
                         status.memberId = false;
                     }
                 },
-                error : function(){
-                    alert("서버와의 통신이 원활하지 않습니다");
-                }
             });
         }
         else{//유효하지 않다면(1차 실패)
@@ -48,40 +45,7 @@ $(function(){
             status.memberId = false;
         }
     });
-    $("[name=memberName]").blur(function(e){
-        var regex =  /^[가-힣]{2,7}$/;
-        var isValid = regex.test($(e.target).val());
 
-        
-        if(isValid){// 형식 통과
-            $.ajax({
-                url:"http://localhost:8080/rest/member/nickCheck",
-                method:"post",
-                data: {memberName : $(e.target).val()},
-                success : function(response){
-                    $(e.target).removeClass("success fail fail2");
-                    if(response == "Y"){//사용 가능한 닉네임
-                        $(e.target).addClass("success");
-                        status.memberNname = true;
-                    }
-                    else{//이미 사용중인 닉네임
-                        $(e.target).addClass("fail2");
-                        status.memberName = false;
-                    }
-                },
-                error : function(){
-                    alert("서버와의 통신이 원활하지 않습니다");
-
-                }
-            });
-        }
-        else{//유효하지 않다면(1차 실패)
-            $(e.target).removeClass("success fail fail2");
-            $(e.target).addClass("fail");
-            status.memberName = false;
-        }
-       
-    });
     $("[name=memberPw]").blur(function(){
         var regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z0-9!@#$]{8,16}$/;
         var isValid = regex.test($(this).val());
@@ -91,6 +55,7 @@ $(function(){
          //비밀번호 확인창에 강제로 blur이벤트를 발생시킨다(트리거)
          $("#password-check").blur();//너무 많으면 혼돈~ 한 두개 정도에 적용
     });
+
     $("#password-check").blur(function(){
         var originPw = $("[name=memberPw]").val();
         var checkPw = $(this).val();
@@ -108,6 +73,14 @@ $(function(){
             status.pwCheck = false;
         }
     });
+
+    $("[name=memberName]").blur(function(){
+        var regex =  /^[가-힣]{2,7}$/;
+        var isValid =$(this).val() == "" || regex.test($(this).val());
+        $(this).removeClass("success fail");
+        $(this).addClass(isValid ? "success" : "fail");
+         status.memberName = isValid;
+    });
     $("[name=memberEmail]").blur(function(){
         var regex =  /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
         var isValid =$(this).val() == "" || regex.test($(this).val());
@@ -116,7 +89,7 @@ $(function(){
          status.memberEmail = isValid;
     });
     $("[name=memberContact]").blur(function(){
-        var regex =  /^010[1-9][0-9]{7}$/;
+        var regex = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
         var contact = $(this).val();
         var isValid =contact.length == 0 || regex.test(contact);
         $(this).removeClass("success fail");

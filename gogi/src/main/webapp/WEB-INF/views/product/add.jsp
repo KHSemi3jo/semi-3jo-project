@@ -4,7 +4,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
   <!-- javascript 작성 공간-->
-    <script>
+   <script>
       $(function(){
             $(".btn-save").click(function(){
                 var input =$(".file-chooser")[0];
@@ -14,28 +14,28 @@
                 form.append("attach",input.files[0]);
 
                 $.ajax({
-                    url:"http://localhost:8080/restfile/Gogi",
+                    url:"http://localhost:8080/Gogi",
                     method:"post",
                     processData:false,
                     contentType:false,
                     data:form,
                     success:function(response){
-                        $("img").attr("src", "http://localhost:8080/restfile/download?attachNo="+response.attachNo);
+                        $("img").attr("src", "http://localhost:8080/download?attachNo="+response.attachNo);
                     },
                 });
             });
-        });
+        }); 
     </script>
 
 
-<form action="add" method="post" autocomplete="off">
+<form action="add" method="post" enctype="multipart/form-data" autocomplete="off">
 <div class="container w-600">
 	<div class="row">
 		<h1> 상품 등록</h1>
 	</div>
      <div class="row left">
      <label>상품이미지</label>
-     	 <input type="file" name="attach" accept="image/*">
+     	 <input type="file" class="file-chooser" name="attach" accept="image/*">
     </div>
      <div class="row left">
      <label>상품이름</label>
