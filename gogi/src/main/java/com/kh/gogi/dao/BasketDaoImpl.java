@@ -11,7 +11,6 @@ import com.kh.gogi.mapper.BasketListMapper;
 
 @Component
 public class BasketDaoImpl implements BasketDao{
-	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
