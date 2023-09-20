@@ -21,6 +21,7 @@ public class ShopAfterMapper implements RowMapper<ShopAfterDto>{
 		shopAfterDto.setShopAfterId(rs.getString("shopAfter_id"));
 		shopAfterDto.setShopAfterLike(rs.getInt("shopAfter_like"));
 		shopAfterDto.setShopAfterNo(rs.getInt("shopAfter_no"));
+		shopAfterDto.setShopReplycount(rs.getInt("shopAfter_replycount"));
 		
 		return shopAfterDto;
 	}

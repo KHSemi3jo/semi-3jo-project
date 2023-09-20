@@ -24,17 +24,18 @@ public class ReplyDaoImpl implements ReplyDao {
 	}
 
 	@Override
-	public void insert(ReplyDto replyDto) {
-		String sql = "insert into reply(reply_no, reply_writer, reply_content, reply_origin) " + "values(?,?,?,?)";
+	public void add(ReplyDto replyDto) {
+		String sql = "insert into reply(reply_no, reply_writer, reply_content, reply_origin) "
+				+ "values(?, ?, ?, ?)";
 		Object[] data = { replyDto.getReplyNo(), replyDto.getReplyWriter(), replyDto.getReplyContent(),
-				replyDto.getReplyOrigin() };
+				replyDto.getReplyOrigin()};
 		tem.update(sql, data);
 
 	}
 
 	@Override
 	public List<ReplyDto> selectList(int replyOrigin) {
-		String sql = "select * from reply where reply_no = ? order by asc";
+		String sql = "select * from reply where reply_origin = ? order by reply_no asc";
 		Object[] data = {replyOrigin};
 		return tem.query(sql,replyMapper,data);
 	}

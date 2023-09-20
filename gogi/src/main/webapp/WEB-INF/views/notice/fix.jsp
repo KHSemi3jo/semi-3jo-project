@@ -11,14 +11,15 @@
 	<div class="row">
 		<h1>공지사항 수정</h1>
 	</div>
-	<form action="add" method="post">
+	<form action="fix" method="post">
 		<div class="row">
-			제목 : <input type="text" required class="form-input"
+			<input type="hidden" name="noticeNo" value="${noticeDto.noticeNo}">
+			제목 : <input type="text" required class="form-input" name="noticeTitle"
 				value="${noticeDto.noticeTitle}">
 		</div>
 		<div class="row ">
 			내용 :
-			<textarea class="form-input w-100" cols="30" rows="10">${noticeDto.noticeContent}</textarea>
+			<textarea name="noticeContent" class="form-input w-100" cols="30" rows="10">${noticeDto.noticeContent}</textarea>
 		</div>
 		<div class="row">
 			<button type="submit" class="btn w-100 btn-navy">등록</button>

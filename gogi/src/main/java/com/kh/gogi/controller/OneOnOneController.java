@@ -61,9 +61,9 @@ public class OneOnOneController {
 	private String fix(@ModelAttribute OneOnOneDto oneOnOneDto) {
 		boolean result = oneOnOneDao.fix(oneOnOneDto);
 		if (result) {
-			return "rediect : detail?oneNo=" + oneOnOneDto.getOneNo();
+			return "redirect:detail?oneNo=" + oneOnOneDto.getOneNo();
 		} else {
-			return "rediect : error";
+			return "redirect:error";
 		}
 	}
 
@@ -71,7 +71,7 @@ public class OneOnOneController {
 	private String delete(@RequestParam int oneNo) {
 		boolean result = oneOnOneDao.delete(oneNo);
 		if (result) {
-			return "redirect : list";
+			return "redirect:list";
 		} else {
 			return "redirect:error";
 		}

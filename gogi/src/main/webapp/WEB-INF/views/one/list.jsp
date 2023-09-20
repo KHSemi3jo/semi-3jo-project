@@ -20,7 +20,7 @@ td {
 }
 </style>
 
-<button><a href="/one/add">1대1 등록</a></button>
+<button  class="btn btn-navy"><a href="/one/add">1대1 등록</a></button>
 <br>
 
 <table class="w-600">
