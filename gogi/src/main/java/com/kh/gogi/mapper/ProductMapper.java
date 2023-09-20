@@ -22,6 +22,7 @@ public class ProductMapper implements RowMapper<ProductDto> {
 		productDto.setProductExpire(rs.getDate("product_expire"));
 		productDto.setProductType(rs.getString("product_type"));
 		productDto.setProductDate(rs.getDate("product_date"));
+		productDto.setImage(rs.getObject("attach_no")!=null);
 		return productDto;
 	}
 
