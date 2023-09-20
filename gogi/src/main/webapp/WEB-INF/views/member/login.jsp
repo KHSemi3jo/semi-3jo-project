@@ -30,7 +30,7 @@
                     <a href="findPw" class="link">비밀번호 찾기</a>
                 </div>
                 <div class="row">
-                    <button class="btn btn-orange w-100">로그인</button>
+                    <button class="btn btn-orange w-100" type="submit">로그인</button>
                 </div>
                 <div class="row">
                     <button class="btn w-100">회원가입</button>

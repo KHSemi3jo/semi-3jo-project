@@ -66,8 +66,8 @@ public class MemberController {
 			MemberBlockDto blockDto = memberDao.selectBlockOne(findDto.getMemberId());
 			
 			if(blockDto != null) {//차단된 회원이라면
-//				return "redirect:오류페이지";
-				throw new AuthorityException("차단된 회원");
+				return "redirect:오류페이지";
+				//throw new AuthorityException("차단된 회원");
 			}
 			//세션에 아이디 + 등급 저장
 			session.setAttribute("name", findDto.getMemberId());
