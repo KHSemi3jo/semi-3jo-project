@@ -16,7 +16,7 @@ public class MemberListMapper implements RowMapper<MemberListDto>{
 		MemberListDto memberListDto = new MemberListDto();
 		memberListDto.setMemberId(rs.getString("member_id"));
 		memberListDto.setMemberPw(rs.getString("member_pw"));
-		memberListDto.setMemberNickname(rs.getString("member_nickname"));
+		memberListDto.setMemberName(rs.getString("member_name"));
 		memberListDto.setMemberEmail(rs.getString("member_email"));
 		memberListDto.setMemberContact(rs.getString("member_contact"));
 		memberListDto.setMemberBirth(rs.getString("member_birth"));
@@ -24,11 +24,12 @@ public class MemberListMapper implements RowMapper<MemberListDto>{
 		memberListDto.setMemberAddr1(rs.getString("member_addr1"));
 		memberListDto.setMemberAddr2(rs.getString("member_addr2"));
 		memberListDto.setMemberLevel(rs.getString("member_level"));
-		memberListDto.setMemberPoint(rs.getInt("member_point"));
+		memberListDto.setMemberPoint(rs.getLong("member_point"));
+		memberListDto.setMemberGmoney(rs.getLong("member_gmoney"));
 		memberListDto.setMemberJoin(rs.getDate("member_join"));
 		memberListDto.setMemberLogin(rs.getDate("member_login"));
 		memberListDto.setMemberChange(rs.getDate("member_change"));
-		memberListDto.setBlock(rs.getString("block"));
+//		memberListDto.setBlock(rs.getString("block"));
 		return memberListDto;
 
 	}

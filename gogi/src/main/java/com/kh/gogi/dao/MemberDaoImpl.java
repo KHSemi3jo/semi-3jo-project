@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.kh.gogi.dto.MemberBlockDto;
 import com.kh.gogi.dto.MemberDto;
@@ -13,14 +14,12 @@ import com.kh.gogi.mapper.MemberBlockMapper;
 import com.kh.gogi.mapper.MemberListMapper;
 import com.kh.gogi.mapper.MemberMapper;
 
-@Component
+@Repository
 public class MemberDaoImpl implements MemberDao {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
-	@Autowired
-	private MemberDto memberDto;
+
 	
 	@Autowired
 	private MemberMapper memberMapper;
@@ -30,11 +29,11 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public void insert(MemberDto memberDto) {
-		String sql = "insert into member("
-				+ "member_id, member_pw, member_name, member_email, member_contact,"
-				+ "member_birth, member_post, member_addr1, member_addr2"
-				+ ") "
-				+ "values(?,?,?,?,?,?,?,?,?)";
+		
+		String sql = "insert into member( "
+				+ "member_id, member_pw, member_name, member_email, member_contact, "
+				+ " member_birth, member_post, member_addr1, member_addr2 ) "
+				+ " values(?,?,?,?,?,?,?,?,?)";
 		
 		Object[] data = {
 				memberDto.getMemberId(), memberDto.getMemberPw(), memberDto.getMemberName(),
@@ -111,6 +110,7 @@ public class MemberDaoImpl implements MemberDao {
 		return jdbcTemplate.update(sql,data) > 0;
 	}
 
+	//관리자
 	@Override
 	public boolean updateMemberInfoByAdmin(MemberDto memberDto) {
 		String sql = "update member set "
@@ -129,6 +129,7 @@ public class MemberDaoImpl implements MemberDao {
 		return jdbcTemplate.update(sql,data) > 0;
 	}
 
+//	//회원 차단
 	@Override
 	public void insertBlock(String memberId) {
 		String sql = "insert into member_block(member_id) values(?)";
@@ -143,36 +144,11 @@ public class MemberDaoImpl implements MemberDao {
 		return jdbcTemplate.update(sql,data) > 0;
 	}
 
-//	@Override
-//	public List<MemberListDto> selectListByPage2(PaginationVO vo) {
-//		if(vo.isSearch()) {
-//			String sql = "select * from ("
-//					+ "select rownum rn, TMP.* from ("
-//					+ "select * from member_list "
-//					+ "where instr("+vo.getType()+",?) > 0 "
-//					+ "and member_level != '관리자' "
-//					+ "order by " + vo.getType()+ " asc"
-//					+ ")TMP"
-//					+") where rn between ? and ?";
-//			Object[] data = {vo.getKeyword(), vo.getStartRow(), vo.getFinishRow()};
-//		return jdbcTemplate.query(sql, memberListMapper, data);
-//		}
-//		else {
-//			String sql = "select * from ("
-//					+ "select rownum rn, TMP.* from ("
-//					+ "select * from member_list "
-//					+ "where member_level != '관리자'"
-//					+ "order by member_id asc"
-//					+ ")TMP"
-//					+") where rn between ? and ?";
-//			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
-//		return jdbcTemplate.query(sql, memberListMapper, data);
-//		}
-//	}
 	
 	@Autowired
 	private MemberBlockMapper memberBlockMapper;
 
+	
 	@Override
 	public List<MemberBlockDto> selectBlockList() {
 		String sql = "select * from member_block order by block_time asc";
@@ -186,6 +162,7 @@ public class MemberDaoImpl implements MemberDao {
 		List<MemberBlockDto> list = jdbcTemplate.query(sql, memberBlockMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	//G머니
 	@Override
 	public boolean memberGmoney(String memberId, long gmoney) {
 		String sql = "update member "
@@ -195,6 +172,7 @@ public class MemberDaoImpl implements MemberDao {
 				
 		return jdbcTemplate.update(sql,data) > 0;
 	}
+	//이름
 	@Override
 	public MemberDto selectOneByName(String memberName) {
 		String sql = "select * from member where member_name=?";
@@ -202,4 +180,5 @@ public class MemberDaoImpl implements MemberDao {
 		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper,data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+
 }

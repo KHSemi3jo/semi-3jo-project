@@ -78,9 +78,9 @@ public class ProductController {
 		
 		@ResponseBody
 		@RequestMapping("/image")
-		public ResponseEntity<ByteArrayResource> image(@RequestParam int proudctNo) throws IOException{
+		public ResponseEntity<ByteArrayResource> image(@RequestParam int productNo) throws IOException{
 			
-			AttachDto attachDto = productDao.findImage(proudctNo);//상품번호로 파일번호 찾기
+			AttachDto attachDto = productDao.findImage(productNo);//상품번호로 파일번호 찾기
 			if(attachDto == null) {
 				return ResponseEntity.notFound().build();//파일번호가 없으면 404 반환
 			}
@@ -106,7 +106,7 @@ public class ProductController {
 		public String detail(@RequestParam int productNo, Model model) {
 				ProductDto productDto = productDao.selectOne(productNo);
 				model.addAttribute("productDto",productDto);
-				return"/WEB-INF/view/product/detail.jsp";
+				return"/WEB-INF/views/product/detail.jsp";
 		}
 		
 		//상품 목록 페이지

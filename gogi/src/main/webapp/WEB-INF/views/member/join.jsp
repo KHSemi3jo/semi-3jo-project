@@ -35,7 +35,7 @@
     <!--jquery CDN-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="/js/checkbox.js"></script>
-    <script src="/js/join.js"></script>
+    
     <!--daum 우편 API cdn-->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <!--javascript 작성 공간-->

@@ -6,43 +6,35 @@
 
 <div class="container w-500">
 	<div class="row">
-		<c:choose>
-		
-		</c:choose>
+		<h1>상품 상세 페이지</h1>
+	</div>
+	<div class="row"></div>
+		<img src="image?productNo=${productDto.productNo}" width="200" height="200">
 	</div>
 	<div class="row">
-		<h1>${producctDto.productNo}</h1>
+		<h1>${productDto.productNo}</h1>;
 	</div>
 	<div class="row">
 		<h1>${productDto.productName}</h1>
 	</div>
 	<div class="row">
-	<h1>${productDto.productPrice}</h1>
+	<h1>${productDto.productPrice}원</h1>
 	</div>
 	<div class="row">
-	<h1>${productDto.productWeight}</h1>
+	<h1>${productDto.productWeight}g</h1>
 	</div>
 	<div class="row">
 	<h1>${productDto.productOrigin}</h1>
 	</div>
 	<div class="row">
-	<h1>${productDto.productExpire}</h1>
+	<h1>${productDto.productExpire}까지</h1>
 	</div>
 	<div class="row">
-	<h1>${productDto.productPrice}</h1>
+	<h1>${productDto.productType}</h1>
 	</div>
 	<div class="row">
-	<h1>${productDto.productPrice}</h1>
+	<h1>${productDto.productDate}</h1>
 	</div>
-	<div class="row">
-	<h1>${productDto.productPrice}</h1>
-	</div>
-	
-
-
-
-
-
 </div>
 
 
