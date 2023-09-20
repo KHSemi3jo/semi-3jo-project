@@ -31,13 +31,13 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public void insert(MemberDto memberDto) {
 		String sql = "insert into member("
-				+ "member_id, member_pw, member_nickname, member_email, member_contact,"
+				+ "member_id, member_pw, member_name, member_email, member_contact,"
 				+ "member_birth, member_post, member_addr1, member_addr2"
 				+ ") "
 				+ "values(?,?,?,?,?,?,?,?,?)";
 		
 		Object[] data = {
-				memberDto.getMemberId(), memberDto.getMemberPw(), memberDto.getMemberNickname(),
+				memberDto.getMemberId(), memberDto.getMemberPw(), memberDto.getMemberName(),
 				memberDto.getMemberEmail(), memberDto.getMemberContact(), memberDto.getMemberBirth(),
 				memberDto.getMemberPost(), memberDto.getMemberAddr1(), memberDto.getMemberAddr2()
 		};
@@ -73,11 +73,11 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public boolean updateMemberInfo(MemberDto memberDto) {
 		String sql = "update member set "
-				+ "member_nickname=?, member_contact=?, member_email=?,"
+				+ "member_name=?, member_contact=?, member_email=?,"
 				+ "member_post=?, member_addr1=?, member_addr2=? "
 				+ "where member_id=?";
 		Object[] data = {
-				memberDto.getMemberNickname(), memberDto.getMemberContact(),
+				memberDto.getMemberName(), memberDto.getMemberContact(),
 				memberDto.getMemberEmail(), memberDto.getMemberBirth(),
 				memberDto.getMemberPost(), memberDto.getMemberAddr1(),
 				memberDto.getMemberAddr2()
@@ -102,7 +102,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	//포인트 추가
 	@Override
-	public boolean increaseMemberPoint(String memberId, int point) {
+	public boolean increaseMemberPoint(String memberId, long point) {
 		String sql = "update member "
 				+ "set member_point=member_point + ? "
 				+ "where member_id=?";
@@ -110,61 +110,21 @@ public class MemberDaoImpl implements MemberDao {
 				
 		return jdbcTemplate.update(sql,data) > 0;
 	}
-	
-//	@Override
-//	public List<MemberDto> selectListByPage(PaginationVO vo) {
-//		if(vo.isSearch()) {
-//			String sql = "select * from ("
-//					+ "select rownum rn, TMP.* from ("
-//					+ "select * from member "
-//					+ "where instr("+vo.getType()+",?) > 0 "
-//					+ "and member_level != '관리자' "
-//					+ "order by " + vo.getType()+ " asc"
-//					+ ")TMP"
-//					+") where rn between ? and ?";
-//			Object[] data = {vo.getKeyword(), vo.getStartRow(), vo.getFinishRow()};
-//		return jdbcTemplate.query(sql, memberMapper, data);
-//	}
-//		else {
-//			String sql = "select * from ("
-//					+ "select rownum rn, TMP.* from ("
-//					+ "select * from member "
-//					+ "where member_level != '관리자'"
-//					+ "order by member_id asc"
-//					+ ")TMP"
-//					+") where rn between ? and ?";
-//			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
-//		return jdbcTemplate.query(sql, memberMapper, data);
-//		}
-//	}
-//
-//	@Override
-//	public int countList(PaginationVO vo) {
-//		if(vo.isSearch()) {
-//			String sql = "select count (*) from member "
-//					+ "where instr("+vo.getType()+",?) > 0";
-//		Object[] data = {vo.getKeyword()};
-//		return jdbcTemplate.queryForObject(sql, int.class, data);
-//		}
-//		else {
-//		String sql = "select count(*) from member";
-//		return jdbcTemplate.queryForObject(sql, int.class);
-//		}
-//	}
 
 	@Override
 	public boolean updateMemberInfoByAdmin(MemberDto memberDto) {
 		String sql = "update member set "
-				+ "member_nickname=?, member_contact=?, member_email=?, member_birth=?,"
+				+ "member_name=?, member_contact=?, member_email=?, member_birth=?,"
 				+ "member_post=?, member_addr1=?, member_addr2=?, member_level=?,"
-				+ "member_point=?"
+				+ "member_point=?, member_gmoney=?"
 				+ " where member_id=?";
 		Object[] data = {
-				memberDto.getMemberNickname(), memberDto.getMemberContact(),
+				memberDto.getMemberName(), memberDto.getMemberContact(),
 				memberDto.getMemberEmail(), memberDto.getMemberBirth(),
 				memberDto.getMemberPost(), memberDto.getMemberAddr1(),
 				memberDto.getMemberAddr2(), memberDto.getMemberLevel(),
-				memberDto.getMemberPoint(), memberDto.getMemberId()
+				memberDto.getMemberPoint(), memberDto.getMemberGmoney(),
+				memberDto.getMemberId()
 		};
 		return jdbcTemplate.update(sql,data) > 0;
 	}
@@ -226,13 +186,20 @@ public class MemberDaoImpl implements MemberDao {
 		List<MemberBlockDto> list = jdbcTemplate.query(sql, memberBlockMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
-
-	
 	@Override
-	public MemberDto selectOneByNickname(String memberNickname) {
-		String sql = "select * from member where member_nickname=?";
-		Object[] data = {memberNickname};
+	public boolean memberGmoney(String memberId, long gmoney) {
+		String sql = "update member "
+				+ "set member_gmoney=member_gmoney + ? "
+				+ "where member_id=?";
+		Object[] data = {gmoney, memberId};
+				
+		return jdbcTemplate.update(sql,data) > 0;
+	}
+	@Override
+	public MemberDto selectOneByName(String memberName) {
+		String sql = "select * from member where member_name=?";
+		Object[] data = {memberName};
 		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper,data);
 		return list.isEmpty() ? null : list.get(0);
 	}
-	}
+}

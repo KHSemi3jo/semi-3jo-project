@@ -27,8 +27,11 @@ public interface MemberDao {
     
 	
 	//포인트 추가
-	boolean increaseMemberPoint(String memberId, int point);
+	boolean increaseMemberPoint(String memberId, long point);
 	
-	MemberDto selectOneByNickname(String memberNickname);
+	//G머니
+	boolean memberGmoney(String memberId, long gmoney);
+	
+	MemberDto selectOneByName(String memberName);
 
 }
