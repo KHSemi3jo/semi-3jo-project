@@ -108,6 +108,41 @@ $(function(){
             status.pwCheck = false;
         }
     });
+
+    $("[name=memberNickname]").blur(function(e){
+        var regex = /^[ㄱ-ㅎㅏ-ㅣ가-힣0-9]{2,10}$/;
+        var isValid = regex.test($(e.target).val());
+
+        if(isValid){ //형식이 유효하다면
+            $.ajax({   
+                url:"http://localhost:9999/rest/member/nicknameCheck",
+                method:"post",
+                data:{memberNickname: $(e.target).val()}, //jQuery
+                success:function(response){
+                    $(e.target).removeClass("success fail fail2");  
+                    if(response == "Y"){ //사용가능한 닉네임
+                        $(e.target).addClass("success");
+                        status.memberNickname = true;
+                    }
+                    else{ //이미 사용중인 닉네임
+                        $(e.target).addClass("fail2");
+                        status.memberNickname = false;
+                    }
+                },
+                error:function(){
+                    alert("서버와의 통신이 원활하지 않습니다");
+                },
+        });
+    }
+       else {//형식이 유효하지 않다면(1차실패)
+            $(e.target).removeClass("success fail fail2");  
+            $(e.target).addClass("fail");
+            status.memberNickname = false;
+        }
+    }); 
+      
+
+
     $("[name=memberEmail]").blur(function(){
         var regex =  /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
         var isValid =$(this).val() == "" || regex.test($(this).val());
@@ -145,6 +180,24 @@ $(function(){
     
         //페이지 이탈 방지 
             //- window에 beforeunload 이벤트 설정
+
+            //$(window).on("beforeunload", function(){
+            //    return false;
+            //});
+
+            //- form 전송할 때는 beforeunload 이벤트를 제거
+           // $(".join-form").submit(function(e){
+             //   $(".form-input").blur();
+              //  console.table(status);
+              //  console.log(status.ok());
+              //  if(!status.ok()){
+             //       e.preventDefault();
+               // }
+           // else{
+              //  $(window).off("beforeunload");
+          //  }
+  //  });
+
             $(window).on("beforeunload",function(){
                 return false;
             });
