@@ -2,21 +2,7 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<script src="/js/join.js"></script>
-<script src="/js/multipage.js"></script>
-
-<!-- daum 우편 API cdn -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-<!-- 주석 -->
-<!-- javascript 작성 공간 -->
-<script>
-
-
-    $(function(){
-
-
-    <style>
+<style>
 .btn.btn-orange{
     border-radius: 3px;
     width: 200px;
@@ -55,7 +41,6 @@
     <!--javascript 작성 공간-->
     <script>
          $(function(){
-
         //검색버튼, 우편번호 입력창, 기본주소 입력창을 클릭하면 검색 실행
         $(".post-search").click(function(){
             new daum.Postcode({
@@ -82,96 +67,6 @@
         }).open();
         });
     });
-
-</script>
-
-<form class="join-form" action="" method="post" autocomplete="off">
-
-<div class="container w-600">
-    <div class="row">
-        <h1>회원가입</h1>
-    </div>
-
-    <!-- 1단계 : 아이디+비밀번호+확인 -->
-        <div class="row left">
-            <label>아이디 <i class="fa-solid fa-asterisk red"></i></label>
-            <input type="text" name="memberId" placeholder="영문 소문자, 숫자 5~20자"
-                    class="form-input w-100">
-            <div class="success-feedback">멋진 아이디입니다!</div>
-            <div class="fail-feedback">아이디를 형식에 맞게 입력하세요</div>
-            <div class="fail2-feedback">이미 사용중인 아이디입니다</div>
-        </div>
-        <div class="row left">
-            <label>비밀번호 <i class="fa-solid fa-asterisk red"></i></label>
-            <input type="password" name="memberPw" 
-                    placeholder="영문,숫자,특수문자 반드시 1개 이상 포함"
-                    class="form-input w-100">
-            <div class="success-feedback">올바른 비밀번호 형식입니다</div>
-            <div class="fail-feedback">잘못된 비밀번호 형식입니다</div>
-        </div>
-        <div class="row left">
-            <label>비밀번호 확인 <i class="fa-solid fa-asterisk red"></i></label>
-            <input type="password" id="password-check" 
-                    placeholder="비밀번호 한 번 더 입력" class="form-input w-100">
-            <div class="success-feedback">비밀번호가 일치합니다</div>
-            <div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
-            <div class="fail2-feedback">비밀번호를 먼저 작성하세요</div>
-        </div>
-        
-       <!-- 이름 -->
-       <div class="row left">
-       <label>이름 <i class="fa-solid fa-asterisk red"></i></label>
-       <input type="text" name="memberName" class="form-input w-100">
-       </div>
-
-    <!-- 3단계 : 이메일+연락처 -->
-        <div class="row left">
-            <label>이메일</label>
-            <input type="text" name="memberEmail" 
-                    placeholder="test@kh.com" class="form-input w-100">
-            <div class="fail-feedback">이메일 형식이 잘못되었습니다</div>
-        </div>
-        <div class="row left">
-            <label>연락처</label>
-            <input type="tel" name="memberContact" placeholder="010XXXXXXXX (- 없이)"
-                    class="form-input w-100">
-            <div class="fail-feedback">전화번호 형식이 올바르지 않습니다</div>
-        </div>
-
-    
-    <!-- 4단계 : 생년월일-->
-        <div class="row left">
-            <label>생년월일</label>
-            <input type="date" name="memberBirth" class="form-input w-100">
-            <div class="fail-feedback">잘못된 날짜를 선택하셨습니다</div>
-        </div>
-
-    <!-- 5단계 : 주소 -->
-        <div class="row left">
-            <label style="display: block;">주소</label>
-                <input type="text" name="memberPost" placeholder="우편번호"
-                            class="form-input post-search" size="6" maxlength="6"
-                                readonly>
-                <button type="button" class="btn post-search">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-                <button type="button" class="btn btn-negative post-clear">
-                	<i class="fa-solid fa-x"></i>
-                </button>
-    
-                <input type="text" name="memberAddr1" placeholder="기본주소"
-                            class="form-input w-100 mt-10 post-search"
-                            readonly>
-                <input type="text" name="memberAddr2" placeholder="상세주소"
-                            class="form-input w-100 mt-10">
-                <div class="fail-feedback">모든 주소를 작성해주세요</div>
-            </div>
-                <button type="submit" class="btn btn-positive w-100">가입하기</button>            
-</div>
-	</form>
-	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-
-
     </script>
 
     <form class="join-form" action="join" method="post" autocomplete="off">
@@ -326,4 +221,3 @@
         </div>
     </form>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-
