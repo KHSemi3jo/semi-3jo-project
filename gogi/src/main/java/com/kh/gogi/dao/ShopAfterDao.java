@@ -3,8 +3,7 @@ package com.kh.gogi.dao;
 import java.util.List;
 
 import com.kh.gogi.dto.ShopAfterDto;
-
-
+import com.kh.gogi.vo.ShopAfterVO;
 
 
 public interface ShopAfterDao {
@@ -26,9 +25,17 @@ public interface ShopAfterDao {
 	public int countList();
 
 	public int countList(String type, String keyword);
-
-	public List<ShopAfterDto> search(String type, String keyword);
 	
+	public List<ShopAfterDto> selectList(String type,String keyword);
+
+
 	public List<ShopAfterDto> selectListByPage(String type, String keyword, int page);
+
 	public List<ShopAfterDto> selectListByPage(int page);
+
+	public List<ShopAfterDto> selectListByPage(ShopAfterVO vo);
+
+
+	public int countList(ShopAfterVO vo);
+
 }

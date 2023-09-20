@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.gogi.dao.MemberDao;
 import com.kh.gogi.dao.ShopAfterDao;
 import com.kh.gogi.dto.MemberDto;
+import com.kh.gogi.dto.NoticeDto;
 import com.kh.gogi.dto.OneOnOneDto;
 import com.kh.gogi.dto.ShopAfterDto;
 import com.kh.gogi.mapper.ShopAfterMapper;
+import com.kh.gogi.vo.ShopAfterVO;
+
 
 @Controller
 @RequestMapping("/shopafter")
@@ -45,39 +48,80 @@ public class ShopAfterController {
 		return "redirect:detail?shopAfterNo=" + shopAfterNo;
 	}
 
-	@RequestMapping("list")
-	public String detail(@RequestParam int shopAfterNo, Model model, HttpSession session,
-			ShopAfterDto shopAfterDto,	@RequestParam(required = false) String type,
-			@RequestParam(required = false) String keyword,
-			@RequestParam(required = false, defaultValue = "1") int page) {
+	
+	@RequestMapping("/list")
+	public String list(Model model, HttpSession session,
+	@ModelAttribute(name = "vo") ShopAfterVO vo,
+	ShopAfterDto shopAfterDto,	
+	@RequestParam(required = false) String type,
+	@RequestParam(required = false) String keyword,
+	@RequestParam(required = false, defaultValue = "1") int page) {
 		
-				boolean isSearch = type != null && keyword != null;
+		boolean isSearch = type != null && keyword != null;
 		
-				int begin = (page - 1) / 10 * 10 + 1;
-				int end = begin + 9;
-				int count = isSearch ? shopAfterDao.countList(type, keyword) : shopAfterDao.countList();
-				int pageCount = (count - 1) / 10 + 1;
-				model.addAttribute("page", page);
-				model.addAttribute("begin", begin);
-				
+		int begin = (page - 1) / 10 * 10 + 1;
+		int end = begin + 9;
+		int count = isSearch ? shopAfterDao.countList(type, keyword) : shopAfterDao.countList();
+		int pageCount = (count - 1) / 10 + 1;
+		model.addAttribute("page", page);
+		model.addAttribute("begin", begin);
+		model.addAttribute("end", Math.min(pageCount, end));
+		model.addAttribute("pageCount", pageCount);
 		
-				model.addAttribute("end", Math.min(pageCount, end));
-				model.addAttribute("pageCount", pageCount);
-				if (isSearch) { // 검색일 경우
-					 List<ShopAfterDto> list = shopAfterDao.search(type, keyword);
-					// List<ShopAfterDto> list = shopAfterDao.selectListByPage(type, keyword, page);
-					model.addAttribute("list", list);
-					model.addAttribute("isSearch", true);
-				} else { // 목록일 경우
-							
-					List<ShopAfterDto> list = shopAfterDao.selectListByPage(page);
-					// model.addAttribute("list", list);//둘다 같다
-					model.addAttribute("list", shopAfterDao.selectListByPage(page));// 검색기능 대비 변수줄이자!
-					model.addAttribute("isSearch", false);
-				}
-				return "/WEB-INF/views/shopafter/list.jsp";
-			}
+		if (isSearch) { 
+			 List<ShopAfterDto> list = shopAfterDao.selectList(type, keyword);
+			// List<ShopAfterDto> list = shopAfterDao.selectListByPage(type, keyword,page);
+			model.addAttribute("list", list);
+			model.addAttribute("isSearch", true);
+		} else { 
 
+			//List<ShopAfterDto>list = shopAfterDao.list();
+			 List<ShopAfterDto> list = shopAfterDao.selectListByPage(page);
+			model.addAttribute("list", list);
+			model.addAttribute("isSearch", false);
+		}
+		
+
+		return "/WEB-INF/views/shopafter/list.jsp";
+	}
+	
+	
+	
+	
+	
+//	@RequestMapping("list")
+//	public String list(Model model, HttpSession session,
+//			@ModelAttribute(name = "vo") ShopAfterVO vo,
+//			ShopAfterDto shopAfterDto,	
+//			@RequestParam(required = false) String type,
+//			@RequestParam(required = false) String keyword,
+//			@RequestParam(required = false, defaultValue = "1") int page) {
+//		
+//				boolean isSearch = type != null && keyword != null;
+//		
+//				int begin = (page - 1) / 10 * 10 + 1;
+//				int end = begin + 9;
+//				int count = isSearch ? shopAfterDao.countList(type, keyword) : shopAfterDao.countList();
+//				int pageCount = (count - 1) / 10 + 1;
+//				model.addAttribute("page", page);
+//				model.addAttribute("begin", begin);
+//				
+//				model.addAttribute("end", Math.min(pageCount, end));
+//				model.addAttribute("pageCount", pageCount);
+//				if (isSearch) { 
+//					 List<ShopAfterDto> list = shopAfterDao.selectListByPage(type, keyword, page);
+//					model.addAttribute("list", list);
+//					model.addAttribute("isSearch", true);
+//				} else { 
+//		
+//					List<ShopAfterDto> list = shopAfterDao.selectListByPage(page);
+//					model.addAttribute("list", shopAfterDao.selectListByPage(page));
+//					model.addAttribute("isSearch", false);
+//				}
+//				return "/WEB-INF/views/shopafter/list.jsp";
+//			}
+
+	
 	@RequestMapping("/detail")
 	private String detail(@RequestParam int shopAfterNo, Model model) {
 		ShopAfterDto  shopAfterDto = shopAfterDao.detail(shopAfterNo);
