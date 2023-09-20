@@ -11,7 +11,7 @@ public class ProductDto {
 	private int productPrice;
 	private int productWeight;
 	private String productOrigin;
-	private Date productExprie;
+	private Date productExpire;
 	private String productType;
 	private Date productDate;
 }

@@ -11,8 +11,9 @@
 	<div class="row">
 		<h1>Qna 수정</h1>
 	</div>
-	<form action="add" method="post">
+	<form action="fix" method="post">
 		<div class="row">
+			<input type="hidden" name="qnaNo" value="${qnaDto.qnaNo}">
 			제목 : <input type="text" name="qnaTitle" required class="form-input"
 				value="${qnaDto.qnaTitle}">
 		</div>

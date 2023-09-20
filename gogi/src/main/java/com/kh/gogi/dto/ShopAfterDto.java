@@ -15,4 +15,5 @@ private	String shopAfterName;
 private	String shopAfterContent;
 private	int shopAfterLike;
 private	Date shopAfterDate;
+private	int shopReplycount;
 }
