@@ -2,10 +2,9 @@ package com.kh.gogi.dao;
 
 import java.util.List;
 
-import com.kh.gogi.dto.BasketDto;
+import com.kh.gogi.dto.BasketListDto;
 
 public interface BasketDao {
-	void insert(BasketDto basketDto);
 	boolean delete(int basketListNo);
-	List<BasketDto> selectList();
+	List<BasketListDto> selectList();
 }
