@@ -4,7 +4,7 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<h1>이메일 전송 완료. 이메일 확인 바람.</h1>
+<h1>이메일로 전송되었습니다. 확인해주세요!</h1>
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
