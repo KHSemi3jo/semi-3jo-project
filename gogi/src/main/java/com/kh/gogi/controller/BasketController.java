@@ -1,38 +1,40 @@
 package com.kh.gogi.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.gogi.dao.BasketDao;
-import com.kh.gogi.dao.ProductDao;
-import com.kh.gogi.dto.BasketDto;
-import com.kh.gogi.dto.ProductDto;
+import com.kh.gogi.dto.BasketListDto;
 
 @Controller
 @RequestMapping("/basket")
 public class BasketController {
 	
 	@Autowired
-	private ProductDao productDao;
-	
-	@Autowired
 	private BasketDao basketDao;
 	
-	@GetMapping("/insert")
-	public String insert(Model model , @RequestParam int productNo) {
-		ProductDto itemDto = productDao.selectOne(productNo);
-		model.addAttribute("itemDto", itemDto);
-		return "/WEB-INF/views/basket/insert.jsp";
+	@RequestMapping("/list")
+	public String list(Model model) {
+		List<BasketListDto> basketList = basketDao.selectList();
+		model.addAttribute("basketList", basketList);
+		return "/WEB-INF/views/basket/basketList.jsp";
 	}
-	@PostMapping("/insert")
-	public String insert(@ModelAttribute BasketDto basketDto) {
-		basketDao.insert(basketDto);
-		return "redirect:insert";
+	
+	@RequestMapping("/delete")
+	public String delete(@RequestParam int basketNo) {
+		boolean result = basketDao.delete(basketNo);
+		if(result) {
+			return "redirect:list";
+		}
+		else {
+			return "redirect:에러페이지";
+		}
 	}
+	
+	
 }
