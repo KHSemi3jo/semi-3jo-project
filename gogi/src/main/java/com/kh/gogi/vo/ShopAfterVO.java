@@ -6,14 +6,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class ShopAfterVO {
-	 private String type, keyword;// 검색 분류 및 키워드
-	 //String memberId;
-	 private int page =1; //현재 페이지 번호(기본 : 1)
-	 private int size = 10;// 보여줄 게시판 글수(기본 : 10)
+	 private String type, keyword;
+
+	 private int page =1; 
+	 private int size = 10;
 	 
-	 private int count ; // 전체 글수 (다른 클래스에서 가져와야한다.)
+	 private int count ; 
 	 
-	 private int navigatorSize = 10; //하단 네이게이터 표시 갯수(기본 : 10)
+	 private int navigatorSize = 10;
 	 
 	 public boolean isSearch() {
 		 return type != null && keyword != null;
@@ -30,10 +30,10 @@ public class ShopAfterVO {
 	 }
 	 
 	 public String getPrevQueryString() {
-		 if(isSearch()) {//검색
+		 if(isSearch()) {
 			 return "page=" +(getBegin()-1)+"&type=?"+type+"&keyword="+keyword;
 		 }
-		 else {//목록
+		 else {
 			return"page= "+(getBegin()-1);
 		}
 	 }
@@ -44,18 +44,18 @@ public class ShopAfterVO {
 		 return getEnd() >= getPageCount();
 	 }
 	 public String getNextQueryString() {
-		 if(isSearch()) {//검색
+		 if(isSearch()) {
 			 return "page=" +(getEnd()+1)+"&size="+size+"&type=?"+type+"&keyword="+keyword;
 		 }
-		 else {//목록
+		 else {
 			return"page= "+(getEnd()+1)+"&size="+size;
 		}
 	 }
 	 public String getQueryString(int page) {
-		 if(isSearch()) {//검색
+		 if(isSearch()) {
 			 return "page=" +page+"&size="+size+"&type="+type+"&keyword="+keyword ;
 		 }
-		 else {//목록
+		 else {
 			return"page="+page+"&size="+size;
 		}
 	 }

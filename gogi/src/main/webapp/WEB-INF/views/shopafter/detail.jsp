@@ -288,7 +288,8 @@ td {
 	<a href="/shopafter/fix?shopAfterNo=${shopAfterDto.shopAfterNo}">쇼핑후기
 		수정</a>
 </button>
-
+<button class="btn btn-navy"><a href="delete?shopAfterNo=${shopAfterDto.shopAfterNo}">삭제</a>
+</button>
 
 
 

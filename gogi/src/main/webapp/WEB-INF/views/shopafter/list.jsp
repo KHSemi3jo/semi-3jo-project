@@ -20,10 +20,10 @@ td {
 }
 </style>
 
-<button  class="btn btn-navy"><a href="/shopafter/add">쇼핑후기 등록</a></button>
+<button  class="btn btn-navy" ><a href="/shopafter/add">쇼핑후기 등록</a></button>
 <br>
 
-<table class="w-600">
+<table class="w-800">
 	<div class="container">
 		<div class="row">
 			<h1>쇼핑 후기 목록</h1>
@@ -32,15 +32,22 @@ td {
 			<th>쇼핑후기 번호</th>
 			<th>쇼핑후기 제목</th>
 			<th>쇼핑후기 내용</th>
-			<th>삭제</th>
+			<th>쇼핑후기 아이디</th>
+			<th>쇼핑후기 작성자</th>
+			<th>쇼핑후기 작성시간</th>
+
 		</tr>
 
 		<c:forEach var="shopAfterDto" items="${list}">
 			<tr>
 				<td>${shopAfterDto.shopAfterNo}</td>
 				<td><a href="detail?shopAfterNo=${shopAfterDto.shopAfterNo}">${shopAfterDto.shopAfterName}</a></td>
-				<td>${shopAfterDto.shopAfterContent}</td>
-				<td><a href="delete?shopAfterNo=${shopAfterDto.shopAfterNo}">삭제</a></td>
+				<td>${shopAfterDto.shopAfterContent}</td>	
+				<td>${shopAfterDto.shopAfterId}</td>
+			<td>${shopAfterDto.shopAfterName}</td>
+			<td>${shopAfterDto.shopAfterDate}</td>
+	
+			
 			</tr>
 		</c:forEach>
 
@@ -97,14 +104,14 @@ td {
 		<c:choose>
 			<c:when test="${param.type == 'shopAfterId'}">
 				<select name="type" 
-					required="required"  class="form-input">
+					required="required"  class="form-input search-navy">
 					<option value="shopAfter_name">제목</option>
 					<option value="shopAfter_id" selected="selected">작성자</option>
 				</select>
 			</c:when>
 			<c:otherwise>
 				<select name="type" 
-					required="required"  class="form-input">
+					required="required"  class="form-input search-navy">
 					<option value="shopAfter_name" selected="selected">제목</option>
 					<option value="shopAfter_id">작성자</option>
 				</select>
@@ -113,8 +120,8 @@ td {
 
 
 
-		<input  class="form-input" type="search" name="keyword" required="required"
-			 placeholder="검색하실 이름을 입력해주세요"
+		<input  class=" form-input search-navy" type="search" name="keyword" required
+			 placeholder="검색하실 이름을 입력해주세요" 
 			>
 		<button class="btn btn-navy" type="submit">검색</button>
 	</form>

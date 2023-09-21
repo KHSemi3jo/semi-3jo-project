@@ -53,8 +53,13 @@ public class NoticeController {
 			HttpSession session) {
 		int noticeNo = noticeDao.sequence();
 		noticeDto.setNoticeNo(noticeNo);
+		
+		
 		String memberId = (String) session.getAttribute("name");
 		noticeDto.setNoticeWriter(memberId);
+		
+		
+		
 		noticeDao.add(noticeDto);
 		return "redirect:detail?noticeNo="+noticeNo;
 	}
