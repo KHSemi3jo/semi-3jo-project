@@ -46,7 +46,8 @@
 
 .btn.btn-orange 
 {
- font-weight: bold;
+	font-size: 18px;
+ 	font-weight: bold;
     border-color: #FA9F5F;
     background-color: #FA9F5F;
     color: white;
@@ -55,7 +56,8 @@
 
 .btn.btn-navy 
 {
-   font-weight: bold;
+	font-size: 18px;
+    font-weight: bold;
     border-color: #012D5C;
     background-color: #012D5C;
     color: white;
