@@ -3,93 +3,134 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
-table {
-	border: 1px solid black;
-	margin-left: auto;
-	margin-right: auto;
+.noticeTitle{
+	text-decoration: none;
 }
 
-th {
-	border: 1px solid black;
-	text-align: center;
+select.form-input,
+.form-input,
+.btn.btn-navy{
+	font-size:16px;
+	height:2.8em;
+    border-radius: 0.1em;
 }
 
-td {
-	border: 1px solid black;
-	text-align: center;
-}
 </style>
 
-<button  class="btn btn-navy"><a href="/notice/add">공지사항 등록</a></button>
-<br>
 
-<table class="w-600">
-	<div class="container ">
-		<div class="row">
-			<h1>공지 사항 목록</h1>
-		</div>
-		<tr>
-			<th>공지사항 번호</th>
-			<th>공지사항 제목</th>
-			<th>공지사항 내용</th>
-			<th>삭제</th>
-		</tr>
-
-		<c:forEach var="noticeDto" items="${list}">
-			<tr>
-				<td>${noticeDto.noticeNo}</td>
-				<td><a href="detail?noticeNo=${noticeDto.noticeNo}">${noticeDto.noticeTitle}</a></td>
-				<td>${noticeDto.noticeContent}</td>
-				<td><a href="delete?noticeNo=${noticeDto.noticeNo}">삭제</a></td>
-			</tr>
-		</c:forEach>
-
+	<div class="container w-800 navy">
+			<div class="row">
+				<h2>공지사항</h2>
+			</div>
+			
+			<!-- 폼시작(체크박스) -->
+			<form class="delete-form" action="deleteByAdmin"method="post">
+			<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
+			<c:if test="${sessionScope.name != null}">
+			<div class="row right ">
+				<c:if test="${sessionScope.level =='관리자' }">
+				<button type ="submit" class="btn upBtn delete-btn">
+					<i class="fa-solid fa-trash"></i>
+					일괄삭제</button></c:if>
+		
+			
+				<a href="write" class="btn upBtn">
+					<i class="fa-solid fa-pen"></i>
+					글쓰기
+				</a>
+			</div>
+			</c:if>
+			
+			<%-- 
+		검색일 경우 검색어를 추가로 출력 
+		(참고) 논리 반환값을 가지는 getter 메소드는 get이 아니라 is로 시작한다
+			--%>
+			<c:if test="${vo.search}">
+			<div class="row left">
+				&quot;${vo.keyword}&quot;에 대한 검색 결과
+			</div>
+			</c:if>
+			
+			
+			<div class="row">
+	            <table class=" table table-slit">
+					<thead>
+	                    <tr>
+	                    <%--체크박스 일괄 삭제 --%>
+							<c:if test="${sessionScope.level =='관리자' }">
+								<th>
+									<input type="checkbox" class="check-all">
+								</th>
+							</c:if>
+	                        <th>번호</th>
+	                        <th width="50%">제목</th>
+	                        <th>작성자</th>
+	                        <th>작성일</th>
+	                    </tr>
+	                </thead>
+	
+					<c:forEach var="noticeDto" items="${list}">				
+						<tr>
+							<%--체크박스 개별 삭제 --%>
+							<c:if test="${sessionScope.level =='관리자' }">
+								<td>
+									<input type="checkbox"class="check-item" name="boardNoList" value="${boardListDto.boardNo }">
+								</td>
+							</c:if>
+							
+							<td>${noticeDto.noticeNo}</td>
+							<td><a class="noticeTitle navy left" href="detail?noticeNo=${noticeDto.noticeNo}">${noticeDto.noticeTitle}</a></td>
+								<c:choose>
+									<c:when test="${noticeDto.noticeWriter != null}">
+										<td>고기어때</td>
+									</c:when>
+									<c:otherwise>
+										<td>고기어때</td>
+									</c:otherwise>
+								</c:choose>
+							<td>${noticeDto.noticeDate}</td>
+						</tr>
+					</c:forEach>
+	            
+	            </table>	
+			</div>
+		<!-- 폼 종료(체크박스) -->
+		</form>
 	</div>
-</table>
+	
+ <div class="row page-navigator mv-30">
+                <!-- 이전 버튼 -->
+                <c:if test="${!vo.first}">
+                    <a href="list?${vo.prevQueryString}">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </a>
+                </c:if>
+            
+                <!-- 숫자 버튼 -->
+                <c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
+                    <c:choose>
+                        <c:when test="${vo.page == i}">
+                            <a class="on">${i}</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="list?${vo.getQueryString(i)}">${i}</a> 
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+            
+                <!-- 다음 버튼 -->
+                <c:if test="${!vo.last}">
+                    <a href="list?${vo.nextQueryString}">
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+                </c:if>
+        </div>
 
-<br><br><br><br>
-
-<!-- 페이지 네이게이터 -->
-
-<h3 align="center">
-
-	<c:if test="${vo.first ==false}">
-
-
-		<a href="list?${vo.prevQueryString}">&lt;&laquo;</a>
-
-	</c:if>
-
-	<c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
-		<c:choose>
-			<c:when test="${vo.page == i}">
-			${i}	
-		</c:when>
-			<c:otherwise>
-				<a href="list?${vo.getQueryString(i)}">${i}</a>
-
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
-
-
-	<c:if test="${!vo.last}">
-
-		<a href="list?${vo.nextQueryString}">&gt;&raquo;</a>
-
-
-
-	</c:if>
-
-
-</h3>
 
 
 
 <!-- 검색기능 -->
 
-<br>
-<br>
 <div align="center">
 	<form action="list" method="get">
 
@@ -112,8 +153,8 @@ td {
 
 
 
-		<input  class="form-input" type="search" name="keyword" required="required"
-			 placeholder="검색하실 이름을 입력해주세요"
+		<input class="form-input" type="search" name="keyword" required="required"
+			 placeholder="검색어를 입력해주세요"
 			>
 		<button class="btn btn-navy" type="submit">검색</button>
 	</form>

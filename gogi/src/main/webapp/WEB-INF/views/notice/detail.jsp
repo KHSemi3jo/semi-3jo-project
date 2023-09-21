@@ -2,44 +2,41 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<!-- 내가 만든 CSS 파일-->
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/css/Gogi-layout.css">
+<link rel="stylesheet" type="text/css" href="/css/Gogi-commons.css">
 <style>
-table {
-	border: 1px solid black;
-	margin-left: auto;
-	margin-right: auto;
-}
 
-th {
-	border: 1px solid black;
-	text-align: center;
-}
-
-td {
-	border: 1px solid black;
-	text-align: center;
-}
 </style>
-<button><a href="/notice/list">공지사항 목록</a></button>
-<br>
-<button><a href="/notice/fix?noticeNo=${noticeDto.noticeNo}">공지사항 수정</a></button>
-<br>
-<button><a href="/notice/delete?noticeNo=${noticeDto.noticeNo}">공지사항 삭제</a></button>
-
-
-<div class="container w-600">
-	<div class="row">
-		<h1>공지사항 상세</h1>
-	</div>
-	<table border="1" style="border-color: black;">
-		<tr>
-			<th>공지사항 번호</th>
-			<th>공지사항 제목</th>
-			<th>공지사항 내용</th>
-		</tr>
-	</table>
-	<td>${noticeDto.noticeNo}</td>
-	<td>${noticeDto.noticeTitle}</td>
-	<td>${noticeDto.noticeContent}</td>
+<div class="container w-800">
+    <div class="row">
+        <h2 class="pt-30 pb-30 navy">공지사항</h2>
+    </div>
+    <div class="row">
+        <table class="table table-slit">
+                <tr>
+                    <th bgcolor="#CCD5DE">제목</th>
+                    <td class="left">${noticeDto.noticeTitle}</td>
+                </tr>
+                <tr>
+                    <th bgcolor="#CCD5DE">작성자</th>
+                    <td class="left">${noticeDto.noticeWriter}</td>
+                </tr>
+                <tr>
+                    <th bgcolor="#CCD5DE">작성일</th>
+                    <td class="left">${noticeDto.noticeDate}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="left">${noticeDto.noticeContent}</td>
+                </tr>
+        </table>
+        <div class="row right">
+            <a href="/notice/list"class="btn btn-navy">목록</a>
+            <a class="btn btn-navy" href="/notice/fix?noticeNo=${noticeDto.noticeNo}">수정</a>
+            <a class="btn btn-navy" href="/notice/delete?noticeNo=${noticeDto.noticeNo}">삭제</a>
+        </div>
+    </div>
 </div>
 
 
