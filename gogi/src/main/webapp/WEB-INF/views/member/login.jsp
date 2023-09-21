@@ -10,26 +10,37 @@
 .container.w-300 input:focus{
     border-color: #1A426C;
 }
+.form-input.login {
+        width: 100%;
+        padding: 10px 10px;
+        font-size: 16px;
+      }
+ .btn.w-100{
+ 	font-size: 18px;
+ }
+ a.link:hover{
+ 	color:#FA9F5F ;
+ }
 </style>
 
 
 <form action="login" method="post" autocomplete="off">
         <div class="container w-300">
-                <div class="row">
+                <div class="row pt-50">
                     <h2>로그인</h2>
                 </div>
-                <div class="row">
-                    <input type="text" name="memberId" class="form-input"
+                <div class="row pt-20">
+                    <input type="text" name="memberId" class="form-input login"
                         placeholder="아이디를 입력해주세요">
                 </div>
                 <div class="row">
-                    <input type="password" name="memberPw" class="form-input"
+                    <input type="password" name="memberPw" class="form-input login"
                         placeholder="비밀번호를 입력해주세요" >
                 </div>
                 <div class="row right">
-                    <a href="findPw" class="link">비밀번호 찾기</a>
+                    <a href="findPw" class="link navy">비밀번호 찾기</a>
                 </div>
-                <div class="row">
+                <div class="row pt-20">
                     <button class="btn btn-orange w-100" type="submit">로그인</button>
                 </div>
                 <div class="row">
