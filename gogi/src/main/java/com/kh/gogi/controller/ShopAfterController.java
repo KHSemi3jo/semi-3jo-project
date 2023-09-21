@@ -42,9 +42,13 @@ public class ShopAfterController {
 	}
 
 	@PostMapping("/add")
-	private String add(@ModelAttribute ShopAfterDto shopAfterDto, HttpSession sesstion) {
+	private String add(@ModelAttribute ShopAfterDto shopAfterDto, 
+			@ModelAttribute MemberDto memberDto,
+			HttpSession session) {
 		int shopAfterNo = shopAfterDao.sequence();
 		shopAfterDto.setShopAfterNo(shopAfterNo);
+		String memberId = (String) session.getAttribute("name");
+		shopAfterDto.setShopAfterId(memberId);
 		shopAfterDao.add(shopAfterDto);
 		return "redirect:detail?shopAfterNo=" + shopAfterNo;
 	}

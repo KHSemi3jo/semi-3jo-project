@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ShopAfterVO {
 	 private String type, keyword;// 검색 분류 및 키워드
+	 //String memberId;
 	 private int page =1; //현재 페이지 번호(기본 : 1)
 	 private int size = 10;// 보여줄 게시판 글수(기본 : 10)
 	 

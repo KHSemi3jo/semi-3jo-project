@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.gogi.dao.QnaDao;
+import com.kh.gogi.dto.MemberDto;
 import com.kh.gogi.dto.QnaDto;
 import com.kh.gogi.dto.ShopAfterDto;
 import com.kh.gogi.mapper.QnaMapper;
@@ -46,9 +47,12 @@ public class QnaController {
 	}
 	@PostMapping("/add")
 	private String add(@ModelAttribute QnaDto qnaDto,
-			HttpSession sesstion) {
+			@ModelAttribute MemberDto memberDto,
+			HttpSession session) {
 		int qnaNo = qnaDao.sequence();
 		qnaDto.setQnaNo(qnaNo);
+		String memberId = (String) session.getAttribute("name");
+		qnaDto.setQnaAdmin(memberId);
 		qnaDao.add(qnaDto);
 		return "redirect:detail?qnaNo="+qnaNo;
 	}
