@@ -25,7 +25,7 @@ public class ReplyRestController {
 	private	ReplyDao replyDao;
 	@Autowired
 	private	ShopAfterDao shopAfterDao;
-//댓글
+
 	@PostMapping("/add")
 	public void add(@ModelAttribute ReplyDto replyDto, HttpSession session) {
 		int replyNo = replyDao.sequence();

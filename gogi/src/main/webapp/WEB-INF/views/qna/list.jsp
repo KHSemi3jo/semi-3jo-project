@@ -48,5 +48,76 @@ td {
 	</div>
 </table>
 
+<br><br><br><br>
+
+<!-- 페이지 네이게이터 -->
+
+<h3 align="center">
+
+	<c:if test="${vo.first ==false}">
+
+
+		<a href="list?${vo.prevQueryString}">&lt;&laquo;</a>
+
+	</c:if>
+
+	<c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
+		<c:choose>
+			<c:when test="${vo.page == i}">
+			${i}	
+		</c:when>
+			<c:otherwise>
+				<a href="list?${vo.getQueryString(i)}">${i}</a>
+
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+
+
+	<c:if test="${!vo.last}">
+
+		<a href="list?${vo.nextQueryString}">&gt;&raquo;</a>
+
+
+
+	</c:if>
+
+
+</h3>
+
+
+
+<!-- 검색기능 -->
+
+<br>
+<br>
+<div align="center">
+	<form action="list" method="get">
+
+		<c:choose>
+			<c:when test="${param.type == 'shopAfterId'}">
+				<select name="type" 
+					required="required"  class="form-input">
+					<option value="qna_title">제목</option>
+					<option value="qna_category" selected="selected">카테고리</option>
+				</select>
+			</c:when>
+			<c:otherwise>
+				<select name="type" 
+					required="required"  class="form-input">
+					<option value="qna_title" selected="selected">제목</option>
+					<option value="qna_category">카테고리</option>
+				</select>
+			</c:otherwise>
+		</c:choose>
+
+
+
+		<input  class="form-input" type="search" name="keyword" required="required"
+			 placeholder="검색하실 이름을 입력해주세요"
+			>
+		<button class="btn btn-navy" type="submit">검색</button>
+	</form>
+</div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

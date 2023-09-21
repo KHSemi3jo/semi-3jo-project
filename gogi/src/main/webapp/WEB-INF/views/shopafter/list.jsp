@@ -50,10 +50,8 @@ td {
 
 <br><br><br><br>
 
-<!-- 페이지 네이게이터 출력 -->
-${list.size()}
-${vo.begin}
-${vo.end}
+<!-- 페이지 네이게이터 -->
+
 <h3 align="center">
 
 	<c:if test="${vo.first ==false}">
@@ -89,7 +87,7 @@ ${vo.end}
 
 
 
-
+<!-- 검색기능 -->
 
 <br>
 <br>

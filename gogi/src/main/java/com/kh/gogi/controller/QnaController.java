@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.gogi.dao.QnaDao;
 import com.kh.gogi.dto.QnaDto;
+import com.kh.gogi.dto.ShopAfterDto;
 import com.kh.gogi.mapper.QnaMapper;
+import com.kh.gogi.vo.ShopAfterVO;
 
 
 @Controller
@@ -27,10 +29,15 @@ public class QnaController {
 	QnaDao qnaDao;
 
 	@RequestMapping("/list")
-	private String list(Model model) {
-		List<QnaDto>list = qnaDao.list();
-		model.addAttribute("list",list);
+	public String list(@ModelAttribute(name = "vo") ShopAfterVO vo, Model model) {
+
+		int count = qnaDao.countList(vo);
+		vo.setCount(count);
+
+		List<QnaDto> list = qnaDao.selectListByPage(vo);
+		model.addAttribute("list", list);
 		return "/WEB-INF/views/qna/list.jsp";
+
 	}
 	
 	@GetMapping("/add")

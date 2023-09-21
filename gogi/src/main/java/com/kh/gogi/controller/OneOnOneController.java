@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.gogi.dao.OneOnOneDao;
 import com.kh.gogi.dto.OneOnOneDto;
+import com.kh.gogi.dto.QnaDto;
 import com.kh.gogi.mapper.OneOnOneMapper;
+import com.kh.gogi.vo.ShopAfterVO;
 
 @Controller
 @RequestMapping("/one")
@@ -24,10 +26,15 @@ public class OneOnOneController {
 	OneOnOneMapper oneOnOneMapper;
 
 	@RequestMapping("/list")
-	private String list(Model model) {
-		List<OneOnOneDto> list = oneOnOneDao.list();
+	public String list(@ModelAttribute(name = "vo") ShopAfterVO vo, Model model) {
+
+		int count = oneOnOneDao.countList(vo);
+		vo.setCount(count);
+
+		List<OneOnOneDto> list = oneOnOneDao.selectListByPage(vo);
 		model.addAttribute("list", list);
 		return "/WEB-INF/views/one/list.jsp";
+
 	}
 
 	@GetMapping("/add")
