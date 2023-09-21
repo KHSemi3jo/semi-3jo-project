@@ -76,7 +76,7 @@ public class MemberController {
 			memberDao.updateMemberLogin(inputDto.getMemberId());
 			//메인페이지로 이동
 //			return "redirect:/"; //절대경로 - 자동으로 초기페이지로 이동
-			return "/WEB-INF/views/member/join.jsp";
+			return "/WEB-INF/views/member/change.jsp";
 		}
 		//[4]비밀번호가 일치하지 않으면 로그인페이지로 이동
 	else {
@@ -120,7 +120,7 @@ public class MemberController {
 		return "/WEB-INF/views/member/passwordFinish.jsp";
 	}
 	
-//	//개인정보 변경
+	//개인정보 변경
 		@GetMapping("/change")
 		public String name(HttpSession session, Model model) {
 			String memberId = (String) session.getAttribute("name");
@@ -138,7 +138,7 @@ public class MemberController {
 			if(inputDto.getMemberPw().equals(findDto.getMemberPw())) { //비밀번호가 일치한다면
 				inputDto.setMemberId(memberId); //아이디를 설정하고
 				memberDao.updateMemberInfo(inputDto);//정보 변경 처리
-				return "redirect:mypage";
+				return "redirect:change";
 			}
 			else { //비밀번호가 일치하지 않는다면 - 다시 입력하도록 되돌려보냄
 				return "redirect:change?error";

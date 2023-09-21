@@ -77,13 +77,13 @@ public class MemberDaoImpl implements MemberDao {
 				+ "where member_id=?";
 		Object[] data = {
 				memberDto.getMemberName(), memberDto.getMemberContact(),
-				memberDto.getMemberEmail(), memberDto.getMemberBirth(),
+				memberDto.getMemberEmail(),
 				memberDto.getMemberPost(), memberDto.getMemberAddr1(),
-				memberDto.getMemberAddr2()
+				memberDto.getMemberAddr2(), memberDto.getMemberId()
 		};
 		return jdbcTemplate.update(sql, data)>0;
 	}
-
+//
 //	@Override
 //	public boolean updateMemberExit(MemberDto memberDto) {
 //		String sql = "update member set "
