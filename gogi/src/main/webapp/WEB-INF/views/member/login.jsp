@@ -49,7 +49,7 @@
                     <button class="btn btn-orange w-100" type="submit">로그인</button>
                 </div>
                 <div class="row">
-                    <button class="btn w-100">회원가입</button>
+                  <button class="btn w-100"><a href="join">회원가입</a></button>
                 </div>
             </div>
 </form>

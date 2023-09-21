@@ -23,6 +23,39 @@ td {
 <button  class="btn btn-navy"><a href="/qna/add">Qna 등록</a></button>
 <br>
 
+
+
+
+
+
+
+
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+
+ <button onclick="requestPay()"><img src="/images/pay/kakaopay.png"></button>
+
+<script>
+const userCode = "imp14397622";
+IMP.init(userCode);
+
+function requestPay() {
+  IMP.request_pay({
+    pg: "kakaopay",
+    pay_method: "card",
+    merchant_uid: "test_lmswa6lo",
+    name: "테스트 결제",
+    amount: 100,
+    buyer_tel: "010-0000-0000",
+  });
+}
+</script>
+
+
+
+
+
+
+
 <table class="w-600">
 	<div class="container ">
 		<div class="row">

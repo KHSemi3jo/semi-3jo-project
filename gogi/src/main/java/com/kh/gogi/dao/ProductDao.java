@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.gogi.dto.AttachDto;
 import com.kh.gogi.dto.ProductDto;
+import com.kh.gogi.vo.ProductVO;
 
 public interface ProductDao {
 	int sequence();
@@ -15,5 +16,12 @@ public interface ProductDao {
 	
 	void connect(int productNo, int attachNo);
 	AttachDto findImage(int productNo);
+	
+	List<ProductDto> selectListBypage(int page);
+	List<ProductDto> selectListBypage(ProductVO vo);
+	
+//	int countList();
+	int countList(ProductVO  vo);
+	
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.gogi.dao.NoticeDao;
+import com.kh.gogi.dto.MemberDto;
 import com.kh.gogi.dto.NoticeDto;
 import com.kh.gogi.dto.ShopAfterDto;
 import com.kh.gogi.mapper.NoticeMapper;
@@ -48,9 +49,17 @@ public class NoticeController {
 	}
 	@PostMapping("/add")
 	private String add(@ModelAttribute NoticeDto noticeDto,
-			HttpSession sesstion) {
+			@ModelAttribute MemberDto memberDto,
+			HttpSession session) {
 		int noticeNo = noticeDao.sequence();
 		noticeDto.setNoticeNo(noticeNo);
+		
+		
+		String memberId = (String) session.getAttribute("name");
+		noticeDto.setNoticeWriter(memberId);
+		
+		
+		
 		noticeDao.add(noticeDto);
 		return "redirect:detail?noticeNo="+noticeNo;
 	}

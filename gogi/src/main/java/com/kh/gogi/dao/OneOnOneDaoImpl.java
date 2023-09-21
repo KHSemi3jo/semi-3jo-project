@@ -29,10 +29,10 @@ public class OneOnOneDaoImpl implements OneOnOneDao {
 
 	@Override
 	public void add(OneOnOneDto oneOnOneDto) {
-		String sql = "insert into OneOnOne(one_no,"
-				+ " one_title ,one_content) "
-				+ "values(?,?,?)";
-		Object[] data = {oneOnOneDto.getOneNo(),
+		String sql = "insert into OneOnOne(one_no,one_id"
+				+ ",one_title ,one_content) "
+				+ "values(?,?,?,?)";
+		Object[] data = {oneOnOneDto.getOneNo(),oneOnOneDto.getOneId(),
 				oneOnOneDto.getOneTitle(),oneOnOneDto.getOneContent()};
 	tem.update(sql, data);
 	}
@@ -45,8 +45,8 @@ public class OneOnOneDaoImpl implements OneOnOneDao {
 	}
 
 	@Override
-	public List<OneOnOneDto> list() {
-		String sql ="select * from OneOnOne order by one_no desc";
+	public List<OneOnOneDto> list(String memberId) {
+		String sql ="select * from OneOnOne where one_id =?   order by one_no desc";
 		return tem.query(sql, oneOnOneMapper);
 	}
 
@@ -79,40 +79,42 @@ public class OneOnOneDaoImpl implements OneOnOneDao {
 		return tem.queryForObject(sql, int.class, ob);
 	}
 	@Override
-	public List<OneOnOneDto> selectListByPage(String type, String keyword, int page) {
+	public List<OneOnOneDto> selectListByPage(String type, String keyword, int page,  String memberId) {
 		int begin = page * 10 - 9;
 		int end = page * 10;
 
 		String sql =	" SELECT * "
 			     +"FROM (SELECT *  FROM OneOnOne"
-			    	     +" where instr(" + type + ", ?) > 0 "
-			    	          +" ORDER BY OneOnOne_no DESC)"
+			    	     +" where one_id = ? and instr(" + type + ", ?) > 0 "
+			    	          +" ORDER BY one_no DESC)"
 			    	    +" WHERE ROWNUM between ? and ?";	
 		
-		Object[] ob = { keyword, begin, end };
+		Object[] ob = {memberId ,keyword, begin, end };
 		return tem.query(sql, oneOnOneMapper, ob);
 	}
 
 	@Override
-	public List<OneOnOneDto> selectListByPage(int page) {
+	public List<OneOnOneDto> selectListByPage(int page, String memberId) {
 		
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from("
-				+ "select * from OneOnOne order by one_no desc"
+				+ "select * from OneOnOne "
+				+ "where one_id = ? "
+				+ "order by one_no desc"
 				+ ")TMP"
 				+ ") where rn between ? and ?";
-		Object[] ob = { page * 10 - 9, page * 10 };
+		Object[] ob = {memberId ,page * 10 - 9, page * 10 };
 		return tem.query(sql,oneOnOneMapper , ob);
 
 	}
 
 	@Override
-	public List<OneOnOneDto> selectListByPage(ShopAfterVO vo) {
+	public List<OneOnOneDto> selectListByPage(ShopAfterVO vo, String memberId) {
 		if (vo.isSearch()) {
-			return selectListByPage(vo.getType(), vo.getKeyword(), vo.getPage());
+			return selectListByPage(vo.getType(), vo.getKeyword(), vo.getPage(),memberId);
 
 		} else {
-			return selectListByPage(vo.getPage());
+			return selectListByPage(vo.getPage(),memberId);
 		}
 	}
 
