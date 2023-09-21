@@ -199,6 +199,7 @@
                         <div class="row left"> 
                             <label class="custom-checkbox">
                                 <input  type="checkbox" class="check-item"><span></span> 이용약관동의(필수)
+                                <div class=""
                             </label>
                         </div> 
                         <div class="row left"> 
