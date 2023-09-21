@@ -141,9 +141,16 @@ public class ShopAfterController {
 
 	
 	@RequestMapping("/detail")
-	private String detail(@RequestParam int shopAfterNo, Model model) {
+	private String detail(@RequestParam int shopAfterNo, Model model, HttpSession session
+			,@ModelAttribute(name = "vo") ShopAfterVO vo) {
 		ShopAfterDto  shopAfterDto = shopAfterDao.detail(shopAfterNo);
 		model.addAttribute("shopAfterDto", shopAfterDto);
+		
+		String shopAfterId = shopAfterDto.getShopAfterId();
+		if (shopAfterId != null) {
+			MemberDto memberDto = memberDao.selectOne(shopAfterId);
+			model.addAttribute("shopAfterDto", memberDto);
+		}
 		return "/WEB-INF/views/shopafter/detail.jsp";
 	}
 

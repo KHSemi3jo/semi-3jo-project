@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.gogi.dao.ReplyDao;
 import com.kh.gogi.dao.ShopAfterDao;
 import com.kh.gogi.dto.ReplyDto;
+import com.kh.gogi.dto.ShopAfterDto;
+import com.kh.gogi.vo.ShopAfterVO;
 
 @RestController
 @CrossOrigin
@@ -40,9 +43,15 @@ public class ReplyRestController {
 	}
 
 	@PostMapping("/list")
-	public List<ReplyDto> list(@RequestParam int replyOrigin) {
-		List<ReplyDto> list = replyDao.selectList(replyOrigin);
+	public List<ReplyDto> list(@RequestParam int replyOrigin, 
+			@ModelAttribute(name = "vo") ShopAfterVO vo,Model model) {
+
+		int count = replyDao.countList(vo);
+		vo.setCount(count);
+		List<ReplyDto> list = replyDao.selectListByPage(vo,replyOrigin);
+		model.addAttribute("list", list);
 		return list;
+		
 	}
 	
 	@PostMapping("/delete")
