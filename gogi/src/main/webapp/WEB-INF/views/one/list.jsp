@@ -20,7 +20,9 @@ td {
 }
 </style>
 
-<button  class="btn btn-navy"><a href="/one/add">1대1 등록</a></button>
+<button class="btn btn-navy">
+	<a href="/one/add">1대1 등록</a>
+</button>
 <br>
 
 <table class="w-600">
@@ -29,29 +31,35 @@ td {
 			<h1>1대1 목록</h1>
 		</div>
 		<tr>
-			<th>1대1 번호</th>
+
+			<th>카테고리</th>
 			<th>1대1 제목</th>
-			<th>1대1 내용</th>
-			<th>삭제</th>
+			<th>1대1 작성시간</th>
+
+
+
 		</tr>
 
 		<c:forEach var="OneOnOneDto" items="${list}">
 			<tr>
-				<td>${OneOnOneDto.oneNo}</td>
+				<td>${OneOnOneDto.oneCategory}</td>
 				<td><a href="detail?oneNo=${OneOnOneDto.oneNo}">${OneOnOneDto.oneTitle}</a></td>
-				<td>${OneOnOneDto.oneContent}</td>
-				<td><a href="delete?oneNo=${OneOnOneDto.oneNo}">삭제</a></td>
+				<td>${OneOnOneDto.oneDate}</td>
+
 			</tr>
 		</c:forEach>
 
 	</div>
 </table>
 
-<br><br><br><br>
+<br>
+<br>
+<br>
+<br>
 
 
 
-	
+
 
 
 
@@ -64,15 +72,13 @@ td {
 
 		<c:choose>
 			<c:when test="${param.type == 'shopAfterId'}">
-				<select name="type" 
-					required="required"  class="form-input">
+				<select name="type" required="required" class="form-input">
 					<option value="one_title">제목</option>
 					<option value="one_id" selected="selected">작성자</option>
 				</select>
 			</c:when>
 			<c:otherwise>
-				<select name="type" 
-					required="required"  class="form-input">
+				<select name="type" required="required" class="form-input">
 					<option value="one_title" selected="selected">제목</option>
 					<option value="one_id">작성자</option>
 				</select>
@@ -81,9 +87,8 @@ td {
 
 
 
-		<input  class="form-input" type="search" name="keyword" required="required"
-			 placeholder="검색하실 이름을 입력해주세요"
-			>
+		<input class="form-input" type="search" name="keyword"
+			required="required" placeholder="검색하실 이름을 입력해주세요">
 		<button class="btn btn-navy" type="submit">검색</button>
 	</form>
 </div>

@@ -88,7 +88,7 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("name");
 		session.removeAttribute("level");
-		return "redirect:/";
+		return "redirect:/main";
 	}
 	
 	//비밀번호 변경
@@ -133,17 +133,18 @@ public class MemberController {
 		public String change(@ModelAttribute MemberDto inputDto,
 							HttpSession session){
 			String memberId = (String) session.getAttribute("name");
-			//비밀번호 검사 후 변경 처리 요청
+
 			MemberDto findDto = memberDao.selectOne(memberId);
-			if(inputDto.getMemberPw().equals(findDto.getMemberPw())) { //비밀번호가 일치한다면
-				inputDto.setMemberId(memberId); //아이디를 설정하고
 				memberDao.updateMemberInfo(inputDto);//정보 변경 처리
-				return "redirect:change";
+				return "redirect:changeFinish";
 			}
-			else { //비밀번호가 일치하지 않는다면 - 다시 입력하도록 되돌려보냄
-				return "redirect:change?error";
-			}
+		
+		@RequestMapping("/changeFinish")
+		public String changeFinish(){
+			return "/WEB-INF/views/member/changeFinish.jsp";
 		}
+		
+		
 		
 		//회원탈퇴
 		@GetMapping("/exit")
@@ -162,7 +163,6 @@ public class MemberController {
 				memberDao.delete(memberId);
 				//로그아웃
 				session.removeAttribute("name");//세션에서 name의 값을 삭제
-				//session.invalidate(); 세션소멸-비추천
 			return "redirect:exitFinish"; //탈퇴완료 페이지로 이동
 		}
 		//비밀번호가 일치하지 않으면
@@ -176,13 +176,13 @@ public class MemberController {
 		}
 
 		//비밀번호 찾기
-		@GetMapping("/findPw")
-		public String findPw() {
-			return "/WEB-INF/views/member/findPw.jsp";
+		@GetMapping("/searchPw")
+		public String searchPw() {
+			return "/WEB-INF/views/member/searchPw.jsp";
 		}
 		
-		@PostMapping("/findPw")
-		public String findPw(@ModelAttribute MemberDto memberDto) {
+		@PostMapping("/searchPw")
+		public String searchPw(@ModelAttribute MemberDto memberDto) {
 			//[1] 아이디로 모든 정보를 불러오고
 			MemberDto findDto = memberDao.selectOne(memberDto.getMemberId());
 			//[2] 이메일이 일치하는지 확인한다
@@ -196,15 +196,15 @@ public class MemberController {
 				message.setText(findDto.getMemberPw());
 				sender.send(message);
 				
-				return "redirect:findPwFinish";
+				return "redirect:searchPwFinish";
 				
 			}
 			else { //이메일이 다르다면
-				return "redirect:findPw?error";
+				return "redirect:searchPw?error";
 			}
 		}
-		@RequestMapping("/findPwFinish")
-		public String findPwFinish() {
-			return "/WEB-INF/views/member/findPwFinish.jsp";
+		@RequestMapping("/searchPwFinish")
+		public String searchPwFinish() {
+			return "/WEB-INF/views/member/searchPwFinish.jsp";
 		}
 	}
