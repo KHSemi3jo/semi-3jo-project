@@ -139,6 +139,11 @@ public class MemberController {
 				return "redirect:changeFinish";
 			}
 		
+		@RequestMapping("/changeFinish")
+		public String changeFinish(){
+			return "/WEB-INF/views/member/changeFinish.jsp";
+		}
+		
 		
 		
 		//회원탈퇴
