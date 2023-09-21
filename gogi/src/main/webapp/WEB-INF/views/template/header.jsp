@@ -68,8 +68,8 @@
 							                    <div class="member-service">
 							                        <a href="#">G-money</a>
 							                        <a href="/payment/list">주문내역</a>
-							                        <a href="/shopAfter/list">상품후기</a>
-							                        <a href="/member/mypage">마이페이지</a>
+							                        <a href="/shopafter/list">상품후기</a>
+							                        <a href="/member/change">개인정보수정</a>
 							                        <a href="/member/logout">로그아웃</a>
 							                    </div>
 							                </div>								        	
