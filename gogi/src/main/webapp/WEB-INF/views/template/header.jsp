@@ -64,7 +64,7 @@
 								<c:when test="${sessionScope.name != null}">
 								        	<%-- 회원일시 로그인된 회원이름(로그인자리) --%>
 							                <div class="row pr-30"><a><i class="cart fa-solid fa-cart-shopping fa-xl navy"></i></a></div>
-							                <div class="row pr-20 member-menu navy"><span>${sessionScope.name != null} 님<i class="fa-solid fa-angle-down"></i></span>
+							                <div class="row pr-20 member-menu navy"><span>${sessionScope.name} 님<i class="fa-solid fa-angle-down"></i></span>
 							                    <div class="member-service">
 							                        <a href="#">G-money</a>
 							                        <a href="/payment/list">주문내역</a>
