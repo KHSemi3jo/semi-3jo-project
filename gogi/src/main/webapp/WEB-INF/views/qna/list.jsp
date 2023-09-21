@@ -3,37 +3,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
-table {
-	border: 1px solid black;
-	margin-left: auto;
-	margin-right: auto;
+.qnaTitle{
+	text-decoration: none;
 }
 
-th {
-	border: 1px solid black;
-	text-align: center;
-}
-
-td {
-	border: 1px solid black;
-	text-align: center;
+select.form-input,
+.form-input,
+.btn.btn-navy{
+	font-size:16px;
+	height:2.8em;
+    border-radius: 0.1em;
 }
 </style>
 
-<button  class="btn btn-navy"><a href="/qna/add">Qna 등록</a></button>
-<br>
-
-
-
-
-
-
-
-
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-
- <button onclick="requestPay()"><img src="/images/pay/kakaopay.png"></button>
-
+<button onclick="requestPay()"><img src="/images/pay/kakaopay.png"width="100px"height="50px"></button>
 <script>
 const userCode = "imp14397622";
 IMP.init(userCode);
@@ -53,104 +37,138 @@ function requestPay() {
 
 
 
+	<div class="container w-800 navy">
+        <div class="row pb-30">
+            <h2>자주하는 질문</h2>
+        </div>
+        
+        <!-- 폼시작(체크박스) -->
+        <form class="delete-form" action="deleteByAdmin"method="post">
+        <%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
+        <c:if test="${sessionScope.name != null}">
+        <div class="row right ">
+            <c:if test="${sessionScope.level =='관리자' }">
+            <button type ="submit" class="btn delete-btn">
+                <i class="fa-solid fa-trash"></i>
+                일괄삭제</button></c:if>
+    
+        
+            <a href="/qna/add" class="btn btn-navy">
+                <i class="fa-solid fa-pen"></i>
+                Qna등록
+            </a>
+        </div>
+        </c:if>
+        
+        <%-- 
+    검색일 경우 검색어를 추가로 출력 
+    (참고) 논리 반환값을 가지는 getter 메소드는 get이 아니라 is로 시작한다
+        --%>
+        <c:if test="${vo.search}">
+        <div class="row left">
+            &quot;${vo.keyword}&quot;에 대한 검색 결과
+        </div>
+        </c:if>
+        
+        
+        <div class="row">
+            <table class=" table table-slit">
+                <thead>
+                    <tr>
+                        <%--체크박스 일괄 삭제 --%>
+                        <c:if test="${sessionScope.level =='관리자' }">
+                            <th>
+                                <input type="checkbox" class="check-all">
+                            </th>
+                        </c:if>
+                            <th>번호</th>
+                            <th>카테고리</th>
+                            <th width="50%">제목</th>
+                    </tr>
+                </thead>
 
-
-
-<table class="w-600">
-	<div class="container ">
-		<div class="row">
-			<h1>자주하는 질문 목록</h1>
-		</div>
-		<div class="row w-100">
-		<tr>
-			<th>Qna 번호</th>
-			<th>Qna 제목</th>
-			<th>Qna 내용</th>
-			<th>삭제</th>
-		</tr>
+                <c:forEach var="qnaDto" items="${list}">				
+                    <tr>
+                        <%--체크박스 개별 삭제 --%>
+                        <c:if test="${sessionScope.level =='관리자' }">
+                            <td>
+                                <a href="delete?qnaNo=${qnaDto.qnaNo}">삭제</a>
+                                <%--<input type="checkbox"class="check-item" name="boardNoList" value="${boardListDto.boardNo }">--%>
+                            </td>
+                        </c:if>
+                        
+                        <td>${qnaDto.qnaNo}</td>
+                        <td>카테고리</td>
+                        <td class="left w-70"><a class="qnaTitle navy" href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></td>    
+                    </tr>
+                </c:forEach>
+            
+            </table>	
+        </div>
+    <!-- 폼 종료(체크박스) -->
+    </form>
 </div>
-		<c:forEach var="qnaDto" items="${list}">
-			<tr>
-				<td>${qnaDto.qnaNo}</td>
-				<td><a href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></td>
-				<td>${qnaDto.qnaAnswer}</td>
-				<td><a href="delete?qnaNo=${qnaDto.qnaNo}">삭제</a></td>
-			</tr>
-		</c:forEach>
 
-	</div>
-</table>
+<div class="row page-navigator mv-30">
+            <!-- 이전 버튼 -->
+            <c:if test="${!vo.first}">
+                <a href="list?${vo.prevQueryString}">
+                    <i class="fa-solid fa-angle-left"></i>
+                </a>
+            </c:if>
+        
+            <!-- 숫자 버튼 -->
+            <c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
+                <c:choose>
+                    <c:when test="${vo.page == i}">
+                        <a class="on">${i}</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="list?${vo.getQueryString(i)}">${i}</a> 
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        
+            <!-- 다음 버튼 -->
+            <c:if test="${!vo.last}">
+                <a href="list?${vo.nextQueryString}">
+                    <i class="fa-solid fa-angle-right"></i>
+                </a>
+            </c:if>
+    </div>
 
-<br><br><br><br>
-
-<!-- 페이지 네이게이터 -->
-
-<h3 align="center">
-
-	<c:if test="${vo.first ==false}">
-
-
-		<a href="list?${vo.prevQueryString}">&lt;&laquo;</a>
-
-	</c:if>
-
-	<c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
-		<c:choose>
-			<c:when test="${vo.page == i}">
-			${i}	
-		</c:when>
-			<c:otherwise>
-				<a href="list?${vo.getQueryString(i)}">${i}</a>
-
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
-
-
-	<c:if test="${!vo.last}">
-
-		<a href="list?${vo.nextQueryString}">&gt;&raquo;</a>
-
-
-
-	</c:if>
-
-
-</h3>
 
 
 
 <!-- 검색기능 -->
 
-<br>
-<br>
 <div align="center">
-	<form action="list" method="get">
+<form action="list" method="get">
 
-		<c:choose>
-			<c:when test="${param.type == 'shopAfterId'}">
-				<select name="type" 
-					required="required"  class="form-input">
-					<option value="qna_title">제목</option>
-					<option value="qna_category" selected="selected">카테고리</option>
-				</select>
-			</c:when>
-			<c:otherwise>
-				<select name="type" 
-					required="required"  class="form-input">
-					<option value="qna_title" selected="selected">제목</option>
-					<option value="qna_category">카테고리</option>
-				</select>
-			</c:otherwise>
-		</c:choose>
+    <c:choose>
+        <c:when test="${param.type == 'shopAfterId'}">
+            <select name="type" 
+                required="required"  class="form-input">
+                <option value="qna_title">제목</option>
+                <option value="qna_category" selected="selected">카테고리</option>
+            </select>
+        </c:when>
+        <c:otherwise>
+            <select name="type" 
+                required="required"  class="form-input">
+                <option value="qna_title" selected="selected">제목</option>
+                <option value="qna_category">카테고리</option>
+            </select>
+        </c:otherwise>
+    </c:choose>
 
 
 
-		<input  class="form-input" type="search" name="keyword" required="required"
-			 placeholder="검색하실 이름을 입력해주세요"
-			>
-		<button class="btn btn-navy" type="submit">검색</button>
-	</form>
+    <input class="form-input" type="search" name="keyword" required="required"
+         placeholder="검색어를 입력해주세요"
+        >
+    <button class="btn btn-navy" type="submit">검색</button>
+</form>
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
