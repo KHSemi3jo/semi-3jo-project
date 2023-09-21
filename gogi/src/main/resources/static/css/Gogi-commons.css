@@ -405,7 +405,7 @@ textarea.form-input.fixed {
     border-top: 1px solid #2d3436;
 }
 
-.table.table-slit > tbody > tr :not(tr:last-child) {
+.table.table-slit > tbody > tr {
     border-bottom: 1px dotted #2d3436;
 }
 
@@ -421,14 +421,14 @@ textarea.form-input.fixed {
     cursor: pointer;
     text-decoration: none;
     /* border:1px solid #2d3436; */
-    box-shadow: 0px 0px 1px 0px #2d3436;
-    color: #2d3436;
+    box-shadow: 0px 0px 1px 0px #012D5C;
+    color: #012D5C;
 }
 .page-navigator > a.on,
 .page-navigator > a:hover {
     /* border-color: #0984e3; */
-    box-shadow: 0px 0px 2px 0px #0984e3;
-    color: #0984e3;
+    box-shadow: 0px 0px 1px 0px #FA9F5F;
+    color: #FA9F5F;
 }
 
 /*
