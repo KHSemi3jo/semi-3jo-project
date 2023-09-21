@@ -38,9 +38,9 @@ public class BasketDaoImpl implements BasketDao{
 	}
 	
 	@Override
-	public boolean delete(int basketListNo) {
-		String sql = "delete basket where basket_listno = ?";
-		Object[] data = {basketListNo};
+	public boolean delete(int basketNo) {
+		String sql = "delete basket where basket_no = ?";
+		Object[] data = {basketNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 

@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.kh.gogi.dto.MemberBlockDto;
 import com.kh.gogi.dto.MemberDto;
+import com.kh.gogi.dto.MemberListDto;
+import com.kh.gogi.vo.PaginationVO;
 
 public interface MemberDao {
 	void insert(MemberDto memberDto);
@@ -14,10 +16,10 @@ public interface MemberDao {
 	boolean updateMemberInfoByAdmin(MemberDto memberDto);
 	boolean delete(String memberId);
 	
-//	List<MemberDto> selectListByPage(PaginationVO vo);
-//	List<MemberListDto> selectListByPage2(PaginationVO vo);
-//    int countList(PaginationVO vo);
-//    
+	List<MemberDto> selectListByPage(PaginationVO vo);
+	List<MemberListDto> selectListByPage2(PaginationVO vo);
+    int countList(PaginationVO vo);
+    
     //차단+해제 기능
     void insertBlock(String memberId);
     boolean deleteBlock(String memberId);

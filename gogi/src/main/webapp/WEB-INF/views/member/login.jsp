@@ -43,7 +43,9 @@
 					</c:if>
 				</div>
                 <div class="row right">
+
                     <a href="searchPw" class="link navy">비밀번호 찾기</a>
+
                 </div>
                 <div class="row pt-20">
                     <button class="btn btn-orange w-100" type="submit">로그인</button>
