@@ -79,7 +79,7 @@ select.form-input,
 							</c:if>
 							
 							<td>${noticeDto.noticeNo}</td>
-							<td><a class="noticeTitle navy" href="detail?noticeNo=${noticeDto.noticeNo}">${noticeDto.noticeTitle}</a></td>
+							<td><a class="noticeTitle navy left" href="detail?noticeNo=${noticeDto.noticeNo}">${noticeDto.noticeTitle}</a></td>
 								<c:choose>
 									<c:when test="${noticeDto.noticeWriter != null}">
 										<td>고기어때</td>
