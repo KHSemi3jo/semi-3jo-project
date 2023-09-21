@@ -66,36 +66,7 @@
                             class="form-input w-100" >
                     </div>
                 </div>
-                
-                <div class="row flex-container">
-                    <div class="row w-25 left">
-                        <label>현재 비밀번호</label>
-                    </div>
-                    <div class="row w-75 pr-30">
-                        <input type="text" name="originPw" value="${memberDto.memberPw}"
-                            class="form-input w-100">
-                    </div>
-                </div>
-                
-                <div class="row flex-container">
-                    <div class="row w-25 left">
-                        <label>새 비밀번호</label>
-                    </div>
-                    <div class="row w-75 pr-30">
-                        <input type="text" name="memberPw"class="form-input w-100">
-                    </div>
-                </div>
-                
-                <div class="row flex-container">
-                    <div class="row w-25 left">
-                        <label>새 비밀번호 확인</label>
-                    </div>
-                    <div class="row w-75 pr-30">
-                        <input type="text" name="memberPw" class="form-input w-100" >
-                    </div>
-                </div>
-
-
+         
                 <div class="row flex-container">
                     <div class="row w-25 left">
                         <label>이름</label>
@@ -167,15 +138,16 @@
                 </div>
                 <div class="row flex-container">
                     <div class="row w-50 right">
-                        <a class="btn" href="exit">                           
+                        <button class="btn" >                           
                             탈퇴하기
-                        </a>
+                        </button>
                     </div>
                     <div class="row w-50 left pl-20">
                         <button class="btn btn-orange " type="submit">                         
                             회원정보수정
                         </button>
                     </div> 
+                    <a href="/main">로그아웃</a>
                 </div>
         </div> 
     </form>
