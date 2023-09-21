@@ -98,7 +98,7 @@ public class OneOnOneDaoImpl implements OneOnOneDao {
 		
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from("
-				+ "select * from OneOnOne order by OneOnOne_no desc"
+				+ "select * from OneOnOne order by one_no desc"
 				+ ")TMP"
 				+ ") where rn between ? and ?";
 		Object[] ob = { page * 10 - 9, page * 10 };
