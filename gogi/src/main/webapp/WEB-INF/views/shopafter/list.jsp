@@ -26,7 +26,7 @@ td {
 <table class="w-800">
 	<div class="container">
 		<div class="row">
-			<h1>쇼핑 후기 목록</h1>
+			<h1>쇼핑 후기 목록1</h1>
 		</div>
 		<tr>
 			<th>쇼핑후기 번호</th>
