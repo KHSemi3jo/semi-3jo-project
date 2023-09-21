@@ -55,7 +55,10 @@
     </div>
     <div class="row left">
     <label>상품타입</label>
-		 <input type="text" class="form-input w-100" name="productType">
+		<input type="radio"  name="productType"  checked>
+        <label >냉동</label>
+        <input type="radio"  name="productType" >
+        <label >냉장</label>
     </div>
     <div class="row left">
         <button type="submit" class="btn btn-orange btn-save w-100">상품 등록</button>

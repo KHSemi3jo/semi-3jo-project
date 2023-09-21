@@ -9,7 +9,14 @@
 		<h1>상품 상세 페이지</h1>
 	</div>
 	<div class="row"></div>
-		<img src="image?productNo=${productDto.productNo}" width="200" height="200">
+	<c:choose>
+		<c:when test="${productDto.image}">
+			<img src="image?productNo=${productDto.productNo}" width="200" height="200">
+		</c:when>
+			<c:otherwise>
+				<img src="https://dummyimage.com/200x200/000/fff" width="200" height="200">
+		</c:otherwise>
+	</c:choose>
 	</div>
 	<div class="row">
 		<h1>${productDto.productNo}</h1>;
@@ -35,7 +42,10 @@
 	<div class="row">
 	<h1>${productDto.productDate}</h1>
 	</div>
-</div>
+	<div class="row">
+	<a href="list?productNo=${productDto.productNo}">목록으로</a>
+	</div>
+	
 
 
 

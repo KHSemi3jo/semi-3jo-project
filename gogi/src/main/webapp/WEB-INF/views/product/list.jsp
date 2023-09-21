@@ -4,8 +4,20 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 	<c:forEach var="productDto" items="${list}">
+		<div class="container w-500">
+		<div class="row">
+		<c:choose>
+		<c:when test="${productDto.image}">
+			<img src="image?productNo=${productDto.productNo}" width="200" height="200">
+		</c:when>
+		<c:otherwise>
+			<img src="https://dummyimage.com/200x200/000/fff" width="200" height="200">
+		</c:otherwise>
+	</c:choose>
+	</div>
 		<div class="row">
 			<a class="link" href="detail?productNo= ${productDto.productNo}">${productDto.productNo}</a> /
+			
 			 ${productDto.productName}/
 			  ${productDto.productPrice}원
 			
@@ -13,6 +25,7 @@
 		<a href="edit?productNo=${productDto.productNo}">수정</a>
 		<a href="delete?productNo=${productDto.productNo}">삭제</a>
 		<hr>
+		</div>
 		</div>
 	
 	</c:forEach>
