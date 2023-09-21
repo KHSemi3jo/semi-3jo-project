@@ -149,6 +149,7 @@
                     </div> 
                     <a href="/main">로그아웃</a>
                     <a href="password">비밀번호변경</a>
+                    <a href="/admin/member/list">회원목록</a>
                 </div>
         </div> 
     </form>
