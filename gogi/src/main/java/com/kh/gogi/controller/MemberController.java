@@ -21,7 +21,7 @@ import com.kh.gogi.error.AuthorityException;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-	
+	//주석
 	@Autowired
 	private MemberDao memberDao;
 	
