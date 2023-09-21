@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class BasketListDto {
+	private int basketNo;
 	private int basketListNo;
 	private String basketMember;
 	private int basketCount;
