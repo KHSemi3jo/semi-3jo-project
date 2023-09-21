@@ -51,7 +51,7 @@
                     <button class="btn btn-orange w-100" type="submit">로그인</button>
                 </div>
                 <div class="row">
-                  <button class="btn w-100"><a href="join">회원가입</a></button>
+                  <a class="btn w-100"href="join">회원가입</a>
                 </div>
             </div>
 </form>

@@ -19,7 +19,7 @@ select.form-input,
 
 
 	<div class="container w-800 navy">
-			<div class="row">
+			<div class="row pb-30">
 				<h2>공지사항</h2>
 			</div>
 			
@@ -34,7 +34,7 @@ select.form-input,
 					일괄삭제</button></c:if>
 		
 			
-				<a href="write" class="btn upBtn">
+				<a href="/notice/add" class="btn upBtn">
 					<i class="fa-solid fa-pen"></i>
 					글쓰기
 				</a>
@@ -79,7 +79,7 @@ select.form-input,
 							</c:if>
 							
 							<td>${noticeDto.noticeNo}</td>
-							<td><a class="noticeTitle navy left" href="detail?noticeNo=${noticeDto.noticeNo}">${noticeDto.noticeTitle}</a></td>
+							<td class="left"><a class="noticeTitle navy " href="detail?noticeNo=${noticeDto.noticeNo}">${noticeDto.noticeTitle}</a></td>
 								<c:choose>
 									<c:when test="${noticeDto.noticeWriter != null}">
 										<td>고기어때</td>
