@@ -3,6 +3,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<script>
+    $(function(){
+        $(".btn-basket").click(function(){
+        	var params = new URLSearchParams(location.search);
+        	var productNo = params.get("productNo");
+        	
+            $.ajax({
+                url:"http://localhost:8080/rest/basket/add",
+                method:"post",
+                data:{productNo:productNo},
+                success:function(){
+                    
+                }
+            });
+        });
+    });
+</script>
 
 <div class="container w-500">
 	<div class="row">
@@ -42,10 +59,19 @@
 	<div class="row">
 	<h1>${productDto.productDate}</h1>
 	</div>
+
+	
+	<div>
+		<button class="btn-basket">담기</button>
+	</div>
+	
+</div>
+
 	<div class="row">
 	<a href="list?productNo=${productDto.productNo}">목록으로</a>
 	</div>
 	
+
 
 
 
