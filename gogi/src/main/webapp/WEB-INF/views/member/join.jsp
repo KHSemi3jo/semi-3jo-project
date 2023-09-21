@@ -35,7 +35,7 @@
     <!--jquery CDN-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="/js/checkbox.js"></script>
-    
+        <script src="/js/join.js"></script>
     <!--daum 우편 API cdn-->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <!--javascript 작성 공간-->
@@ -199,7 +199,6 @@
                         <div class="row left"> 
                             <label class="custom-checkbox">
                                 <input  type="checkbox" class="check-item"><span></span> 이용약관동의(필수)
-                                <div class=""
                             </label>
                         </div> 
                         <div class="row left"> 
