@@ -14,7 +14,7 @@ public interface OneOnOneDao {
 
 	public boolean delete(int OneOnOneNo);
 
-	public List<OneOnOneDto> list();
+	public List<OneOnOneDto> list(String memberId);
 
 	public boolean fix(OneOnOneDto oneOnOneDto);
 
@@ -28,14 +28,14 @@ public interface OneOnOneDao {
 
 
 
-	public List<OneOnOneDto> selectListByPage(String type, String keyword, int page);
+	public List<OneOnOneDto> selectListByPage(String type, String keyword, int page,  String memberId);
 
-	public List<OneOnOneDto> selectListByPage(int page);
+	public List<OneOnOneDto> selectListByPage(int page,  String memberId);
 
-	public List<OneOnOneDto> selectListByPage(ShopAfterVO vo);
+	public List<OneOnOneDto> selectListByPage(ShopAfterVO vo, String memberId);
 
 
-	public int countList(ShopAfterVO vo);
+	public int countList(ShopAfterVO vo );
 	
 	
 }

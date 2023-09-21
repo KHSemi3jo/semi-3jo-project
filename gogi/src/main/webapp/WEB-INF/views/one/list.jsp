@@ -49,40 +49,9 @@ td {
 
 <br><br><br><br>
 
-<!-- 페이지 네이게이터 -->
-
-<h3 align="center">
-
-	<c:if test="${vo.first ==false}">
 
 
-		<a href="list?${vo.prevQueryString}">&lt;&laquo;</a>
-
-	</c:if>
-
-	<c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
-		<c:choose>
-			<c:when test="${vo.page == i}">
-			${i}	
-		</c:when>
-			<c:otherwise>
-				<a href="list?${vo.getQueryString(i)}">${i}</a>
-
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
-
-
-	<c:if test="${!vo.last}">
-
-		<a href="list?${vo.nextQueryString}">&gt;&raquo;</a>
-
-
-
-	</c:if>
-
-
-</h3>
+	
 
 
 

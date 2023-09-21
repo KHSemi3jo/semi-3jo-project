@@ -2,6 +2,8 @@ package com.kh.gogi.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.gogi.dao.MemberDao;
 import com.kh.gogi.dao.OneOnOneDao;
+import com.kh.gogi.dto.MemberDto;
 import com.kh.gogi.dto.OneOnOneDto;
 import com.kh.gogi.dto.QnaDto;
 import com.kh.gogi.mapper.OneOnOneMapper;
@@ -24,14 +28,23 @@ public class OneOnOneController {
 	OneOnOneDao oneOnOneDao;
 	@Autowired
 	OneOnOneMapper oneOnOneMapper;
-
+	@Autowired
+	MemberDao memberDao;
+	
 	@RequestMapping("/list")
-	public String list(@ModelAttribute(name = "vo") ShopAfterVO vo, Model model) {
-
+	public String list(@ModelAttribute(name = "vo") ShopAfterVO vo, Model model,
+			String memberId,
+			@ModelAttribute MemberDto memberDto,
+			HttpSession session) {
+		
+		memberId = (String) session.getAttribute("name");
+	//	boolean isLogin =	inputDto.getMemberId()==findDto.getMemberId();
+		
+		
 		int count = oneOnOneDao.countList(vo);
 		vo.setCount(count);
 
-		List<OneOnOneDto> list = oneOnOneDao.selectListByPage(vo);
+		List<OneOnOneDto> list = oneOnOneDao.selectListByPage(vo,memberId);
 		model.addAttribute("list", list);
 		return "/WEB-INF/views/one/list.jsp";
 
@@ -43,9 +56,13 @@ public class OneOnOneController {
 	}
 
 	@PostMapping("/add")
-	private String add(@ModelAttribute OneOnOneDto oneOnOneDto) {
+	private String add(@ModelAttribute OneOnOneDto oneOnOneDto,
+			@ModelAttribute MemberDto memberDto
+			,HttpSession session) {
 		int oneNo = oneOnOneDao.sequence();
 		oneOnOneDto.setOneNo(oneNo);
+		String memberId = (String) session.getAttribute("name");
+		oneOnOneDto.setOneId(memberId);
 		oneOnOneDao.add(oneOnOneDto);
 		return "redirect:detail?oneNo="+oneNo;
 	}
