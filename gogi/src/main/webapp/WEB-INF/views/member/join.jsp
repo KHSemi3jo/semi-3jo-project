@@ -31,6 +31,61 @@
 .custom-checkbox > [type=checkbox]:checked + span {
     background-image: url("/images/checkbox/checkbox-check.png");
 }
+.popup {
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    background-color: rgba(0,0,0,0.6);
+    display: none;
+    position: fixed;
+}
+.popup-wrap {
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius:  10px;
+    background-color: white;
+    width: 400px;
+    height: 500px;
+    padding: 20px;
+    border: 1px solid #012D5C;
+}
+.popup__head{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom:  20px;
+}
+.popup__body{
+    font-size: 16px;
+    line-height: 30px;
+}
+.close-btn{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    background-color: white;
+    color: #FA9F5F;
+    border-radius:  10px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+textarea{
+    border-top: none;
+    border-left: none ;
+    border-bottom: none;
+    border-right: none;
+    margin:10px;
+    resize: none;
+    width: 100%;
+    min-height:350px;
+}
+textarea:focus{
+    outline: none;
+}
     </style>
     <!--jquery CDN-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -66,6 +121,14 @@
             }
         }).open();
         });
+        //약관보기 팝업
+        $(".policy").click(function(){
+            $(".popup").show();
+        });
+        $(".popup .close-btn").click(function(){
+            $(".popup").hide();
+        });
+        
     });
     </script>
 
@@ -81,7 +144,7 @@
             <hr class="navy">
 
                 <div class="row flex-container">
-                    <div class="row w-25">
+                    <div class="row w-25 left">
                         <label>아이디<span class="red">*</span></label>
                     </div>
                     <div class="row w-75 pr-30">
@@ -93,7 +156,7 @@
                     </div>
                 </div>
                 <div class="row flex-container">
-                    <div class="row w-25">
+                    <div class="row w-25 left">
                         <label>비밀번호<span class="red">*</span></label>
                     </div>
                     <div class="row w-75 pr-30">
@@ -105,7 +168,7 @@
                     </div>
                 </div>
                 <div class="row flex-container">
-                    <div class="row w-25">
+                    <div class="row w-25 left">
                         <label>비밀번호 확인<span class="red">*</span></label>
                     </div>
                     <div class="row w-75 pr-30">
@@ -118,7 +181,7 @@
                 </div>
                
                 <div class="row flex-container">
-                    <div class="row w-25">
+                    <div class="row w-25 left">
                         <label>이름<span class="red">*</span></label>
                     </div>
                     <div class="row w-75 pr-30">
@@ -130,7 +193,7 @@
                 </div>
 
                 <div class="row flex-container">
-                    <div class="row w-25">
+                    <div class="row w-25 left">
                         <label>이메일<span class="red">*</span></label>
                     </div>
                     <div class="row w-75 pr-30">
@@ -140,7 +203,7 @@
                     </div>
                 </div>
                 <div class="row flex-container">
-                    <div class="row w-25">
+                    <div class="row w-25 left">
                         <label>생년월일</label>
                     </div>
                     <div class="row w-75 pr-30">
@@ -151,7 +214,7 @@
                 </div>
 
                 <div class="row flex-container">
-                    <div class="row w-25">
+                    <div class="row w-25 left">
                         <label>휴대폰<span class="red">*</span></label>
                     </div>
                     <div class="row w-75 pr-30">
@@ -161,7 +224,7 @@
                     </div>
                 </div>
                 <div class="row flex-container">
-                    <div class="row w-25">
+                    <div class="row w-25 left">
                         <label style="display: block;">주소<span class="red">*</span></label>
                     </div>
                     <div class="row w-75 left">
@@ -196,10 +259,27 @@
                                 <input  type="checkbox" class="check-all"><span></span> 전체 동의합니다
                             </label>
                         </div>
-                        <div class="row left"> 
-                            <label class="custom-checkbox">
-                                <input  type="checkbox" class="check-item"><span></span> 이용약관동의(필수)
-                            </label>
+                        <div class="flex-container "> 
+                            <div class="row w-75 left">
+                                <label class="custom-checkbox">
+                                    <input  type="checkbox" class="check-item"><span></span> 이용약관동의(필수)                               
+                                </label>
+                            </div>
+                            <div class="row w-25 right">
+                                <span class="policy">약관보기 <i class="fa-solid fa-greater-than fa-xs"></i></span>
+                                        <div class="popup">
+                                            <div class="popup-wrap">
+                                                <div class="popup__head">이용약관/개인정보수집동의(필수)</div>
+                                                <textarea class="popup__body">제1조(목적) 이 약관은 업체 회사(전자상거래 사업자)가 운영하는 업체 사이버 몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리․의무 및 책임사항을 규정함을 목적으로 합니다.① “몰”이란 업체 회사가 재화 또는 용역(이하 “재화 등”이라 함)을 이용자에게 제공하기 위하여 컴퓨터 등 정보통신설비를 이용하여 재화 등을 거래할 수 있도록 설정한 가상의 영업장을 말하며, 아울러 사이버몰을 운영하는 사업자의 의미로도 사용합니다.
+ ② “이용자”란 “몰”에 접속하여 이 약관에 따라 “몰”이 제공하는 서비스를 받는 회원 및 비회원을 말합니다.
+    1. 개인정보의 수집·이용에 관한 사항
+    재정지원 일자리사업 참여 신청과 관련하여 「고용정책기본법」 제13조의2에 근거하여 아래와 같이 귀하의 개인정보를 수집·이용하기 위하여 「개인정보보호법」 제15조에 따라 동의를 구합니다.       
+    개인정보의 수집·이용 목적 : 재정지원 일자리사업 참여자 선정 심사, 구직등록 여부, 계약 체결, 중앙부처·지방자치단체의 일자리관련시스템 등 정보제공 및 정책자료 활용(사업 관련 각종 연구∙설문조사 포함)       
+    수집·이용할 개인정보 항목 및 보유, 이용기간</textarea>
+                                                <div class="close-btn">확인</div>
+                                            </div>
+                                        </div>
+                            </div>
                         </div> 
                         <div class="row left"> 
                             <label class="custom-checkbox">
