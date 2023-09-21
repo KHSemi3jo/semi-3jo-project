@@ -78,8 +78,8 @@ textarea{
     border-left: none ;
     border-bottom: none;
     border-right: none;
-    margin:10px;
     resize: none;
+    margin:10px;
     width: 100%;
     min-height:350px;
 }

@@ -34,7 +34,7 @@ select.form-input,
 					일괄삭제</button></c:if>
 		
 			
-				<a href="write" class="btn upBtn">
+				<a href="/notice/add" class="btn upBtn">
 					<i class="fa-solid fa-pen"></i>
 					글쓰기
 				</a>
