@@ -37,6 +37,11 @@
                     <input type="password" name="memberPw" class="form-input login"
                         placeholder="비밀번호를 입력해주세요" >
                 </div>
+                <div class="row left">
+	                <c:if test="${param.error != null}">
+					<h5 class="orange">아이디 또는 비밀번호가 일치하지 않습니다</h5>
+					</c:if>
+				</div>
                 <div class="row right">
                     <a href="findPw" class="link navy">비밀번호 찾기</a>
                 </div>
@@ -59,8 +64,6 @@
 	파라미터를 읽고 싶을 경우 param이라는 내장객체(기본아이템)를 사용할 수 있다
 	param을 이용하여 파라미터를 비교할 수 있다
 	 --%>
-<c:if test="${param.error != null}">
-		<h3 class="orange">아이디 또는 비밀번호가 일치하지 않습니다</h3>
-</c:if>
+
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
