@@ -109,9 +109,18 @@ public class ProductController {
 				return"/WEB-INF/views/product/detail.jsp";
 		}
 		
+//		//상품 목록 페이지
+//				@RequestMapping("/list")
+//				public String list(Model model) {
+//					List<ProductDto>list = productDao.selectList();
+//					model.addAttribute("list",list);
+//					return"/WEB-INF/views/product/list.jsp";
+//				}
+		
 		//상품 목록 페이지
 		@RequestMapping("/list")
-		public String list(Model model) {
+		public String list(Model model,
+								@RequestParam(required= false, defaultValue = "1") int page) {
 			List<ProductDto>list = productDao.selectList();
 			model.addAttribute("list",list);
 			return"/WEB-INF/views/product/list.jsp";
@@ -125,14 +134,40 @@ public class ProductController {
 			return"/WEB-INF/views/product/edit.jsp";
 		}
 		@PostMapping("/edit")
-		public String edit(@ModelAttribute ProductDto productDto) {
-			boolean result= productDao.update(productDto);
-			if(result) {
-				return "redirect:detail?productNo="+productDto.getProductNo();
-			}
-			else {
-				return"redirect:error";
-			}
+		public String edit(@ModelAttribute ProductDto productDto,
+								@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
+			 productDao.update(productDto);//상품 정보 변경
+			 
+			 if(!attach.isEmpty()) { //파일이 있으면
+				 //파일 삭제
+				 AttachDto attachDto = productDao.findImage(productDto.getProductNo());
+				 String home = System.getProperty("user.home");
+				 File dir = new File(home, "Gogi");
+				 
+				 if(attachDto != null) {
+					 attachDao.delete(attachDto.getAttachNo());
+				 
+				 	File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
+				 	target.delete();
+			 }
+			 
+			 //파일 추가 및 연결
+			 int attachNo = attachDao.sequence();
+			 
+			 File insertTarget = new File(dir,String.valueOf(attachNo));
+			 attach.transferTo(insertTarget);
+			 
+			 AttachDto insertDto = new AttachDto();
+			 insertDto.setAttachNo(attachNo);
+			 insertDto.setAttachName(attach.getOriginalFilename());
+			 insertDto.setAttachSize(attach.getSize());
+			 insertDto.setAttachType(attach.getContentType());
+			 attachDao.insert(insertDto);
+			 
+			 productDao.connect(productDto.getProductNo(), attachNo);//상품 번호 + 파일 연결
+			 }
+			 
+			 return "redirect:detail?productNo="+productDto.getProductNo();
 		}
 		
 		//상품 삭제 페이지
@@ -141,10 +176,11 @@ public class ProductController {
 			AttachDto attachDto = productDao.findImage(productNo);
 			productDao.delete(productNo);//상품+이미지 삭제
 			
+			//이미지가 있을 경우에만 이미지 삭제
 			if(attachDto != null) {
 				
 				String home = System.getProperty("user.home");
-				File dir = new File(home, "upload");
+				File dir = new File(home, "Gogi");
 				File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
 				target.delete();
 				
