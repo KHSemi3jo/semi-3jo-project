@@ -15,4 +15,5 @@ public class ProductDto {
 	private String productType;
 	private Date productDate;
 	private boolean image;
+	private int page;
 }

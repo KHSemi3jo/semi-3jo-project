@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class BasketDto {
+	private int basketNo;
 	private int basketListNo;
 	private String basketMember;
 	private int basketCount;

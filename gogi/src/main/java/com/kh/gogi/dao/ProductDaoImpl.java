@@ -10,6 +10,7 @@ import com.kh.gogi.dto.AttachDto;
 import com.kh.gogi.dto.ProductDto;
 import com.kh.gogi.mapper.AttachMapper;
 import com.kh.gogi.mapper.ProductMapper;
+import com.kh.gogi.vo.ProductVO;
 
 @Repository
 public class ProductDaoImpl implements ProductDao {
@@ -105,6 +106,34 @@ public class ProductDaoImpl implements ProductDao {
 					productDto.getProductType(),productDto.getProductNo()
 						};
 		return jdbcTemplate.update(sql,data)>0;
+	}
+
+	@Override
+	public List<ProductDto> selectListBypage(int page) {
+		int end = page*10;
+		int begin = end - 9;
+		
+		String sql = "select * from ( "
+				+ " select rownum rn, TMP.* from( "
+				+ " select * from product_list "
+				+ " connect by prior product_no=product_parent "
+				+ " start with product_parent is null "
+				+ " order siblings by product_no asc "
+				+ ")TMP "
+				+ " where rn between ? and ?";
+		Object[] data = {begin,end};
+		return jdbcTemplate.query(sql, productMapper, data);
+	}
+
+	@Override
+	public List<ProductDto> selectListBypage(ProductVO vo) {
+		return selectListBypage(vo.getPage());
+	}
+
+	@Override
+	public int countList(ProductVO vo) {
+		String sql = "select count(*) from product";
+		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 
 }
