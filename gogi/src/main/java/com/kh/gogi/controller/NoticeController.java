@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.gogi.dao.NoticeDao;
 import com.kh.gogi.dto.NoticeDto;
+import com.kh.gogi.dto.ShopAfterDto;
 import com.kh.gogi.mapper.NoticeMapper;
+import com.kh.gogi.vo.ShopAfterVO;
 
 
 @Controller
@@ -26,12 +28,19 @@ public class NoticeController {
 	@Autowired
 	NoticeDao noticeDao;
 
+	
 	@RequestMapping("/list")
-	private String list(Model model) {
-		List<NoticeDto>list = noticeDao.list();
-		model.addAttribute("list",list);
+	public String list(@ModelAttribute(name = "vo") ShopAfterVO vo, Model model) {
+
+		int count = noticeDao.countList(vo);
+		vo.setCount(count);
+
+		List<NoticeDto> list = noticeDao.selectListByPage(vo);
+		model.addAttribute("list", list);
 		return "/WEB-INF/views/notice/list.jsp";
+
 	}
+	
 	
 	@GetMapping("/add")
 	private String add() {

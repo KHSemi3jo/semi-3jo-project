@@ -104,19 +104,24 @@ public class ShopAfterDaoImpl implements ShopAfterDao {
 	public List<ShopAfterDto> selectListByPage(String type, String keyword, int page) {
 		int begin = page * 10 - 9;
 		int end = page * 10;
-		String sql ="select * from ("
-				+"	where instr(" + type + ", ?) > 0"
-				+ "select rownum rn, TMP.* from("
-				+ "select * from shopAfter order by shopAfter_no desc"
-				+ ")TMP"
-				+ ") where rn between ? and ?";
 
+
+		String sql =	" SELECT * "
+			     +"FROM (SELECT *  FROM shopAfter"
+			    	     +" where instr(" + type + ", ?) > 0 "
+			    	          +" ORDER BY shopAfter_no DESC)"
+			    	    +" WHERE ROWNUM between ? and ?";
+		
+		
 		Object[] ob = { keyword, begin, end };
 		return tem.query(sql, shopAfterMapper, ob);
 	}
 
 	@Override
 	public List<ShopAfterDto> selectListByPage(int page) {
+//		String sql = "SELECT * FROM shopAfter ORDER BY shopAfter_no DESC "
+//	+"OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+		
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from("
 				+ "select * from shopAfter order by shopAfter_no desc"
@@ -140,11 +145,11 @@ public class ShopAfterDaoImpl implements ShopAfterDao {
 	@Override
 	public int countList(ShopAfterVO vo) {
 		if (vo.isSearch()) {
-			String sql = "select count(*) from board where instr(" + vo.getType() + ", ?) > 0";
+			String sql = "select count(*) from shopAfter where instr(" + vo.getType() + ", ?) > 0";
 			Object[] ob = { vo.getKeyword() };
 			return tem.queryForObject(sql, int.class, ob);
 		} else {
-			String sql = "select count(*) from board";
+			String sql = "select count(*) from shopAfter";
 			return tem.queryForObject(sql, int.class);
 		}
 	}

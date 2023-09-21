@@ -23,6 +23,7 @@ import com.kh.gogi.mapper.ShopAfterMapper;
 import com.kh.gogi.vo.ShopAfterVO;
 
 
+
 @Controller
 @RequestMapping("/shopafter")
 public class ShopAfterController {
@@ -49,40 +50,53 @@ public class ShopAfterController {
 	}
 
 	
+//	@RequestMapping("/list")
+//	public String list(Model model, HttpSession session,
+//	@ModelAttribute(name = "vo") ShopAfterVO vo,
+//	ShopAfterDto shopAfterDto,	
+//	@RequestParam(required = false) String type,
+//	@RequestParam(required = false) String keyword,
+//	@RequestParam(required = false, defaultValue = "1") int page) {
+//		
+//		boolean isSearch = type != null && keyword != null;
+//		
+//		int begin = (page - 1) / 10 * 10 + 1;
+//		int end = begin + 9;
+//		int count = isSearch ? shopAfterDao.countList(type, keyword) : shopAfterDao.countList();
+//		int pageCount = (count - 1) / 10 + 1;
+//		model.addAttribute("page", page);
+//		model.addAttribute("begin", begin);
+//		model.addAttribute("end", end);
+//		model.addAttribute("pageCount", pageCount);
+//		
+//		if (isSearch) { 
+//			 List<ShopAfterDto> list = shopAfterDao.selectList(type, keyword);
+//			// List<ShopAfterDto> list = shopAfterDao.selectListByPage(type, keyword,page);
+//			model.addAttribute("list", list);
+//			model.addAttribute("isSearch", true);
+//		} else { 
+//
+//			//List<ShopAfterDto>list = shopAfterDao.list();
+//			 List<ShopAfterDto> list = shopAfterDao.selectListByPage(page);
+//			model.addAttribute("list", list);
+//			model.addAttribute("isSearch", false);
+//		}
+//		
+//
+//		return "/WEB-INF/views/shopafter/list.jsp";
+//	}
+	
+	
 	@RequestMapping("/list")
-	public String list(Model model, HttpSession session,
-	@ModelAttribute(name = "vo") ShopAfterVO vo,
-	ShopAfterDto shopAfterDto,	
-	@RequestParam(required = false) String type,
-	@RequestParam(required = false) String keyword,
-	@RequestParam(required = false, defaultValue = "1") int page) {
-		
-		boolean isSearch = type != null && keyword != null;
-		
-		int begin = (page - 1) / 10 * 10 + 1;
-		int end = begin + 9;
-		int count = isSearch ? shopAfterDao.countList(type, keyword) : shopAfterDao.countList();
-		int pageCount = (count - 1) / 10 + 1;
-		model.addAttribute("page", page);
-		model.addAttribute("begin", begin);
-		model.addAttribute("end", Math.min(pageCount, end));
-		model.addAttribute("pageCount", pageCount);
-		
-		if (isSearch) { 
-			 List<ShopAfterDto> list = shopAfterDao.selectList(type, keyword);
-			// List<ShopAfterDto> list = shopAfterDao.selectListByPage(type, keyword,page);
-			model.addAttribute("list", list);
-			model.addAttribute("isSearch", true);
-		} else { 
+	public String list(@ModelAttribute(name = "vo") ShopAfterVO vo, Model model) {
 
-			//List<ShopAfterDto>list = shopAfterDao.list();
-			 List<ShopAfterDto> list = shopAfterDao.selectListByPage(page);
-			model.addAttribute("list", list);
-			model.addAttribute("isSearch", false);
-		}
-		
+		int count = shopAfterDao.countList(vo);
+		vo.setCount(count);
 
+		List<ShopAfterDto> list = shopAfterDao.selectListByPage(vo);
+		model.addAttribute("list", list);
 		return "/WEB-INF/views/shopafter/list.jsp";
+
 	}
 	
 	
