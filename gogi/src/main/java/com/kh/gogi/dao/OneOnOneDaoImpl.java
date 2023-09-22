@@ -29,10 +29,11 @@ public class OneOnOneDaoImpl implements OneOnOneDao {
 
 	@Override
 	public void add(OneOnOneDto oneOnOneDto) {
-		String sql = "insert into OneOnOne(one_no,one_id"
+		String sql = "insert into OneOnOne(one_no,one_id, one_category"
 				+ ",one_title ,one_content,one_group, one_parent, one_depth) "
-				+ "values(?,?,?,?,?,?,?)";
-		Object[] data = {oneOnOneDto.getOneNo(),oneOnOneDto.getOneId(),
+				+ "values(?,?,?,?,?,?,?,?)";
+		Object[] data = {oneOnOneDto.getOneNo(),oneOnOneDto.getOneId()
+				,oneOnOneDto.getOneCategory(),
 				oneOnOneDto.getOneTitle(),oneOnOneDto.getOneContent(),
 				oneOnOneDto.getOneGroup(), oneOnOneDto.getOneParent()
 				,oneOnOneDto.getOneDepth()};

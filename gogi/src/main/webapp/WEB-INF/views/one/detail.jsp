@@ -3,43 +3,39 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
-table {
-	border: 1px solid black;
-	margin-left: auto;
-	margin-right: auto;
-}
 
-th {
-	border: 1px solid black;
-	text-align: center;
-}
-
-td {
-	border: 1px solid black;
-	text-align: center;
-}
 </style>
-<button><a href="/one/list">1대1 목록</a></button>
-<br>
-<button><a href="/one/fix?oneNo=${oneOnOneDto.oneNo}">1대1 수정</a></button>
-<br>
-<button><a href="/one/delete?oneNo=${oneOnOneDto.oneNo}"">1대1 삭제</a></button>
-		<button>	<a href="/one/add?oneParent=${oneOnOneDto.oneNo}">답글 쓰기</a></button>
 
-<div class="container w-600">
-	<div class="row">
-		<h1>1대1 상세</h1>
-	</div>
-	<table border="1" style="border-color: black;">
-		<tr>
-			<th>1대1 번호</th>
-			<th>1대1 제목</th>
-			<th>1대1 내용</th>
-		</tr>
-	</table>
-	<td>${oneOnOneDto.oneNo}</td>
-	<td>${oneOnOneDto.oneTitle}</td>
-	<td>${oneOnOneDto.oneContent}</td>
+<div class="container w-800">
+    <div class="row">
+        <h2 class="pt-30 pb-30 navy">1대1 게시판</h2>
+    </div>
+    <div class="row">
+        <table class="table table-slit">
+                <tr>
+                    <th bgcolor="#CCD5DE">제목</th>
+                    <td class="left">${oneOnOneDto.oneTitle}</td>
+                </tr>
+                <tr>
+                    <th bgcolor="#CCD5DE">작성자</th>
+                    <td class="left">${oneOnOneDto.oneId}</td>
+                </tr>
+                <tr>
+                    <th bgcolor="#CCD5DE">작성일</th>
+                    <td class="left">${oneOnOneDto.oneDate}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="left">${oneOnOneDto.oneContent}</td>
+                </tr>
+        </table>
+        <div class="row right">
+            <a href="/one/list"class="btn btn-navy">목록</a> 
+            <a class="btn btn-navy" href="/one/add?oneParent=${oneOnOneDto.oneNo}">답글</a>
+            <a class="btn btn-navy" href="/one/fix?oneNo=${oneOnOneDto.oneNo}">수정</a>
+            <a class="btn btn-navy" href="/one/delete?oneNo=${oneOnOneDto.oneNo}">삭제</a>
+
+        </div>
+    </div>
 </div>
 
 
