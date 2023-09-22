@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OneOnOneDto {
 	
-private int oneNo,oneStatus;
+private int oneNo,oneStatus, oneDepth,oneGroup;
+private Integer oneParent;
 private Date oneDate;
 private String oneId,oneTitle,oneContent,oneCategory;
  }

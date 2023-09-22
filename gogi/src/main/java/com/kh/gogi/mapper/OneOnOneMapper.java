@@ -23,6 +23,9 @@ public class OneOnOneMapper implements RowMapper<OneOnOneDto> {
 		oneOnOneDto.setOneNo(rs.getInt("one_no"));
 		oneOnOneDto.setOneStatus(rs.getInt("one_status"));
 		oneOnOneDto.setOneTitle(rs.getString("one_title"));
+		oneOnOneDto.setOneDepth(rs.getInt("one_depth"));
+		oneOnOneDto.setOneGroup(rs.getInt("one_group"));
+		oneOnOneDto.setOneParent(rs.getObject("one_parent",Integer.class));
 		return oneOnOneDto;
 	}
 

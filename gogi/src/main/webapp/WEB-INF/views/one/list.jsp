@@ -3,62 +3,118 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
-table {
-	border: 1px solid black;
-	margin-left: auto;
-	margin-right: auto;
+.noticeTitle {
+	text-decoration: none;
 }
 
-th {
-	border: 1px solid black;
-	text-align: center;
-}
-
-td {
-	border: 1px solid black;
-	text-align: center;
+select.form-input, .form-input, .btn.btn-navy {
+	font-size: 16px;
+	height: 2.8em;
+	border-radius: 0.1em;
 }
 </style>
 
-<button class="btn btn-navy">
-	<a href="/one/add">1대1 등록</a>
-</button>
-<br>
-
-<table class="w-600">
-	<div class="container w-600">
-		<div class="row">
-			<h1>1대1 목록</h1>
-		</div>
-		<tr>
-
-			<th>카테고리</th>
-			<th>1대1 제목</th>
-			<th>1대1 작성시간</th>
-
-
-
-		</tr>
-
-		<c:forEach var="OneOnOneDto" items="${list}">
-			<tr>
-				<td>${OneOnOneDto.oneCategory}</td>
-				<td><a href="detail?oneNo=${OneOnOneDto.oneNo}">${OneOnOneDto.oneTitle}</a></td>
-				<td>${OneOnOneDto.oneDate}</td>
-
-			</tr>
-		</c:forEach>
-
+<div class="container w-800 navy">
+	<div class="row pb-30">
+		<h2>1대1 목록</h2>
 	</div>
-</table>
+	<!-- 폼시작(체크박스) -->
+	<form class="delete-form" action="deleteByAdmin" method="post">
+		<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
+		<c:if test="${sessionScope.name != null}">
+			<div class="row right ">
+				<c:if test="${sessionScope.level =='관리자' }">
+					<button type="submit" class="btn upBtn delete-btn">
+						<i class="fa-solid fa-trash"></i> 일괄삭제
+					</button>
+				</c:if>
 
-<br>
-<br>
-<br>
-<br>
+
+				<a href="/one/add" class="btn upBtn"> <i class="fa-solid fa-pen"></i>
+					글쓰기
+				</a>
+			</div>
+		</c:if>
+
+		<%-- 
+		검색일 경우 검색어를 추가로 출력 
+		(참고) 논리 반환값을 가지는 getter 메소드는 get이 아니라 is로 시작한다
+			--%>
+		<c:if test="${vo.search}">
+			<div class="row left">&quot;${vo.keyword}&quot;에 대한 검색 결과</div>
+		</c:if>
+
+
+		<div class="row">
+			<table class=" table table-slit">
+				<thead>
+					<tr>
+						<%--체크박스 일괄 삭제 --%>
+						<c:if test="${sessionScope.level =='관리자' }">
+							<th><input type="checkbox" class="check-all"></th>
+						</c:if>
+						<th>카테고리</th>
+						<th width="50%">제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+					</tr>
+				</thead>
+
+				<c:forEach var="OneOnOneDto" items="${list}">
+					<tr>
+						<td>${OneOnOneDto.oneCategory}</td>
+
+				
+							<td class="left"><c:if test="${OneOnOneDto.oneDepth >0}">
+								<img src="/images/shopAfter/bottonArrow.png" width="15" height="15"
+								style="background-color: ;">						
+							</c:if>
+								<a class="noticeTitle navy "
+									href="detail?oneNo=${OneOnOneDto.oneNo}">${OneOnOneDto.oneTitle}</a></td>
+					
+						<td>${OneOnOneDto.oneId}</td>
+						<td>${OneOnOneDto.oneDate}</td>
+					</tr>
+				</c:forEach>
+
+			</table>
+		</div>
+		<!-- 폼 종료(체크박스) -->
+	</form>
+</div>
 
 
 
+
+
+
+<div class="row page-navigator mv-30">
+	<!-- 이전 버튼 -->
+	<c:if test="${!vo.first}">
+		<a href="list?${vo.prevQueryString}"> <i
+			class="fa-solid fa-angle-left"></i>
+		</a>
+	</c:if>
+
+	<!-- 숫자 버튼 -->
+	<c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
+		<c:choose>
+			<c:when test="${vo.page == i}">
+				<a class="on">${i}</a>
+			</c:when>
+			<c:otherwise>
+				<a href="list?${vo.getQueryString(i)}">${i}</a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+
+	<!-- 다음 버튼 -->
+	<c:if test="${!vo.last}">
+		<a href="list?${vo.nextQueryString}"> <i
+			class="fa-solid fa-angle-right"></i>
+		</a>
+	</c:if>
+</div>
 
 
 
@@ -74,12 +130,14 @@ td {
 			<c:when test="${param.type == 'shopAfterId'}">
 				<select name="type" required="required" class="form-input">
 					<option value="one_title">제목</option>
+					<option value="one_category">카테고리</option>
 					<option value="one_id" selected="selected">작성자</option>
 				</select>
 			</c:when>
 			<c:otherwise>
 				<select name="type" required="required" class="form-input">
 					<option value="one_title" selected="selected">제목</option>
+					<option value="one_category">카테고리</option>
 					<option value="one_id">작성자</option>
 				</select>
 			</c:otherwise>

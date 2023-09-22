@@ -6,15 +6,46 @@
 <button><a href="/one/list">1대1 목록</a></button>
 
 
+<c:choose>
+<c:when test="${isReply}">
+<h2>답글 작성</h2>
+</c:when>
+<c:otherwise><h2>1대1 작성</h2>
+</c:otherwise></c:choose>
+
+
 
 <div class="container w-600">
 	<div class="row">
 		<h1>1대1 등록</h1>
 	</div>
 	<form action="add" method="post">
-		<div class="row">
-			제목 : <input type="text" required class="form-input" name="oneTitle">
-		</div>
+	
+
+	<select name="type" required="required" class="form-input">
+					<option value="shopAfter_name">결재</option>
+					<option value="shopAfter_id" selected="selected">회원</option>
+					<option value="shopAfter_content">기타문의</option>
+				</select>
+	<br>
+	
+	
+	<c:if test="${isReply}">
+	<input type="text" name="oneParent" value="${oneDto.oneNo}">
+	</c:if>
+	
+	   <c:choose>
+				<c:when test="${isReply}">
+			제목 : 		<input type="text" name="oneTitle" class="form-input w-100"
+								value="RE: ${oneDto.oneTitle}" >
+				</c:when>
+				<c:otherwise>
+			제목 : 		<input type="text" name="oneTitle" class="form-input w-100">
+				</c:otherwise>
+			</c:choose>
+	
+	
+	
 		<div class="row ">
 			내용 :
 			<textarea name="oneContent" class="form-input w-100" cols="30" rows="10" ></textarea>

@@ -30,10 +30,12 @@ public class OneOnOneDaoImpl implements OneOnOneDao {
 	@Override
 	public void add(OneOnOneDto oneOnOneDto) {
 		String sql = "insert into OneOnOne(one_no,one_id"
-				+ ",one_title ,one_content) "
-				+ "values(?,?,?,?)";
+				+ ",one_title ,one_content,one_group, one_parent, one_depth) "
+				+ "values(?,?,?,?,?,?,?)";
 		Object[] data = {oneOnOneDto.getOneNo(),oneOnOneDto.getOneId(),
-				oneOnOneDto.getOneTitle(),oneOnOneDto.getOneContent()};
+				oneOnOneDto.getOneTitle(),oneOnOneDto.getOneContent(),
+				oneOnOneDto.getOneGroup(), oneOnOneDto.getOneParent()
+				,oneOnOneDto.getOneDepth()};
 	tem.update(sql, data);
 	}
 
@@ -44,9 +46,15 @@ public class OneOnOneDaoImpl implements OneOnOneDao {
 		return tem.update(sql, data)>0;
 	}
 
+//	@Override
+//	public List<OneOnOneDto> list(String memberId) {
+//		String sql ="select * from OneOnOne where one_id =?   order by one_no desc";
+//		return tem.query(sql, oneOnOneMapper);
+//	}
 	@Override
-	public List<OneOnOneDto> list(String memberId) {
-		String sql ="select * from OneOnOne where one_id =?   order by one_no desc";
+	public List<OneOnOneDto> list() {
+		String sql = "SELECT * FROM OneOnOne_list connect by Prior one_no = one_parent "
+				+ "start WITH one_parent is NULL order siblings by one_group desc, one_no asc";
 		return tem.query(sql, oneOnOneMapper);
 	}
 
@@ -79,42 +87,51 @@ public class OneOnOneDaoImpl implements OneOnOneDao {
 		return tem.queryForObject(sql, int.class, ob);
 	}
 	@Override
-	public List<OneOnOneDto> selectListByPage(String type, String keyword, int page,  String memberId) {
+	public List<OneOnOneDto> selectListByPage(String type, String keyword, int page ,String oneId) {
 		int begin = page * 10 - 9;
 		int end = page * 10;
 
-		String sql =	" SELECT * "
-			     +"FROM (SELECT *  FROM OneOnOne"
-			    	     +" where one_id = ? and instr(" + type + ", ?) > 0 "
-			    	          +" ORDER BY one_no DESC)"
-			    	    +" WHERE ROWNUM between ? and ?";	
+//		String sql =	" SELECT * "
+//			     +"FROM (SELECT *  FROM OneOnOne"
+//			    	     +" where one_id = ? and instr(" + type + ", ?) > 0 "
+//			    	          +" ORDER BY one_no DESC)"
+//			    	    +" WHERE ROWNUM between ? and ?";	
 		
-		Object[] ob = {memberId ,keyword, begin, end };
+		String sql=  "select * from ("
+			+ "select rownum rn, TMP.* from("
+			+ "select * from OneOnOne_list "
+			+ "where one_id = ? and instr(" + type + ", ?) > 0  "
+			+ "connect by Prior one_no = one_parent start WITH one_parent is NULL "
+			+ "order siblings by one_group desc, one_no asc"
+			+ ")TMP"
+			+ ") where rn between ? and ?";
+		
+		
+		Object[] ob = {oneId,keyword, begin, end };
 		return tem.query(sql, oneOnOneMapper, ob);
 	}
 
 	@Override
-	public List<OneOnOneDto> selectListByPage(int page, String memberId) {
+	public List<OneOnOneDto> selectListByPage(int page, String oneId) {
 		
-		String sql = "select * from ("
-				+ "select rownum rn, TMP.* from("
-				+ "select * from OneOnOne "
-				+ "where one_id = ? "
-				+ "order by one_no desc"
-				+ ")TMP"
-				+ ") where rn between ? and ?";
-		Object[] ob = {memberId ,page * 10 - 9, page * 10 };
+		String sql = "select * from (select rownum rn, TMP.* from("
+				+ "select * from OneOnOne_list  where one_id = ?"
+				+ "connect by Prior one_no = one_parent "
+				+ "start WITH one_parent is NULL "
+				+ "order siblings by one_group desc, one_no asc"
+				+ ")TMP) where rn between ? and ?";
+		Object[] ob = {oneId, page * 10 - 9, page * 10 };
 		return tem.query(sql,oneOnOneMapper , ob);
 
 	}
 
 	@Override
-	public List<OneOnOneDto> selectListByPage(ShopAfterVO vo, String memberId) {
+	public List<OneOnOneDto> selectListByPage(ShopAfterVO vo, String oneId) {
 		if (vo.isSearch()) {
-			return selectListByPage(vo.getType(), vo.getKeyword(), vo.getPage(),memberId);
+			return selectListByPage(vo.getType(), vo.getKeyword(), vo.getPage(),oneId);
 
 		} else {
-			return selectListByPage(vo.getPage(),memberId);
+			return selectListByPage(vo.getPage(),oneId);
 		}
 	}
 
@@ -130,6 +147,13 @@ public class OneOnOneDaoImpl implements OneOnOneDao {
 		}
 	}
 
+	@Override
+	public Integer selectMax(String memberId) {
+		String sql = "select max(one_no) from OneOnOne where one_id = ?";
+		Object[] ob = {memberId};
+		return tem.queryForObject(sql, Integer.class, ob);
+	}
+	
 
 }
 
