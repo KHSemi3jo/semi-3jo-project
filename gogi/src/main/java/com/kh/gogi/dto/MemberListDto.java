@@ -14,9 +14,10 @@ public class MemberListDto {
 	private String memberBirth;
 	private String memberPost, memberAddr1, memberAddr2;
 	private String memberLevel;
-	private long memberPoint, memberGmoney;
+	private long memberPoint;
+	private long memberGmoney;
 	private Date memberJoin, memberLogin, memberChange;
 	
 	private String block;//차단 여부 확인
-
 }
+

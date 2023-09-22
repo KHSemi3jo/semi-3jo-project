@@ -109,7 +109,7 @@
 </tbody>
 </table>
 <h3>
-<%-- <c:if test="${!vo.first}">
+<c:if test="${!vo.first}">
 	<a href="list?${vo.prevQueryString}">&lt;</a>
 </c:if>
 
@@ -121,7 +121,7 @@
 <c:if test="${!vo.last}">
 <a href="list?${vo.nextQueryString}">&gt;</a>
 
-</c:if> --%>
+</c:if>
 
 </h3>
 
