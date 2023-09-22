@@ -76,7 +76,7 @@ public class MemberController {
 			memberDao.updateMemberLogin(inputDto.getMemberId());
 			//메인페이지로 이동
 //			return "redirect:/"; //절대경로 - 자동으로 초기페이지로 이동
-			return "/WEB-INF/views/member/change.jsp";
+			return "redirect:/main";
 		}
 		//[4]비밀번호가 일치하지 않으면 로그인페이지로 이동
 	else {

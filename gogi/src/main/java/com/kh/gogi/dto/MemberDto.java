@@ -17,5 +17,6 @@ public class MemberDto {
 	private long memberPoint;
 	private long memberGmoney;
 	private Date memberJoin, memberLogin, memberChange;
+
 }
 

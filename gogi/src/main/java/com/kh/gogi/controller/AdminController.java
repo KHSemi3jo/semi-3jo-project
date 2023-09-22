@@ -31,6 +31,9 @@ public class AdminController {
 	
 //	@Autowired
 //	private BoardDao boardDao;
+	
+	@Autowired
+	private MemberListDto memberListDto;
 
 	
 	@RequestMapping("/home")
@@ -44,7 +47,6 @@ public class AdminController {
 				vo.setCount(count);
 		model.addAttribute("vo", vo);
 		
-//		List<MemberDto> list = memberDao.selectListByPage(vo); //상황에 맞는 목록데이터;
 		List<MemberListDto> list = memberDao.selectListByPage2(vo);
 		model.addAttribute("list",list);
 		return "/WEB-INF/views/admin/member/list.jsp";
