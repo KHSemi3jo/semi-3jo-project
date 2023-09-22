@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.gogi.dto.ShopAfterDto;
-import com.kh.gogi.mapper.ShopAfterListMapper;
+
 import com.kh.gogi.mapper.ShopAfterMapper;
 import com.kh.gogi.vo.ShopAfterVO;
 
@@ -69,7 +69,8 @@ public class ShopAfterDaoImpl implements ShopAfterDao {
 	@Override
 	public boolean updateShopAfterReplyCount(int shopAfterNo) {
 		String sql = "update shopAfter set shopAfter_replycount= ("
-				+ " select count(*) from reply where reply_origin = ?) " + "where shopAfter_no = ?";
+				+ " select count(*) from reply where reply_origin = ?) " 
+				+ "where shopAfter_no = ?";
 		Object[] data = { shopAfterNo, shopAfterNo };
 		return tem.update(sql, data) > 0;
 	}
@@ -153,5 +154,7 @@ public class ShopAfterDaoImpl implements ShopAfterDao {
 			return tem.queryForObject(sql, int.class);
 		}
 	}
+
+
 
 }

@@ -37,14 +37,15 @@ public class ReplyRestController {
 		String memberId = (String) session.getAttribute("name");
 		replyDto.setReplyWriter(memberId);
 		replyDao.add(replyDto);
-		
-
 		shopAfterDao.updateShopAfterReplyCount(replyDto.getReplyOrigin());
 	}
+	
+
 
 	@PostMapping("/list")
 	public List<ReplyDto> list(@RequestParam int replyOrigin, 
-			@ModelAttribute(name = "vo") ShopAfterVO vo,Model model) {
+			@ModelAttribute(name = "vo") ShopAfterVO vo,Model model,
+			@RequestParam(required = false, defaultValue = "1") int page) {
 
 		int count = replyDao.countList(vo);
 		vo.setCount(count);
@@ -66,5 +67,8 @@ public class ReplyRestController {
 	public void edit(@ModelAttribute ReplyDto replyDto) {
 		replyDao.edit(replyDto);
 	}
+	
+
+	
 	
 }
