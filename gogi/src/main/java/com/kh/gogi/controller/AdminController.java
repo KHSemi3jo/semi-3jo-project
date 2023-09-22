@@ -44,17 +44,15 @@ public class AdminController {
 				vo.setCount(count);
 		model.addAttribute("vo", vo);
 		
-//		List<MemberDto> list = memberDao.selectListByPage(vo); //상황에 맞는 목록데이터;
 		List<MemberListDto> list = memberDao.selectListByPage2(vo);
 		model.addAttribute("list",list);
 		return "/WEB-INF/views/admin/member/list.jsp";
 	}
 
 	@GetMapping("/member/edit")
-	public String edit(HttpSession session, Model model) {
-		String memberId = (String) session.getAttribute("name");
+	public String edit(Model model, @RequestParam String memberId) {
 		MemberDto memberDto = memberDao.selectOne(memberId);
-		model.addAttribute("memberDto", memberDto);
+		model.addAttribute("memberDto",memberDto);
         return "/WEB-INF/views/admin/member/edit.jsp";
 	}
 	@PostMapping("/member/edit")
@@ -65,7 +63,8 @@ public class AdminController {
 			//return "redirect:/admin/member/list"; //절대경로
 		}
 		else {
-			throw new NoTargetException("존재하지 않는 회원 ID");
+			return "redirect:edit";
+			//throw new NoTargetException("존재하지 않는 회원 ID");
 		}
 	}
 	@RequestMapping("/member/detail")

@@ -61,8 +61,19 @@ select.form-input, .form-input, .btn.btn-navy {
 				<c:forEach var="shopAfterDto" items="${list}">
 					<tr>
 						<td>${shopAfterDto.shopAfterNo}</td>
+						
+
+
+
+
+						
+						
 						<td><a class="noticeTitle navy left"
-							href="detail?shopAfterNo=${shopAfterDto.shopAfterNo}">${shopAfterDto.shopAfterName}</a></td>
+							href="detail?shopAfterNo=${shopAfterDto.shopAfterNo}">${shopAfterDto.shopAfterName}
+							<c:if test="${shopAfterDto.shopReplycount > 0}">
+							[${shopAfterDto.shopReplycount}]
+							</c:if></a>
+							</td>
 						<td>${shopAfterDto.shopAfterId}</td>
 	
 						<td>${shopAfterDto.shopAfterDate}</td>

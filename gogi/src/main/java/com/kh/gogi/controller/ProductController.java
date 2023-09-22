@@ -25,6 +25,7 @@ import com.kh.gogi.dao.AttachDao;
 import com.kh.gogi.dao.ProductDao;
 import com.kh.gogi.dto.AttachDto;
 import com.kh.gogi.dto.ProductDto;
+import com.kh.gogi.vo.ProductVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -120,8 +121,11 @@ public class ProductController {
 		//상품 목록 페이지
 		@RequestMapping("/list")
 		public String list(Model model,
-								@RequestParam(required= false, defaultValue = "1") int page) {
-			List<ProductDto>list = productDao.selectList();
+								@ModelAttribute(name = "vo") ProductVO vo) {
+			int count=productDao.countList(vo);
+			vo.setCount(count);
+			
+			List<ProductDto>list = productDao.selectListBypage(vo);
 			model.addAttribute("list",list);
 			return"/WEB-INF/views/product/list.jsp";
 		}

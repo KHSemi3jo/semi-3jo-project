@@ -24,7 +24,7 @@ td {
 <button><a href="/one/fix?oneNo=${oneOnOneDto.oneNo}">1대1 수정</a></button>
 <br>
 <button><a href="/one/delete?oneNo=${oneOnOneDto.oneNo}"">1대1 삭제</a></button>
-
+		<button>	<a href="/one/add?oneParent=${oneOnOneDto.oneNo}">답글 쓰기</a></button>
 
 <div class="container w-600">
 	<div class="row">

@@ -41,8 +41,22 @@
                 }
             });
         });
+        $(".btn-pick").click(function(){
+        	var params = new URLSearchParams(location.search);
+        	var productNo = params.get("productNo");
+        	
+            $.ajax({
+                url:"http://localhost:8080/rest/pick/add",
+                method:"post",
+                data:{productNo:productNo},
+                success:function(){
+                    
+                }
+            });
+        });
     });
 </script>
+
     <div class="row container 800">
         <div class="row flex-container">
             <div class="row w-40 pt-10">
@@ -94,6 +108,7 @@
             </div>
         </div>
     </div>
+
 
 
 

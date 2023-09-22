@@ -29,7 +29,7 @@ public class MemberListMapper implements RowMapper<MemberListDto>{
 		memberListDto.setMemberJoin(rs.getDate("member_join"));
 		memberListDto.setMemberLogin(rs.getDate("member_login"));
 		memberListDto.setMemberChange(rs.getDate("member_change"));
-//		memberListDto.setBlock(rs.getString("block"));
+		memberListDto.setBlock(rs.getString("block"));
 		return memberListDto;
 
 	}
