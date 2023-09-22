@@ -1,6 +1,7 @@
 package com.kh.gogi.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.gogi.dao.MemberDao;
 import com.kh.gogi.dto.MemberDto;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/rest/member")
 public class MemberRestController {
@@ -27,4 +29,33 @@ public class MemberRestController {
 		}
 	}
 	
+	@PostMapping("/emailCheck")
+	public String eamilCheck(@RequestParam String memberEmail) {
+		MemberDto memberDto = memberDao.selectOneEmail(memberEmail);
+		if(memberDto == null) {
+			return "Y";
+		}
+		else {
+			return "N";
+		}
+	}
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

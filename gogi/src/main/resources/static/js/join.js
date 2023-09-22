@@ -10,9 +10,10 @@ $(function(){
         memberContact:false,
         memberBirth:false,
         memberAddr:false,
+        policy:false,
         ok:function(){
             return this.memberId && this.memberPw && this.pwCheck&&this.memberName && this.memberEmail 
-            && this.memberContact && this.memberBirth && this.memberAddr;
+            && this.memberContact && this.memberBirth && this.memberAddr && this.policy;
         },
     };
 
@@ -76,25 +77,62 @@ $(function(){
 
     $("[name=memberName]").blur(function(){
         var regex =  /^[가-힣]{2,7}$/;
-        var isValid =$(this).val() == "" || regex.test($(this).val());
+        var isValid =regex.test($(this).val());
         $(this).removeClass("success fail");
-        $(this).addClass(isValid ? "success" : "fail");
-         status.memberName = isValid;
+         if(isValid){
+			  $(this).addClass("success"); 
+              status.memberName = true;
+		 }
+		 else{
+			 $(this).addClass("fail");
+            status.memberName = false;
+		 }
+         
     });
-    $("[name=memberEmail]").blur(function(){
+    $("[name=memberEmail]").blur(function(e){
         var regex =  /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-        var isValid =$(this).val() == "" || regex.test($(this).val());
-        $(this).removeClass("success fail");
-        $(this).addClass(isValid ? "success" : "fail");
-         status.memberEmail = isValid;
+        var isValid =regex.test($(this).val());
+        
+        if(isValid){//형식이 유효하다면
+			$.ajax({
+				url:"http://localhost:8080/rest/member/emailCheck",
+				method:"post",
+				data : {memberEmail : $(e.target).val()},
+				success: function(response){
+					$(e.target).removeClass("success fail fail2");
+					if(response == "Y"){
+						$(e.target).addClass("success");
+						status.memberEmail = true;
+					}
+					else{
+						$(e.target).addClass("fail2");
+						status.memberEmail = false;
+					}
+				},
+				error : function(){
+					alert("서버와의 통신이 원할하지 않습니다");
+				}
+			});
+		}
+		else{
+			$(e.target).removeClass("success fail fail2");
+			$(e.target).addClass("fail");
+			status.memberEmail = false;
+		}
     });
     $("[name=memberContact]").blur(function(){
-        var regex = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
+        var regex = /^01([0|1|6|7|8|9])([1-9]{3,4})([0-9]{4})$/;
         var contact = $(this).val();
-        var isValid =contact.length == 0 || regex.test(contact);
+        var isValid =regex.test(contact);
         $(this).removeClass("success fail");
-        $(this).addClass(isValid ? "success" : "fail");
-         status.memberContact = isValid;
+         if(isValid){
+			  $(this).addClass("success"); 
+              status.memberContact = true;
+		 }
+		 else{
+			 $(this).addClass("fail");
+            status.memberContact = false;
+		 }
     });
     $("[name=memberBirth]").blur(function(){
         var regex =  /^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[01])$/;
@@ -107,13 +145,24 @@ $(function(){
         //this 사용 불가(확실히 누군지 알 수 없음)-수동으로 선택해줘야함
         var post =  $("[name=memberPost]").val();
         var addr1 = $("[name=memberAddr1]").val();
-        var addr2 = $("[name=memberAddr2]").val();
-        var isBlank = post.length == 0 && addr1.length == 0 && addr2.length == 0;
-        var isFill = post.length > 0 && addr1.length > 0 && addr2.length > 0;            
-        var isValid = isBlank || isFill;
-        $("[name=memberPost],[name=memberAddr1],[name=memberAddr2]").removeClass("success fail");
-        $("[name=memberPost],[name=memberAddr1],[name=memberAddr2]").addClass(isValid ? "success" : "fail");
-         status.memberAddr = isValid;
+        var addr2 = $("[name=memberAddr2]").val();    
+        var isValid =  post.length > 0 && addr1.length > 0 && addr2.length > 0;
+         if(isValid){
+			  $("[name=memberPost],[name=memberAddr1],[name=memberAddr2]").removeClass("success fail").addClass("success"); 
+              status.memberAddr = true;
+		 }
+		 else{
+
+			 $("[name=memberPost],[name=memberAddr1],[name=memberAddr2]").removeClass("success fail").addClass("fail");
+            status.memberAddr = false;
+		 }
+    });
+    //약관동의 전체체크시 가입가능
+     $(".check-all").change(function(){
+        var isVaild = $(this).prop("checked");
+        if(isVaild){
+            status.policy = true;
+        }
     });
     
         //페이지 이탈 방지 

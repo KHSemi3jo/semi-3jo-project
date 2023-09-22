@@ -247,5 +247,29 @@ public class MemberDaoImpl implements MemberDao {
 		return jdbcTemplate.queryForObject(sql, int.class);
 		}
 	}
+	
+	//비동기 이메일 검사 
+	@Override
+	public MemberDto selectOneEmail(String memberEmail) {
+		String sql = "select * from member where member_email = ?";
+		Object[] data = {memberEmail};
+		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -200,6 +200,7 @@ textarea:focus{
                         <input type="text" name="memberEmail" placeholder="예: test@kh.com"
                                 class="form-input w-100">
                         <div class="fail-feedback left">이메일 형식으로 입력해주세요</div>
+                        <div class="fail2-feedback left">이미 사용중인 이메일입니다</div>
                     </div>
                 </div>
                 <div class="row flex-container">
@@ -247,6 +248,7 @@ textarea:focus{
                     <div class="w-75 pr-30">
                         <input type="text" name="memberAddr2" placeholder="상세주소"
                                     class="form-input w-100" >
+                                    <div class="success-feedback"></div>
                         <div class="fail-feedback left">주소 입력시 모든 주소를 작성해주세요</div>
                     </div>
                 </div>
@@ -287,7 +289,7 @@ textarea:focus{
                             </label>
                         </div> 
                         <div class="row left"> 
-                            <label class="custom-checkbox">
+                            <label class="custom-checkbox mt-10">
                                 <input  type="checkbox" class="check-item"><span></span> 본인은 만 14세 이상입니다(필수)
                             </label>
                         </div> 
