@@ -6,7 +6,7 @@
 
 <h1>비밀번호 찾기</h1>
 <br><br>
-<form action="findPw" method="post">
+<form action="searchPw" method="post">
 	아이디<input type="text" name="memberId"><br><br>
 	이메일<input type="email" name="memberEmail"><br><br>
 	<button type="submit">비밀번호 찾기</button>
