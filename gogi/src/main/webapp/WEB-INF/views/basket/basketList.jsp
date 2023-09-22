@@ -9,7 +9,15 @@
 <script src="/js/checkbox.js"></script>
 <!-- javascript 작성 공간 -->
 <script>
-	
+	var count = $("[name=count]").val();
+	$(".btn-plus").on("click", function(){
+		$("[name=count]").val(count++);
+	});
+	$(".btn-minus").on("click", function(){
+		if(count > 1){
+			$("[name=count]").val(count--);	
+		}
+	});
 </script>
 
 <form action="#" method="post">
@@ -44,7 +52,9 @@
 							${basketListDto.productName}
 						</a>
 					</td>
-					<td>${basketListDto.getBasketCount()}</td>
+					<td><button class="btn-plus">+</button></td>
+					<td><intput type="number" min="1" max="10" value="1" name="count">${basketListDto.getBasketCount()}</td>
+					<td><button class="btn-minus">-</button></td>
 					<td>${basketListDto.productPrice}</td>
 				</tr>
 			</c:forEach>
@@ -54,7 +64,7 @@
 		<div style="width:300px;">
 			<div>
 				<span>상품금액 : </span>
-				<span>20000원</span>
+				<span>${basketListDto.productPrice}원</span>
 			</div>
 			<div>할인금액 : </div>
 			<div>합계금액 : </div>

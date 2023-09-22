@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,12 +32,12 @@ public class BasketRestConrtoller {
 		if(productDto == null) return;//없는 상품이면 중지
 		
 		int basketNo = basketDao.sequence();
-		
 		BasketDto basketDto = new BasketDto();
 		basketDto.setBasketNo(basketNo);
 		basketDto.setBasketListNo(productDto.getProductNo());
 		String memberId = (String) session.getAttribute("name");
 		basketDto.setBasketMember(memberId);
+		basketDto.setBasketCount(1);
 		basketDao.add(basketDto);
 	}
 
