@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.gogi.dto.AttachDto;
 import com.kh.gogi.dto.ProductDto;
 import com.kh.gogi.mapper.AttachMapper;
+import com.kh.gogi.mapper.ProductListMapper;
 import com.kh.gogi.mapper.ProductMapper;
 import com.kh.gogi.vo.ProductVO;
 
@@ -23,6 +24,9 @@ public class ProductDaoImpl implements ProductDao {
 	
 	@Autowired
 	private AttachMapper attachMapper;
+	
+	@Autowired
+	private ProductListMapper productListMapper;
 	
 	
 //	상품번호 생성 기능
@@ -108,32 +112,64 @@ public class ProductDaoImpl implements ProductDao {
 		return jdbcTemplate.update(sql,data)>0;
 	}
 
+
+	@Override
+	public int countList(ProductVO vo) {
+		if(vo.isSearch()) {
+			String sql = "select count(*) from product "
+					+ "where instr("+vo.getType()+",?)>0";
+			Object[]data= {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class,data);
+		}
+		else {
+			String sql = "select count(*) from product";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
+
+	@Override
+	public List<ProductDto> selectListBypage(ProductVO vo) {
+		
+		if(vo.isSearch()) {//검색할때
+			return selectListBypage(vo.getType(),vo.getKeyword(),vo.getPage());
+		}
+		else {
+			return selectListBypage(vo.getPage()) ;
+		}
+	}
+
 	@Override
 	public List<ProductDto> selectListBypage(int page) {
-		int end = page*10;
+		int end = page *10;
 		int begin = end - 9;
 		
 		String sql = "select * from ( "
 				+ " select rownum rn, TMP.* from( "
 				+ " select * from product_list "
-				+ " connect by prior product_no=product_parent "
-				+ " start with product_parent is null "
+				+ " connect by prior product_no=attach_no "
+				+ " start with attach_no is null "
 				+ " order siblings by product_no asc "
 				+ ")TMP "
-				+ " where rn between ? and ?";
-		Object[] data = {begin,end};
-		return jdbcTemplate.query(sql, productMapper, data);
+				+ ") where rn between ? and ?";
+		Object[] data = {begin, end};
+		return jdbcTemplate.query(sql, productListMapper,data);
 	}
 
 	@Override
-	public List<ProductDto> selectListBypage(ProductVO vo) {
-		return selectListBypage(vo.getPage());
-	}
-
-	@Override
-	public int countList(ProductVO vo) {
-		String sql = "select count(*) from product";
-		return jdbcTemplate.queryForObject(sql, int.class);
+	public List<ProductDto> selectListBypage(String type, String keyword, int page) {
+		int end = page *10;
+		int begin = end - 9;
+		String sql = "select * from ( "
+				+ " select rownum rn, TMP.* from( "
+				+ " select * from product_list "
+				+ "where instr("+type+",?)>0 "
+				+ " connect by prior product_no=attach_no "
+				+ " start with product_no is null "
+				+ " order siblings by product_no asc "
+				+ ")TMP "
+				+ ") where rn between ? and ?";
+		Object[] data = {keyword,begin, end};
+		return jdbcTemplate.query(sql, productListMapper,data);
 	}
 
 }

@@ -3,6 +3,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<form action="list" method="get">
+<c:choose>
+	<c:when test="${vo.type == 'product_name'}"></c:when>
+	<c:otherwise>
+	<select name="type">
+	<option value="product_name" selected>상품이름</option>
+	</select>
+	</c:otherwise>
+</c:choose>
+	<input type="search" name="keyword" placeholder="검색어"
+	value="${vo.keyword}" required>
+	<button>검색</button>
+	</form>
+
+
 	<c:forEach var="productDto" items="${list}">
 		<div class="container w-500">
 		<div class="row">
@@ -27,8 +42,16 @@
 		<hr>
 		</div>
 		</div>
-	
 	</c:forEach>
+	<c:if test="${!vo.first}">
+	<a href= "list?${vo.prevQueryString}">&lt;</a>
+	</c:if>
+	<c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
+	<a href="list?${vo.getQueryString(i)}">${i}</a>
+	</c:forEach>
+	<c:if test="${!vo.last}">
+	<a href= "list?${vo.prevQueryString}">&gt;</a>
+	</c:if>
 
 
 
