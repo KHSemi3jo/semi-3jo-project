@@ -31,9 +31,6 @@ public class AdminController {
 	
 //	@Autowired
 //	private BoardDao boardDao;
-	
-	@Autowired
-	private MemberListDto memberListDto;
 
 	
 	@RequestMapping("/home")
@@ -53,10 +50,9 @@ public class AdminController {
 	}
 
 	@GetMapping("/member/edit")
-	public String edit(HttpSession session, Model model) {
-		String memberId = (String) session.getAttribute("name");
+	public String edit(Model model, @RequestParam String memberId) {
 		MemberDto memberDto = memberDao.selectOne(memberId);
-		model.addAttribute("memberDto", memberDto);
+		model.addAttribute("memberDto",memberDto);
         return "/WEB-INF/views/admin/member/edit.jsp";
 	}
 	@PostMapping("/member/edit")
@@ -67,7 +63,8 @@ public class AdminController {
 			//return "redirect:/admin/member/list"; //절대경로
 		}
 		else {
-			throw new NoTargetException("존재하지 않는 회원 ID");
+			return "redirect:edit";
+			//throw new NoTargetException("존재하지 않는 회원 ID");
 		}
 	}
 	@RequestMapping("/member/detail")
