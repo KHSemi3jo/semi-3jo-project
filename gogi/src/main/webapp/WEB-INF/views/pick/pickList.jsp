@@ -26,42 +26,30 @@
 						<span>선택삭제</span>
 					</th>
 					<th width="40%">상품명</th>
-					<th>개수</th>
 					<th>가격</th>
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="basketListDto" items="${basketList}">
+			<c:forEach var="pickListDto" items="${pickList}">
 				<tr>
 					<td>
 						<!-- 개별항목 체크박스 -->
-						<input type="checkbox" class="check-item" name="basketNoList" value="${basketListDto.basketNo}">
+						<input type="checkbox" class="check-item" name="pickNoList" value="${pickListDto.pickNo}">
 					</td>
-					<td>${basketListDto.basketNo}</td>
+					<td>${pickListDto.pickNo}</td>
 					<td align="left">
 						<!-- 제목을 누르면 상세페이지로 이동 -->
-						<a class="link" href="/product/detail?productNo=${basketListDto.basketListNo}">
-							${basketListDto.productName}
+						<a class="link" href="/product/detail?productNo=${pickListDto.pickProdNo}">
+							${pickListDto.productName}
 						</a>
 					</td>
-					<td>${basketListDto.getBasketCount()}</td>
-					<td>${basketListDto.productPrice}</td>
+					<td>${pickListDto.productPrice}</td>
 				</tr>
 			</c:forEach>
 			</tbody>
 		</table>
 		</div>
-		<div style="width:300px;">
-			<div>
-				<span>상품금액 : </span>
-				<span>20000원</span>
-			</div>
-			<div>할인금액 : </div>
-			<div>합계금액 : </div>
-			<div>
-				<button class="btn btn-orange w-100">결제하기</button>
-			</div>
-		</div>
+		
 	</div>
 
 </form>

@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.gogi.dao.MemberDao;
+import com.kh.gogi.dao.ReplyDao;
 import com.kh.gogi.dao.ShopAfterDao;
 import com.kh.gogi.dto.MemberDto;
 import com.kh.gogi.dto.NoticeDto;
 import com.kh.gogi.dto.OneOnOneDto;
+import com.kh.gogi.dto.ReplyDto;
 import com.kh.gogi.dto.ShopAfterDto;
 import com.kh.gogi.mapper.ShopAfterMapper;
 import com.kh.gogi.vo.ShopAfterVO;
@@ -33,6 +35,8 @@ public class ShopAfterController {
 	ShopAfterDao shopAfterDao;
 	@Autowired
 	MemberDao memberDao;
+	@Autowired
+	ReplyDao replyDao;
 
 
 
@@ -141,10 +145,19 @@ public class ShopAfterController {
 
 	
 	@RequestMapping("/detail")
-	private String detail(@RequestParam int shopAfterNo, Model model, HttpSession session
-			,@ModelAttribute(name = "vo") ShopAfterVO vo) {
+	private String detail(@RequestParam int shopAfterNo, Model model, HttpSession session,
+			@RequestParam(required = false, defaultValue = "1") int page) {
 		ShopAfterDto  shopAfterDto = shopAfterDao.detail(shopAfterNo);
 		model.addAttribute("shopAfterDto", shopAfterDto);
+		int replyOrigin = shopAfterDto.getShopAfterNo();
+		
+		//댓글 페이징을 위한 코드
+	   List <ReplyDto> replyList =replyDao.selectListByPage(replyOrigin, page);
+	    model.addAttribute("replyList", replyList);
+
+	    
+	    
+	    
 		
 		String shopAfterId = shopAfterDto.getShopAfterId();
 		if (shopAfterId != null) {

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
 
 <h2>전체회원관리</h2>
 
@@ -55,9 +55,9 @@
 		</c:otherwise>
 		</c:choose>
 
-<%-- 	<input type="search" name="keyword" placeholder="검색어" 
-	vale="${vo.keyword}" required>
-	<button>검색</button> --%>
+	<input type="search" name="keyword" placeholder="검색어" 
+	value="${vo.keyword}" required>
+	<button>검색</button>
 	
 </form>
 	
@@ -109,7 +109,7 @@
 </tbody>
 </table>
 <h3>
-<%-- <c:if test="${!vo.first}">
+<c:if test="${!vo.first}">
 	<a href="list?${vo.prevQueryString}">&lt;</a>
 </c:if>
 
@@ -121,8 +121,8 @@
 <c:if test="${!vo.last}">
 <a href="list?${vo.nextQueryString}">&gt;</a>
 
-</c:if> --%>
+</c:if>
 
 </h3>
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

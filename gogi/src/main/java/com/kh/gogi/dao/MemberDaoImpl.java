@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.kh.gogi.dto.MemberBlockDto;
@@ -25,8 +24,7 @@ public class MemberDaoImpl implements MemberDao {
 	@Autowired
 	private MemberMapper memberMapper;
 	
-	@Autowired
-	private MemberListMapper memberListMapper;
+
 
 	@Override
 	public void insert(MemberDto memberDto) {
@@ -207,6 +205,9 @@ public class MemberDaoImpl implements MemberDao {
 		return jdbcTemplate.query(sql, memberMapper, data);
 		}
 	}
+	
+	@Autowired
+	private MemberListMapper memberListMapper;
 	@Override
 	public List<MemberListDto> selectListByPage2(PaginationVO vo) {
 		if(vo.isSearch()) {

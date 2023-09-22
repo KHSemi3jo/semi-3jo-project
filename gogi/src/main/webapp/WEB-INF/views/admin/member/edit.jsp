@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <h2>회원정보변경</h2>
@@ -45,11 +45,18 @@
 	<br><br>
 	포인트<input type="number" name="memberPoint" value="${memberDto.memberPoint}">
 	<br><br>
+	G머니<input type="number" name="memberGmoney" value="${memberDto.memberGmoney}">
 	
-	<button>정보변경</button>
+	
+	
+	<input type="hidden" name="memberId" value="${memberDto.memberId}">
+	
+	
+	
+	<button type="submit" class="btn btn-positive">정보변경</button>
 </form>
 
 
 
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

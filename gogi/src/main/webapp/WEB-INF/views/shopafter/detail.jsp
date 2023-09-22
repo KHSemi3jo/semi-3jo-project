@@ -28,14 +28,20 @@
 		reloadList();
 		function reloadList() {
 			var params = new URLSearchParams(location.search);
-			var no = params.get("shopAfterNo");
+			var no = params.get("shopAfterNo");		
 			var memberId = "${sessionScope.name}";
+			
+			var page = ${replyList};
+
+			
 
 			$.ajax({
 						url : "/rest/reply/list",
 						method : "post",
 						data : {
 							replyOrigin : no
+			
+							
 						},
 						success : function(response) {
 						$(".reply-list").empty();
@@ -215,7 +221,7 @@
 							url : "/rest/like/action",
 							method : "post",
 							data : {
-								boardNo : boardNo
+								shopAfterNo : shopAfterNo
 							},
 							success : function(response) {
 								if (response.check) {
