@@ -34,7 +34,7 @@
 
 			
 
-			<a class="link" href="detail?productNo= ${productDto.productNo}">${productDto.productNo}</a> /
+			<a class="link" href="detail?productNo=${productDto.productNo}">${productDto.productNo}</a> /
 			
 
 			 ${productDto.productName}/

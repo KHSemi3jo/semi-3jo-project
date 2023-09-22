@@ -14,6 +14,7 @@ public class BasketListMapper implements RowMapper<BasketListDto>{
 	@Override
 	public BasketListDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		BasketListDto basketListDto = new BasketListDto();
+		basketListDto.setBasketNo(rs.getInt("basket_no"));
 		basketListDto.setBasketListNo(rs.getInt("basket_listno"));
 		basketListDto.setBasketMember(rs.getString("basket_member"));
 		basketListDto.setBasketCount(rs.getInt("basket_count"));
