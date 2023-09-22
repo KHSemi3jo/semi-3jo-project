@@ -1,15 +1,17 @@
 package com.kh.gogi.vo;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 //VO(Value Object)
 //-내 입맛대로 데이터를 모아서 저장하는 클래스(DB무관)
 //-등록하지 않고 필요할 때마다 만들어서 사용
 @Data
+@NoArgsConstructor
 public class ProductVO {
 	private String type,keyword;//검색 분류 및 키워드
 	private int page =1;//현재 페이지 번호(기본:1)
-	private int size=10;//보여줄 게시판의 글 수(기본:10)
+	private int size=20;//보여줄 게시판의 글 수(기본:10)
 	private int count;//전체 글 수
 	private int navigatorSize=10;//하단 네비게이터 표시 개수(기본:10)
 	
