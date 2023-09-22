@@ -10,6 +10,7 @@ import com.kh.gogi.vo.PaginationVO;
 public interface MemberDao {
 	void insert(MemberDto memberDto);
 	MemberDto selectOne(String memberId);
+	MemberDto selectOneEmail(String memberEmail);//비동기 이메일 검사
 	boolean updateMemberLogin(String memberId);
 	boolean updateMemberPw(String memberId,String changePw);
 	boolean updateMemberInfo(MemberDto memberDto);
