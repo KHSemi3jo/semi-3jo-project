@@ -16,7 +16,7 @@ select.form-input, .form-input, .btn.btn-navy {
 
 <div class="container w-800 navy">
 	<div class="row pb-30">
-		<h2>1대1 목록</h2>
+		<h2>1대1 목록test</h2>
 	</div>
 	<!-- 폼시작(체크박스) -->
 	<form class="delete-form" action="deleteByAdmin" method="post">
