@@ -57,6 +57,14 @@ public class BasketDaoImpl implements BasketDao{
 		return jdbcTemplate.query(sql, basketListMapper);
 	}
 
+	@Override
+	public List<BasketListDto> checkPay() {
+		String sql ="select sum(product_price) from basket left outer join"
+				+ " product on product.product_no ="
+				+ " basket.basket_listno";
+		return jdbcTemplate.query(sql, basketListMapper);
+	}
+
 
 
 }
