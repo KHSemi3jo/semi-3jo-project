@@ -4,10 +4,11 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
                 <h2 >배송지 관리</h2>
+                <hr>
+                
 <table border= "1"  width= "800">
 <thead>
 <tr>
-	<th>아이디</th>
 	<th>이름</th>
 	<th>주소</th>
 	<th>연락처</th>
@@ -16,15 +17,14 @@
 </thead>
 
  <tbody align="center">
-    <c:forEach var= "addressDto" items= "${list}">
+    <c:forEach var= "addressDto" items= "${addressList}">
 <tr>
-	 <td><a href="detail?memberId=${addressDto.memberId}">${addressDto.memberId}</a></td>
-    <td> ${memberListDto.memberName}</td>
-    <td> ${addressDto.addressNormal}</td>
-    <td> ${memberListDto.memberContact}</td>
-
+	 <td><a href="detail?memberId=${sessionScope.name}">${sessionScope.name}</a></td>
+    <td> ${}</td>
+    <td> ${}</td>
+    <td> ${}</td>
   <td>
- 	<a href="edit?memberId=">수정</a>
+ 	<a href="addressDetail">수정</a>
 </c:forEach>
 </tbody>
 </table>
