@@ -1,5 +1,7 @@
 package com.kh.gogi.rest;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.gogi.dao.BasketDao;
 import com.kh.gogi.dao.ProductDao;
 import com.kh.gogi.dto.BasketDto;
+import com.kh.gogi.dto.BasketListDto;
 import com.kh.gogi.dto.ProductDto;
+import com.kh.gogi.dto.ReplyDto;
 
 @CrossOrigin
 @RestController
@@ -22,15 +26,16 @@ import com.kh.gogi.dto.ProductDto;
 public class BasketRestConrtoller {
 	@Autowired
 	private BasketDao basketDao;
-	
+
 	@Autowired
 	private ProductDao productDao;
-	
+
 	@PostMapping("/add")
 	public void add(@RequestParam int productNo, HttpSession session) {
 		ProductDto productDto = productDao.selectOne(productNo);
-		if(productDto == null) return;//없는 상품이면 중지
-		
+		if (productDto == null)
+			return;// 없는 상품이면 중지
+
 		int basketNo = basketDao.sequence();
 		BasketDto basketDto = new BasketDto();
 		basketDto.setBasketNo(basketNo);
@@ -39,6 +44,12 @@ public class BasketRestConrtoller {
 		basketDto.setBasketMember(memberId);
 		basketDto.setBasketCount(1);
 		basketDao.add(basketDto);
+	}
+
+	@PostMapping("/selectPrice")
+	public void selectPrice() {
+
+
 	}
 
 }

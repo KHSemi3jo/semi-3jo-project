@@ -21,7 +21,8 @@ public class BasketController {
 	private BasketDao basketDao;
 	
 	@RequestMapping("/list")
-	public String list(Model model) {
+	public String list(Model model
+			) {
 		List<BasketListDto> basketList = basketDao.selectList();
 		model.addAttribute("basketList", basketList);
 		
@@ -36,6 +37,8 @@ public class BasketController {
 		}
 		return "redirect:list";
 	}
+	
+	
 	
 	
 }

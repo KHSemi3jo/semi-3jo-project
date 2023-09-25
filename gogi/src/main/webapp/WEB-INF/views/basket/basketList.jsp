@@ -21,6 +21,65 @@
 	});
 </script>
 
+
+<script>
+            $(function() {
+                $(".check-item").click(function() {
+        
+                    var param = [];
+                    var selectList = [];
+                 	var   productPrice = $(this).parents('tr').find(".pay").text();
+                 	var 	basketCount = $(this).parents('tr').find(".count").text();
+                 	  
+                 	   
+                    $(".check-item:checked").each(function(i) {
+                        selectList = {
+        
+                            // basketNo: $(this).parents('tr').find(".no").text(),
+                            productPrice : $(this).parents('tr').find(".pay").text(),
+                            basketCount : $(this).parents('tr').find(".count").text()
+                        };
+        
+                        //param 배열에 selectList 오브젝트를 담는다.
+                        param.push(selectList);
+                    });
+
+                    $.ajax({
+                        type : "post",
+                        url : "/rest/basket/selectPrice",
+                        headers : {
+                            "content-type" : "application/json"
+                        },
+                        data : JSON.stringify(param),
+                        dateType : "text",
+        
+                        success : function(response) {
+                         //   $(".totalpay").text("테스트"),
+                            	  console.log(param.length);
+                              	  var result =0;
+                          for(var i=0 ; i <param.length; i++)
+                 	   {
+              
+                        	  var result = productPrice * basketCount +result;
+                        //	  console.log(result);
+                        	  } console.log(result);
+                        //    console.log("금액 :"+productPrice);
+                          //  console.log("수량 :"+basketCount);
+                        	  console.log(result);
+                        	  $(".totalpay").text(result);
+                        },
+
+                    
+                    });
+        
+                });
+            })
+        </script>
+
+
+
+
+
 <form class="delete-form" action="delete" method="post">
 	<div class="flex-container">
 		<div style="width:950px;">
@@ -54,9 +113,12 @@
 						</a>
 					</td>
 					<td><button class="btn-plus">+</button></td>
-					<td><intput type="number" min="1" max="10" name="count">${basketListDto.getBasketCount()}</td>
+
+					<td class="count"><intput type="number" min="1" max="10" name="count">${basketListDto.getBasketCount()}</td>
+
+
 					<td><button class="btn-minus">-</button></td>
-					<td>${basketListDto.productPrice}</td>
+					<td class="pay">${basketListDto.productPrice}</td>
 				</tr>
 			</c:forEach>
 			</tbody>
@@ -69,9 +131,13 @@
 					<fmt:formatNumber pattern="###,###,###" value="${basketListDto.productPrice}"/>원
 				</span>
 			</div>
+
+		
 <!-- 			<div>할인금액 : </div> -->
 <!-- 			<div>합계금액 : </div> -->
-		</c:forEach>
+		</c:forEach>	
+	<div class="flex-container">	합계금액  :  <div class="totalpay"></div>원</div>
+
 			<div>
 				<button class="btn btn-orange w-100">결제하기</button>
 			</div>

@@ -11,4 +11,6 @@ public interface BasketDao {
 	void add(BasketDto basketDto);
 	boolean delete(int basketNo);
 	List<BasketListDto> selectList();
+	
+
 }
