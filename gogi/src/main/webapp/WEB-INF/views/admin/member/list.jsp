@@ -72,8 +72,8 @@
 	<th>이메일</th>
 	<th>생년월일</th>
 	<th>등급</th>
+	<th>차단여부</th>
 	<th>메뉴</th>
-	<th>차단</th>
 </tr>
 </thead>
 
