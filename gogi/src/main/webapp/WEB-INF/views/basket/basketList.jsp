@@ -8,7 +8,7 @@
 </style>
 
 <script src="/js/checkbox.js"></script>
-<!-- javascript 작성 공간 -->
+<!-- javascript 작성 공간 --> 
 <script>
 	var count = $("[name=count]").val();
 	$(".btn-plus").on("click", function(){
