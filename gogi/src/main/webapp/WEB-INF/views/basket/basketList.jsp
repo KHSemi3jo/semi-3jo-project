@@ -21,6 +21,7 @@
 	});
 </script>
 
+
 <script>
             $(function() {
                 $(".check-item").click(function() {
@@ -78,6 +79,7 @@
 
 
 
+
 <form class="delete-form" action="delete" method="post">
 	<div class="flex-container">
 		<div style="width:950px;">
@@ -111,7 +113,10 @@
 						</a>
 					</td>
 					<td><button class="btn-plus">+</button></td>
+
 					<td class="count"><intput type="number" min="1" max="10" name="count">${basketListDto.getBasketCount()}</td>
+
+
 					<td><button class="btn-minus">-</button></td>
 					<td class="pay">${basketListDto.productPrice}</td>
 				</tr>
@@ -126,11 +131,13 @@
 					<fmt:formatNumber pattern="###,###,###" value="${basketListDto.productPrice}"/>원
 				</span>
 			</div>
+
 		
 <!-- 			<div>할인금액 : </div> -->
 <!-- 			<div>합계금액 : </div> -->
 		</c:forEach>	
 	<div class="flex-container">	합계금액  :  <div class="totalpay"></div>원</div>
+
 			<div>
 				<button class="btn btn-orange w-100">결제하기</button>
 			</div>
