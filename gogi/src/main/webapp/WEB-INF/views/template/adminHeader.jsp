@@ -74,6 +74,8 @@
                 <li><a href="#"><i class="fa-solid fa-bars "></i> 회원 관리</a>
                     <ul>
                         <li><a href="/admin/member/list?size=20">회원정보관리</a></li>
+                        <li><a href="/admin/member/address?size=20">회원배송지관리</a></li>
+                        <li><a href="/admin/product/list?size=20">상품등록관리</a></li>
                         <li><a href="#">회원 통계</a></li>
                     </ul>
                 </li>
