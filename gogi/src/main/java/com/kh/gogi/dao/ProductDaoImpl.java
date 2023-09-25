@@ -131,45 +131,27 @@ public class ProductDaoImpl implements ProductDao {
 	public List<ProductDto> selectListBypage(ProductVO vo) {
 		
 		if(vo.isSearch()) {//검색할때
-			return selectListBypage(vo.getType(),vo.getKeyword(),vo.getPage());
+			String sql = "SELECT * FROM ( "
+	                + "SELECT ROWNUM AS rn, TMP.* FROM ( "
+	                + "SELECT * FROM product_list "
+	                + "where instr("+vo.getType()+",?)>0"
+	                + "ORDER  BY product_no asc,"+vo.getType()+" ASC "
+	                + ") TMP "
+	                + ") WHERE rn BETWEEN ? AND ?";
+			Object[] data = {vo.getKeyword(),vo.getStartRow(),vo.getFinishRow()};
+			return jdbcTemplate.query(sql, productListMapper,data);
 		}
 		else {
-			return selectListBypage(vo.getPage()) ;
+			String sql = "SELECT * FROM ( "
+	                + "SELECT ROWNUM AS rn, TMP.* FROM ( "
+	                + "SELECT * FROM product_list "
+	                + "ORDER  BY product_no ASC "
+	                + ") TMP "
+	                + ") WHERE rn BETWEEN ? AND ?";
+			Object[] data = {vo.getStartRow(),vo.getFinishRow()};
+			return jdbcTemplate.query(sql, productListMapper,data);
 		}
 	}
 
-	@Override
-	public List<ProductDto> selectListBypage(int page) {
-		int end = page *10;
-		int begin = end - 9;
-		
-		String sql = "select * from ( "
-				+ " select rownum rn, TMP.* from( "
-				+ " select * from product_list "
-				+ " connect by prior product_no=attach_no "
-				+ " start with attach_no is null "
-				+ " order siblings by product_no asc "
-				+ ")TMP "
-				+ ") where rn between ? and ?";
-		Object[] data = {begin, end};
-		return jdbcTemplate.query(sql, productListMapper,data);
-	}
-
-	@Override
-	public List<ProductDto> selectListBypage(String type, String keyword, int page) {
-		int end = page *10;
-		int begin = end - 9;
-		String sql = "select * from ( "
-				+ " select rownum rn, TMP.* from( "
-				+ " select * from product_list "
-				+ "where instr("+type+",?)>0 "
-				+ " connect by prior product_no=attach_no "
-				+ " start with product_no is null "
-				+ " order siblings by product_no asc "
-				+ ")TMP "
-				+ ") where rn between ? and ?";
-		Object[] data = {keyword,begin, end};
-		return jdbcTemplate.query(sql, productListMapper,data);
-	}
 
 }
