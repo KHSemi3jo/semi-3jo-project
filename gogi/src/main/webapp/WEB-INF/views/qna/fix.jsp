@@ -30,7 +30,7 @@
                     </div>
                     <div class="row right  pr-30">
                         <a class="btn btn-navy" href="/qna/list">목록</a>
-                        <button href="/one/delete?ontNo=${qnaDto.qnaNo}"class="btn btn-navy">삭제</button>
+                        <button href="/one/delete?ontNo=${qnaDto.qnaNo}"class="btn btn-orange">삭제</button>
                         <button type="submit"class="btn btn-orange">등록</button>
                     </div>
                 </div>

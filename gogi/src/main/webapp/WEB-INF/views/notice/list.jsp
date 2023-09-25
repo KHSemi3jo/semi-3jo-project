@@ -6,7 +6,6 @@
 .noticeTitle{
 	text-decoration: none;
 }
-
 select.form-input,
 .form-input,
 .btn.btn-navy{
@@ -14,54 +13,24 @@ select.form-input,
 	height:2.8em;
     border-radius: 0.1em;
 }
-
 </style>
-
 
 	<div class="container w-800 navy">
 			<div class="row pb-30">
 				<h2>공지사항</h2>
 			</div>
 			
-			<!-- 폼시작(체크박스) -->
-			<form class="delete-form" action="deleteByAdmin"method="post">
-			<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
-			<c:if test="${sessionScope.name != null}">
-			<div class="row right ">
-				<c:if test="${sessionScope.level =='관리자' }">
-				<button type ="submit" class="btn upBtn delete-btn">
-					<i class="fa-solid fa-trash"></i>
-					일괄삭제</button></c:if>
-		
-			
-				<a href="/notice/add" class="btn upBtn">
-					<i class="fa-solid fa-pen"></i>
-					글쓰기
-				</a>
-			</div>
+			<%-- 작성은 관리자가 로그인한 경우에만 출력 --%>
+			<c:if test="${sessionScope.level =='관리자' }">
+				<div class="row right">
+					 <a href="/notice/add" class="btn btn-orange">작성</a>
+				</div>						
 			</c:if>
-			
-			<%-- 
-		검색일 경우 검색어를 추가로 출력 
-		(참고) 논리 반환값을 가지는 getter 메소드는 get이 아니라 is로 시작한다
-			--%>
-			<c:if test="${vo.search}">
-			<div class="row left">
-				&quot;${vo.keyword}&quot;에 대한 검색 결과
-			</div>
-			</c:if>
-			
-			
+						
 			<div class="row">
 	            <table class=" table table-slit">
 					<thead>
 	                    <tr>
-	                    <%--체크박스 일괄 삭제 --%>
-							<c:if test="${sessionScope.level =='관리자' }">
-								<th>
-									<input type="checkbox" class="check-all">
-								</th>
-							</c:if>
 	                        <th>번호</th>
 	                        <th width="50%">제목</th>
 	                        <th>작성자</th>
@@ -71,34 +40,25 @@ select.form-input,
 	
 					<c:forEach var="noticeDto" items="${list}">				
 						<tr>
-							<%--체크박스 개별 삭제 --%>
-							<c:if test="${sessionScope.level =='관리자' }">
-								<td>
-									<input type="checkbox"class="check-item" name="boardNoList" value="${boardListDto.boardNo }">
-								</td>
-							</c:if>
-							
 							<td>${noticeDto.noticeNo}</td>
 							<td class="left"><a class="noticeTitle navy " href="detail?noticeNo=${noticeDto.noticeNo}">${noticeDto.noticeTitle}</a></td>
-								<c:choose>
-									<c:when test="${noticeDto.noticeWriter != null}">
-										<td>고기어때</td>
-									</c:when>
-									<c:otherwise>
-										<td>고기어때</td>
-									</c:otherwise>
-								</c:choose>
+							<%--관리자 누가 작성하든 작성자 이름은 고기어때로 출력 --%>
+							<c:choose>
+								<c:when test="${noticeDto.noticeWriter != null}">
+									<td>고기어때</td>
+								</c:when>
+								<c:otherwise>
+									<td>고기어때</td>
+								</c:otherwise>
+							</c:choose>
 							<td>${noticeDto.noticeDate}</td>
 						</tr>
-					</c:forEach>
-	            
+					</c:forEach>	            
 	            </table>	
 			</div>
-		<!-- 폼 종료(체크박스) -->
-		</form>
 	</div>
 	
- <div class="row page-navigator mv-30">
+ 		<div class="row page-navigator mv-30">
                 <!-- 이전 버튼 -->
                 <c:if test="${!vo.first}">
                     <a href="list?${vo.prevQueryString}">
@@ -126,9 +86,6 @@ select.form-input,
                 </c:if>
         </div>
 
-
-
-
 <!-- 검색기능 -->
 
 <div align="center">
@@ -150,8 +107,6 @@ select.form-input,
 				</select>
 			</c:otherwise>
 		</c:choose>
-
-
 
 		<input class="form-input" type="search" name="keyword" required="required"
 			 placeholder="검색어를 입력해주세요"

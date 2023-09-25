@@ -18,41 +18,12 @@ select.form-input, .form-input, .btn.btn-navy {
 	<div class="row pb-30">
 		<h2>1대1 목록test</h2>
 	</div>
-	<!-- 폼시작(체크박스) -->
-	<form class="delete-form" action="deleteByAdmin" method="post">
-		<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
-		<c:if test="${sessionScope.name != null}">
-			<div class="row right ">
-				<c:if test="${sessionScope.level =='관리자' }">
-					<button type="submit" class="btn upBtn delete-btn">
-						<i class="fa-solid fa-trash"></i> 일괄삭제
-					</button>
-				</c:if>
-
-
-				<a href="/one/add" class="btn upBtn"> <i class="fa-solid fa-pen"></i>
-					글쓰기
-				</a>
-			</div>
-		</c:if>
-
-		<%-- 
-		검색일 경우 검색어를 추가로 출력 
-		(참고) 논리 반환값을 가지는 getter 메소드는 get이 아니라 is로 시작한다
-			--%>
-		<c:if test="${vo.search}">
-			<div class="row left">&quot;${vo.keyword}&quot;에 대한 검색 결과</div>
-		</c:if>
 
 
 		<div class="row">
 			<table class=" table table-slit">
 				<thead>
 					<tr>
-						<%--체크박스 일괄 삭제 --%>
-						<c:if test="${sessionScope.level =='관리자' }">
-							<th><input type="checkbox" class="check-all"></th>
-						</c:if>
 						<th>카테고리</th>
 						<th width="50%">제목</th>
 						<th>작성자</th>
@@ -63,28 +34,23 @@ select.form-input, .form-input, .btn.btn-navy {
 				<c:forEach var="OneOnOneDto" items="${list}">
 					<tr>
 						<td>${OneOnOneDto.oneCategory}</td>
-
-				
-							<td class="left"><c:if test="${OneOnOneDto.oneDepth >0}">
+						<td class="left">
+							<c:if test="${OneOnOneDto.oneDepth >0}">
 								<img src="/images/shopAfter/bottonArrow.png" width="15" height="15"
 								style="background-color: ;">						
 							</c:if>
-								<a class="noticeTitle navy "
-									href="detail?oneNo=${OneOnOneDto.oneNo}">${OneOnOneDto.oneTitle}</a></td>
-					
+							<a class="noticeTitle navy "href="detail?oneNo=${OneOnOneDto.oneNo}">${OneOnOneDto.oneTitle}</a>
+						</td>				
 						<td>${OneOnOneDto.oneId}</td>
 						<td>${OneOnOneDto.oneDate}</td>
 					</tr>
 				</c:forEach>
-
 			</table>
+			<div class="row right">
+							<a href="/one/add" class="btn btn-navy pt-10">문의하기</a>
+			</div>
 		</div>
-		<!-- 폼 종료(체크박스) -->
-	</form>
 </div>
-
-
-
 
 
 
@@ -116,40 +82,6 @@ select.form-input, .form-input, .btn.btn-navy {
 	</c:if>
 </div>
 
-
-
-
-<!-- 검색기능 -->
-
-<br>
-<br>
-<div align="center">
-	<form action="list" method="get">
-
-		<c:choose>
-			<c:when test="${param.type == 'shopAfterId'}">
-				<select name="type" required="required" class="form-input">
-					<option value="one_title">제목</option>
-					<option value="one_category">카테고리</option>
-					<option value="one_id" selected="selected">작성자</option>
-				</select>
-			</c:when>
-			<c:otherwise>
-				<select name="type" required="required" class="form-input">
-					<option value="one_title" selected="selected">제목</option>
-					<option value="one_category">카테고리</option>
-					<option value="one_id">작성자</option>
-				</select>
-			</c:otherwise>
-		</c:choose>
-
-
-
-		<input class="form-input" type="search" name="keyword"
-			required="required" placeholder="검색하실 이름을 입력해주세요">
-		<button class="btn btn-navy" type="submit">검색</button>
-	</form>
-</div>
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

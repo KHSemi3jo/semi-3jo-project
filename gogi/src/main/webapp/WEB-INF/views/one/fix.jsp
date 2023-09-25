@@ -3,27 +3,42 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<button><a href="/one/list">1대1 목록</a></button>
-<button><a href="/one/delete?ontNo=${oneOnOneDto.oneNo}">1대1 삭제</a></button>
 
 
-<div class="container w-600">
+
+<div class="container w-800">
 	<div class="row">
-		<h1>1대1 수정</h1>
+		<h2 class="pt-30 pb-30">1 : 1 문의 답변 수정</h2>
 	</div>
+	    <hr>
 	<form action="fix" method="post">
-		<div class="row">
 		<input type="hidden" name="oneNo" value="${oneOnOneDto.oneNo}">
-			제목 : <input type="text" name="oneTitle" required class="form-input"
-				value="${oneOnOneDto.oneTitle}">
-		</div>
-		<div class="row ">
-			내용 :
-			<textarea name="oneContent" class="form-input w-100" cols="30" rows="10">${oneOnOneDto.oneContent}</textarea>
-		</div>
-		<div class="row">
-			<button type="submit" class="btn w-100 btn-navy">등록</button>
+	
+	 	<div class="row flex-container">
+                  <div class="row w-25 ">
+                      <label>제목</label>
+                  </div>
+                  <div class="row w-75 pr-30 left ">
+                      <input type="text" name="oneTitle" required class="form-input w-100"
+								value="${oneOnOneDto.oneTitle}">
+                  </div>
+         </div>
+		<div class="row flex-container">
+                    <div class="row w-25">
+                        <label>내용</label>
+                    </div>
+                    <div class="row w-75 pr-30">
+                        <textarea name="oneContent" class="form-input w-100" cols="30" rows="10">${oneOnOneDto.oneContent}</textarea>
+                    </div>
+         </div>
+		<div class="row right  pr-30">
+                    <a class="btn btn-navy" href="/one/list">목록</a>
+                    <button type="submit"class="btn btn-orange">등록</button>
+                    <a class="btn btn-orange"href="/one/delete?ontNo=${oneOnOneDto.oneNo}">삭제</a>
+        </div>
+
 	</form>
+
 </div>
 
 

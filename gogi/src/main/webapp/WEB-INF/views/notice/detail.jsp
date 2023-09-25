@@ -33,8 +33,11 @@
         </table>
         <div class="row right">
             <a href="/notice/list"class="btn btn-navy">목록</a>
-            <a class="btn btn-navy" href="/notice/fix?noticeNo=${noticeDto.noticeNo}">수정</a>
-            <a class="btn btn-navy" href="/notice/delete?noticeNo=${noticeDto.noticeNo}">삭제</a>
+            <%-- 수정,삭제는 관리자가 로그인한 경우에만 출력 --%>
+			<c:if test="${sessionScope.level =='관리자' }">
+	            <a class="btn btn-orange" href="/notice/fix?noticeNo=${noticeDto.noticeNo}">수정</a>
+	            <a class="btn btn-orange" href="/notice/delete?noticeNo=${noticeDto.noticeNo}">삭제</a>										
+			</c:if>
         </div>
     </div>
 </div>
