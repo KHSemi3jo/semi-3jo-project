@@ -20,7 +20,8 @@ public class BasketController {
 	private BasketDao basketDao;
 	
 	@RequestMapping("/list")
-	public String list(Model model) {
+	public String list(Model model
+			) {
 		List<BasketListDto> basketList = basketDao.selectList();
 		model.addAttribute("basketList", basketList);
 		return "/WEB-INF/views/basket/basketList.jsp";
@@ -36,6 +37,8 @@ public class BasketController {
 			return "redirect:에러페이지";
 		}
 	}
+	
+	
 	
 	
 }
