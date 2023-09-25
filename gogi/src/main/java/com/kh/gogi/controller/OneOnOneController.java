@@ -96,6 +96,8 @@ public class OneOnOneController {
 		oneOnOneDto.setOneNo(oneNo);
 		String memberId = (String) session.getAttribute("name");
 		oneOnOneDto.setOneId(memberId);
+		String memberLevel = (String) session.getAttribute("level");
+		oneOnOneDto.setOneLevel(memberLevel);
 	
 		if(oneOnOneDto.getOneParent()==null) {
 			oneOnOneDto.setOneGroup(oneNo);

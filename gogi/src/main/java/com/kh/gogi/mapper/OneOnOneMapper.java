@@ -20,6 +20,7 @@ public class OneOnOneMapper implements RowMapper<OneOnOneDto> {
 		oneOnOneDto.setOneContent(rs.getString("one_content"));
 		oneOnOneDto.setOneDate(rs.getDate("one_date"));
 		oneOnOneDto.setOneId(rs.getString("one_id"));
+		oneOnOneDto.setOneLevel(rs.getString("one_level"));
 		oneOnOneDto.setOneNo(rs.getInt("one_no"));
 		oneOnOneDto.setOneStatus(rs.getInt("one_status"));
 		oneOnOneDto.setOneTitle(rs.getString("one_title"));

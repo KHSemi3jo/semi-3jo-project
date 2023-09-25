@@ -12,5 +12,5 @@ public class OneOnOneDto {
 private int oneNo,oneStatus, oneDepth,oneGroup;
 private Integer oneParent;
 private Date oneDate;
-private String oneId,oneTitle,oneContent,oneCategory;
+private String oneId,oneTitle,oneContent,oneCategory, oneLevel;
  }

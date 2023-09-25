@@ -29,11 +29,11 @@ public class OneOnOneDaoImpl implements OneOnOneDao {
 
 	@Override
 	public void add(OneOnOneDto oneOnOneDto) {
-		String sql = "insert into OneOnOne(one_no,one_id, one_category"
+		String sql = "insert into OneOnOne(one_no,one_id, one_level, one_category"
 				+ ",one_title ,one_content,one_group, one_parent, one_depth) "
-				+ "values(?,?,?,?,?,?,?,?)";
-		Object[] data = {oneOnOneDto.getOneNo(),oneOnOneDto.getOneId()
-				,oneOnOneDto.getOneCategory(),
+				+ "values(?,?,?,?,?,?,?,?,?)";
+		Object[] data = {oneOnOneDto.getOneNo(),oneOnOneDto.getOneId(), 
+				oneOnOneDto.getOneLevel(),oneOnOneDto.getOneCategory(),
 				oneOnOneDto.getOneTitle(),oneOnOneDto.getOneContent(),
 				oneOnOneDto.getOneGroup(), oneOnOneDto.getOneParent()
 				,oneOnOneDto.getOneDepth()};
@@ -101,7 +101,7 @@ public class OneOnOneDaoImpl implements OneOnOneDao {
 		String sql=  "select * from ("
 			+ "select rownum rn, TMP.* from("
 			+ "select * from OneOnOne_list "
-			+ "where one_id = ? and instr(" + type + ", ?) > 0  "
+			+ "where one_id = ? or one_level = '관리자' and instr(" + type + ", ?) > 0  "
 			+ "connect by Prior one_no = one_parent start WITH one_parent is NULL "
 			+ "order siblings by one_group desc, one_no asc"
 			+ ")TMP"
@@ -116,7 +116,7 @@ public class OneOnOneDaoImpl implements OneOnOneDao {
 	public List<OneOnOneDto> selectListByPage(int page, String oneId) {
 		
 		String sql = "select * from (select rownum rn, TMP.* from("
-				+ "select * from OneOnOne_list  where one_id = ?"
+				+ "select * from OneOnOne_list  where one_id = ? or one_level = '관리자' "
 				+ "connect by Prior one_no = one_parent "
 				+ "start WITH one_parent is NULL "
 				+ "order siblings by one_group desc, one_no asc"
