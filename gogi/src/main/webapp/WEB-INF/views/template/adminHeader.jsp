@@ -48,7 +48,7 @@
     <main>
         <header>
             <div class="logo">
-                <a><img src="./images/logo/GogiLogo-main.png"width=150 height="150"></a>
+                <a href="/admin/home"><img src="/images/logo/GogiLogo-main.png"width=150 height="150"></a>
             </div>
             <div class="title flex-container ">
                 <div class="row input-search">
@@ -57,26 +57,28 @@
                     <button class="btn btn-search"><i class="fa-solid fa-magnifying-glass navy"></i></button>
                 </div>
             </div>
-            <div class="etc">
-                <div class="row pr-20 orange">${sessionScope.level}</div>
-                <div class="row pr-20 etc-menu navy"><a href="/member/logout">로그아웃</a></div>
+            <div class="etc flex-container">
+                <div class="row pr-20 navy">${sessionScope.name} 님</div>
+                <div class="row pr-20 etc-menu navy"><a class="orange" href="/member/logout">로그아웃</a></div>
             </div>
         </header>
         <nav>
             <ul class="menu menu-navy center">
                 <li><a href="#"><i class="fa-solid fa-bars "></i> 고객센터</a>
                     <ul>
-                        <li><a href="#">공지사항 관리</a></li>
-                        <li><a href="#">1:1문의 관리</a></li>
-                        <li><a href="#">QnA 관리</a></li>
+                        <li><a class="left" href="/notice/list">공지사항 관리</a></li>
+                        <li><a class="left" href="/qna/list">QnA 관리</a></li>
+                        <li><a class="left" href="/one/list">1:1 문의</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><i class="fa-solid fa-bars "></i> 회원 관리</a>
                     <ul>
-                        <li><a href="/admin/member/list?size=20">회원정보관리</a></li>
+
+
+                        <li><a class="left" href="/admin/member/list?size=20">회원정보관리</a></li>
                         <li><a href="/admin/member/address?size=20">회원배송지관리</a></li>
-                        <li><a href="/admin/product/list?size=20">상품등록관리</a></li>
-                        <li><a href="#">회원 통계</a></li>
+                        <li><a class="left" href="#">회원 통계</a></li>
+
                     </ul>
                 </li>
                 <li><a href="#">상품 통계</a></li>

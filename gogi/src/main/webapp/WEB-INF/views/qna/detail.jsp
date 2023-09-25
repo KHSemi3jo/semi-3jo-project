@@ -26,8 +26,11 @@
             </table>
             <div class="row right">
                 <a href="/qna/list"class="btn btn-navy">목록</a>
-                <a class="btn btn-navy" href="/qna/fix?qnaNo=${qnaDto.qnaNo}">수정</a>
-                <a class="btn btn-navy" href="/qna/delete?qnaNo=${qnaDto.qnaNo}">삭제</a>
+                <%-- 수정,삭제는 관리자가 로그인한 경우에만 출력 --%>
+				<c:if test="${sessionScope.level =='관리자' }">								
+	                <a class="btn btn-orange" href="/qna/fix?qnaNo=${qnaDto.qnaNo}">수정</a>
+	                <a class="btn btn-orange" href="/qna/delete?qnaNo=${qnaDto.qnaNo}">삭제</a>
+				</c:if>
             </div>
         </div>
     </div>

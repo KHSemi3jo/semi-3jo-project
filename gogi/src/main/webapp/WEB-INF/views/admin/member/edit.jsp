@@ -1,61 +1,196 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
+    <style>
+.custom-checkbox {
+    display: inline-block;
+    font-size: 18px;
+    position: relative;
+}
+.custom-checkbox > [type=radio] {
+    display: none; 
+    }
+.custom-checkbox > span {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
 
-<h2>회원정보변경</h2>
-<form action="edit" method="post">
-	
-	이름<input type="text" name="memberName" 
-		value="${memberDto.memberName}" required><br><br>
-	이메일<input type="email" name="memberEmail" 
-		value="${memberDto.memberEmail}"><br><br>
-	전화번호<input type="tel" name="memberContact" 
-		value="${memberDto.memberContact}"><br><br>
-	생년월일<input type="date" name="memberBirth" 
-		value="${memberDto.memberBirth}"><br><br>
-	주소<input type="text" name="memberPost" size="6" maxlength="6" 
-		placeholder="우편번호" value="${memberDto.memberPost}"><br>
-		<input type="text" name="memberAddr1" size="50"
-		placeholder="기본주소" value="${memberDto.memberAddr1}"><br>
-		<input type="text" name="memberAddr2" size="50"
-		placeholder="상세주소" value="${memberDto.memberAddr2}"><br>
-	
-	<%-- radio button은 select box와 같은 역할을 한다 --%>
-	등급
-	<c:choose>
-	<c:when test="${memberDto.memberLevel == 'VIP'}">
-	<input type="radio" name="memberLevel" value="일반">일반
-	<input type="radio" name="memberLevel" value="VIP" checked>VIP
-	<input type="radio" name="memberLevel" value="관리자">관리자
-	
-	</c:when>
-	<c:when test="${memberDto.memberLevel == '관리자'}">
-	<input type="radio" name="memberLevel" value="일반">일반
-	<input type="radio" name="memberLevel" value="VIP">VIP
-	<input type="radio" name="memberLevel" value="관리자" checked>관리자
-	</c:when>
-	<c:otherwise>
-	<input type="radio" name="memberLevel" value="일반" checked>일반
-	<input type="radio" name="memberLevel" value="VIP">VIP
-	<input type="radio" name="memberLevel" value="관리자">관리자
-	</c:otherwise>
-	</c:choose>
-	
-	<br><br>
-	포인트<input type="number" name="memberPoint" value="${memberDto.memberPoint}">
-	<br><br>
-	G머니<input type="number" name="memberGmoney" value="${memberDto.memberGmoney}">
-	
-	
-	
-	<input type="hidden" name="memberId" value="${memberDto.memberId}">
-	
-	
-	
-	<button type="submit" class="btn btn-positive">정보변경</button>
-</form>
+    background-image: url("/images/checkbox/checkbox-empty.png");
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.custom-checkbox > [type=radio]:checked + span {
+    background-image: url("/images/checkbox/checkbox-check.png");
+}
+.w-20{
+    display: inline-flex;
+    
+}
+    </style>
 
+    <div class="container w-600 navy">
+        <div class="row pb-20 pt-30">
+            <h2 >회원 정보 변경</h2>
+        </div>
+
+        <form action="edit" method="post" autocomplete="off">
+        <input type="hidden" name="memberId" value="${memberDto.memberId}">
+            <hr class="navy">
+                <div class="row flex-container pt-20">
+                    <div class="row w-25 left">
+                        <label>이름</label>
+                    </div>
+                    <div class="row w-75 pr-30">
+                        <input type="text" name="memberName" class="form-input w-100"
+                                     value="${memberDto.memberName}"   required>
+                    </div>
+                </div>
+                <div class="row flex-container">
+                    <div class="row w-25 left">
+                        <label>등급</label>
+                    </div>
+                    <div class="row float-container w-75 left">
+                        <c:choose>
+                                <c:when test="${memberDto.memberLevel == 'VIP'}">
+                                        <div class="row w-20">
+                                            <label class="custom-checkbox">
+                                                <input type="radio"  name="memberLevel" >
+                                                <span ></span> 일반
+                                            </label>
+                                        </div>
+                                        <div class="row w-20 pl-10">
+                                            <label class="custom-checkbox">
+                                                <input type="radio"  name="memberLevel" checked >
+                                                <span ></span> Vip
+                                            </label>
+                                        </div>
+                                        <div class="row w-20 pl-10">
+                                            <label class="custom-checkbox">
+                                                <input type="radio"  name="memberLevel" >
+                                                <span ></span> 관리자
+                                            </label>
+                                        </div>
+                                    </div>
+                                </c:when>
+                                <c:when test="${memberDto.memberLevel == '관리자'}">
+                                        <div class="row w-20">
+                                            <label class="custom-checkbox">
+                                                <input type="radio"  name="memberLevel" >
+                                                <span ></span> 일반
+                                            </label>
+                                        </div>
+                                        <div class="row w-20 pl-10">
+                                            <label class="custom-checkbox">
+                                                <input type="radio"  name="memberLevel"  >
+                                                <span ></span> Vip
+                                            </label>
+                                        </div>
+                                        <div class="row w-20 pl-10">
+                                            <label class="custom-checkbox">
+                                                <input type="radio"  name="memberLevel"checked >
+                                                <span ></span> 관리자
+                                            </label>
+                                        </div>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                        <div class="row w-20">
+                                            <label class="custom-checkbox">
+                                                <input type="radio"  name="memberLevel" checked>
+                                                <span ></span> 일반
+                                            </label>
+                                        </div>
+                                        <div class="row w-20 pl-10">
+                                            <label class="custom-checkbox">
+                                                <input type="radio"  name="memberLevel"  >
+                                                <span ></span> Vip
+                                            </label>
+                                        </div>
+                                        <div class="row w-20 pl-10">
+                                            <label class="custom-checkbox">
+                                                <input type="radio"  name="memberLevel" >
+                                                <span ></span> 관리자
+                                            </label>
+                                        </div>
+                                    </div>
+                                </c:otherwise>
+                           </c:choose>
+                </div>
+                <div class="row flex-container">
+                    <div class="row w-25 left">
+                        <label>이메일</label>
+                    </div>
+                    <div class="row w-75 pr-30">
+                        <input type="email" name="memberEmail" class="form-input w-100"
+                                 value="${memberDto.memberEmail}">
+                    </div>
+                </div>
+
+                <div class="row flex-container">
+                    <div class="row w-25 left">
+                        <label>전화번호</label>
+                    </div>
+                    <div class="row w-75 pr-30">
+                        <input type="tel" name="memberContact" class="form-input w-100"
+                                value="${memberDto.memberContact}">
+                    </div>
+                </div>
+
+                <div class="row flex-container">
+                    <div class="row w-25 left">
+                        <label>생년월일</label>
+                    </div>
+                    <div class="row w-75 pr-30">
+                        <input type="text" name="memberBirth" class="form-input w-100"
+                                value="${memberDto.memberBirth}">
+                    </div>
+                </div>
+
+                <div class="row flex-container">
+                    <div class="row w-25 left">
+                        <label style="display: block;">주소</label>
+                    </div>
+                    <div class="row w-75 left">
+                        <input type="text" name="memberPost" class="form-input post-search"
+                                size="6" maxlength="6" value="${memberDto.memberPost}">
+                        <button type="button" class="btn post-search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row flex-container">
+                    <div class="w-25"></div>
+                    <div class="w-75 pr-30">
+                        <input type="text" name="memberAddr1"
+                                    class="form-input post-search w-100 " value="${memberDto.memberAddr1}">
+                    </div>
+                </div>
+                <div class="row flex-container">
+                    <div class="w-25"></div>
+                    <div class="w-75 pr-30">
+                        <input type="text" name="memberAddr2"  value="${memberDto.memberAddr2}"
+                                    class="form-input w-100" >
+                    </div>
+                </div>
+               
+                <div class="row flex-container">
+                    <div class="row w-25 left">
+                        <label>G-money</label>
+                    </div>
+                    <div class="row w-75 pr-30">
+                        <input type="number" name="memberGmoney" class="form-input w-100"
+                                value="${memberDto.memberGmoney}">
+                    </div>
+                </div>
+
+                <hr class="mt-30">               
+                <div class="row pt-10">
+                    <button type="submit" class="btn btn-orange btn-save">정보변경</button>
+                </div>
+        </div>
+    </form>
 
 
 

@@ -27,8 +27,7 @@
         }
         header > .etc{
             width: 25%;
-            padding-top: 50px;
-            display: flex;
+            padding-top: 70px;
             align-items: center;
         }
         header > .logo

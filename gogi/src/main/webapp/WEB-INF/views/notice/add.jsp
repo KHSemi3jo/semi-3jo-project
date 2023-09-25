@@ -29,7 +29,7 @@
                 </div>
                 <div class="row right  pr-30">
                     <a class="btn btn-navy" href="/notice/list">목록</a>
-                    <button type="submit"class="btn btn-navy">등록</button>
+                    <button type="submit"class="btn btn-orange">등록</button>
                 </div>
             </div>
     </form>
