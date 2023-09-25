@@ -41,24 +41,13 @@ function requestPay() {
         <div class="row pb-30">
             <h2>자주하는 질문</h2>
         </div>
-        
-        <!-- 폼시작(체크박스) -->
-        <form class="delete-form" action="deleteByAdmin"method="post">
-        <%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
-        <c:if test="${sessionScope.name != null}">
-        <div class="row right ">
-            <c:if test="${sessionScope.level =='관리자' }">
-            <button type ="submit" class="btn delete-btn">
-                <i class="fa-solid fa-trash"></i>
-                일괄삭제</button></c:if>
     
-        
-            <a href="/qna/add" class="btn btn-navy">
-                <i class="fa-solid fa-pen"></i>
-                Qna등록
-            </a>
-        </div>
-        </c:if>
+    <%-- 작성은 관리자가 로그인한 경우에만 출력 --%>
+		<c:if test="${sessionScope.level =='관리자' }">
+	        <div class="row right">
+	            <a href="/qna/add" class="btn btn-orange">작성</a>
+	        </div>
+		</c:if>
         
         <%-- 
     검색일 경우 검색어를 추가로 출력 
@@ -75,12 +64,6 @@ function requestPay() {
             <table class=" table table-slit">
                 <thead>
                     <tr>
-                        <%--체크박스 일괄 삭제 --%>
-                        <c:if test="${sessionScope.level =='관리자' }">
-                            <th>
-                                <input type="checkbox" class="check-all">
-                            </th>
-                        </c:if>
                             <th>번호</th>
                             <th>카테고리</th>
                             <th width="50%">제목</th>
@@ -89,14 +72,6 @@ function requestPay() {
 
                 <c:forEach var="qnaDto" items="${list}">				
                     <tr>
-                        <%--체크박스 개별 삭제 --%>
-                        <c:if test="${sessionScope.level =='관리자' }">
-                            <td>
-                                <a href="delete?qnaNo=${qnaDto.qnaNo}">삭제</a>
-                                <%--<input type="checkbox"class="check-item" name="boardNoList" value="${boardListDto.boardNo }">--%>
-                            </td>
-                        </c:if>
-                        
                         <td>${qnaDto.qnaNo}</td>
                         <td>카테고리</td>
                         <td class="left w-70"><a class="qnaTitle navy" href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></td>    
@@ -105,8 +80,7 @@ function requestPay() {
             
             </table>	
         </div>
-    <!-- 폼 종료(체크박스) -->
-    </form>
+
 </div>
 
 <div class="row page-navigator mv-30">
