@@ -388,10 +388,10 @@ textarea.form-input.fixed {
     확장 스타일 - 줄무늬 테이블
 */
 .table.table-stripe > thead {
-    background-color: #dfe6e9;
+    background-color: #E5EAEE;
 }
 .table.table-stripe > tbody > tr:nth-child(2n) {/*짝수(2n) / 홀수라면 (2n-1)*/
-    background-color: #dfe6e9;
+    background-color: #E5EAEE;
 }
 
 /*
