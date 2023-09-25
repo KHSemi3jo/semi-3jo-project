@@ -65,7 +65,7 @@
             </table>
             <div class="row right">
                 <a href="/admin/member/list"class="btn btn-navy">목록</a>
-                <a class="btn btn-orange" href="edit?memberId=${memberListDto.memberId}">수정</a>
+               <a class="btn btn-orange" href="edit?memberId=${memberDto.memberId}">수정</a>
                 
             </div>
         </div>
