@@ -23,55 +23,97 @@
 
 
 <script>
-            $(function() {
-                $(".check-item").click(function() {
-        
+            $(function () {
+
+                $(".btn-plus").click(function () {
+                	
+                        var basketCount =  $(this).parents('tr').find("[name=count]").text();
+
+                        $.ajax({
+                            url: "/rest/basket/selectPrice",
+                            method: "post",
+                            data: { basketCount: basketCount },
+                            success: function (response) {
+                            	var result;
+                            	basketCount++;
+                            	 console.log( basketCount);
+                			
+                                $("[name=count]").text(basketCount);
+                            }
+                        })
+                    })
+                    
+                    $(".btn-minus").click(function () {
+                	  	
+                        var basketCount =  $(this).parents('tr').find("[name=count]").text();
+
+                        $.ajax({
+                            url: "/rest/basket/selectPrice",
+                            method: "post",
+                            data: { basketCount: basketCount },
+                            success: function (response) {
+ 
+                            	var result;
+                            	basketCount--;
+                            	 console.log( basketCount);
+                			
+                                $("[name=count]").text(basketCount);
+                            }
+                        })
+                    })
+
+
+
+                $(".check-item").click(function () {
+
                     var param = [];
                     var selectList = [];
-                 	var   productPrice = $(this).parents('tr').find(".pay").text();
-                 	var 	basketCount = $(this).parents('tr').find(".count").text();
-                 	  
-                 	   
-                    $(".check-item:checked").each(function(i) {
+                    var productPrice = $(this).parents('tr').find(".pay").text();
+                    var basketCount = $(this).parents('tr').find(".count").text();
+
+                  
+
+
+
+                    $(".check-item:checked").each(function (i) {
                         selectList = {
-        
+
                             // basketNo: $(this).parents('tr').find(".no").text(),
-                            productPrice : $(this).parents('tr').find(".pay").text(),
-                            basketCount : $(this).parents('tr').find(".count").text()
+                            productPrice: $(this).parents('tr').find(".pay").text(),
+                            basketCount: $(this).parents('tr').find(".count").text()
                         };
-        
+
                         //param 배열에 selectList 오브젝트를 담는다.
                         param.push(selectList);
                     });
 
                     $.ajax({
-                        type : "post",
-                        url : "/rest/basket/selectPrice",
-                        headers : {
-                            "content-type" : "application/json"
+                        type: "post",
+                        url: "/rest/basket/selectPrice",
+                        headers: {
+                            "content-type": "application/json"
                         },
-                        data : JSON.stringify(param),
-                        dateType : "text",
-        
-                        success : function(response) {
-                         //   $(".totalpay").text("테스트"),
-                            	  console.log(param.length);
-                              	  var result =0;
-                          for(var i=0 ; i <param.length; i++)
-                 	   {
-              
-                        	  var result = productPrice * basketCount +result;
-                        //	  console.log(result);
-                        	  } console.log(result);
-                        //    console.log("금액 :"+productPrice);
-                          //  console.log("수량 :"+basketCount);
-                        	  console.log(result);
-                        	  $(".totalpay").text(result);
+                        data: JSON.stringify(param),
+                        dateType: "text",
+
+                        success: function (response) {
+                            //   $(".totalpay").text("테스트"),
+                            console.log(param.length);
+                            var result = 0;
+                            for (var i = 0; i < param.length; i++) {
+
+                                var result = productPrice * basketCount + result;
+                                //	  console.log(result);
+                            } console.log(result);
+                            //    console.log("금액 :"+productPrice);
+                            //  console.log("수량 :"+basketCount);
+                            console.log(result);
+                            $(".totalpay").text(result);
                         },
 
-                    
+
                     });
-        
+
                 });
             })
         </script>
@@ -112,12 +154,12 @@
 							${basketListDto.productName}
 						</a>
 					</td>
-					<td><button class="btn-plus">+</button></td>
+					<td><button class="btn-plus" type="button">+</button></td>
 
 					<td class="count"><intput type="number" min="1" max="10" name="count">${basketListDto.getBasketCount()}</td>
 
 
-					<td><button class="btn-minus">-</button></td>
+					<td><button class="btn-minus" type="button">-</button></td>
 					<td class="pay">${basketListDto.productPrice}</td>
 				</tr>
 			</c:forEach>
