@@ -73,8 +73,12 @@
                 </li>
                 <li><a href="#"><i class="fa-solid fa-bars "></i> 회원 관리</a>
                     <ul>
+
+
                         <li><a class="left" href="/admin/member/list?size=20">회원정보관리</a></li>
+                        <li><a href="/admin/member/address?size=20">회원배송지관리</a></li>
                         <li><a class="left" href="#">회원 통계</a></li>
+
                     </ul>
                 </li>
                 <li><a href="#">상품 통계</a></li>

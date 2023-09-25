@@ -1,5 +1,7 @@
 package com.kh.gogi.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.gogi.dao.AddressDao;
 import com.kh.gogi.dao.MemberDao;
+import com.kh.gogi.dto.AddressDto;
 import com.kh.gogi.dto.MemberBlockDto;
 import com.kh.gogi.dto.MemberDto;
-import com.kh.gogi.error.AuthorityException;
 
 @Controller
 @RequestMapping("/member")
@@ -27,6 +30,7 @@ public class MemberController {
 	
 	@Autowired
 	private JavaMailSender sender;
+
 	
 	@GetMapping("/join")
 	public String join() {
@@ -206,5 +210,10 @@ public class MemberController {
 		@RequestMapping("/searchPwFinish")
 		public String searchPwFinish() {
 			return "/WEB-INF/views/member/searchPwFinish.jsp";
+		}
+		
+		@RequestMapping("/addressList")
+		public String address() {
+			return "/WEB-INF/views/member/addressList.jsp";
 		}
 	}

@@ -60,6 +60,7 @@
         <div class="etc">
 			      								        	
 			  		<%-- 세션에 저장된 name이라는 이름의 값으로 회원/비회원 구분  --%>
+
 							<c:choose>
 										<%--회원일시 보이는 etc 메뉴 --%>
 										<c:when test="${sessionScope.name != null}">
@@ -70,6 +71,7 @@
 											                        <a class="left" href="/payment/list">주문내역</a>
 											                        <a class="left" href="/shopafter/list">상품후기</a>
 											                        <a class="left" href="/member/change">개인정보수정</a>
+                                              <a href="/member/address">배송지관리</a>
 											                        <a class="left" href="/member/logout">로그아웃</a>
 											                    </div>
 											                </div>				
@@ -107,6 +109,7 @@
 				                <div class="row float-right"><span class="orange">10,000</span><span class="orange"> G</span></div>      									          
 				          </div>
 			         </c:if>									        	
+
 			  </div>        	
         </header>
         <nav>
