@@ -89,7 +89,7 @@
                                         </div>
                                         <div class="row w-20 pl-10">
                                             <label class="custom-checkbox">
-                                                <input type="radio"  name="memberLevel"checkedvalue="관리자" >
+                                                <input type="radio"  name="memberLevel"checked value="관리자" >
                                                 <span ></span> 관리자
                                             </label>
                                         </div>
@@ -188,6 +188,7 @@
                 <hr class="mt-30">               
                 <div class="row pt-10">
                     <button type="submit" class="btn btn-orange btn-save">정보변경</button>
+                    <a href="/admin/member/list"class="btn btn-navy ">목록</a>
                 </div>
         </div>
     </form>
