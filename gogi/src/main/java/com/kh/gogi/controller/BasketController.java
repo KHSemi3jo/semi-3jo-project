@@ -33,10 +33,7 @@ public class BasketController {
 //		BasketListDto basketDto = basketDao.selectOne(basketNo);
 //		String basketMember = basketListDto.getBasketMember();
 //		model.addAttribute("basketDto", basketDto);
-//		
-//		
-//		
-//		
+		
 //		if(memberId != null) {
 //			List<BasketListDto> basketList = basketDao.selectList(null);
 //			model.addAttribute("basketList", basketList);
@@ -54,9 +51,9 @@ public class BasketController {
 	        List<BasketListDto> basketList = basketDao.selectList(basketMember);
 	        model.addAttribute("basketList", basketList);
 	        return "/WEB-INF/views/basket/basketList.jsp";
-	    } else {
-	        
-	        return "redirect:에러"; 
+	    } 
+	    else {//비회원이면 로그인 필요 요청
+	        return "redirect:";
 	    }
 			
 	
