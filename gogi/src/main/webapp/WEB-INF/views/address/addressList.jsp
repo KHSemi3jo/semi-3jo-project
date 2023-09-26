@@ -69,9 +69,8 @@ select.form-input, .form-input, .btn.btn-navy {
 <tr>
  <td><input type="checkbox"></td>
 	 <td>${addressDto.addressId}</td>
-    <td> ${addressDto.addressPost}</td>
+  	<td> ${sessionScope.phone}</td>
   	<td> ${addressDto.addressNormal}</td>
-    <td> ${addressDto.addressDetail}</td>
 
   </tr>
 </c:forEach>
@@ -91,8 +90,8 @@ select.form-input, .form-input, .btn.btn-navy {
 				value=" ${addressDto.addressPost}">
 	</div>
 			<div class="row">
-		기본주소 :	<input type="text" name="addressNomal"
-				value=" ${addressDto.addressNomal}">
+		기본주소 :	<input type="text" name="addressNormal"
+				value=" ${addressDto.addressNormal}">
 	</div>
 			<div class="row">
 		상세주소 :	<input type="text" name="addressDetail"
