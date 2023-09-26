@@ -76,6 +76,11 @@ public class MemberController {
 			//세션에 아이디 + 등급 저장
 			session.setAttribute("name", findDto.getMemberId());
 			session.setAttribute("level", findDto.getMemberLevel());
+			session.setAttribute("customer", findDto.getMemberName());
+			session.setAttribute("phone", findDto.getMemberContact());
+			session.setAttribute("post", findDto.getMemberPost());
+			session.setAttribute("addr1", findDto.getMemberAddr1());
+			session.setAttribute("addr2", findDto.getMemberAddr2());
 			//로그인시간 갱신
 			memberDao.updateMemberLogin(inputDto.getMemberId());
 			//메인페이지로 이동
