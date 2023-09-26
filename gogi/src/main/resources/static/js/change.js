@@ -7,7 +7,7 @@ $(function(){
         memberBirth:false,
         memberAddr:false,
         ok:function(){
-            this.memberName && this.memberEmail 
+            return this.memberName && this.memberEmail 
             && this.memberContact && this.memberBirth && this.memberAddr;
         },
     };
@@ -19,28 +19,34 @@ $(function(){
         $(this).addClass(isValid ? "success" : "fail");
          status.memberName = isValid;
     });
+    
+    var backupEmail = $("[name=memberEmail]").val();
+    
     $("[name=memberEmail]").blur(function(e){
         var regex =  /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-        var isValid =regex.test($(e.target).val());
-        var emailValue = $(e.target).val();
+        var email = $("[name=memberEmail]").val();
         
-        if(isValid){//형식이 유효하다면
+        if(backupEmail == email) {
+        	$("[name=memberEmail]").removeClass("success fail fail2");
+			$("[name=memberEmail]").addClass("success");
+			status.memberEmail = true; //통과
+			return;
+		}
+     
+        var isValid =regex.test($(e.target).val());
+         if(isValid){//형식이 유효하다면
 			$.ajax({
 				url:"http://localhost:8080/rest/member/emailCheck",
 				method:"post",
-				data : {memberEmail : $(e.target).val()},
+				data : {memberEmail : email },
 				success: function(response){
-					$(e.target).removeClass("success fail fail2");
+					$("[name=memberEmail]").removeClass("success fail fail2");
 					if(response == "Y"){
-						$(e.target).addClass("success");
+						$("[name=memberEmail]").addClass("success");
 						status.memberEmail = true;
-					}
-        			else if (emailValue == "${memberDto.memberEmail}") {
-                        $(e.target).removeClass("success fail fail2");
-                        status.memberEmail = true; //통과
-                    } 
+					}				       			
 					else{
-						$(e.target).addClass("fail2");
+						$("[name=memberEmail]").addClass("fail2");
 						status.memberEmail = false;
 					}
 				},
