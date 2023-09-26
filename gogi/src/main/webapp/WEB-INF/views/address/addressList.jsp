@@ -59,9 +59,9 @@ select.form-input, .form-input, .btn.btn-navy {
 <tr>
 	<th>선택</th>
 	<th>아이디</th>
-	<th>우편주소</th>
+	<th>이름</th>
+	<th>연락처</th>
 	<th>기본주소</th>
-	<th>상세주소</th>
 </tr>
 </thead>
  <tbody align="center">
@@ -69,8 +69,9 @@ select.form-input, .form-input, .btn.btn-navy {
 <tr>
  <td><input type="checkbox"></td>
 	 <td>${addressDto.addressId}</td>
+  	<td> ${sessionScope.customer}</td>
   	<td> ${sessionScope.phone}</td>
-  	<td> ${addressDto.addressNormal}</td>
+  	<td> ${sessionScope.addr1}</td>
 
   </tr>
 </c:forEach>
@@ -84,18 +85,18 @@ select.form-input, .form-input, .btn.btn-navy {
 	<div class="flex-container w-800">
 		<form class="address-insert-form" method="post">
 		<input type="hidden" name="addressId"
-				value=" ${sessionScope.name}">
+				value="${sessionScope.name}">
 		<div class="row">
-		 우편번호 :	<input type="text" name="addressPost" maxlength="6"
-				value=" ${addressDto.addressPost}">
+		 이름 :	<input type="text" name="memberName"
+				value="${sessionScope.customer}">
 	</div>
 			<div class="row">
-		기본주소 :	<input type="text" name="addressNormal"
-				value=" ${addressDto.addressNormal}">
+		연락처 :	<input type="text" name="memberContact"
+				value="${sessionScope.phone}">
 	</div>
 			<div class="row">
-		상세주소 :	<input type="text" name="addressDetail"
-				value=" ${addressDto.addressDetail}">
+		기본주소 :	<input type="text" name="memberAddr1"
+				value="${sessionScope.addr1}">
 	</div>
 		
 			<div class="row">
