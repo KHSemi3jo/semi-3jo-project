@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
 .noticeTitle {
@@ -15,37 +15,218 @@ select.form-input, .form-input, .btn.btn-navy {
 </style>
 
 <script>
-  $(function(){
+            $(function () {
+                $(".address-insert-form").submit(function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: "/rest/address/add",
+                        method: "post",
+                        data: $(e.target).serialize(),
+                        success: function (response) {
+                        }
+                    });
+                    reloadList();
+                });
 
-	 
-	  $(".address-insert-form").submit(function(e) {	
-			  
-			e.preventDefault();
-			$.ajax({	
-				url : "/rest/address/add",
-				method : "post",
-				data : $(e.target).serialize(),
-				success : function(response) {
-					
+                function reloadList() {
+                    var params = new URLSearchParams(location.search);
+                    var addressNo = params.get("addressNo");
+                    var addressPost = params.get("addressPost");
+                    var addressNormal = params.get("addressNormal");
+                    var addressDetail = params.get("addressDetail");
+                    var addressId = "${sessionScope.name}";
 
-				}
-			});
-		});
-	  
-	  
-  });
+                    $.ajax({
+                        url: "/rest/address/list",
+                        method: "post",
+                        data: {
+                            addressId: addressId
+                        },
+                        success: function (response) {
+                            $(".address-list").empty();
+                            for (var i = 0; i < response.length; i++) {
+                                var address = response[i];
+                                var template = $("#address-template").html();
+                                var htmlTemplate = $.parseHTML(template);
+                                $(htmlTemplate).find(".addressId").text(
+                                    "회원 아이디 : " + address.addressId || "탈퇴한 사용자");
+                                $(htmlTemplate).find(".addressPost").text(
+                                    "우편 번호 : " + address.addressPost);
+                                $(htmlTemplate).find(".addressNormal").text(
+                                    "기본 주소 : " + address.addressNormal);
+                                $(htmlTemplate).find(".addressDetail").text(
+                                    "상세 주소 : " + address.addressDetail);
+
+
+                                if (addressId.length == 0
+                                    || addressId != address.addressId) {
+
+                                    $(htmlTemplate).find(".w-25").empty();
+                                }
+                                $(htmlTemplate).find(".btn-delete").attr(
+                                    "data-address-no", address.addressNo)
+                                    .click(
+                                        function (e) {
+                                            var addressNo = $(this).attr(
+                                                "data-address-no");
+                                            if (confirm("정말 삭제하실에요?")) {
+                                                $.ajax({
+                                                    url: "/rest/address/delete",
+                                                    method: "post",
+                                                    data: {
+                                                        addressNo: addressNo
+                                                    },
+                                                    success: function (response) {
+                                                        reloadList();
+                                                    },
+                                                });
+                                            }
+                                            else {
+                                                alert("취소하였습니다.")
+                                            }
+                                        });
+                                
+                                
+                                $(htmlTemplate)
+								.find(".btn-edit")
+								.attr("data-address-no", address.addressNo)
+								.click(
+										function() {
+											var editTemplate = $(
+													"#address-edit-template")
+													.html();
+											var editHtmlTemplate = $
+													.parseHTML(editTemplate);	
+											var addressNo = $(this).attr(
+													"data-address-no");
+										
+									
+											$(editHtmlTemplate).find(
+													"[name=addressNo]")
+													.val(addressNo);
+											$(editHtmlTemplate)
+													.find(
+															"[name=addressId]")
+													.val(addressId);
+											$(editHtmlTemplate).find(
+											"[name=addressPost]")
+											.val(addressPost);
+											$(editHtmlTemplate).find(
+											"[name=addressNormal]")
+											.val(addressNormal);
+											$(editHtmlTemplate).find(
+											"[name=addressDetail]")
+											.val(addressDetail);
+											
+											$(editHtmlTemplate)
+													.find(".btn-cancel")
+													.click(
+															function() {
+																$(this).parents(
+																				".edit-container").prev(
+																				".view-container").show();
+																$(this).parents(
+																				".edit-container").remove();});
+
+											$(editHtmlTemplate).submit(function(e) {
+															
+																e.preventDefault();
+																$.ajax({
+																			url : "/rest/address/edit",
+																			method : "post",
+																			data : $(
+																					e.target).serialize(),
+																			success : function(response) {
+																				reloadList();
+																			}
+																		});
+															});
+											$(this).parents(".view-container")
+													.hide().after(editHtmlTemplate);
+										});
+                                
+                                
+                                
+                                  $(".address-list").append(htmlTemplate);
+                            }
+                          
+                        },
+                    })
+                }
+                reloadList();
+
+            });
+        </script>
+<h2>배송지 관리</h2>
+<hr>
+
+<script id="address-template" type="text/template">
+<div class="row flex-container view-container w-800">
+<table border="1" width="800" class=" table table-slit">
+	<thead>
+<div class="">
+<input type="checkbox">
+</div>
+
+		<div class="w-75">
+				<div class="row left">
+					<h3 class="addressId">아이디</h3>
+				</div>
+				<div class="row left">
+					<pre class="addressPost">우편번호</pre>
+				</div>
+				<div class="row left">
+					<pre class="addressNormal">기본주소</pre>
+				</div>
+				<div class="row left">
+					<pre class="addressDetail">상세주소</pre>
+				</div>
+	
+			</div>
+			<div class="w-25">
+				<div class="row right">
+					<button class="btn btn-edit btn-navy">
+						<i class="fa-solid fa-edit"></i>
+						주소 수정
+					</button>
+				</div>
+				<div class="row right">
+					<button class="btn btn-orange btn-delete">
+						<i class="fa-solid fa-trash"></i>
+						주소 삭제
+					</button>
+				</div>
+			</div>
+</div>
 </script>
 
-                <h2 >배송지 관리</h2>
-                <hr>
-                
-<script  id="address-template" type="text/template">
-<h1>배송지 목록페이지가 와야합니다.</h1>
-</script>
-	
-	
-<script  id="address-edit-template" type="text/template">
-<h1>배송지 수정페이지가 와야합니다.</h1>
+
+<script id="address-edit-template" type="text/template">
+		<form class="address-edit-form edit-container">
+		<input type="hidden" name="addressNo">
+	<input type="hidden" name="addressId" >
+		<div class="row flex-container">
+			<div class="w-75">
+			우편번호 :	<input type="text" name="addressPost" maxlength="5"  >
+			기본주소 :	<input type="text" name="addressNormal"  >
+			상세주소 :	<input type="text" name="addressDetail" >
+			</div>
+			<div class="w-25">
+				<div class="row right">
+					<button type="submit" class="btn btn-positive">
+						<i class="fa-solid fa-check"></i>
+						수정
+					</button>
+				</div>
+				<div class="row right">
+					<button type="button" class="btn btn-negative btn-cancel">
+						<i class="fa-solid fa-xmark"></i>
+						취소
+					</button>
+				</div>
+			</div>
+		</div>
+		</form>
 </script>
 
 
@@ -54,51 +235,57 @@ select.form-input, .form-input, .btn.btn-navy {
 
 <h3>기본 배송지</h3>
 <h3>회원가입시 입력한 회원의 기본 배송지가 나와야합니다.</h3>
-<table border= "1"  width= "800" class=" table table-slit">
-<thead>
-<tr>
-	<th>선택</th>
-	<th>아이디</th>
-	<th>이름</th>
-	<th>연락처</th>
-	<th>기본주소</th>
-</tr>
-</thead>
- <tbody align="center">
-    <c:forEach var= "addressDto" items= "${list}">
-<tr>
- <td><input type="checkbox"></td>
-	 <td>${addressDto.addressId}</td>
-  	<td> ${sessionScope.customer}</td>
-  	<td> ${sessionScope.phone}</td>
-  	<td> ${sessionScope.addr1}</td>
 
-  </tr>
-</c:forEach>
-</tbody>
+<table border="1" width="800" class=" table table-slit">
+	<thead>
+		<tr>
+			<th>선택</th>
+			<th>아이디</th>
+			<th>우편주소</th>
+			<th>기본주소</th>
+			<th>상세주소</th>
+		</tr>
+	</thead>
+	<tbody align="center">
+		<c:forEach var="addressDto" items="${list}">
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>${addressDto.addressId}</td>
+				<td>${sessionScope.phone}</td>
+				<td>${addressDto.addressNormal}</td>
+
+			</tr>
+		</c:forEach>
+	</tbody>
+
 </table>
 
+<div class="container address-list w-800"></div>
 
 
 
 <c:if test="${sessionScope.name != null}">
 	<div class="flex-container w-800">
 		<form class="address-insert-form" method="post">
-		<input type="hidden" name="addressId"
-				value="${sessionScope.name}">
-		<div class="row">
-		 이름 :	<input type="text" name="memberName"
-				value="${sessionScope.customer}">
-	</div>
+
+			<input type="hidden" name="addressId" value=" ${sessionScope.name}">
 			<div class="row">
-		연락처 :	<input type="text" name="memberContact"
-				value="${sessionScope.phone}">
-	</div>
+				우편번호 : <input type="text" name="addressPost" maxlength="6"
+					value=" ${addressDto.addressPost}">
+			</div>
 			<div class="row">
-		기본주소 :	<input type="text" name="memberAddr1"
-				value="${sessionScope.addr1}">
-	</div>
+				기본주소 : <input type="text" name="addressNormal"
+					value=" ${addressDto.addressNormal}">
+			</div>
+			<div class="row">
+				상세주소 : <input type="text" name="addressDetail"
+					value=" ${addressDto.addressDetail}">
+			</div>
+
+
+
 		
+
 			<div class="row">
 				<button class="btn btn-orange ">
 					<i class="fa-solid fa-pen"></i> 주소등록

@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.gogi.dto.AddressDto;
+import com.kh.gogi.dto.ReplyDto;
 import com.kh.gogi.mapper.AddressMapper;
 
 @Repository
@@ -40,7 +41,32 @@ public class AddressDaoImpl implements AddressDao{
 
 	@Override
 	public int sequence() {
-		String sql = "select shopAfter_seq.nextval from dual ";
+		String sql = "select address_seq.nextval from dual ";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
+	
+	@Override
+	public AddressDto selectOne(int addressNo) {
+		String sql = "select * from address where address_no =?";
+		Object[] data = { addressNo };
+		List< AddressDto> list = jdbcTemplate.query(sql, addressMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+
+	@Override
+	public boolean delete(int addressNo) {
+		String sql = "delete from address where address_no = ?";
+		Object[] data = { addressNo };
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	@Override
+	public boolean edit(AddressDto addressDto) {
+		String sql = "update address set address_post=?, address_normal=?, "
+				+ "address_detail =? where address_no = ?";
+		Object[] data = { addressDto.getAddressPost(), addressDto.getAddressNormal(),
+				addressDto.getAddressDetail(), addressDto.getAddressNo()};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
 }
