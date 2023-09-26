@@ -17,12 +17,13 @@
 </tr>
 </thead>
  <tbody align="center">
-    <c:forEach var= "memberDto" items= "${list}">
+    <c:forEach var= "addressDto" items= "${list}">
 <tr>
-	 <td><a href="detail?memberId=${memberDto.memberId}">${memberDto.memberId}</a></td>
-    <td> ${memberDto.memberName}</td>
-    <td> ${memberDto.memberContact}</td>
-    <td> ${memberDto.memberAddr1}</td>
+	 <td><a href="detail?addressId=${addressDto.addressId}">${addressDto.addressId}</a></td>
+    <td> ${addressDto.addressName}</td>
+    <td> ${addressDto.addressPhone}</td>
+    <td> ${addressDto.addressNormal}</td>
+    
   <td>
  	<a href="addressDetail">수정</a></td>
 </c:forEach>
