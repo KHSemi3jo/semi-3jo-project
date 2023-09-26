@@ -40,4 +40,10 @@ public interface OneOnOneDao {
 	public int countList(ShopAfterVO vo );
 	
 	
+	
+	public List<OneOnOneDto> selectAdminListByPage(ShopAfterVO vo);
+	public List<OneOnOneDto> selectAdminListByPage(int page);
+	public List<OneOnOneDto> selectAdminListByPage(String type, String keyword, int page);
+	
+	
 }

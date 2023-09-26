@@ -18,12 +18,8 @@ public interface ProductDao {
 	AttachDto findImage(int productNo);
 	
 	int countList(ProductVO  vo);
-	
-	List<ProductDto> selectListBypage(int page);
-	List<ProductDto> selectListBypage(String type, String keyword, int page);
 	List<ProductDto> selectListBypage(ProductVO vo);
 	
-//	int countList();
 	
 
 }
