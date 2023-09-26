@@ -2,6 +2,8 @@ package com.kh.gogi.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,15 +21,45 @@ import com.kh.gogi.dto.BasketListDto;
 public class BasketController {
 	@Autowired
 	private BasketDao basketDao;
-	
+
 	@RequestMapping("/list")
 	public String list(Model model
-			) {
+
+			
+//						,@RequestParam int basketNo
+			,HttpSession session
+						) {
+//		String basketMember = (String) session.getAttribute("name");
+//		BasketListDto basketDto = basketDao.selectOne(basketNo);
+//		String basketMember = basketListDto.getBasketMember();
+//		model.addAttribute("basketDto", basketDto);
+//		
+//		
+//		
+//		
+//		if(memberId != null) {
+//			List<BasketListDto> basketList = basketDao.selectList(null);
+//			model.addAttribute("basketList", basketList);
+//			return "/WEB-INF/views/basket/basketList.jsp";
+//		}
+//		else {
+//			return "redirect:에러";
+//		}
+
+
 		
-		List<BasketListDto> basketList = basketDao.selectList();
-		model.addAttribute("basketList", basketList);
-		
-		return "/WEB-INF/views/basket/basketList.jsp";
+		String basketMember = (String) session.getAttribute("name");
+
+	    if (basketMember != null) {
+	        List<BasketListDto> basketList = basketDao.selectList(basketMember);
+	        model.addAttribute("basketList", basketList);
+	        return "/WEB-INF/views/basket/basketList.jsp";
+	    } else {
+	        
+	        return "redirect:에러"; 
+	    }
+			
+	
 	}
 	
 	@PostMapping("/delete")
