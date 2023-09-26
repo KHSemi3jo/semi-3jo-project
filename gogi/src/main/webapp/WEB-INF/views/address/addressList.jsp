@@ -17,7 +17,38 @@ select.form-input, .form-input, .btn.btn-navy {
 }
 </style>
 
+ <!--daum 우편 API cdn-->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <script>
+$(function(){
+    //검색버튼, 우편번호 입력창, 기본주소 입력창을 클릭하면 검색 실행
+    $(".post-search").click(function(){
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.querySelector("[name=addressPost]").value = data.zonecode;
+                document.querySelector("[name=addressNormal]").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.querySelector("[name=addressDetail]").focus();
+        }
+    }).open();
+    });
+});
+     
             $(function () {
             	  
                 $(".address-insert-form").submit(function (e) {
@@ -68,14 +99,14 @@ select.form-input, .form-input, .btn.btn-navy {
                                     "회원 아이디 : " + address.addressId || "탈퇴한 사용자");
                                 
                                 $(htmlTemplate).find(".addressName").text(
-                                        "고객 성함 : " + customer);
+                                        "받으실 분 : " + customer);
                                 $(htmlTemplate).find(".addressPhone").text(
-                                        "전화 번호 : " + phone);
+                                        "연락처 : " + phone);
                                 
                                 $(htmlTemplate).find(".addressPost").text(
-                                    "우편 번호 : " + address.addressPost);
+                                    "우편번호 : " + address.addressPost);
                                 $(htmlTemplate).find(".addressNormal").text(
-                                    "기본 주소 : " + address.addressNormal);
+                                    "기본주소 : " + address.addressNormal);
                                 $(htmlTemplate).find(".addressDetail").text(
                                     "상세 주소 : " + address.addressDetail);
 
@@ -91,7 +122,7 @@ select.form-input, .form-input, .btn.btn-navy {
                                         function (e) {
                                             var addressNo = $(this).attr(
                                                 "data-address-no");
-                                            if (confirm("정말 삭제하실에요?")) {
+                                            if (confirm("정말 삭제하시겠습니까?")) {
                                                 $.ajax({
                                                     url: "/rest/address/delete",
                                                     method: "post",
@@ -179,7 +210,7 @@ select.form-input, .form-input, .btn.btn-navy {
 
             });
         </script>
-<h2>배송지 관리</h2>
+<h1>배송지 관리</h1>
 <hr>
 
 <script id="address-template" type="text/template">
@@ -261,24 +292,24 @@ select.form-input, .form-input, .btn.btn-navy {
 
 
 <br>
-<h3>기본 배송지</h3>
-<h3>회원가입시 입력한 회원의 기본 배송지가 나와야합니다.</h3>
+<h3>배송지 목록</h3>
+<br>
+<h4>배송지에 따라 상품정보가 달라질 수 있습니다.</h4>
 
 <table border="1" width="800" class=" table table-slit">
 	<thead>
 		<tr>
 			<th>선택</th>
-			<th>아이디</th>
-			<th>우편주소</th>
+			<th>받으실 분</th>
+			<th>연락처</th>
 			<th>기본주소</th>
-			<th>상세주소</th>
 		</tr>
 	</thead>
 	<tbody align="center">
 		<c:forEach var="addressDto" items="${list}">
 			<tr>
 				<td><input type="checkbox"></td>
-				<td>${addressDto.addressId}</td>
+				<td>${addressDto.addressName}</td>
 				<td>${sessionScope.phone}</td>
 				<td>${addressDto.addressNormal}</td>
 
@@ -293,34 +324,39 @@ select.form-input, .form-input, .btn.btn-navy {
 
 
 <c:if test="${sessionScope.name != null}">
-	<div class="container w-800">
+	<div class="row container w-800">
 		<form class="address-insert-form" method="post">
 
-			<input type="hidden" name="addressId" value=" ${sessionScope.name}">
-				<input type="hidden" name="addressName" value=" ${sessionScope.customer}">
-					<input type="hidden" name="addressPhone" value="${sessionScope.phone}">
-			<div class="row " >
-				<h2 style="display: inline; vertical-align:middle; align-items: center; ">우편번호 : </h2><input type="text" name="addressPost" maxlength="6" class="form-input"
-					value=" ${addressDto.addressPost}">
+			<input type="hidden" name="addressId" class="form-input" value=" ${sessionScope.name}">
+			<div class="row">
+			이름 : <input name="addressName" class="form-input" value=" ${sessionScope.customer}">
 			</div>
 			<div class="row">
-		<h2 style="display: inline; vertical-align:middle; align-items: center; ">		기본주소 : </h2><input type="text" name="addressNormal" class="form-input"
+			연락처 : <input name="addressPhone" class="form-input" value="${sessionScope.phone}">
+			</div>
+			<div class="row ">
+			우편번호 : <input type="text" name="addressPost" maxlength="6" class="form-input"
+					value=" ${addressDto.addressPost}">
+					<button type="button" class="btn post-search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+			</div>
+			<div class="row"> 
+			기본주소 : <input type="text" name="addressNormal" class="form-input"
 					value=" ${addressDto.addressNormal}">
 			</div>
 			<div class="row">
-			<h2 style="display: inline; vertical-align:middle; align-items: center; ">	상세주소 : </h2><input type="text" name="addressDetail" class="form-input"
+			상세주소 : <input type="text" name="addressDetail" class="form-input"
 					value=" ${addressDto.addressDetail}">
 			</div>
-
-
-
 		
 
 			<div class="row">
 				<button class="btn btn-orange ">
-					<i class="fa-solid fa-pen"></i> 주소등록
+					<i class="fa-solid fa-plus"></i> 새 배송지 추가
 				</button>
 			</div>
+			
 		</form>
 	</div>
 </c:if>
