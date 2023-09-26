@@ -37,10 +37,10 @@ public class OneOnOneController {
 
 		String oneLevel = (String) session.getAttribute("level");
 		boolean isAdmin = oneLevel.equals("관리자");
+		oneId = (String) session.getAttribute("name");
+		int count = oneOnOneDao.countList(vo);
+		vo.setCount(count);
 		if (isAdmin) {
-			oneId = (String) session.getAttribute("name");
-			int count = oneOnOneDao.countList(vo);
-			vo.setCount(count);
 			List<OneOnOneDto> list = oneOnOneDao.selectAdminListByPage(vo);
 			model.addAttribute("list", list);
 
@@ -49,9 +49,6 @@ public class OneOnOneController {
 		}
 
 		else {
-			oneId = (String) session.getAttribute("name");
-			int count = oneOnOneDao.countList(vo);
-			vo.setCount(count);
 			List<OneOnOneDto> list = oneOnOneDao.selectListByPage(vo, oneId);
 			model.addAttribute("list", list);
 
