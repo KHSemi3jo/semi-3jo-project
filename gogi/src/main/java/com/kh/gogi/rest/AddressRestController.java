@@ -44,9 +44,13 @@ public class AddressRestController {
 	public void add(@ModelAttribute AddressDto addressDto, HttpSession session) {
 		int addressNo = addressDao.sequence();
 		addressDto.setAddressNo(addressNo);
-		String memberId = (String) session.getAttribute("name");
-		addressDto.setAddressId(memberId);
-
+		String addressId = (String) session.getAttribute("name");
+		addressDto.setAddressId(addressId);
+		String addressPhone = (String) session.getAttribute("phone");
+		addressDto.setAddressPhone(addressPhone);
+		String addressName = (String) session.getAttribute("customer");
+		addressDto.setAddressName(addressName);
+		
 		addressDao.insert(addressDto);
 
 	}

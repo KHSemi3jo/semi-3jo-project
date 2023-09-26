@@ -21,20 +21,23 @@ public class AddressDaoImpl implements AddressDao{
 
 	@Override
 	public void insert(AddressDto addressDto) {
-		String sql = "insert into address(address_no,address_id,address_post, address_normal, address_detail ) "
-				+ "values(?,?,?,?,?)";
+		String sql = "insert into address(address_no,address_id,address_post, "
+				+ "address_normal, address_detail, address_name,"
+				+ "address_phone ) "
+				+ "values(?,?,?,?,?,?,?)";
 		
 		Object[] data = {addressDto.getAddressNo(),
-				addressDto.getAddressId(),
-				addressDto.getAddressPost(), addressDto.getAddressNormal(),
-				addressDto.getAddressDetail()
+				addressDto.getAddressId(),addressDto.getAddressPost(), 
+				addressDto.getAddressNormal(),addressDto.getAddressDetail(),
+				addressDto.getAddressName(),addressDto.getAddressPhone()
 		};
 		jdbcTemplate.update(sql,data);
 	}
 
 	@Override
 	public List<AddressDto> selectAddressList(String addressId) {
-		String sql = "select * from address where address_id=?";
+		String sql = "select * from address where address_id=? "
+				+ "order by address_no asc";
 		Object[] data = {addressId};
 		return jdbcTemplate.query(sql, addressMapper, data);
 	}

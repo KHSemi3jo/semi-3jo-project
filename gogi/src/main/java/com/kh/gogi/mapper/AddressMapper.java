@@ -19,6 +19,8 @@ public class AddressMapper implements RowMapper<AddressDto>{
 		addressDto.setAddressPost(rs.getString("address_post"));
 		addressDto.setAddressNormal(rs.getString("address_normal"));
 		addressDto.setAddressDetail(rs.getString("address_detail"));
+		addressDto.setAddressName(rs.getString("address_name"));
+		addressDto.setAddressPhone(rs.getString("address_phone"));
 		return addressDto;
 	}
 

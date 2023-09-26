@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+
+
 <style>
 .noticeTitle {
 	text-decoration: none;
@@ -16,18 +19,25 @@ select.form-input, .form-input, .btn.btn-navy {
 
 <script>
             $(function () {
+            	  
                 $(".address-insert-form").submit(function (e) {
+                	 var addressId = "${sessionScope.name}";
+                   var addressName = "${sessionScope.customer}";
+                   var addressPhone = "${sessionScope.phone}";
                     e.preventDefault();
                     $.ajax({
                         url: "/rest/address/add",
                         method: "post",
                         data: $(e.target).serialize(),
                         success: function (response) {
+                        	 console.log("더하기"+response)
+                             reloadList();
+
                         }
                     });
-                    reloadList();
+                    
                 });
-
+                reloadList();
                 function reloadList() {
                     var params = new URLSearchParams(location.search);
                     var addressNo = params.get("addressNo");
@@ -35,6 +45,8 @@ select.form-input, .form-input, .btn.btn-navy {
                     var addressNormal = params.get("addressNormal");
                     var addressDetail = params.get("addressDetail");
                     var addressId = "${sessionScope.name}";
+                    var addressName = "${sessionScope.customer}";
+                    var addressPhone = "${sessionScope.phone}";
 
                     $.ajax({
                         url: "/rest/address/list",
@@ -44,12 +56,22 @@ select.form-input, .form-input, .btn.btn-navy {
                         },
                         success: function (response) {
                             $(".address-list").empty();
+                            console.log(response)    
+                            var customer = "${sessionScope.customer}";
+                               var phone = "${sessionScope.phone}";
                             for (var i = 0; i < response.length; i++) {
                                 var address = response[i];
                                 var template = $("#address-template").html();
                                 var htmlTemplate = $.parseHTML(template);
+                           
                                 $(htmlTemplate).find(".addressId").text(
                                     "회원 아이디 : " + address.addressId || "탈퇴한 사용자");
+                                
+                                $(htmlTemplate).find(".addressName").text(
+                                        "고객 성함 : " + customer);
+                                $(htmlTemplate).find(".addressPhone").text(
+                                        "전화 번호 : " + phone);
+                                
                                 $(htmlTemplate).find(".addressPost").text(
                                     "우편 번호 : " + address.addressPost);
                                 $(htmlTemplate).find(".addressNormal").text(
@@ -161,16 +183,21 @@ select.form-input, .form-input, .btn.btn-navy {
 <hr>
 
 <script id="address-template" type="text/template">
-<div class="row flex-container view-container w-800">
-<table border="1" width="800" class=" table table-slit">
-	<thead>
-<div class="">
+<div class=" flex-container view-container  container w-1000">
+
+<div class="row">
 <input type="checkbox">
 </div>
 
-		<div class="w-75">
+		<div class="w-75 container">
 				<div class="row left">
-					<h3 class="addressId">아이디</h3>
+					<h2 class="addressId">아이디</h2>
+				</div>
+				<div class="row left">
+					<h3 class="addressName">성함</h3>
+				</div>
+				<div class="row left">
+					<h3 class="addressPhone">전화번호</h3>
 				</div>
 				<div class="row left">
 					<pre class="addressPost">우편번호</pre>
@@ -183,21 +210,22 @@ select.form-input, .form-input, .btn.btn-navy {
 				</div>
 	
 			</div>
-			<div class="w-25">
+			<div class="w-25" flex-container>
 				<div class="row right">
-					<button class="btn btn-edit btn-navy">
+					<button class="btn btn-edit btn-navy w-100">
 						<i class="fa-solid fa-edit"></i>
 						주소 수정
 					</button>
 				</div>
-				<div class="row right">
-					<button class="btn btn-orange btn-delete">
+				<div class="row right ">
+					<button class="btn btn-orange btn-delete w-100">
 						<i class="fa-solid fa-trash"></i>
-						주소 삭제
+						 주소 삭제
 					</button>
 				</div>
 			</div>
 </div>
+<hr>
 </script>
 
 
@@ -232,7 +260,7 @@ select.form-input, .form-input, .btn.btn-navy {
 
 
 
-
+<br>
 <h3>기본 배송지</h3>
 <h3>회원가입시 입력한 회원의 기본 배송지가 나와야합니다.</h3>
 
@@ -260,25 +288,27 @@ select.form-input, .form-input, .btn.btn-navy {
 
 </table>
 
-<div class="container address-list w-800"></div>
+<div class="container address-list w-1000"></div>
 
 
 
 <c:if test="${sessionScope.name != null}">
-	<div class="flex-container w-800">
+	<div class="container w-800">
 		<form class="address-insert-form" method="post">
 
 			<input type="hidden" name="addressId" value=" ${sessionScope.name}">
-			<div class="row">
-				우편번호 : <input type="text" name="addressPost" maxlength="6"
+				<input type="hidden" name="addressName" value=" ${sessionScope.customer}">
+					<input type="hidden" name="addressPhone" value="${sessionScope.phone}">
+			<div class="row " >
+				<h2 style="display: inline; vertical-align:middle; align-items: center; ">우편번호 : </h2><input type="text" name="addressPost" maxlength="6" class="form-input"
 					value=" ${addressDto.addressPost}">
 			</div>
 			<div class="row">
-				기본주소 : <input type="text" name="addressNormal"
+		<h2 style="display: inline; vertical-align:middle; align-items: center; ">		기본주소 : </h2><input type="text" name="addressNormal" class="form-input"
 					value=" ${addressDto.addressNormal}">
 			</div>
 			<div class="row">
-				상세주소 : <input type="text" name="addressDetail"
+			<h2 style="display: inline; vertical-align:middle; align-items: center; ">	상세주소 : </h2><input type="text" name="addressDetail" class="form-input"
 					value=" ${addressDto.addressDetail}">
 			</div>
 
