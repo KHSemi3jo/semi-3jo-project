@@ -71,7 +71,7 @@
 											                        <a class="left" href="/payment/list">주문내역</a>
 											                        <a class="left" href="/shopafter/list">상품후기</a>
 											                        <a class="left" href="/member/change">개인정보수정</a>
-                                              <a href="/member/address">배송지관리</a>
+                                             						 <a class="left" href="/member/addressList">배송지관리</a>
 											                        <a class="left" href="/member/logout">로그아웃</a>
 											                    </div>
 											                </div>				
