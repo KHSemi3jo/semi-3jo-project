@@ -135,6 +135,8 @@ public class OneOnOneDaoImpl implements OneOnOneDao {
 			return selectListByPage(vo.getPage(),oneId);
 		}
 	}
+	
+	
 
 	@Override
 	public int countList(ShopAfterVO vo) {
@@ -155,6 +157,50 @@ public class OneOnOneDaoImpl implements OneOnOneDao {
 		return tem.queryForObject(sql, Integer.class, ob);
 	}
 	
+	@Override
+	public List<OneOnOneDto> selectAdminListByPage(ShopAfterVO vo) {
+		if (vo.isSearch()) {
+			return selectAdminListByPage(vo.getType(), vo.getKeyword(), vo.getPage());
+
+		} else {
+			return selectAdminListByPage(vo.getPage());
+		}
+	}
+	
+	@Override
+	public List<OneOnOneDto> selectAdminListByPage(int page) {
+		
+		String sql = "select * from (select rownum rn, TMP.* from("
+				+ "select * from OneOnOne_list  "
+				+ "connect by Prior one_no = one_parent "
+				+ "start WITH one_parent is NULL "
+				+ "order siblings by one_group desc, one_no asc"
+				+ ")TMP) where rn between ? and ?";
+		Object[] ob = { page * 10 - 9, page * 10 };
+		return tem.query(sql,oneOnOneMapper , ob);
+
+	}
+	
+	
+	@Override
+	public List<OneOnOneDto> selectAdminListByPage(String type, String keyword, int page) {
+		int begin = page * 10 - 9;
+		int end = page * 10;
+
+		
+		String sql=  "select * from ("
+			+ "select rownum rn, TMP.* from("
+			+ "select * from OneOnOne_list "
+			+ "where instr(" + type + ", ?) > 0  "
+			+ "connect by Prior one_no = one_parent start WITH one_parent is NULL "
+			+ "order siblings by one_group desc, one_no asc"
+			+ ")TMP"
+			+ ") where rn between ? and ?";
+		
+		
+		Object[] ob = {keyword, begin, end };
+		return tem.query(sql, oneOnOneMapper, ob);
+	}
 
 }
 

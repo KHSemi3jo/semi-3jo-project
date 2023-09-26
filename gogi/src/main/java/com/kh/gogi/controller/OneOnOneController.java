@@ -21,7 +21,6 @@ import com.kh.gogi.dto.QnaDto;
 import com.kh.gogi.mapper.OneOnOneMapper;
 import com.kh.gogi.vo.ShopAfterVO;
 
-
 @Controller
 @RequestMapping("/one")
 public class OneOnOneController {
@@ -31,23 +30,33 @@ public class OneOnOneController {
 	OneOnOneMapper oneOnOneMapper;
 	@Autowired
 	MemberDao memberDao;
-	
-	@RequestMapping("/list")
-	public String list(@ModelAttribute(name = "vo") ShopAfterVO vo, Model model,
-			String oneId,
-			@ModelAttribute MemberDto memberDto,
-			HttpSession session) {
-		
-		oneId = (String) session.getAttribute("name");
-	//	boolean isLogin =	inputDto.getMemberId()==findDto.getMemberId();
-		
-		
-		int count = oneOnOneDao.countList(vo);
-		vo.setCount(count);
 
-		List<OneOnOneDto> list = oneOnOneDao.selectListByPage(vo, oneId);
-		model.addAttribute("list", list);
-		return "/WEB-INF/views/one/list.jsp";
+	@RequestMapping("/list")
+	public String list(@ModelAttribute(name = "vo") ShopAfterVO vo, Model model, String oneId,
+			@ModelAttribute MemberDto memberDto, @ModelAttribute OneOnOneDto oneOnOneDto, HttpSession session) {
+
+		String oneLevel = (String) session.getAttribute("level");
+		boolean isAdmin = oneLevel.equals("관리자");
+		if (isAdmin) {
+			oneId = (String) session.getAttribute("name");
+			int count = oneOnOneDao.countList(vo);
+			vo.setCount(count);
+			List<OneOnOneDto> list = oneOnOneDao.selectAdminListByPage(vo);
+			model.addAttribute("list", list);
+
+			return "/WEB-INF/views/one/adminList.jsp";
+
+		}
+
+		else {
+			oneId = (String) session.getAttribute("name");
+			int count = oneOnOneDao.countList(vo);
+			vo.setCount(count);
+			List<OneOnOneDto> list = oneOnOneDao.selectListByPage(vo, oneId);
+			model.addAttribute("list", list);
+
+			return "/WEB-INF/views/one/list.jsp";
+		}
 
 	}
 
@@ -69,9 +78,7 @@ public class OneOnOneController {
 //	}
 
 	@GetMapping("/add")
-	private String add(HttpSession session,Model model,
-			 @RequestParam(required = false) Integer oneParent)
-	{
+	private String add(HttpSession session, Model model, @RequestParam(required = false) Integer oneParent) {
 		if (oneParent != null) {
 			OneOnOneDto oneDto = oneOnOneDao.detail(oneParent);
 			model.addAttribute("oneDto", oneDto);
@@ -88,31 +95,29 @@ public class OneOnOneController {
 			return "/WEB-INF/views/member/login.jsp";
 		}
 	}
-	
+
 	@PostMapping("/add")
-	private String add(@ModelAttribute OneOnOneDto oneOnOneDto,
-			HttpSession session) {
+	private String add(@ModelAttribute OneOnOneDto oneOnOneDto, HttpSession session) {
 		int oneNo = oneOnOneDao.sequence();
 		oneOnOneDto.setOneNo(oneNo);
 		String memberId = (String) session.getAttribute("name");
 		oneOnOneDto.setOneId(memberId);
 		String memberLevel = (String) session.getAttribute("level");
 		oneOnOneDto.setOneLevel(memberLevel);
-	
-		if(oneOnOneDto.getOneParent()==null) {
+
+		if (oneOnOneDto.getOneParent() == null) {
 			oneOnOneDto.setOneGroup(oneNo);
 			oneOnOneDto.setOneParent(null);
 			oneOnOneDto.setOneDepth(0);
-		}
-		else {
-			OneOnOneDto originDto =oneOnOneDao.detail(oneOnOneDto.getOneParent());
+		} else {
+			OneOnOneDto originDto = oneOnOneDao.detail(oneOnOneDto.getOneParent());
 			oneOnOneDto.setOneGroup(originDto.getOneGroup());
 			oneOnOneDto.setOneParent(originDto.getOneNo());
-			oneOnOneDto.setOneDepth(originDto.getOneDepth()+1);
+			oneOnOneDto.setOneDepth(originDto.getOneDepth() + 1);
 		}
 		Integer lastNo = oneOnOneDao.selectMax(memberId);
 		oneOnOneDao.add(oneOnOneDto);
-		return "redirect:detail?oneNo="+oneNo;
+		return "redirect:detail?oneNo=" + oneNo;
 	}
 
 	@RequestMapping("/detail")
