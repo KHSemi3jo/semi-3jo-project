@@ -14,11 +14,14 @@
     </style>
       <!--jquery CDN-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/js/change.js"></script>
     
      <!--daum 우편 API cdn-->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     
      <script>
+     
+     
          $(function(){
         //검색버튼, 우편번호 입력창, 기본주소 입력창을 클릭하면 검색 실행
         $(".post-search").click(function(){
@@ -46,11 +49,12 @@
         }).open();
         });
     });
+         
     </script>
     
     
-    <form action="change" method="post">
-	    <div class="container w-600">
+    <form class="change-form" action="change" method="post">
+	    <div class="container w-600" >
 
             <div class="row left">
                 <h2 >개인 정보 수정</h2>
@@ -63,7 +67,7 @@
                     </div>
                     <div class="row w-75 pr-30">
                         <input type="text" name="memberId" value="${memberDto.memberId}"
-                            class="form-input w-100" >
+                            class="form-input w-100" autocomplete="off" readonly>
                     </div>
                 </div>
          
@@ -73,49 +77,49 @@
                     </div>
                     <div class="row w-75 pr-30">
                         <input type="text" name="memberName" value="${memberDto.memberName}" 
-                         class="form-input w-100" required >
+                         class="form-input w-100" required autocomplete="off">
 
                     </div>
                 </div>
 
                 <div class="row flex-container">
-                    <div class="row w-25">
+                    <div class="row w-25 left">
                         <label>이메일</label>
                     </div>
                     <div class="row w-75 pr-30">
                         <input type="email" name="memberEmail"value="${memberDto.memberEmail}"
-                                class="form-input w-100">
+                                class="form-input w-100"autocomplete="off">
                         <div class="fail-feedback left">이메일 형식으로 입력해주세요</div>
                     </div>
                 </div>
                 <div class="row flex-container">
-                    <div class="row w-25">
+                    <div class="row w-25 left">
                         <label>생년월일</label>
                     </div>
                     <div class="row w-75 pr-30">
-                        <input type="date" name="memberBirth" value="${memberDto.memberBirth}"
-                        class="form-input w-100">
+                        <input type="text" name="memberBirth" value="${memberDto.memberBirth}"
+                        class="form-input w-100"autocomplete="off">
                         <div class="fail-feedback left">잘못된 날짜를 선택하셨습니다</div>
                     </div>
                 </div>
 
                 <div class="row flex-container">
-                    <div class="row w-25">
+                    <div class="row w-25 left">
                         <label>휴대폰</label>
                     </div>
                     <div class="row w-75 pr-30">
                         <input type="tel" name="memberContact" value="${memberDto.memberContact}"
-                                class="form-input w-100">
+                                class="form-input w-100"autocomplete="off">
                         <div class="fail-feedback left">휴대폰 번호를 입력해주세요</div>
                     </div>
                 </div>
                 <div class="row flex-container">
-                    <div class="row w-25">
+                    <div class="row w-25 left">
                         <label style="display: block;">주소</label>
                     </div>
                     <div class="row w-75 left">
                         <input type="text" name="memberPost" class="form-input post-search"
-                                size="6" maxlength="6" value="${memberDto.memberPost}">
+                                size="6" maxlength="6" value="${memberDto.memberPost}"autocomplete="off">
                         <button type="button" class="btn post-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -124,7 +128,7 @@
                 <div class="row flex-container">
                     <div class="w-25"></div>
                     <div class="w-75 pr-30">
-                        <input type="text" name="memberAddr1"
+                        <input type="text" name="memberAddr1"autocomplete="off"
                                     class="form-input post-search w-100 " value="${memberDto.memberAddr1}">
                     </div>
                 </div>
@@ -132,28 +136,20 @@
                     <div class="w-25"></div>
                     <div class="w-75 pr-30">
                         <input type="text" name="memberAddr2"  value="${memberDto.memberAddr2}"
-                                    class="form-input w-100" >
+                                    class="form-input w-100" autocomplete="off">
                         <div class="fail-feedback left">주소 입력시 모든 주소를 작성해주세요</div>
                     </div>
                 </div>
-                <div class="row flex-container">
-                    <div class="row w-50 right">
-                        <button class="btn" >                           
-                            탈퇴하기
-                        </button>
-                    </div>
-                    <div class="row w-50 left pl-20">
-                        <button class="btn btn-orange " type="submit">                         
-                            회원정보수정
-                        </button>
-                    </div> 
-                    <a href="/main">로그아웃</a>
-                    <a href="password">비밀번호변경</a>
+                <div class="row float-container right pr-30" >
+	                        <button class="btn btn-orange " type="submit">                         
+	                            회원정보수정
+	                        </button>
+	                        <a class="btn btn-navy" href="password">비밀번호변경</a>
+	                        <button class="btn" >                           
+	                            탈퇴하기
+	                        </button>
                 </div>
         </div> 
     </form>
-
-
-
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
