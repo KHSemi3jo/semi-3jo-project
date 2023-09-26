@@ -14,6 +14,8 @@ public class AddressMapper implements RowMapper<AddressDto>{
 	@Override
 	public AddressDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		AddressDto addressDto = new AddressDto();
+		addressDto.setAddressNo(rs.getInt("address_no"));
+		addressDto.setAddressId(rs.getString("address_id"));
 		addressDto.setAddressPost(rs.getString("address_post"));
 		addressDto.setAddressNormal(rs.getString("address_normal"));
 		addressDto.setAddressDetail(rs.getString("address_detail"));

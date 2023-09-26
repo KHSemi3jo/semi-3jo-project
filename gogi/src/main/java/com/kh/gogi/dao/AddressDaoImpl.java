@@ -20,10 +20,11 @@ public class AddressDaoImpl implements AddressDao{
 
 	@Override
 	public void insert(AddressDto addressDto) {
-		String sql = "insert into address(address_post, address_normal, address_detail ) "
-				+ "values(?,?,?)";
+		String sql = "insert into address(address_no,address_id,address_post, address_normal, address_detail ) "
+				+ "values(?,?,?,?,?)";
 		
-		Object[] data = {
+		Object[] data = {addressDto.getAddressNo(),
+				addressDto.getAddressId(),
 				addressDto.getAddressPost(), addressDto.getAddressNormal(),
 				addressDto.getAddressDetail()
 		};
@@ -31,8 +32,15 @@ public class AddressDaoImpl implements AddressDao{
 	}
 
 	@Override
-	public List<AddressDto> selectAddressList(String memberId) {
-		String sql = "select * from address where member_id=?";
-		return jdbcTemplate.query(sql, addressMapper);
+	public List<AddressDto> selectAddressList(String addressId) {
+		String sql = "select * from address where address_id=?";
+		Object[] data = {addressId};
+		return jdbcTemplate.query(sql, addressMapper, data);
+	}
+
+	@Override
+	public int sequence() {
+		String sql = "select shopAfter_seq.nextval from dual ";
+		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 }

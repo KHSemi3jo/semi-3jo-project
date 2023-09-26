@@ -20,6 +20,7 @@ import com.kh.gogi.dao.MemberDao;
 import com.kh.gogi.dto.AddressDto;
 import com.kh.gogi.dto.MemberBlockDto;
 import com.kh.gogi.dto.MemberDto;
+import com.kh.gogi.dto.OneOnOneDto;
 
 @Controller
 @RequestMapping("/member")
@@ -30,7 +31,9 @@ public class MemberController {
 	
 	@Autowired
 	private JavaMailSender sender;
-
+	
+	@Autowired
+	private AddressDao addressDao;
 	
 	@GetMapping("/join")
 	public String join() {
@@ -81,6 +84,7 @@ public class MemberController {
 			session.setAttribute("post", findDto.getMemberPost());
 			session.setAttribute("addr1", findDto.getMemberAddr1());
 			session.setAttribute("addr2", findDto.getMemberAddr2());
+
 			//로그인시간 갱신
 			memberDao.updateMemberLogin(inputDto.getMemberId());
 			//메인페이지로 이동
@@ -218,7 +222,13 @@ public class MemberController {
 		}
 		
 		@RequestMapping("/addressList")
-		public String address() {
-			return "/WEB-INF/views/member/addressList.jsp";
+		public String address( String memberId,
+				Model model, HttpSession session
+				) {
+			memberId =(String) session.getAttribute("name");
+	
+			List<AddressDto> list = addressDao.selectAddressList(memberId);
+			model.addAttribute("list", list);
+			return "/WEB-INF/views/address/addressList.jsp";
 		}
 	}
