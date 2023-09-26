@@ -9,122 +9,44 @@
 
 <script src="/js/checkbox.js"></script>
 <!-- javascript 작성 공간 --> 
-<script>
-// 	var count = $("[name=count]").val();
-// 	$(".btn-plus").on("click", function(){
-// 		$("[name=count]").val(count++);
-// 	});
-// 	$(".btn-minus").on("click", function(){
-// 		if(count > 1){
-// 			$("[name=count]").val(count--);	
-// 		}
-// 	});
-</script>
-
 
 <script>
             $(function () {
+            	// "+" 버튼 클릭 시
+		        $(".btn-plus").click(function () {
+		            var count = $(this).parents('tr').find(".count"); // 수량을 표시하는 요소
+		            var plusCount = parseInt(count.text()); // 현재 수량 가져오기
+		            plusCount++; // 수량 증가
+		            count.text(plusCount); // 업데이트된 수량 표시
+		        });
+		
+		        // "-" 버튼 클릭 시
+		        $(".btn-minus").click(function () {
+		            var count = $(this).parents('tr').find(".count"); // 수량을 표시하는 요소
+		            var minusCount = parseInt(count.text()); // 현재 수량 가져오기
+		            if (minusCount > 1) {
+		                minusCount--; // 수량 감소
+		                count.text(minusCount); // 업데이트된 수량 표시
+		            }
+		        });
 
-                $(".btn-plus").click(function () {
-                	
-                        var basketCount =  $(this).parents('tr').find("[name=count]").text();
+		        $(".check-item").click(function () {
+		            var totalPay = $(".totalpay"); // 합계 금액을 표시하는 요소
+		            var totalPrice = 0; // 총 가격 초기화
 
-                        $.ajax({
-                            url: "/rest/basket/selectPrice",
-                            method: "post",
-                            data: { basketCount: basketCount },
-                            success: function (response) {
-                            	var result;
-                            	basketCount++;
-                            	 console.log( basketCount);
-                			
-                                $("[name=count]").text(basketCount);
-                            }
-                        })
-                    })
-                    
-                    $(".btn-minus").click(function () {
-                	  	
-                        var basketCount =  $(this).parents('tr').find("[name=count]").text();
-
-                        $.ajax({
-                            url: "/rest/basket/selectPrice",
-                            method: "post",
-                            data: { basketCount: basketCount },
-                            success: function (response) {
- 
-                            	var result;
-                            	basketCount--;
-                            	 console.log( basketCount);
-                			
-                                $("[name=count]").text(basketCount);
-                            }
-                        })
-                    })
-
-
-
-                $(".check-item").click(function () {
-
-                    var param = [];
-                    var selectList = [];
-                    var productPrice = $(this).parents('tr').find(".pay").text();
-                    var basketCount = $(this).parents('tr').find(".count").text();
-
-                  
-
-
-
-                    $(".check-item:checked").each(function (i) {
-                        selectList = {
-
-                            // basketNo: $(this).parents('tr').find(".no").text(),
-                            productPrice: $(this).parents('tr').find(".pay").text(),
-                            basketCount: $(this).parents('tr').find(".count").text()
-                        };
-
-                        //param 배열에 selectList 오브젝트를 담는다.
-                        param.push(selectList);
-                    });
-
-                    $.ajax({
-                        type: "post",
-                        url: "/rest/basket/selectPrice",
-                        headers: {
-                            "content-type": "application/json"
-                        },
-
-                        data : JSON.stringify(param),
-                        dateType : "text",
-        
-                        success : function(response) {
-                         //   $(".totalpay").text("테스트"),
-//                             	  console.log(param.length);
-                              	  var result =0;
-                          for(var i=0 ; i <param.length; i++)
-                 	   {
-              
-                        	  var result = productPrice +result;
-                        //	  console.log(result);
-                        	  } 
-//                           console.log(result);
-                        //    console.log("금액 :"+productPrice);
-                          //  console.log("수량 :"+basketCount);
-//                         	  console.log(result);
-                        	  $(".totalpay").text(result);
-
-                        }
-
-
-                    });
-
-                });
+		            $(".check-item:checked").each(function () {
+		                var price = parseInt($(this).parents('tr').find(".pay").text()); // 선택된 상품의 가격
+		                var count = parseInt($(this).parents('tr').find(".count").text()); // 선택된 상품의 수량
+		                var total = price * count; // 상품별 합계 금액
+		                totalPrice += total; // 총 가격에 합산
+		            });
+		        
+		            totalPay.text(totalPrice); // 합계 금액 업데이트
+		        });
+		        
             })
+            
         </script>
-
-
-
-
 
 <form class="delete-form" action="delete" method="post">
 	<div class="flex-container">
@@ -160,17 +82,14 @@
 						</a>
 					</td>
 
-					<td><button class="btn-plus" type="button">+</button></td>
+					<td><button class="btn-plus" type="button" name="plus">+</button></td>
 
 
 					<td class="count">
 			<!-- <input type="number" min="1" max="10" name="count"> -->
 					${basketListDto.getBasketCount()}
 					</td>
-
-
-
-					<td><button class="btn-minus" type="button">-</button></td>
+					<td><button class="btn-minus" type="button" name="minus">-</button></td>
 
 					<td class="pay">${basketListDto.productPrice}</td>
 				</tr>
@@ -191,7 +110,7 @@
 <!-- 			<div>할인금액 : </div> -->
 <!-- 			<div>합계금액 : </div> -->
 		</c:forEach>	
-	<div class="flex-container">	합계금액  :  <div class="totalpay"></div>원</div>
+	<div class="flex-container">	합계금액  :  <div class="totalpay" name="total"></div>원</div>
 
 			<div>
 				<button class="btn btn-orange w-100">결제하기</button>
