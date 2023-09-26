@@ -64,7 +64,7 @@
                         <label>상품 이미지</label>
                     </div>
                     <div class="row w-75 pr-30">
-                        <label><input type="file" name="attach" class="form-input w-100 file-chooser"
+                        <label><input type="file" name="attach" class="w-100 file-chooser"
                             style="display:none;"accept="image/*"><img src="/images/product/no-image.png" 
                             width="300"height="300"></label>
                     </div>

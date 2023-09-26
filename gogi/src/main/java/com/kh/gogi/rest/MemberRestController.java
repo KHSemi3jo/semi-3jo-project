@@ -30,7 +30,7 @@ public class MemberRestController {
 	}
 	
 	@PostMapping("/emailCheck")
-	public String eamilCheck(@RequestParam String memberEmail) {
+	public String emailCheck(@RequestParam String memberEmail) {
 		MemberDto memberDto = memberDao.selectOneEmail(memberEmail);
 		if(memberDto == null) {
 			return "Y";

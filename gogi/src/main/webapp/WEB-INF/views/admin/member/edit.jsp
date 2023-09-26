@@ -56,20 +56,20 @@
                                 <c:when test="${memberDto.memberLevel == 'VIP'}">
                                         <div class="row w-20">
                                             <label class="custom-checkbox">
-                                                <input type="radio"  name="memberLevel" >
-                                                <span ></span> 일반
+                                                <input type="radio"  name="memberLevel" value="일반">
+                                                <span ></span> 일반 
                                             </label>
                                         </div>
                                         <div class="row w-20 pl-10">
                                             <label class="custom-checkbox">
-                                                <input type="radio"  name="memberLevel" checked >
-                                                <span ></span> Vip
+                                                <input type="radio"  name="memberLevel" checked value="Vip">
+                                                <span ></span> Vip 
                                             </label>
                                         </div>
                                         <div class="row w-20 pl-10">
                                             <label class="custom-checkbox">
-                                                <input type="radio"  name="memberLevel" >
-                                                <span ></span> 관리자
+                                                <input type="radio"  name="memberLevel" value="관리자">
+                                                <span ></span> 관리자 
                                             </label>
                                         </div>
                                     </div>
@@ -77,19 +77,19 @@
                                 <c:when test="${memberDto.memberLevel == '관리자'}">
                                         <div class="row w-20">
                                             <label class="custom-checkbox">
-                                                <input type="radio"  name="memberLevel" >
+                                                <input type="radio"  name="memberLevel" value="일반">
                                                 <span ></span> 일반
                                             </label>
                                         </div>
                                         <div class="row w-20 pl-10">
                                             <label class="custom-checkbox">
-                                                <input type="radio"  name="memberLevel"  >
+                                                <input type="radio"  name="memberLevel" value="Vip" >
                                                 <span ></span> Vip
                                             </label>
                                         </div>
                                         <div class="row w-20 pl-10">
                                             <label class="custom-checkbox">
-                                                <input type="radio"  name="memberLevel"checked >
+                                                <input type="radio"  name="memberLevel"checkedvalue="관리자" >
                                                 <span ></span> 관리자
                                             </label>
                                         </div>
@@ -98,19 +98,19 @@
                                 <c:otherwise>
                                         <div class="row w-20">
                                             <label class="custom-checkbox">
-                                                <input type="radio"  name="memberLevel" checked>
+                                                <input type="radio"  name="memberLevel" checked value="일반">
                                                 <span ></span> 일반
                                             </label>
                                         </div>
                                         <div class="row w-20 pl-10">
                                             <label class="custom-checkbox">
-                                                <input type="radio"  name="memberLevel"  >
+                                                <input type="radio"  name="memberLevel" value="Vip" >
                                                 <span ></span> Vip
                                             </label>
                                         </div>
                                         <div class="row w-20 pl-10">
                                             <label class="custom-checkbox">
-                                                <input type="radio"  name="memberLevel" >
+                                                <input type="radio"  name="memberLevel" value="관리자">
                                                 <span ></span> 관리자
                                             </label>
                                         </div>

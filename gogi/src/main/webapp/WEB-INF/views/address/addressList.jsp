@@ -235,6 +235,7 @@ select.form-input, .form-input, .btn.btn-navy {
 
 <h3>기본 배송지</h3>
 <h3>회원가입시 입력한 회원의 기본 배송지가 나와야합니다.</h3>
+
 <table border="1" width="800" class=" table table-slit">
 	<thead>
 		<tr>
@@ -256,6 +257,7 @@ select.form-input, .form-input, .btn.btn-navy {
 			</tr>
 		</c:forEach>
 	</tbody>
+
 </table>
 
 <div class="container address-list w-800"></div>
@@ -265,6 +267,7 @@ select.form-input, .form-input, .btn.btn-navy {
 <c:if test="${sessionScope.name != null}">
 	<div class="flex-container w-800">
 		<form class="address-insert-form" method="post">
+
 			<input type="hidden" name="addressId" value=" ${sessionScope.name}">
 			<div class="row">
 				우편번호 : <input type="text" name="addressPost" maxlength="6"
@@ -278,6 +281,10 @@ select.form-input, .form-input, .btn.btn-navy {
 				상세주소 : <input type="text" name="addressDetail"
 					value=" ${addressDto.addressDetail}">
 			</div>
+
+
+
+		
 
 			<div class="row">
 				<button class="btn btn-orange ">
