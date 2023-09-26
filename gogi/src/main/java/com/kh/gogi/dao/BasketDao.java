@@ -10,7 +10,8 @@ public interface BasketDao {
 	int sequence();
 	void add(BasketDto basketDto);
 	boolean delete(int basketNo);
-	List<BasketListDto> selectList();
+	BasketListDto selectOne(int basketNo);
+	List<BasketListDto> selectList(String basketMember);
 	
 
 }

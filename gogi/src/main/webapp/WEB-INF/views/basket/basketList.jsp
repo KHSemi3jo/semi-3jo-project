@@ -104,15 +104,16 @@
                           for(var i=0 ; i <param.length; i++)
                  	   {
               
-                        	  var result = productPrice * basketCount +result;
+                        	  var result = productPrice +result;
                         //	  console.log(result);
-//                         	  } console.log(result);
+                        	  } 
+//                           console.log(result);
                         //    console.log("금액 :"+productPrice);
                           //  console.log("수량 :"+basketCount);
 //                         	  console.log(result);
                         	  $(".totalpay").text(result);
 
-                        },
+                        }
 
 
                     });
@@ -144,6 +145,7 @@
 				</tr>
 			</thead>
 			<tbody>
+<%-- 			<c:if test="${sessionScope.name == '${findDto.getMemberId()}'}"></c:if> --%>
 			<c:forEach var="basketListDto" items="${basketList}">
 				<tr>
 					<td>
@@ -162,7 +164,7 @@
 
 
 					<td class="count">
-<!-- <input type="number" min="1" max="10" name="count"> -->
+			<!-- <input type="number" min="1" max="10" name="count"> -->
 					${basketListDto.getBasketCount()}
 					</td>
 
@@ -179,8 +181,9 @@
 		<div style="width:300px;">
 		<c:forEach var="basketListDto" items="${basketList}" varStatus="i">
 			<div>
-				<span>상품금액 : 
-					<fmt:formatNumber pattern="###,###,###" value="${basketListDto.productPrice}"/>원
+			상품금액 :
+				<span class="price"> 
+<%-- 					<fmt:formatNumber pattern="###,###,###" value="${basketListDto.productPrice}"/>원 --%>
 				</span>
 			</div>
 
