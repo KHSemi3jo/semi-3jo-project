@@ -36,9 +36,8 @@
 	</form>
 	</div>
 
-
-	<c:forEach var="productDto" items="${list}">
 		<div class="container w-500">
+	<c:forEach var="productDto" items="${list}">
 		<div class="row">
 		<c:choose>
 		<c:when test="${productDto.image}">
@@ -67,8 +66,8 @@
 		</div>
 		<hr>
 		</div>
-		</div>
 	</c:forEach>
+		</div>
 	<div class="row page-navigator mv-30">
 	<!-- 이전 버튼 -->
 	<c:if test="${!vo.first}">

@@ -82,12 +82,13 @@ public class ProductController {
 		public ResponseEntity<ByteArrayResource> image(@RequestParam int productNo) throws IOException{
 			
 			AttachDto attachDto = productDao.findImage(productNo);//상품번호로 파일번호 찾기
-			if(attachDto == null) {
-				return ResponseEntity.notFound().build();//파일번호가 없으면 404 반환
-			}
+//			if(attachDto == null) {
+//				return ResponseEntity.notFound().build();//파일번호가 없으면 404 반환
+//			}
 			String home=System.getProperty("user.home");
 			File dir = new File(home, "Gogi");
 			File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
+			
 			
 			byte[] data = FileUtils.readFileToByteArray(target);//실제 파일 불러오기
 			ByteArrayResource resource = new ByteArrayResource(data);

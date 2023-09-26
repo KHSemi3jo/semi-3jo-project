@@ -24,6 +24,7 @@ public class BasketController {
 
 	@RequestMapping("/list")
 	public String list(Model model
+
 			
 //						,@RequestParam int basketNo
 			,HttpSession session
@@ -44,6 +45,8 @@ public class BasketController {
 //		else {
 //			return "redirect:에러";
 //		}
+
+
 		
 		String basketMember = (String) session.getAttribute("name");
 

@@ -186,7 +186,7 @@ ul.menu-navy li:hover {
     text-decoration: none;
     vertical-align: bottom;
 
-    font-size: 20px;
+    font-size: 18px;
     padding: 0.5em 1em;
     outline: none; /*outline은 입력 창 선택 시 강조 효과 */
     border: 1px solid #012D5C;
@@ -808,10 +808,10 @@ a.link:hover
 .fail2 ~ .fail2-feedback {
     display: block;
 }
-.success {
-    /* important는 우선순위를 최상위로 올린다 */
+/*.success {
+     important는 우선순위를 최상위로 올린다 
     border-color: #00b894 !important;
-}
+}*/
 .success:not([type=date]) {
     background-image: url("../image/valid.png");
     background-repeat: no-repeat;
