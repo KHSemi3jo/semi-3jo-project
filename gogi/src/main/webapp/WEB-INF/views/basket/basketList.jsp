@@ -10,15 +10,15 @@
 <script src="/js/checkbox.js"></script>
 <!-- javascript 작성 공간 --> 
 <script>
-	var count = $("[name=count]").val();
-	$(".btn-plus").on("click", function(){
-		$("[name=count]").val(count++);
-	});
-	$(".btn-minus").on("click", function(){
-		if(count > 1){
-			$("[name=count]").val(count--);	
-		}
-	});
+// 	var count = $("[name=count]").val();
+// 	$(".btn-plus").on("click", function(){
+// 		$("[name=count]").val(count++);
+// 	});
+// 	$(".btn-minus").on("click", function(){
+// 		if(count > 1){
+// 			$("[name=count]").val(count--);	
+// 		}
+// 	});
 </script>
 
 
@@ -55,17 +55,17 @@
         
                         success : function(response) {
                          //   $(".totalpay").text("테스트"),
-                            	  console.log(param.length);
+//                             	  console.log(param.length);
                               	  var result =0;
                           for(var i=0 ; i <param.length; i++)
                  	   {
               
                         	  var result = productPrice * basketCount +result;
                         //	  console.log(result);
-                        	  } console.log(result);
+//                         	  } console.log(result);
                         //    console.log("금액 :"+productPrice);
                           //  console.log("수량 :"+basketCount);
-                        	  console.log(result);
+//                         	  console.log(result);
                         	  $(".totalpay").text(result);
                         },
 
@@ -112,12 +112,15 @@
 							${basketListDto.productName}
 						</a>
 					</td>
-					<td><button class="btn-plus">+</button></td>
+<!-- 					<td><button class="btn-plus">+</button></td> -->
 
-					<td class="count"><intput type="number" min="1" max="10" name="count">${basketListDto.getBasketCount()}</td>
+					<td class="count">
+<!-- <input type="number" min="1" max="10" name="count"> -->
+					${basketListDto.getBasketCount()}
+					</td>
 
 
-					<td><button class="btn-minus">-</button></td>
+<!-- 					<td><button class="btn-minus">-</button></td> -->
 					<td class="pay">${basketListDto.productPrice}</td>
 				</tr>
 			</c:forEach>
