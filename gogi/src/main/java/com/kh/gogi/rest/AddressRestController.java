@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.gogi.dao.AddressDao;
@@ -21,6 +22,7 @@ import com.kh.gogi.vo.ShopAfterVO;
 
 //@CrossOrigin
 @RestController
+
 @RequestMapping("/rest/address")
 public class AddressRestController {
 	
@@ -30,9 +32,10 @@ public class AddressRestController {
 	
 
 	@PostMapping("/list")
-	public List<AddressDto> list(@RequestParam String memberId,
+	 @ResponseBody
+	public List<AddressDto> list(@RequestParam String addressId,
 			Model model){
-		List<AddressDto> list = addressDao.selectAddressList(memberId);
+		List<AddressDto> list = addressDao.selectAddressList(addressId);
 		model.addAttribute("list",list);
 		return list;
 	}
@@ -46,6 +49,17 @@ public class AddressRestController {
 
 		addressDao.insert(addressDto);
 
+	}
+	
+	@PostMapping("/delete")
+	public  void delete(@RequestParam int addressNo) {
+
+		addressDao.delete(addressNo);
+		
+	}
+	@PostMapping("/edit")
+	public void edit(@ModelAttribute AddressDto addressDto) {
+		addressDao.edit(addressDto);
 	}
 	
 	

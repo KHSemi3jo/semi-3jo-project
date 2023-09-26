@@ -23,6 +23,7 @@ public class BasketController {
 	@RequestMapping("/list")
 	public String list(Model model
 			) {
+		
 		List<BasketListDto> basketList = basketDao.selectList();
 		model.addAttribute("basketList", basketList);
 		
