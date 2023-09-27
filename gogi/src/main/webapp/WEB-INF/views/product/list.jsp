@@ -29,7 +29,9 @@
 </script>
 
 <div class="row">
+
 <form action="list" method="get">
+
 <c:choose>
 	<c:when test="${vo.type == 'productName'}"></c:when>
 	<c:otherwise>

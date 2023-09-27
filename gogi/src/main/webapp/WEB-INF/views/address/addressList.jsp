@@ -308,7 +308,7 @@ $(function(){
                         <label>연락처</label>
                     </div>
                     <div class="row w-75 pr-30">
-                        <input type="tel" name="addressPhone" value="${addressDto.addressPhone}"
+                        <input type="tel" name="addressPhone" value="${sessionScope.phone}"
                                 class="form-input w-100"autocomplete="off">
                         <div class="fail-feedback left">휴대폰 번호를 입력해주세요</div>
                     </div>
@@ -320,7 +320,8 @@ $(function(){
                     </div>
                     <div class="row w-75 left">
                         <input type="text" name="addressPost" class="form-input post-search"
-                                size="6" maxlength="6" value="${addressDto.addressPost}"autocomplete="off">
+                                size="6" maxlength="6" 
+value="$[name=addressPost].text()"autocomplete="off">
                         <button type="button" class="btn post-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -342,16 +343,17 @@ $(function(){
                     </div>
                 </div>
 
-			<div class="w-25">
-				<div class="row right">
 
-					<button type="submit" class="btn btn-positive">
+			<div class="w-25">
+		<div class="row right">
+
+					<button type="submit" class="btn btn-navy">
 						<i class="fa-solid fa-check"></i>
 						수정
 					</button>
 				</div>
 				<div class="row">
-					<button type="button" class="btn btn-negative btn-cancel">
+					<button type="button" class="btn btn-orange btn-cancel">
 						<i class="fa-solid fa-xmark"></i>
 						취소
 					</button>
@@ -410,18 +412,18 @@ $(function(){
 			</div>
 			<div class="row ">
 			우편번호 : <input type="text" name="addressPost" maxlength="6" class="form-input"
-					value=" ${addressDto.addressPost}">
+		>
 					<button type="button" class="btn post-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
 			</div>
 			<div class="row"> 
 			기본주소 : <input type="text" name="addressNormal" class="form-input"
-					value=" ${addressDto.addressNormal}">
+					>
 			</div>
 			<div class="row">
 			상세주소 : <input type="text" name="addressDetail" class="form-input"
-					value=" ${addressDto.addressDetail}">
+					>
 			</div>
 		
 

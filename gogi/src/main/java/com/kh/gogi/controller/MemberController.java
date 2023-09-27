@@ -21,6 +21,7 @@ import com.kh.gogi.dto.AddressDto;
 import com.kh.gogi.dto.MemberBlockDto;
 import com.kh.gogi.dto.MemberDto;
 import com.kh.gogi.dto.OneOnOneDto;
+import com.kh.gogi.dto.ShopAfterDto;
 
 @Controller
 @RequestMapping("/member")
@@ -226,7 +227,12 @@ public class MemberController {
 				Model model, HttpSession session
 				) {
 			memberId =(String) session.getAttribute("name");
-	
+			
+			AddressDto addressDto = addressDao.selectOne(memberId);
+			model.addAttribute("addressDto",addressDto);
+			
+		
+			
 			List<AddressDto> list = addressDao.selectAddressList(memberId);
 			model.addAttribute("list", list);
 			return "/WEB-INF/views/address/addressList.jsp";

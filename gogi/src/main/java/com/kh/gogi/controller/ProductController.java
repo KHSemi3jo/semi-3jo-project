@@ -3,7 +3,10 @@ package com.kh.gogi.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.sql.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,7 @@ import com.kh.gogi.dto.AttachDto;
 import com.kh.gogi.dto.ProductDto;
 import com.kh.gogi.vo.ProductVO;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -105,9 +109,11 @@ public class ProductController {
 		
 		//상품 상세 페이지
 		@RequestMapping("/detail")
-		public String detail(@RequestParam int productNo, Model model) {
+		public String detail(@RequestParam int productNo, Model model,
+				HttpSession session) {
 				ProductDto productDto = productDao.selectOne(productNo);
 				model.addAttribute("productDto",productDto);
+				session.setAttribute("productNo", productDto.getProductNo());
 				return"/WEB-INF/views/product/detail.jsp";
 		}
 		
@@ -122,12 +128,14 @@ public class ProductController {
 		//상품 목록 페이지
 		@RequestMapping("/list")
 		public String list(Model model,
-								@ModelAttribute(name = "vo") ProductVO vo) {
+								@ModelAttribute(name = "vo") ProductVO vo,
+								HttpSession session) {
 			int count=productDao.countList(vo);
 			vo.setCount(count);
 			
 			List<ProductDto>list = productDao.selectListBypage(vo);
 			model.addAttribute("list",list);
+			session.removeAttribute("productNo");
 			return"/WEB-INF/views/product/list.jsp";
 		}
 		//상품 국내산 소고기 목록 페이지

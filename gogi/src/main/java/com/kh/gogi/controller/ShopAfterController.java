@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.gogi.dao.MemberDao;
+import com.kh.gogi.dao.ProductDao;
 import com.kh.gogi.dao.ReplyDao;
 import com.kh.gogi.dao.ShopAfterDao;
 import com.kh.gogi.dto.MemberDto;
 import com.kh.gogi.dto.NoticeDto;
 import com.kh.gogi.dto.OneOnOneDto;
+import com.kh.gogi.dto.ProductDto;
 import com.kh.gogi.dto.ReplyDto;
 import com.kh.gogi.dto.ShopAfterDto;
 import com.kh.gogi.mapper.ShopAfterMapper;
@@ -37,6 +39,8 @@ public class ShopAfterController {
 	MemberDao memberDao;
 	@Autowired
 	ReplyDao replyDao;
+	@Autowired
+	ProductDao productDao;
 
 
 
@@ -47,12 +51,15 @@ public class ShopAfterController {
 
 	@PostMapping("/add")
 	private String add(@ModelAttribute ShopAfterDto shopAfterDto, 
-			@ModelAttribute MemberDto memberDto,
+			@ModelAttribute ProductDto productDto,
 			HttpSession session) {
 		int shopAfterNo = shopAfterDao.sequence();
 		shopAfterDto.setShopAfterNo(shopAfterNo);
 		String memberId = (String) session.getAttribute("name");
 		shopAfterDto.setShopAfterId(memberId);
+		
+		int productNo = (int) session.getAttribute("productNo");
+		shopAfterDto.setShopAfterAfterNo(productNo);
 		shopAfterDao.add(shopAfterDto);
 		return "redirect:detail?shopAfterNo=" + shopAfterNo;
 	}
@@ -96,15 +103,32 @@ public class ShopAfterController {
 	
 	
 	@RequestMapping("/list")
-	public String list(@ModelAttribute(name = "vo") ShopAfterVO vo, Model model) {
+	public String list(@ModelAttribute(name = "vo") ShopAfterVO vo, Model model,
+			@ModelAttribute ProductDto productDto,
+		HttpSession session) {
+ 
+		Integer productNo = (Integer) session.getAttribute("productNo");
+	
+		
+		if(productNo !=null) 
+		{
+			productDto = productDao.selectOne(productNo);
+		int count = shopAfterDao.countProductList(vo,productNo);
+		vo.setCount(count);
 
+		List<ShopAfterDto> list = shopAfterDao.selectProductListByPage(vo,productNo);
+		model.addAttribute("list", list);
+		return "/WEB-INF/views/shopafter/productList.jsp";
+
+	}
+	else {
 		int count = shopAfterDao.countList(vo);
 		vo.setCount(count);
 
 		List<ShopAfterDto> list = shopAfterDao.selectListByPage(vo);
 		model.addAttribute("list", list);
 		return "/WEB-INF/views/shopafter/list.jsp";
-
+	}
 	}
 	
 	
@@ -155,14 +179,11 @@ public class ShopAfterController {
 	   List <ReplyDto> replyList =replyDao.selectListByPage(replyOrigin, page);
 	    model.addAttribute("replyList", replyList);
 
-	    
-	    
-	    
 		
 		String shopAfterId = shopAfterDto.getShopAfterId();
 		if (shopAfterId != null) {
-			MemberDto memberDto = memberDao.selectOne(shopAfterId);
-			model.addAttribute("shopAfterDto", memberDto);
+			
+			model.addAttribute("shopAfterDto", shopAfterDto);
 		}
 		return "/WEB-INF/views/shopafter/detail.jsp";
 	}

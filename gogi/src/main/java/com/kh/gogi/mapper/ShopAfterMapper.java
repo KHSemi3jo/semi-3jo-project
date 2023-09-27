@@ -14,7 +14,7 @@ public class ShopAfterMapper implements RowMapper<ShopAfterDto>{
 	@Override
 	public ShopAfterDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		ShopAfterDto shopAfterDto = new ShopAfterDto();
-		shopAfterDto.setShopAfterAfterNo(rs.getInt("shopAfter_afterno"));
+		shopAfterDto.setShopAfterAfterNo(rs.getObject("shopAfter_afterno",Integer.class));
 		shopAfterDto.setShopAfterContent(rs.getString("shopAfter_content"));
 		shopAfterDto.setShopAfterName(rs.getString("shopAfter_name"));
 		shopAfterDto.setShopAfterDate(rs.getDate("shopAfter_date"));
