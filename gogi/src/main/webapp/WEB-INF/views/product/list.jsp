@@ -36,38 +36,41 @@
 	</form>
 	</div>
 
-		<div class="container w-500">
-	<c:forEach var="productDto" items="${list}">
-		<div class="row">
-		<c:choose>
-		<c:when test="${productDto.image}">
-			<img src="image?productNo=${productDto.productNo}" width="200" height="200">
-		</c:when>
-		<c:otherwise>
-			<img src="https://dummyimage.com/200x200/000/fff" width="200" height="200">
-		</c:otherwise>
-	</c:choose>
-	</div>
-		<div class="row">
-
-			
-
-			<a class="link" href="detail?productNo=${productDto.productNo}">${productDto.productNo}</a> /
-			
-
-			 ${productDto.productName}/
-			  ${productDto.productPrice}원
-			
-		<a href="add?productNo=${productDto.productNo}">등록</a>
-		<a href="edit?productNo=${productDto.productNo}">수정</a>
-		<a href="delete?productNo=${productDto.productNo}">삭제</a>
-		<div>
-		<button class="btn-basket">담기</button>
-		</div>
-		<hr>
-		</div>
-	</c:forEach>
-		</div>
+		<div class="container w-600">
+    <div class="row flex-container auto-width">
+        <c:forEach var="productDto" items="${list}" varStatus="loopStatus">
+            <div class="col-md-4">
+                <div class="row">
+                    <c:choose>
+                        <c:when test="${productDto.image}">
+                            <img src="image?productNo=${productDto.productNo}" class="img-fluid" alt="Product Image" width="200" height="200">
+                        </c:when>
+                        <c:otherwise>
+                            <img src="https://dummyimage.com/200x200/000/fff" class="img-fluid" alt="Default Image">
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+                <div class="row">
+                    <a class="link" href="detail?productNo=${productDto.productNo}">${productDto.productNo}</a> /
+                    ${productDto.productName} /
+                    ${productDto.productPrice}원
+                    <a href="add?productNo=${productDto.productNo}">등록</a>
+                    <a href="edit?productNo=${productDto.productNo}">수정</a>
+                    <a href="delete?productNo=${productDto.productNo}">삭제</a>
+                </div>
+                <div class="row">
+                    <button class="btn-basket">담기</button>
+                </div>
+                <hr>
+            </div>
+            <!-- Start a new row after every 3rd product -->
+            <c:if test="${loopStatus.index % 3 == 2 or loopStatus.last}">
+                </div><div class="row flex-container auto-width">
+            </c:if>
+        </c:forEach>
+    </div>
+</div>
+	
 	<div class="row page-navigator mv-30">
 	<!-- 이전 버튼 -->
 	<c:if test="${!vo.first}">
