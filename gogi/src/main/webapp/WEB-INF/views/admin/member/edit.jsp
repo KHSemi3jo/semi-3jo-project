@@ -51,9 +51,9 @@
                     <div class="row w-25 left">
                         <label>등급</label>
                     </div>
-                    <div class="row float-container w-75 left">
                         <c:choose>
                                 <c:when test="${memberDto.memberLevel == 'VIP'}">
+                   					 <div class="row float-container w-75 left">
                                         <div class="row w-20">
                                             <label class="custom-checkbox">
                                                 <input type="radio"  name="memberLevel" value="일반">
@@ -75,6 +75,7 @@
                                     </div>
                                 </c:when>
                                 <c:when test="${memberDto.memberLevel == '관리자'}">
+                                	<div class="row float-container w-75 left">
                                         <div class="row w-20">
                                             <label class="custom-checkbox">
                                                 <input type="radio"  name="memberLevel" value="일반">
@@ -96,6 +97,7 @@
                                     </div>
                                 </c:when>
                                 <c:otherwise>
+                                	<div class="row float-container w-75 left">
                                         <div class="row w-20">
                                             <label class="custom-checkbox">
                                                 <input type="radio"  name="memberLevel" checked value="일반">
