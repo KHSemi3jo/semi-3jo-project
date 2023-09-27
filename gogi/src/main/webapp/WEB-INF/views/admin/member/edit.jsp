@@ -192,8 +192,8 @@
                     <button type="submit" class="btn btn-orange btn-save">정보변경</button>
                     <a href="/admin/member/list"class="btn btn-navy ">목록</a>
                 </div>
-        </div>
-    </form>
+    	</form>
+   </div>
 
 
 
