@@ -11,40 +11,44 @@
 <!-- javascript 작성 공간 --> 
 
 <script>
-            $(function () {
-            	// "+" 버튼 클릭 시
-		        $(".btn-plus").click(function () {
-		            var count = $(this).parents('tr').find(".count"); // 수량을 표시하는 요소
-		            var plusCount = parseInt(count.text()); // 현재 수량 가져오기
-		            plusCount++; // 수량 증가
-		            count.text(plusCount); // 업데이트된 수량 표시
-		        });
-		
-		        // "-" 버튼 클릭 시
-		        $(".btn-minus").click(function () {
-		            var count = $(this).parents('tr').find(".count"); // 수량을 표시하는 요소
-		            var minusCount = parseInt(count.text()); // 현재 수량 가져오기
-		            if (minusCount > 1) {
-		                minusCount--; // 수량 감소
-		                count.text(minusCount); // 업데이트된 수량 표시
-		            }
-		        });
+		$(function(){
+           	// "+" 버튼 클릭 시
+	        $(".btn-plus").click(function () {
+	            var count = $(this).parents('tr').find(".count"); // 수량을 표시하는 요소
+	            var plusCount = parseInt(count.text()); // 현재 수량 가져오기
+	            plusCount++; // 수량 증가
+	            
+	            count.text(plusCount); // 업데이트된 수량 표시
+	        });
+	
+	        // "-" 버튼 클릭 시
+	        $(".btn-minus").click(function () {
+	            var count = $(this).parents('tr').find(".count"); // 수량을 표시하는 요소
+	            var minusCount = parseInt(count.text()); // 현재 수량 가져오기
+	            if (minusCount > 1) {
+	                minusCount--; // 수량 감소
+	                
+	                count.text(minusCount); // 업데이트된 수량 표시
+	            }
+	        });
+            
 
-		        $(".check-item").click(function () {
-		            var totalPay = $(".totalpay"); // 합계 금액을 표시하는 요소
-		            var totalPrice = 0; // 총 가격 초기화
+	        $(".check-item").click(function () {
+	            var totalPay = $(".totalpay"); // 합계 금액을 표시하는 요소
+	            var totalPrice = 0; // 총 가격 초기화
 
-		            $(".check-item:checked").each(function () {
-		                var price = parseInt($(this).parents('tr').find(".pay").text()); // 선택된 상품의 가격
-		                var count = parseInt($(this).parents('tr').find(".count").text()); // 선택된 상품의 수량
-		                var total = price * count; // 상품별 합계 금액
-		                totalPrice += total; // 총 가격에 합산
-		            });
+	            $(".check-item:checked").each(function () {
+	                var price = parseInt($(this).parents('tr').find(".pay").text()); // 선택된 상품의 가격
+	                var count = parseInt($(this).parents('tr').find(".count").text()); // 선택된 상품의 수량
+	                var total = price * count; // 상품별 합계 금액
+	                totalPrice += total; // 총 가격에 합산
+	            });
+	        
+	            totalPay.text(totalPrice); // 합계 금액 업데이트
+	        });
 		        
-		            totalPay.text(totalPrice); // 합계 금액 업데이트
-		        });
-		        
-            })
+            			
+		});
             
         </script>
 

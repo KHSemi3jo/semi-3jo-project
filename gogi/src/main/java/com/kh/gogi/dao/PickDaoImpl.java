@@ -43,7 +43,7 @@ public class PickDaoImpl implements PickDao{
 	}
 
 	@Override
-	public List<PickListDto> selectList() {
+	public List<PickListDto> selectList(String pickMemberId) {
 		String sql = "select "
 				+ "pickmember_id,"
 				+ "product_no, product_name, product_price,"
@@ -51,8 +51,10 @@ public class PickDaoImpl implements PickDao{
 				+ "from pick "
 				+ "left outer join product "
 				+ "on product.product_no = pick.pickProd_no "
+				+ "where pick.pickmember_id = ? "
 				+ "order by pick.pickmember_id asc";
-		return jdbcTemplate.query(sql, pickListMapper);
+		Object[] data = {pickMemberId};
+		return jdbcTemplate.query(sql, pickListMapper, data);
 	}
 
 }
