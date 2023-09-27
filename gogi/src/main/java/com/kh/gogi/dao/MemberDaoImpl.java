@@ -72,13 +72,14 @@ public class MemberDaoImpl implements MemberDao {
 	public boolean updateMemberInfo(MemberDto memberDto) {
 		String sql = "update member set "
 				+ "member_name=?, member_contact=?, member_email=?,"
-				+ "member_post=?, member_addr1=?, member_addr2=? "
+				+ "member_post=?, member_addr1=?, member_addr2=?, member_birth=? "
 				+ "where member_id=?";
 		Object[] data = {
 				memberDto.getMemberName(), memberDto.getMemberContact(),
 				memberDto.getMemberEmail(),
 				memberDto.getMemberPost(), memberDto.getMemberAddr1(),
-				memberDto.getMemberAddr2(), memberDto.getMemberId()
+				memberDto.getMemberAddr2(), memberDto.getMemberBirth(),
+				memberDto.getMemberId()
 		};
 		return jdbcTemplate.update(sql, data)>0;
 	}
