@@ -138,6 +138,39 @@ public class ProductController {
 			session.removeAttribute("productNo");
 			return"/WEB-INF/views/product/list.jsp";
 		}
+		//상품 국내산 소고기 목록 페이지
+				@RequestMapping("/dblist")
+				public String dblist(Model model,
+										@ModelAttribute(name = "vo") ProductVO vo) {
+					int count=productDao.countList(vo);
+					vo.setCount(count);
+					
+					List<ProductDto>list = productDao.selectImportedBeefProduct(vo);
+					model.addAttribute("list",list);
+					return"/WEB-INF/views/product/dblist.jsp";
+				}
+				//상품 수입산 소고기 목록 페이지
+				@RequestMapping("/iblist")
+				public String iblist(Model model,
+										@ModelAttribute(name = "vo") ProductVO vo) {
+					int count=productDao.countList(vo);
+					vo.setCount(count);
+					
+					List<ProductDto>list = productDao.selectImportedBeefProduct(vo);
+					model.addAttribute("list",list);
+					return"/WEB-INF/views/product/iblist.jsp";
+				}
+				//상품 돼지고기 목록 페이지
+				@RequestMapping("/plist")
+				public String plist(Model model,
+										@ModelAttribute(name = "vo") ProductVO vo) {
+					int count=productDao.countList(vo);
+					vo.setCount(count);
+					
+					List<ProductDto>list = productDao.selectPorkProduct(vo);
+					model.addAttribute("list",list);
+					return"/WEB-INF/views/product/plist.jsp";
+				}
 		
 		//상품 수정 페이지
 		@GetMapping("/edit")

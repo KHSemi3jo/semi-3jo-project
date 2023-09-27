@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<c:choose>
+	<c:when test="${sessionScope.level == '관리자'}">
+		<jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
+	</c:when>
+	<c:otherwise>
+		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>	
+	</c:otherwise>
+</c:choose>
 <style>
 .custom-checkbox {
     display: inline-block;
@@ -30,6 +37,28 @@
    <script>
    $(function(){
        $(".btn-save").click(function(){
+    	   
+    	// 입력 필드의 값을 가져와서 길이 확인
+           var productName = $("[name=productName]").val();
+           var productPrice = parseFloat($("[name=productPrice]").val()); // 가격을 숫자로 변환
+           var productWeight = parseFloat($("[name=productWeight]").val()); // 무게를 숫자로 변환
+           var productOrigin = $("[name=productOrigin]").val();
+           var fileInput = $(".file-chooser")[0];
+
+           // 이미지 파일이 업로드되었는지 확인
+           if (fileInput.files.length == 0) {
+               event.preventDefault(); // 폼 제출을 막음
+               alert("이미지를 선택하세요.");
+               return;
+           }
+
+           // 하나라도 입력 필드가 비어있거나 가격 또는 무게가 0이면 등록 버튼 비활성화하고 메시지 표시
+           if (productName.length == 0 || isNaN(productPrice) || isNaN(productWeight) || productOrigin.length == 0 || productPrice == 0 || productWeight == 0) {
+               event.preventDefault(); // 폼 제출을 막음
+               alert("가격과 무게는 0이 아니어야 합니다. 빈 칸을 채워주세요.");
+           }
+    	   
+    	   
            var input =$(".file-chooser")[0];
 
            if(input.files.length == 0) return;
@@ -48,6 +77,7 @@
                },
            });
        });
+            
    }); 
     </script>
 
@@ -75,7 +105,7 @@
                     </div>
                     <div class="row pr-30">
                         <label class="custom-checkbox">
-                            <input type="radio"  name="productType" value="냉동">
+                            <input type="radio"  name="productType" value="냉동" checked>
                             <span ></span> 냉동
                         </label>
                     </div>
@@ -99,7 +129,7 @@
                         <label>상품 가격 (단위: 원)</label>
                     </div>
                     <div class="row w-75 pr-30">
-                        <input type="number" name="productPrice" class="form-input w-100">
+                        <input type="number"   min='0'  step='100' name="productPrice" class="form-input w-100">
                     </div>
                 </div>
                 <div class="row flex-container">
@@ -107,7 +137,7 @@
                         <label>상품 중량 (단위 : g)</label>
                     </div>
                     <div class="row w-75 pr-30">
-                        <input type="text" name="productWeight"class="form-input w-100">
+                        <input type="number" min='0'  step='50'  name="productWeight"class="form-input w-100">
                     </div>
                 </div>
                

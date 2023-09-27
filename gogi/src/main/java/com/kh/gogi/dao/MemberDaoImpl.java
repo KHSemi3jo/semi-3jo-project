@@ -72,13 +72,14 @@ public class MemberDaoImpl implements MemberDao {
 	public boolean updateMemberInfo(MemberDto memberDto) {
 		String sql = "update member set "
 				+ "member_name=?, member_contact=?, member_email=?,"
-				+ "member_post=?, member_addr1=?, member_addr2=? "
+				+ "member_post=?, member_addr1=?, member_addr2=?, member_birth=? "
 				+ "where member_id=?";
 		Object[] data = {
 				memberDto.getMemberName(), memberDto.getMemberContact(),
 				memberDto.getMemberEmail(),
 				memberDto.getMemberPost(), memberDto.getMemberAddr1(),
-				memberDto.getMemberAddr2(), memberDto.getMemberId()
+				memberDto.getMemberAddr2(), memberDto.getMemberBirth(),
+				memberDto.getMemberId()
 		};
 		return jdbcTemplate.update(sql, data)>0;
 	}
@@ -215,7 +216,7 @@ public class MemberDaoImpl implements MemberDao {
 					+ "select rownum rn, TMP.* from ("
 					+ "select * from member_list "
 					+ "where instr("+vo.getType()+",?) > 0 "
-					+ "and member_level != '관리자' "
+//					+ "and member_level != '관리자' "
 					+ "order by " + vo.getType()+ " asc"
 					+ ")TMP"
 					+") where rn between ? and ?";
@@ -226,7 +227,7 @@ public class MemberDaoImpl implements MemberDao {
 			String sql = "select * from ("
 					+ "select rownum rn, TMP.* from ("
 					+ "select * from member_list "
-					+ "where member_level != '관리자'"
+//					+ "where member_level != '관리자'"
 					+ "order by member_id asc"
 					+ ")TMP"
 					+") where rn between ? and ?";

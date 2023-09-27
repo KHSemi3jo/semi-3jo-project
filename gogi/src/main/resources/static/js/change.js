@@ -11,17 +11,17 @@ $(function(){
             && this.memberContact && this.memberBirth && this.memberAddr;
         },
     };
+    
 
     $("[name=memberName]").blur(function(){
         var regex =  /^[가-힣]{2,7}$/;
-        var isValid =$(this).val() == "" || regex.test($(this).val());
+        var isValid =$(this).val() != "" || regex.test($(this).val());
         $(this).removeClass("success fail");
         $(this).addClass(isValid ? "success" : "fail");
          status.memberName = isValid;
     });
     
-    var backupEmail = $("[name=memberEmail]").val();
-    
+    var backupEmail = $("[name=memberEmail]").val();   
     $("[name=memberEmail]").blur(function(e){
         var regex =  /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
         var email = $("[name=memberEmail]").val();
@@ -33,7 +33,7 @@ $(function(){
 			return;
 		}
      
-        var isValid =regex.test($(e.target).val());
+        var isValid = email != "" || regex.test($(e.target).val());
          if(isValid){//형식이 유효하다면
 			$.ajax({
 				url:"http://localhost:8080/rest/member/emailCheck",
@@ -64,7 +64,7 @@ $(function(){
     $("[name=memberContact]").blur(function(){
         var regex = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
         var contact = $(this).val();
-        var isValid =contact.length == 0 || regex.test(contact);
+        var isValid =contact.length != 0 || regex.test(contact);
         $(this).removeClass("success fail");
         $(this).addClass(isValid ? "success" : "fail");
          status.memberContact = isValid;

@@ -32,6 +32,7 @@
 <style>
 .btn.btn-search{
 	padding: 0.5em 0.7em;
+	    line-height: 1.4em;
 }
 </style>
 

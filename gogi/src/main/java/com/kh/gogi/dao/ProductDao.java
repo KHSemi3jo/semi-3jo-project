@@ -20,6 +20,10 @@ public interface ProductDao {
 	int countList(ProductVO  vo);
 	List<ProductDto> selectListBypage(ProductVO vo);
 	
+	List<ProductDto> selectByProductType(String productType);//카테고리로 상품찾기
+	List<ProductDto> selectDomesticBeefProduct(ProductVO vo); //국내산 소고기
+	List<ProductDto> selectImportedBeefProduct(ProductVO vo);// 수입산 소고기 
+	List<ProductDto> selectPorkProduct(ProductVO vo);// 돼지고기
 	
 
 }

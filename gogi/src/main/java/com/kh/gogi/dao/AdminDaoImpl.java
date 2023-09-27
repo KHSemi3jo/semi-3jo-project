@@ -101,7 +101,6 @@ public List<MemberListDto> selectListByPage2(ShopAfterVO vo) {
 							+ "select rownum rn, TMP.* from ("
 								+ "select * from member_list "
 								+ "where instr("+vo.getType()+", ?) > 0 "
-
 								+ "order by "+vo.getType()+" asc"
 							+ ")TMP"
 						+ ") where rn between ? and ?";

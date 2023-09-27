@@ -12,6 +12,7 @@ public interface BasketDao {
 	boolean delete(int basketNo);
 	BasketListDto selectOne(int basketNo);
 	List<BasketListDto> selectList(String basketMember);
+	boolean isInBasket(String basketMember, int productNo);
 	
 
 }
