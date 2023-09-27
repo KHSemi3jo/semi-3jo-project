@@ -69,7 +69,7 @@
                 method:"post",
                 data:{productNo:productNo},
                 success:function(){
-                    
+                    alert("성공");
                 }
             });
         });
@@ -82,7 +82,7 @@
                 method:"post",
                 data:{productNo:productNo},
                 success:function(){
-                    
+                	alert("성공");
                 }
             });
         });
