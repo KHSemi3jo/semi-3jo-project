@@ -299,7 +299,7 @@ $(function(){
                         <label>받으실 분</label>
                     </div>
                     <div class="row w-75 pr-30">
-                      <input type="text" name="addressName" value="${sessionScope.customer}" 
+                      <input type="text" name="addressName" value="${addressDto.addressName}" 
                      class="form-input w-100" required autocomplete="off">
                     </div>
                 </div>
@@ -341,17 +341,7 @@ $(function(){
                         <div class="fail-feedback left">주소 입력시 모든 주소를 작성해주세요</div>
                     </div>
                 </div>
-			<div class="row float-container center pr-25">
-				<div class="row">
 
-			<div class="w-75">
-			우편번호 :	<input type="text" name="addressPost" maxlength="5"  >
-						<button type="button" class="btn post-search">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-			기본주소 :	<input type="text" name="addressNormal"  >
-			상세주소 :	<input type="text" name="addressDetail" >
-			</div>
 			<div class="w-25">
 				<div class="row right">
 
