@@ -169,7 +169,7 @@
                 <hr class="line">
                 <div class="row right">총상품금액: <span class="total">0</span>원</div>
                 <div class="row flex-container">
-                    <div class="row w-25">후기(36)</div>
+                    <div class="row w-25"><a href="/shopafter/add">후기작성</a></div>
                     <div class="row w-50 ">
                         <button class="btn btn-orange btn-basket w-100">장바구니담기</button>
                     </div>

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class ShopAfterDto {
-private	int shopAfterAfterNo;
+private	Integer shopAfterAfterNo;
 private	int shopAfterNo;
 private	String shopAfterId;
 private	String shopAfterName;

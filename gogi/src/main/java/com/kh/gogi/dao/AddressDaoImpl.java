@@ -49,9 +49,9 @@ public class AddressDaoImpl implements AddressDao{
 	}
 	
 	@Override
-	public AddressDto selectOne(int addressNo) {
-		String sql = "select * from address where address_no =?";
-		Object[] data = { addressNo };
+	public AddressDto selectOne(String memberId) {
+		String sql = "select * from address where address_id =?";
+		Object[] data = { memberId };
 		List< AddressDto> list = jdbcTemplate.query(sql, addressMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}

@@ -8,7 +8,7 @@ public interface AddressDao {
 	public int sequence();
 	void insert(AddressDto addressDto);
 	List<AddressDto> selectAddressList(String memberId);
-	public AddressDto selectOne(int addressNo);
+	public AddressDto  selectOne(String memberId);
 	public boolean delete(int addressNo);
 	public boolean edit(AddressDto addressDto);
 	

@@ -27,9 +27,11 @@ public class ShopAfterDaoImpl implements ShopAfterDao {
 
 	@Override
 	public void add(ShopAfterDto shopAfterDto) {
-		String sql = "insert into shopAfter(shopAfter_no,shopAfter_name ,shopAfter_content) values(?,?,?)";
+		String sql = "insert into shopAfter(shopAfter_no,shopAfter_name,shopAfter_content,"
+				+ "shopAfter_afterno, shopAfter_id) values(?,?,?,?,?)";
 		Object[] data = { shopAfterDto.getShopAfterNo(), shopAfterDto.getShopAfterName(),
-				shopAfterDto.getShopAfterContent()};
+				shopAfterDto.getShopAfterContent(),shopAfterDto.getShopAfterAfterNo(),
+				shopAfterDto.getShopAfterId()};
 		tem.update(sql, data);
 	}
 
@@ -155,6 +157,56 @@ public class ShopAfterDaoImpl implements ShopAfterDao {
 		}
 	}
 
+	@Override
+	public List<ShopAfterDto> selectProductListByPage(String type, String keyword, int page, int productNo) {
+		int begin = page * 10 - 9;
+		int end = page * 10;
+
+
+		String sql =	" SELECT * "
+			     +"FROM (SELECT *  FROM shopAfter"
+			    	     +" where shopAfter_afterno = ? and instr(" + type + ", ?) > 0 "
+			    	          +" ORDER BY shopAfter_no DESC)"
+			    	    +" WHERE ROWNUM between ? and ?";
+		
+		
+		Object[] ob = { productNo,keyword, begin, end };
+		return tem.query(sql, shopAfterMapper, ob);
+	}
+
+	@Override
+	public List<ShopAfterDto> selectProductListByPage(int page, int productNo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from("
+				+ "select * from shopAfter where shopAfter_afterno = ? order by shopAfter_no desc"
+				+ ")TMP"
+				+ ") where rn between ? and ?";
+		Object[] ob = { productNo,page * 10 - 9, page * 10 };
+		return tem.query(sql,shopAfterMapper , ob);
+
+	}
+
+	@Override
+	public List<ShopAfterDto> selectProductListByPage(ShopAfterVO vo, int productNo) {
+		if (vo.isSearch()) {
+			return selectProductListByPage(vo.getType(), vo.getKeyword(), vo.getPage(),productNo);
+
+		} else {
+			return  selectProductListByPage(vo.getPage(),productNo);
+		}
+	}
+	@Override
+	public int countProductList(ShopAfterVO vo,int productNo) {
+		if (vo.isSearch()) {
+			String sql = "select count(*) from shopAfter where shopAfter_afterno = ? and instr(" + vo.getType() + ", ?) > 0";
+			Object[] ob = { productNo,vo.getKeyword() };
+			return tem.queryForObject(sql, int.class, ob);
+		} else {
+			String sql = "select count(*) from shopAfter where shopAfter_afterno = ?";
+			Object[] ob = { productNo };
+			return tem.queryForObject(sql, int.class,ob);
+		}
+	}
 
 
 }
