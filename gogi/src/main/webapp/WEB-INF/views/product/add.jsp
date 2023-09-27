@@ -75,13 +75,13 @@
                     </div>
                     <div class="row pr-30">
                         <label class="custom-checkbox">
-                            <input type="radio"  name="productType" >
+                            <input type="radio"  name="productType" value="냉동">
                             <span ></span> 냉동
                         </label>
                     </div>
                     <div class="row pr-30">
                         <label class="custom-checkbox">
-                            <input type="radio"  name="productType" >
+                            <input type="radio"  name="productType" value="냉장">
                             <span ></span> 냉장
                         </label>
                     </div>
