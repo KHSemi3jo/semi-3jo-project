@@ -143,7 +143,8 @@ $(function() {
          }
 
 		
-            
+      })
+});
         </script>
 
 <form class="delete-form" action="delete" method="post">
