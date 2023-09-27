@@ -27,23 +27,31 @@ public class BasketRestConrtoller {
 	@PostMapping("/add")
 	public void add(@RequestParam int productNo, HttpSession session) {
 		ProductDto productDto = productDao.selectOne(productNo);
-		if (productDto == null)
-			return;// 없는 상품이면 중지
+		if(productDto == null) return;//없는 상품이면 중지
 
-		int basketNo = basketDao.sequence();
-		BasketDto basketDto = new BasketDto();
-		basketDto.setBasketNo(basketNo);
-		basketDto.setBasketListNo(productDto.getProductNo());
 		String memberId = (String) session.getAttribute("name");
-		basketDto.setBasketMember(memberId);
-		basketDto.setBasketCount(1);
-		basketDao.add(basketDto);
+		boolean isInBasket = basketDao.isInBasket(memberId, productDto.getProductNo());
+		
+		if(!isInBasket) {
+			int basketNo = basketDao.sequence();
+			BasketDto basketDto = new BasketDto();
+			basketDto.setBasketNo(basketNo);
+			basketDto.setBasketListNo(productDto.getProductNo());
+			basketDto.setBasketMember(memberId);
+			basketDto.setBasketCount(1);
+			basketDao.add(basketDto);
+			
+		}
+		
+//		BasketListDto basketListDto = basketDao.selectOne(basketNo);
+//		if (장바구니에 있으면) return;//이미 담겨 있는 상품이면 중지
+		
 	}
 
-	@PostMapping("/selectPrice")
-	public void selectPrice() {
-
-
-	}
+//	@PostMapping("/selectPrice")
+//	public void selectPrice() {
+//
+//
+//	}
 
 }

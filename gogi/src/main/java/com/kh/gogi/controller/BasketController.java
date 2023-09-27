@@ -23,11 +23,9 @@ public class BasketController {
 	private BasketDao basketDao;
 
 	@RequestMapping("/list")
-	public String list(Model model
-
-			
+	public String list(Model model		
 //						,@RequestParam int basketNo
-			,HttpSession session
+						,HttpSession session
 						) {
 //		String basketMember = (String) session.getAttribute("name");
 //		BasketListDto basketDto = basketDao.selectOne(basketNo);
@@ -53,7 +51,7 @@ public class BasketController {
 	        return "/WEB-INF/views/basket/basketList.jsp";
 	    } 
 	    else {//비회원이면 로그인 필요 요청
-	        return "redirect:";
+	        return "redirect:/member/login";
 	    }
 			
 	

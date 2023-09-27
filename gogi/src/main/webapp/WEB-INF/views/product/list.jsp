@@ -36,6 +36,7 @@
 	</form>
 	</div>
 
+
 		<div class="container w-600">
     <div class="row flex-container auto-width">
         <c:forEach var="productDto" items="${list}" varStatus="loopStatus">
@@ -71,6 +72,7 @@
     </div>
 </div>
 	
+
 	<div class="row page-navigator mv-30">
 	<!-- 이전 버튼 -->
 	<c:if test="${!vo.first}">
