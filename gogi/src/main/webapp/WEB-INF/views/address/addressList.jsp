@@ -245,13 +245,13 @@ $(function(){
 				<div class="row right">
 					<button class="btn btn-edit btn-navy w-100">
 						<i class="fa-solid fa-edit"></i>
-						주소 수정
+						배송지 수정
 					</button>
 				</div>
 				<div class="row right ">
 					<button class="btn btn-orange btn-delete w-100">
 						<i class="fa-solid fa-trash"></i>
-						 주소 삭제
+						 배송지 삭제
 					</button>
 				</div>
 			</div>
@@ -264,26 +264,68 @@ $(function(){
 		<form class="address-edit-form edit-container">
 		<input type="hidden" name="addressNo">
 	<input type="hidden" name="addressId" >
+		<div class="container w-400">
+		 <div class="row flex-container">
+                    <div class="row w-25 left">
+                        <label>받으실 분</label>
+                    </div>
+                    <div class="row w-75 pr-30">
+                      <input type="text" name="addressName" value="${sessionScope.customer}" 
+                     class="form-input w-100" required autocomplete="off">
+                    </div>
+                </div>
+			<div class="row flex-container">
+                    <div class="row w-25 left">
+                        <label>연락처</label>
+                    </div>
+                    <div class="row w-75 pr-30">
+                        <input type="tel" name="addressPhone" value="${addressDto.addressPhone}"
+                                class="form-input w-100"autocomplete="off">
+                        <div class="fail-feedback left">휴대폰 번호를 입력해주세요</div>
+                    </div>
+                </div>
 		<div class="row flex-container">
-			<div class="w-75">
-			우편번호 :	<input type="text" name="addressPost" maxlength="5"  >
-			기본주소 :	<input type="text" name="addressNormal"  >
-			상세주소 :	<input type="text" name="addressDetail" >
-			</div>
-			<div class="w-25">
-				<div class="row right">
+                    <div class="row w-25 left">
+                        <label style="display: block;">주소</label>
+                    </div>
+                    <div class="row w-75 left">
+                        <input type="text" name="addressPost" class="form-input post-search"
+                                size="6" maxlength="6" value="${addressDto.addressPost}"autocomplete="off">
+                        <button type="button" class="btn post-search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row flex-container">
+                    <div class="w-25"></div>
+                    <div class="w-75 pr-30">
+                        <input type="text" name="addressNormal"autocomplete="off"
+                      class="form-input post-search w-100 " value="${addressDto.addressNormal}">
+                    </div>
+                </div>
+                <div class="row flex-container">
+                    <div class="w-25"></div>
+                    <div class="w-75 pr-30">
+                        <input type="text" name="addressDetail"  value="${addressDto.addressDetail}"
+                        class="form-input w-100" autocomplete="off">
+                        <div class="fail-feedback left">주소 입력시 모든 주소를 작성해주세요</div>
+                    </div>
+                </div>
+			<div class="row float-container center pr-25">
+				<div class="row">
 					<button type="submit" class="btn btn-positive">
 						<i class="fa-solid fa-check"></i>
 						수정
 					</button>
 				</div>
-				<div class="row right">
+				<div class="row">
 					<button type="button" class="btn btn-negative btn-cancel">
 						<i class="fa-solid fa-xmark"></i>
 						취소
 					</button>
 				</div>
 			</div>
+		</div>
 		</div>
 		</form>
 </script>
