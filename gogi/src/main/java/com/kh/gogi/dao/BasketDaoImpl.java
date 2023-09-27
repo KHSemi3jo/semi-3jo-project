@@ -67,6 +67,14 @@ public class BasketDaoImpl implements BasketDao {
 		return jdbcTemplate.query(sql, basketListMapper, data);
 	}
 
+	@Override
+	public boolean isInBasket(String basketMember, int productNo) {
+		String sql = "SELECT COUNT(*) FROM basket WHERE basket_member = ? AND basket_listno = ?";
+        Object[] data = { basketMember, productNo };
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, data);
+        return count > 0;
+	}
+
 
 
 
