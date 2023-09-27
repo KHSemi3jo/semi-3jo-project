@@ -19,7 +19,7 @@ select.form-input, .form-input, .btn.btn-navy {
 
  <!--daum 우편 API cdn-->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 $(function(){
     //검색버튼, 우편번호 입력창, 기본주소 입력창을 클릭하면 검색 실행
