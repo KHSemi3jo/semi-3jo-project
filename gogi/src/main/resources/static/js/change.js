@@ -33,7 +33,7 @@ $(function(){
 			return;
 		}
      
-        var isValid =regex.test($(e.target).val());
+        var isValid = email != "" || regex.test($(e.target).val());
          if(isValid){//형식이 유효하다면
 			$.ajax({
 				url:"http://localhost:8080/rest/member/emailCheck",
