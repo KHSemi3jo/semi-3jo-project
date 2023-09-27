@@ -46,7 +46,7 @@
            }
 
            // 하나라도 입력 필드가 비어있거나 가격 또는 무게가 0이면 등록 버튼 비활성화하고 메시지 표시
-           if (productName.length === 0 || isNaN(productPrice) || isNaN(productWeight) || productOrigin.length === 0 || productPrice === 0 || productWeight === 0) {
+           if (productName.length == 0 || isNaN(productPrice) || isNaN(productWeight) || productOrigin.length == 0 || productPrice == 0 || productWeight == 0) {
                event.preventDefault(); // 폼 제출을 막음
                alert("가격과 무게는 0이 아니어야 합니다. 빈 칸을 채워주세요.");
            }
@@ -70,11 +70,7 @@
                },
            });
        });
-       
-       
-      
-       
-       
+            
    }); 
     </script>
 
