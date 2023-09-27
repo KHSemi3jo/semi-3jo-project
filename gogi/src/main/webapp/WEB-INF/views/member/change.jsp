@@ -53,7 +53,7 @@
     </script>
     
     
-    <form class="change-form" action="change" method="post">
+    <form class="change-form" action="change" method="post"autocomplete="off" >
 	    <div class="container w-600" >
 
             <div class="row left">
@@ -67,7 +67,7 @@
                     </div>
                     <div class="row w-75 pr-30">
                         <input type="text" name="memberId" value="${memberDto.memberId}"
-                            class="form-input w-100" autocomplete="off" readonly>
+                            class="form-input w-100" readonly>
                     </div>
                 </div>
          
@@ -77,8 +77,8 @@
                     </div>
                     <div class="row w-75 pr-30">
                         <input type="text" name="memberName" value="${memberDto.memberName}" 
-                         class="form-input w-100" required autocomplete="off">
-
+                         class="form-input w-100" >
+                         <div class="fail-feedback left">한글 2~7자 이내의 이름을 입력하세요</div>
                     </div>
                 </div>
 
@@ -88,8 +88,9 @@
                     </div>
                     <div class="row w-75 pr-30">
                         <input type="email" name="memberEmail"value="${memberDto.memberEmail}"
-                                class="form-input w-100"autocomplete="off">
+                                class="form-input w-100">
                         <div class="fail-feedback left">이메일 형식으로 입력해주세요</div>
+                        <div class="fail2-feedback left">이미 사용중인 이메일입니다</div>
                     </div>
                 </div>
                 <div class="row flex-container">
@@ -97,9 +98,9 @@
                         <label>생년월일</label>
                     </div>
                     <div class="row w-75 pr-30">
-                        <input type="text" name="memberBirth" value="${memberDto.memberBirth}"
-                        class="form-input w-100"autocomplete="off">
-                        <div class="fail-feedback left">잘못된 날짜를 선택하셨습니다</div>
+                        <input type="date" name="memberBirth" value="${memberDto.memberBirth}"
+                        class="form-input w-100">
+                        <div class="fail-feedback left">예)1999-01-22( '-'를 포함하여 작성)</div>
                     </div>
                 </div>
 
@@ -109,8 +110,8 @@
                     </div>
                     <div class="row w-75 pr-30">
                         <input type="tel" name="memberContact" value="${memberDto.memberContact}"
-                                class="form-input w-100"autocomplete="off">
-                        <div class="fail-feedback left">휴대폰 번호를 입력해주세요</div>
+                                class="form-input w-100">
+                        <div class="fail-feedback left">예)010xxxx0000( '-' 없이 작성)</div>
                     </div>
                 </div>
                 <div class="row flex-container">
@@ -119,7 +120,7 @@
                     </div>
                     <div class="row w-75 left">
                         <input type="text" name="memberPost" class="form-input post-search"
-                                size="6" maxlength="6" value="${memberDto.memberPost}"autocomplete="off">
+                                size="6" maxlength="6" value="${memberDto.memberPost}">
                         <button type="button" class="btn post-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -128,7 +129,7 @@
                 <div class="row flex-container">
                     <div class="w-25"></div>
                     <div class="w-75 pr-30">
-                        <input type="text" name="memberAddr1"autocomplete="off"
+                        <input type="text" name="memberAddr1"
                                     class="form-input post-search w-100 " value="${memberDto.memberAddr1}">
                     </div>
                 </div>
@@ -136,7 +137,7 @@
                     <div class="w-25"></div>
                     <div class="w-75 pr-30">
                         <input type="text" name="memberAddr2"  value="${memberDto.memberAddr2}"
-                                    class="form-input w-100" autocomplete="off">
+                                    class="form-input w-100" >
                         <div class="fail-feedback left">주소 입력시 모든 주소를 작성해주세요</div>
                     </div>
                 </div>
