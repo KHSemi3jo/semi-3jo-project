@@ -40,7 +40,7 @@
 	<c:forEach var="productDto" items="${list}">
 		<div class="row">
 		<c:choose>
-		<c:when test="${productDto.image}">
+		<c:when test="${productDto.image}">${productDto.image}
 			<img src="image?productNo=${productDto.productNo}" width="200" height="200">
 		</c:when>
 		<c:otherwise>

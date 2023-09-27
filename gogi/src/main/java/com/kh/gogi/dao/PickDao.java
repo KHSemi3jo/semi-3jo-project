@@ -9,6 +9,6 @@ public interface PickDao {
 	int sequence();
 	void add(PickDto pickDto);
 	boolean delete(int pickNo);
-	List<PickListDto> selectList();
+	List<PickListDto> selectList(String pickMemberId);
 
 }
