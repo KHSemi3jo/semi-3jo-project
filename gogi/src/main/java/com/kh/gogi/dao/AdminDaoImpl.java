@@ -101,8 +101,6 @@ public List<MemberListDto> selectListByPage2(ShopAfterVO vo) {
 							+ "select rownum rn, TMP.* from ("
 								+ "select * from member_list "
 								+ "where instr("+vo.getType()+", ?) > 0 "
-//								+ "where member_level !='관리자' "
-//								+ "order by member_id asc";
 								+ "order by "+vo.getType()+" asc"
 							+ ")TMP"
 						+ ") where rn between ? and ?";
@@ -113,7 +111,6 @@ public List<MemberListDto> selectListByPage2(ShopAfterVO vo) {
 		String sql = "select * from ("
 							+ "select rownum rn, TMP.* from ("
 								+ "select * from member_list "
-//								+ "where member_level !='관리자' "
 								+ "order by member_id asc"
 							+ ")TMP"
 						+ ") where rn between ? and ?";
