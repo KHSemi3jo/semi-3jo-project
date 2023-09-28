@@ -146,9 +146,9 @@
 	                            회원정보수정
 	                        </button>
 	                        <a class="btn btn-navy" href="password">비밀번호변경</a>
-	                        <button class="btn" >                           
+	                        <a class="btn" href="exit" >                           
 	                            탈퇴하기
-	                        </button>
+	                        </a>
                 </div>
         </div> 
     </form>
