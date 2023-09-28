@@ -28,8 +28,7 @@ public class AdminController {
 	@Autowired
 	private MemberDao memberDao; 
 	
-//	@Autowired
-//	private BoardDao boardDao;
+
 
 	
 	@RequestMapping("/home")
@@ -58,12 +57,12 @@ public class AdminController {
 	public String edit(@ModelAttribute MemberDto memberDto) {
 		boolean result = memberDao.updateMemberInfoByAdmin(memberDto);
 		if(result) {
-			return "redirect:list"; //상대경로
+			return "redirect:detail?memberId="+memberDto.getMemberId(); //상대경로
 			//return "redirect:/admin/member/list"; //절대경로
 		}
 		else {
 			return "redirect:edit";
-			//throw new NoTargetException("존재하지 않는 회원 ID");
+//			throw new NoTargetException("존재하지 않는 회원 ID");
 		}
 	}
 	@RequestMapping("/member/detail")
