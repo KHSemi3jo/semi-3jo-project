@@ -15,7 +15,7 @@ $(function(){
 
     $("[name=memberName]").blur(function(){
         var regex =  /^[가-힣]{2,7}$/;
-        var isValid =$(this).val() != "" || regex.test($(this).val());
+        var isValid =$(this).val() != "" && regex.test($(this).val());
         $(this).removeClass("success fail");
         $(this).addClass(isValid ? "success" : "fail");
          status.memberName = isValid;
@@ -26,7 +26,7 @@ $(function(){
         var regex =  /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
         var email = $("[name=memberEmail]").val();
         
-        if(backupEmail == email) {
+        if(backupEmail == email ) {
         	$("[name=memberEmail]").removeClass("success fail fail2");
 			$("[name=memberEmail]").addClass("success");
 			status.memberEmail = true; //통과
@@ -64,7 +64,7 @@ $(function(){
     $("[name=memberContact]").blur(function(){
         var regex = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
         var contact = $(this).val();
-        var isValid =contact.length != 0 || regex.test(contact);
+        var isValid =contact.length != 0 && regex.test(contact);
         $(this).removeClass("success fail");
         $(this).addClass(isValid ? "success" : "fail");
          status.memberContact = isValid;

@@ -111,7 +111,8 @@
 				          <div class="float-container pr-50 pb-10">
 				          		<div class="row col-3"></div>
 				                <div class="row float-left pl-50"><a href="/basket/list"><i class="cart fa-solid fa-cart-shopping fa-xl navy"></i></a></div>
-				                <div class="row float-right"><span class="orange">10,000</span><span class="orange"> G</span></div>      									          
+				                <input type="hidden" name="memberId" value="${memberDto.memberId}">
+				                <div class="row float-right"><span class="orange"> G </span><span class="orange">${sessionScope.Gmoney}</span></div>      									          
 				          </div>
 			         </c:if>									        	
 
