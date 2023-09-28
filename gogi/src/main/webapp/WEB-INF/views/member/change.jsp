@@ -56,12 +56,12 @@
     <form class="change-form" action="change" method="post"autocomplete="off" >
 	    <div class="container w-600" >
 
-            <div class="row left">
+            <div class="row left pb-20">
                 <h2 >개인 정보 수정</h2>
             </div>
             <hr>
 
-                <div class="row flex-container">
+                <div class="row flex-container pt-20">
                     <div class="row w-25 left">
                         <label>아이디</label>
                     </div>
