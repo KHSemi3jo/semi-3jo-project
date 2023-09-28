@@ -15,7 +15,7 @@
         <h2 class="pt-30 pb-30 navy">공지사항 등록</h2>
     </div>
     <hr>
-    <form action="add" method="post">
+    <form action="add" method="post"autocomplete="off">
         <input type="hidden" name="noticeNo" value="${noticeDto.noticeNo}">
             <div class="row">
                 <div class="row flex-container">
