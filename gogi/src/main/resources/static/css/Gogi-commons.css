@@ -137,6 +137,7 @@ ul.menu-navy li:hover {
 .w-75 {width: 75%; }
 .w-100 {width: 100%; }
 
+.w-200 { width:200px; }
 .w-300 { width:300px; }
 .w-400 { width:400px; }
 .w-500 { width:500px; }
@@ -312,6 +313,7 @@ textarea.form-input.fixed {
 .pt-30{padding-top: 30px;}
 .pt-40{padding-top: 40px;}
 .pt-50{padding-top: 50px;}
+.pt-60{padding-top: 60px;}
 
 .pb-10{padding-bottom: 10px;}
 .pb-20{padding-bottom: 20px;}
