@@ -14,18 +14,30 @@
 
 <script>
     $(function(){
-        $(".btn-basket").click(function(){
-        	
+        $(".btn-basket").click(function(e){
+        	e.preventDefault();
+            
+            // 상품 번호 가져오기
+            var productNo = $(this).data("product-no");
+            
             $.ajax({
-                url:"http://localhost:8080/rest/basket/add",
-                method:"post",
-                data:{productNo:productNo},
-                success:function(){
-                    
-                }
+                type: "POST",
+                url: "/rest/basket/add",
+                contentType: "application/json",
+                success: function(response) {
+                    if (response.success) {
+                        alert(response.message);
+                    } 
+                    else {
+                        alert(response.message);
+                    }
+                },
+                
             });
         });
-    });
+     });
+   
+
 </script>
 
 <div class="row">
