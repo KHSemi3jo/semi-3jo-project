@@ -16,7 +16,7 @@
     </div>
     <hr>
     <form action="add" method="post"autocomplete="off">
-        <input type="hidden" name="noticeNo" value="${noticeDto.noticeNo}">
+      
             <div class="row">
                 <div class="row flex-container">
                     <div class="row w-25 ">

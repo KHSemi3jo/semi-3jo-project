@@ -24,7 +24,7 @@ select.form-input, .form-input, .btn.btn-navy {
 
 <div class="container w-800 navy">
 	<div class="row pb-30">
-		<h2>1대1 목록test</h2>
+		<h2>1대1 문의</h2>
 	</div>
 
 
