@@ -145,7 +145,7 @@ public class ProductController {
 					int count=productDao.countList(vo);
 					vo.setCount(count);
 					
-					List<ProductDto>list = productDao.selectImportedBeefProduct(vo);
+					List<ProductDto>list = productDao.selectDomesticBeefProduct(vo);
 					model.addAttribute("list",list);
 					return"/WEB-INF/views/product/dblist.jsp";
 				}
