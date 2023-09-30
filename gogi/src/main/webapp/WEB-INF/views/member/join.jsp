@@ -86,6 +86,44 @@ textarea{
 textarea:focus{
     outline: none;
 }
+
+/* 가입 완료 팝업 스타일 */
+.endPopup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+.endPopup-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* 팝업 버튼 스타일 */
+.endPopup-content button {
+  margin: 10px;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.endPopup-content button:hover {
+  background: #0056b3;
+}
+
     </style>
     <!--jquery CDN-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -128,6 +166,8 @@ textarea:focus{
         $(".popup .close-btn").click(function(){
             $(".popup").hide();
         });
+        
+
         
     });
     </script>
@@ -295,10 +335,10 @@ textarea:focus{
                         </div> 
                     </div>
                 </div>
+
                 <div class="row pt-10">
                     <button type="submit" class="btn btn-orange">가입하기</button>
                 </div>
-
 
         </div>
     </form>

@@ -2,9 +2,16 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<h2>그동안 이용해주셔서 감사합니다</h2>
+<div class="row container">
+	<div class="row pt-20">
+		<h2>회원 탈퇴 완료</h2>
+	</div>
+	<div class="row pt-10">
+		<h2>그동안 이용해주셔서 감사합니다</h2>
+	</div>
+	<div class="row pt-20">
+		<h3><a href="/main" class="btn btn-navy">홈으로 이동</a></h3>
+	</div>
+</div>
 
-<h3><a href="/member/join">메인페이지로 이동</a></h3>
-<h3><a href="https://www.google.com">구글로 이동</a></h3>
-<h3><a href="https://www.naver.com/">네이버로 이동</a></h3>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
