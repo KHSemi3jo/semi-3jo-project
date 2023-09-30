@@ -1,5 +1,7 @@
 package com.kh.gogi.rest;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -66,6 +68,24 @@ public class MemberRestController {
 		}
 		else { //이메일이 다르다면
 			return "아이디와 이메일주소를 확인해주세요";
+		}
+	}
+	
+	@PostMapping("/changePw")
+	public String password(HttpSession session,
+						@RequestParam String originPw,
+						@RequestParam String changePw) {
+		String memberId = (String) session.getAttribute("name"); //object로 꺼내기 위해 다운캐스팅
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		
+		//[1]기존 비밀번호가 일치하는지 판정
+		if(memberDto.getMemberPw().equals(originPw)) {//비밀번호가 일치한다면
+			//[2]1번이 성공일 때만 비밀번호를 변경하도록 처리(+개인정보 변경시각 수정(마지막 정보 변경일))
+			memberDao.updateMemberPw(memberId,changePw); //dto써도 무방(값이 1-2개일 때)
+			return "success";
+		}
+		else {
+			return "error"; //비밀번호 입력이 틀렸습니다 - 다시 입력하세요
 		}
 	}
 	
