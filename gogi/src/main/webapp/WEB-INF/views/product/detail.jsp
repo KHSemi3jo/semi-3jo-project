@@ -68,8 +68,13 @@
                 url:"http://localhost:8080/rest/basket/add",
                 method:"post",
                 data:{productNo:productNo},
-                success:function(){
-                    alert("성공");
+                success:function(response){
+                	if (response.success) {
+                        alert("상품이 장바구니에 추가되었습니다");
+                    } 
+                	else {
+                        alert("이미 장바구니에 있는 상품입니다");
+                    }
                 }
             });
         });
