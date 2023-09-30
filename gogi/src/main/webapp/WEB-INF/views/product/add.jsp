@@ -105,14 +105,20 @@
                     </div>
                     <div class="row pr-30">
                         <label class="custom-checkbox">
-                            <input type="radio"  name="productType" value="냉동" checked>
-                            <span ></span> 냉동
+                            <input type="radio"  name="productType" value="국내산소고기" checked>
+                            <span ></span> 국내산소고기
                         </label>
                     </div>
                     <div class="row pr-30">
                         <label class="custom-checkbox">
-                            <input type="radio"  name="productType" value="냉장">
-                            <span ></span> 냉장
+                            <input type="radio"  name="productType" value="수입산소고기">
+                            <span ></span> 수입산소고기
+                        </label>
+                    </div>
+                    <div class="row pr-30">
+                        <label class="custom-checkbox">
+                            <input type="radio"  name="productType" value="돼지고기">
+                            <span ></span> 돼지고기
                         </label>
                     </div>
                 </div>

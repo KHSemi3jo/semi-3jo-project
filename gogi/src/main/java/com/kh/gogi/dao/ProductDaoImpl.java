@@ -153,32 +153,33 @@ public class ProductDaoImpl implements ProductDao {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public List<ProductDto> selectByProductType(String productType) {
 		String sql = "SELECT p.*, pd.attach_no "
-				+ "FROM product p "
-				+ "LEFT OUTER JOIN product_image pd ON p.product_no = pd.product_no "
-				+ "WHERE p.product_type = ?  "
-				+ "ORDER BY p.product_no ASC;";
-		return jdbcTemplate.query(sql, productListMapper);
+	            + "FROM product p "
+	            + "LEFT OUTER JOIN product_image pd ON p.product_no = pd.product_no "
+	            + "WHERE p.product_type = ? "
+	            + "ORDER BY p.product_no ASC";
+		return jdbcTemplate.query(sql,new Object[] {productType}, productListMapper);
 	}
 
 	@Override
 	public List<ProductDto> selectDomesticBeefProduct(ProductVO vo) {
-		String productType = "국내산소고기";
-		return selectByProductType(productType);
+		vo.setProductType("국내산소고기");
+		return selectByProductType(vo.getProductType());
 	}
 
 	@Override
 	public List<ProductDto> selectImportedBeefProduct(ProductVO vo) {
-		String productType = "수입산소고기";
-		return selectByProductType(productType);
+		vo.setProductType("수입산소고기");
+		return selectByProductType(vo.getProductType());
 	}
 
 	@Override
 	public List<ProductDto> selectPorkProduct(ProductVO vo) {
-		String productType = "돼지고기";
-		return selectByProductType(productType);
+		vo.setProductType("돼지고기");
+		return selectByProductType(vo.getProductType());
 	}
 
 

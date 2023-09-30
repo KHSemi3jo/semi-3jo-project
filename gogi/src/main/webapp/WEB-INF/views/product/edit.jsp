@@ -68,17 +68,17 @@
                         <label>상품 타입</label>
                     </div>
                         <c:choose>
-                           <c:when test="${productDto.productType =='냉동'}">
+                           <c:when test="${productDto.productType =='국내산소고기'}">
                     		<div class="row pr-20 pb-20">
                                 <label class="custom-checkbox">
-                                    <input type="radio"  name="productType" value="냉동" checked>
-                                    <span ></span> 냉동
+                                    <input type="radio"  name="productType" value="국내산소고기" checked>
+                                    <span ></span> 국내산소고기
                                 </label>
                             </div>
                             <div class="row pr-20">
                                 <label class="custom-checkbox">
-                                    <input type="radio"  name="productType" value="냉장">
-                                    <span ></span> 냉장
+                                    <input type="radio"  name="productType" value="수입산소고기">
+                                    <span ></span> 수입산소고기
                                 </label>
                             </div>
                             </c:when>

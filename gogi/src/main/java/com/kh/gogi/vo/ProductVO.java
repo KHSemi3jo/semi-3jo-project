@@ -14,6 +14,8 @@ public class ProductVO {
 	private int size=18;//보여줄 게시판의 글 수(기본:10)
 	private int count;//전체 글 수
 	private int navigatorSize=10;//하단 네비게이터 표시 개수(기본:10)
+	private String productType;
+	
 	
 	public boolean isSearch() {
 		return type != null&&keyword != null;
