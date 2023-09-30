@@ -116,12 +116,13 @@ public class OneOnOneDaoImpl implements OneOnOneDao {
 	public List<OneOnOneDto> selectListByPage(int page, String oneId) {
 		
 		String sql = "select * from (select rownum rn, TMP.* from("
-				+ "select * from OneOnOne_list  where one_id = ? "
+				+ "select * from OneOnOne_list  where one_id = ? or one_level ='관리자' "
+				+ "and one_group in(select one_no from OneOnOne_list  where one_id = ?) "
 				+ "connect by Prior one_no = one_parent "
 				+ "start WITH one_parent is NULL "
 				+ "order siblings by one_group desc, one_no asc"
 				+ ")TMP) where rn between ? and ?";
-		Object[] ob = {oneId, page * 10 - 9, page * 10 };
+		Object[] ob = {oneId,oneId, page * 10 - 9, page * 10 };
 		return tem.query(sql,oneOnOneMapper , ob);
 
 	}

@@ -49,7 +49,6 @@ public class NoticeController {
 	}
 	@PostMapping("/add")
 	private String add(@ModelAttribute NoticeDto noticeDto,
-			@ModelAttribute MemberDto memberDto,
 			HttpSession session) {
 		int noticeNo = noticeDao.sequence();
 		noticeDto.setNoticeNo(noticeNo);
@@ -57,8 +56,6 @@ public class NoticeController {
 		
 		String memberId = (String) session.getAttribute("name");
 		noticeDto.setNoticeWriter(memberId);
-		
-		
 		
 		noticeDao.add(noticeDto);
 		return "redirect:detail?noticeNo="+noticeNo;

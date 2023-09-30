@@ -53,7 +53,9 @@ select.form-input, .form-input, .btn.btn-navy {
 					</tr>
 				</c:forEach>
 			</table>
-
+			<div class="row right">
+							<a href="/one/add" class="btn btn-navy pt-10">문의하기</a>
+			</div>
 		</div>
 </div>
 
