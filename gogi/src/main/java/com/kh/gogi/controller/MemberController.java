@@ -173,7 +173,7 @@ public class MemberController {
 			
 			MemberDto memberDto = memberDao.selectOne(memberId);
 			
-			if(memberDto.getMemberPw().equals(memberDto.getMemberPw())) {
+			if(memberDto.getMemberPw().equals(memberPw)) {
 				//삭제
 				memberDao.delete(memberId);
 				//로그아웃
