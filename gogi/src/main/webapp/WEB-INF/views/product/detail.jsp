@@ -72,9 +72,13 @@
                 	if (response.success) {
                         alert("상품이 장바구니에 추가되었습니다");
                     } 
-                	else {
-                        alert("이미 장바구니에 있는 상품입니다");
-                    }
+//                 	else {
+//                         alert("이미 장바구니에 있는 상품입니다");
+//                     }
+//                 	console.log(response);
+                },
+                error: function (xhr, status, error) {
+                	alert("이미 장바구니에 있는 상품입니다");
                 }
             });
         });

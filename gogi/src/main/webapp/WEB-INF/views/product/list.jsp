@@ -21,16 +21,19 @@
             var productNo = $(this).data("product-no");
             
             $.ajax({
-                type: "POST",
-                url: "/rest/basket/add",
-                contentType: "application/json",
+                url: "http://localhost:8080/rest/basket/add",
+                method: "post",
+                data: { productNo: productNo },
                 success: function(response) {
                     if (response.success) {
                         alert(response.message);
                     } 
-                    else {
-                        alert(response.message);
-                    }
+//                     else {
+//                         alert(response.message);
+//                     }
+                },
+                error: function (xhr, status, error) {
+                	alert("이미 장바구니에 있는 상품입니다");
                 },
                 
             });
@@ -84,7 +87,7 @@
                     <a href="delete?productNo=${productDto.productNo}">삭제</a>
                 </div>
                 <div class="row">
-                    <button class="btn-basket">담기</button>
+                    <button class="btn-basket" data-product-no="${productDto.productNo}">담기</button>
                 </div>
                 <hr>
             </div>
