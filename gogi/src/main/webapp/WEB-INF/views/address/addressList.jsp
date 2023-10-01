@@ -72,6 +72,7 @@ $(function(){
                 });
                 reloadList();
                 function reloadList() {
+
                     var params = new URLSearchParams(location.search);
                     var addressNo = params.get("addressNo");
                     var addressPost = params.get("addressPost");
@@ -96,7 +97,10 @@ $(function(){
                                 var address = response[i];
                                 var template = $("#address-template").html();
                                 var htmlTemplate = $.parseHTML(template);
-                           
+                        
+                                console.log(  document.querySelector("[name=addressPost]").value = address.addressPost);    
+                               
+                                
                                 $(htmlTemplate).find(".addressId").text(
                                     "회원 아이디 : " + address.addressId || "탈퇴한 사용자");
                                 
@@ -112,7 +116,10 @@ $(function(){
                                 $(htmlTemplate).find(".addressDetail").text(
                                     "상세 주소 : " + address.addressDetail);
 
-
+                          
+                        
+                                
+                                
                                 if (addressId.length == 0
                                     || addressId != address.addressId) {
 
@@ -140,14 +147,20 @@ $(function(){
                                                 alert("취소하였습니다.")
                                             }
                                         });
-                                
-                         
-                                
                                 $(htmlTemplate)
 								.find(".btn-edit")
-								.attr("data-address-no", address.addressNo)
-								.click(
-										function() {
+								.attr("data-address-post", address.addressPost)
+								       $(htmlTemplate)
+								.find(".btn-edit")
+								.attr("data-address-normal", address.addressNormal)
+								       $(htmlTemplate)
+								.find(".btn-edit")
+								.attr("data-address-detail", address.addressDetail)
+
+                                $(htmlTemplate)
+								.find(".btn-edit")
+								.attr("data-address-no", 	address.addressNo)
+								.click(function() {
 											var editTemplate = $(
 													"#address-edit-template")
 													.html();
@@ -155,7 +168,20 @@ $(function(){
 													.parseHTML(editTemplate);	
 											var addressNo = $(this).attr(
 													"data-address-no");
+											var addressPost = $(this).attr(
+											"data-address-post");
+											var addressNormal = $(this).attr(
+											"data-address-normal");
+											var addressDetail = $(this).attr(
+											"data-address-detail");
 										
+								
+											
+											
+				                                
+										
+								
+											
 											$(editHtmlTemplate).find(".post-search").click(function(){
 											    new daum.Postcode({
 											        oncomplete: function(data) {
@@ -181,25 +207,29 @@ $(function(){
 											    }).open();
 											})
 											
-
-										
+											
+											  var addressId = "${sessionScope.name}";
+									
+				
+											
 											$(editHtmlTemplate).find(
 													"[name=addressNo]")
 													.val(addressNo);
 											$(editHtmlTemplate)
 													.find(
 															"[name=addressId]")
-													.val(addressId);
+													.val(address.addressId);
 											$(editHtmlTemplate).find(
 											"[name=addressPost]")
-											.val(addressPost);
+											.val(address.addressPost);
 											$(editHtmlTemplate).find(
 											"[name=addressNormal]")
-											.val(addressNormal);
+											.val(address.addressNormal);
 											$(editHtmlTemplate).find(
 											"[name=addressDetail]")
-											.val(addressDetail);
-											
+											.val(address.addressDetail);
+									
+								
 											$(editHtmlTemplate)
 													.find(".btn-cancel")
 													.click(
@@ -219,12 +249,17 @@ $(function(){
 																			data : $(
 																					e.target).serialize(),
 																			success : function(response) {
+																				
 																				reloadList();
 																			}
 																		});
 															});
 											$(this).parents(".view-container")
 													.hide().after(editHtmlTemplate);
+											 document.querySelector("[name=addressPost]").value = addressPost;
+												document.querySelector("[name=addressNormal]").value =addressNormal;
+				                 		   document.querySelector("[name=addressDetail]").value =addressDetail;
+											
 										});
                                 
                                 
@@ -238,6 +273,10 @@ $(function(){
                 reloadList();
 
             });
+            
+         
+            
+            
         </script>
 <h1>배송지 관리</h1>
 <hr>
@@ -290,6 +329,8 @@ $(function(){
 
 
 <script id="address-edit-template" type="text/template">
+
+
 		<form class="address-edit-form edit-container">
 		<input type="hidden" name="addressNo">
 	<input type="hidden" name="addressId" >
@@ -321,7 +362,7 @@ $(function(){
                     <div class="row w-75 left">
                         <input type="text" name="addressPost" class="form-input post-search"
                                 size="6" maxlength="6" 
-value="$[name=addressPost].text()"autocomplete="off">
+value="" autocomplete="off">
                         <button type="button" class="btn post-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -331,13 +372,13 @@ value="$[name=addressPost].text()"autocomplete="off">
                     <div class="w-25"></div>
                     <div class="w-75 pr-30">
                         <input type="text" name="addressNormal"autocomplete="off"
-                      class="form-input post-search w-100 " value="${addressDto.addressNormal}">
+                      class="form-input post-search w-100 " value="addressNormal">
                     </div>
                 </div>
                 <div class="row flex-container">
                     <div class="w-25"></div>
                     <div class="w-75 pr-30">
-                        <input type="text" name="addressDetail"  value="${addressDto.addressDetail}"
+                        <input type="text" name="addressDetail"  value="addressDetail"
                         class="form-input w-100" autocomplete="off">
                         <div class="fail-feedback left">주소 입력시 모든 주소를 작성해주세요</div>
                     </div>
@@ -362,6 +403,9 @@ value="$[name=addressPost].text()"autocomplete="off">
 		</div>
 		</div>
 		</form>
+
+
+
 </script>
 
 
