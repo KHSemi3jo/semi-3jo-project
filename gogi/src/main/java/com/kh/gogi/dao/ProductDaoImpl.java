@@ -182,6 +182,45 @@ public class ProductDaoImpl implements ProductDao {
 		return selectByProductType(vo.getProductType());
 	}
 
+	@Override
+	public int countDomesticBeefProduct(ProductVO vo) {
+		if(vo.isSearch()) {
+			String sql = "select count(*) from product where product_type = '국내산소고기' "
+					+ "and instr("+vo.getType()+",?)>0";
+			Object[]data= {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class,data);
+		}
+		else {
+			String sql = "select count(*) from product where product_type = '국내산소고기'";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
 
+	@Override
+	public int countImportedBeefProduct(ProductVO vo) {
+		if(vo.isSearch()) {
+			String sql = "select count(*) from product where product_type = '수입산소고기' "
+					+ "and instr("+vo.getType()+",?)>0";
+			Object[]data= {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class,data);
+		}
+		else {
+			String sql = "select count(*) from product where product_type = '수입산소고기'";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
 
+	@Override
+	public int countPorkProduct(ProductVO vo) {
+		if(vo.isSearch()) {
+			String sql = "select count(*) from product where product_type = '돼지고기' "
+					+ "and instr("+vo.getType()+",?)>0";
+			Object[]data= {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class,data);
+		}
+		else {
+			String sql = "select count(*) from product where product_type = '돼지고기'";
+			return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	}
 }
