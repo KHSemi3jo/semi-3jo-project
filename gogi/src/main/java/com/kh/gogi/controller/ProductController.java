@@ -138,11 +138,11 @@ public class ProductController {
 			session.removeAttribute("productNo");
 			return"/WEB-INF/views/product/list.jsp";
 		}
-		//상품 국내산 소고기 목록 페이지
+				//상품 국내산 소고기 목록 페이지
 				@RequestMapping("/dblist")
 				public String dblist(Model model,
 										@ModelAttribute(name = "vo") ProductVO vo) {
-					int count=productDao.countList(vo);
+					int count=productDao.countDomesticBeefProduct(vo);
 					vo.setCount(count);
 					
 					List<ProductDto>list = productDao.selectDomesticBeefProduct(vo);
@@ -153,7 +153,7 @@ public class ProductController {
 				@RequestMapping("/iblist")
 				public String iblist(Model model,
 										@ModelAttribute(name = "vo") ProductVO vo) {
-					int count=productDao.countList(vo);
+					int count=productDao.countImportedBeefProduct(vo);
 					vo.setCount(count);
 					
 					List<ProductDto>list = productDao.selectImportedBeefProduct(vo);
@@ -164,7 +164,7 @@ public class ProductController {
 				@RequestMapping("/plist")
 				public String plist(Model model,
 										@ModelAttribute(name = "vo") ProductVO vo) {
-					int count=productDao.countList(vo);
+					int count=productDao.countPorkProduct(vo);
 					vo.setCount(count);
 					
 					List<ProductDto>list = productDao.selectPorkProduct(vo);
