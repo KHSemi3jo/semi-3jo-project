@@ -10,7 +10,18 @@
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>	
 	</c:otherwise>
 </c:choose>
-
+<style>
+select.form-input,
+.form-input,
+.btn.btn-navy{
+	font-size:16px;
+	height:2.8em;
+    border-radius: 0.1em;
+}
+.hidden-select{
+	display: none;
+}
+</style>
 
 <script>
     $(function(){
@@ -28,25 +39,25 @@
     });
 </script>
 
-<div class="row">
-
-<form action="list" method="get">
-
-<c:choose>
-	<c:when test="${vo.type == 'productName'}"></c:when>
-	<c:otherwise>
-	<select name="type">
-	<option value="product_name" selected>상품이름</option>
-	</select>
-	</c:otherwise>
-</c:choose>
-	<input  class="form-inptut" type="search" name="keyword" placeholder="검색어를 입력해주세요"
-	required>
-	<button type="submit" class="btn btn-navy">
-	<i class="fa-solid fa-magnifying-glass"></i>
-	검색</button>
-	</form>
+<c:if test="${sessionScope.level == '관리자'}">
+	<div class="row">
+		<form action="list" method="get">
+			<c:choose>
+				<c:when test="${vo.type == 'productName'}"></c:when>
+				<c:otherwise>
+				<select class="form-input hidden-select" name="type">
+				<option value="product_name" selected>상품이름</option>
+				</select>
+				</c:otherwise>
+			</c:choose>
+			<input  class="form-input" type="search" name="keyword" placeholder="검색어를 입력해주세요"
+			 autocomplete="off">
+			<button type="submit" class="btn btn-navy">
+			<i class="fa-solid fa-magnifying-glass"></i>
+			검색</button>
+		</form>
 	</div>
+</c:if>
 
 
 		<div class="container w-600">
