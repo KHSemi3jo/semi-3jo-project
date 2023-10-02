@@ -10,6 +10,7 @@
 <!-- 아이콘 사용을 위한 Font Awesome 6 CDN -->
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 
 <!-- 구글 웹 폰트 사용을 위한 CDN -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,6 +35,9 @@
 	padding: 0.5em 0.7em;
 	    line-height: 1.4em;
 }
+.hidden-select{
+	display: none;
+}
 </style>
 
 </head>
@@ -52,11 +56,21 @@
                 <a href="/main"><img src="/images/logo/GogiLogo-main.png"width=150 height="150"></a>
             </div>
             <div class="title flex-container pl-50">
-                <div class="row input-search">
-                    <input type="search" name="keyword" class="form-input search-navy" value="${param.keyword}" 
-                                placeholder="검색어를 입력해주세요" autocomplete="off">
-                    <button type="submit" class="btn btn-search"><i class="fa-solid fa-magnifying-glass orange"></i></button>
-                </div>
+	            <form action="list" method="get">
+	                <div class="row input-search">
+		                <c:choose>
+							<c:when test="${vo.type == 'productName'}"></c:when>
+							<c:otherwise>
+							<select class="form-input hidden-select" name="type">
+							<option value="product_name" selected>상품이름</option>
+							</select>
+							</c:otherwise>
+						</c:choose>
+	                    <input type="search" name="keyword" class="form-input search-navy"
+	                                placeholder="검색어를 입력해주세요" autocomplete="off">
+	                    <button type="submit" class="btn btn-search"><i class="fa-solid fa-magnifying-glass orange"></i></button>
+	                </div>
+	             </form>
             </div>
         <div class="etc">
 			      								        	
