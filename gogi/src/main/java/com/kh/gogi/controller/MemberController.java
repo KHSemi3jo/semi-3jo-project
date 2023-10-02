@@ -223,7 +223,7 @@ public class MemberController {
 			return "/WEB-INF/views/member/searchPwFinish.jsp";
 		}
 		
-		@RequestMapping("/addressList")
+		@RequestMapping("/addressList2")
 		public String address( String memberId,
 				Model model, HttpSession session
 				) {
@@ -236,6 +236,6 @@ public class MemberController {
 			
 			List<AddressDto> list = addressDao.selectAddressList(memberId);
 			model.addAttribute("list", list);
-			return "/WEB-INF/views/address/addressList.jsp";
+			return "/WEB-INF/views/address/addressList2.jsp";
 		}
 	}
