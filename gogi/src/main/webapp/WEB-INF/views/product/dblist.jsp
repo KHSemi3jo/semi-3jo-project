@@ -84,6 +84,7 @@ select.form-input,
 </style>
 
 <script>
+
     $(function(){
         $(".btn-basket").click(function(e){
         	e.preventDefault();
@@ -141,6 +142,7 @@ select.form-input,
 
 </script>
 
+
 <c:if test="${sessionScope.level == '관리자'}">
 	<div class="row">
 		<form action="list" method="get">
@@ -187,7 +189,9 @@ select.form-input,
 		                	<c:if test="${sessionScope.level == '관리자'}">
 		                    	<span>No.${productDto.productNo}</span>
 		                	</c:if>
-		                    	${productDto.productName} (${productDto.productType})
+
+		                    	${productDto.productName} 
+
 		                	</div>
 		                	<div class="row left productPrice">
 		                    	${productDto.productPrice}원
@@ -205,7 +209,6 @@ select.form-input,
         </c:forEach>
     </div>
 </div>
-	
 
 	<div class="row page-navigator mv-30">
 	<!-- 이전 버튼 -->
@@ -226,6 +229,7 @@ select.form-input,
 	</div>
 
 
+
 <!-- 모달 대화상자 -->
 <div id="myModal" class="modal ">
   <div class="modal-content container">
@@ -233,14 +237,6 @@ select.form-input,
     <p id="modalMessage" class="orange pt-50"></p>
   </div>
 </div>
-
-
-
-
-
-
-
-
 
 
 

@@ -187,7 +187,9 @@ select.form-input,
 		                	<c:if test="${sessionScope.level == '관리자'}">
 		                    	<span>No.${productDto.productNo}</span>
 		                	</c:if>
-		                    	${productDto.productName} (${productDto.productType})
+
+		                    	${productDto.productName} 
+
 		                	</div>
 		                	<div class="row left productPrice">
 		                    	${productDto.productPrice}원
@@ -233,17 +235,6 @@ select.form-input,
     <p id="modalMessage" class="orange pt-50"></p>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
