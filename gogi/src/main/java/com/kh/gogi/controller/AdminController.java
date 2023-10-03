@@ -2,6 +2,7 @@ package com.kh.gogi.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.gogi.dao.MemberDao;
 import com.kh.gogi.dto.MemberDto;
 import com.kh.gogi.dto.MemberListDto;
-import com.kh.gogi.error.NoTargetException;
 import com.kh.gogi.vo.PaginationVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -78,9 +78,10 @@ public class AdminController {
 		return "/WEB-INF/views/admin/member/detail.jsp";
 	}
 	@RequestMapping("/member/block")
-	public String memberBlock(@RequestParam String memberId) {
+	public String memberBlock(@RequestParam String memberId, HttpServletRequest request ) {
 		memberDao.insertBlock(memberId);
-		return "redirect:list";
+		// 현재 페이지 URL을 가져와서 리다이렉트 
+		return "redirect:" + request.getHeader("Referer");
 	}
 	@RequestMapping("/member/cancel")
 	public String memberCancel(@RequestParam String memberId) {

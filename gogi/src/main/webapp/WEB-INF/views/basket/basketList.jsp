@@ -100,6 +100,33 @@ $(function() {
  	 $(".check-item").click(function(){
  		 reload();
  	 });
+
+
+ 	  // 전체선택 체크박스 상태 변수
+    var isCheckAllChecked = false;
+
+    // "전체선택" 체크박스 클릭 처리
+    $(".check-all").click(function() {
+        isCheckAllChecked = $(this).prop("checked");
+        $(".check-item").prop("checked", isCheckAllChecked);
+        // 체크박스가 선택되거나 선택 해제 될 때 총 결제 금액을 계산
+        reload();
+        // 전체선택 체크박스 상태에 따라 "선택 삭제" 버튼 활성화/비활성화
+        $(".btn-select").prop("disabled", !isCheckAllChecked);
+    });
+
+     // 체크박스 상태 변화 감지
+     $(".check-item").change(function() {
+    	 reload();
+         var checkedItems = $(".check-item:checked");
+         // 체크된 항목이 하나 이상인 경우 버튼을 활성화, 그렇지 않으면 비활성화
+         if (checkedItems.length > 0) {
+             $(".btn-select").prop("disabled", false);
+         } else {
+             $(".btn-select").prop("disabled", true);
+         }
+     });
+
       //실시간 변경처리
       function reload(){
          

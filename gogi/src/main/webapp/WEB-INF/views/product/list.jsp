@@ -43,6 +43,44 @@ select.form-input,
 .hidden-select{
 	display: none;
 }
+
+   /* 모달 스타일 */
+.modal {
+    display: none; /* 초기에는 모달을 숨김 */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #FA9F5F;
+    width: 300px;
+    height: 180px;
+    box-shadow: 0px 0px 1px 0px #000;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+}
+.close {
+    color: #FA9F5F;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: -10px;
+}
+.close:hover,
+.close:focus {
+    color: #012D5C;
+    text-decoration: none;
+    cursor: pointer;
+}
 </style>
 
 <script>
@@ -59,20 +97,47 @@ select.form-input,
                 data: { productNo: productNo },
                 success: function(response) {
                     if (response.success) {
-                        alert(response.message);
+                		$("#modalMessage").text("상품이 장바구니에 추가되었습니다");
+                        openModal(); // 모달 열기
                     } 
 //                     else {
 //                         alert(response.message);
 //                     }
                 },
                 error: function (xhr, status, error) {
-                	alert("이미 장바구니에 있는 상품입니다");
+                	$("#modalMessage").text("이미 장바구니에 있는 상품입니다");
+                    openModal(); // 모달 열기
                 },
                 
             });
         });
      });
-   
+    // 모달 열기------------------------------
+    function openModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "block";
+    }
+
+    // 모달 닫기
+    function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    }
+
+    // 모달 닫기 버튼 클릭 시 닫기
+    var closeBtn = document.getElementsByClassName("close")[0];
+    closeBtn.onclick = function() {
+        closeModal();
+    }
+
+    // 모달 외부 클릭 시 닫기
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal");
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+    //----------------------------
 
 </script>
 
@@ -161,7 +226,13 @@ select.form-input,
 	</div>
 
 
-
+<!-- 모달 대화상자 -->
+<div id="myModal" class="modal ">
+  <div class="modal-content container">
+    <span class="close orange" onclick="closeModal()">&times;</span>
+    <p id="modalMessage" class="orange pt-50"></p>
+  </div>
+</div>
 
 
 
