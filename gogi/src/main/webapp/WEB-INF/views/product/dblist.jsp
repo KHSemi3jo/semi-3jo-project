@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
+
 <c:choose>
 	<c:when test="${sessionScope.level == '관리자'}">
 		<jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
@@ -82,61 +84,64 @@ select.form-input,
 </style>
 
 <script>
-$(function(){
-    $(".btn-basket").click(function(e){
-    	e.preventDefault();
-        
-        // 상품 번호 가져오기
-        var productNo = $(this).data("product-no");
-        
-        $.ajax({
-            url: "http://localhost:8080/rest/basket/add",
-            method: "post",
-            data: { productNo: productNo },
-            success: function(response) {
-                if (response.success) {
-            		$("#modalMessage").text("상품이 장바구니에 추가되었습니다");
-                    openModal(); // 모달 열기
-                } 
-//                 else {
-//                     alert(response.message);
-//                 }
-            },
-            error: function (xhr, status, error) {
-            	$("#modalMessage").text("이미 장바구니에 있는 상품입니다");
-                openModal(); // 모달 열기
-            },
+
+    $(function(){
+        $(".btn-basket").click(function(e){
+        	e.preventDefault();
             
+            // 상품 번호 가져오기
+            var productNo = $(this).data("product-no");
+            
+            $.ajax({
+                url: "http://localhost:8080/rest/basket/add",
+                method: "post",
+                data: { productNo: productNo },
+                success: function(response) {
+                    if (response.success) {
+                		$("#modalMessage").text("상품이 장바구니에 추가되었습니다");
+                        openModal(); // 모달 열기
+                    } 
+//                     else {
+//                         alert(response.message);
+//                     }
+                },
+                error: function (xhr, status, error) {
+                	$("#modalMessage").text("이미 장바구니에 있는 상품입니다");
+                    openModal(); // 모달 열기
+                },
+                
+            });
         });
-    });
- });
-// 모달 열기------------------------------
-function openModal() {
-    var modal = document.getElementById("myModal");
-    modal.style.display = "block";
-}
+     });
+    // 모달 열기------------------------------
+    function openModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "block";
+    }
 
-// 모달 닫기
-function closeModal() {
-    var modal = document.getElementById("myModal");
-    modal.style.display = "none";
-}
+    // 모달 닫기
+    function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    }
 
-// 모달 닫기 버튼 클릭 시 닫기
-var closeBtn = document.getElementsByClassName("close")[0];
-closeBtn.onclick = function() {
-    closeModal();
-}
-
-// 모달 외부 클릭 시 닫기
-window.onclick = function(event) {
-    var modal = document.getElementById("myModal");
-    if (event.target == modal) {
+    // 모달 닫기 버튼 클릭 시 닫기
+    var closeBtn = document.getElementsByClassName("close")[0];
+    closeBtn.onclick = function() {
         closeModal();
     }
-}
-//----------------------------
+
+    // 모달 외부 클릭 시 닫기
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal");
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+    //----------------------------
+
 </script>
+
 
 <c:if test="${sessionScope.level == '관리자'}">
 	<div class="row">
@@ -184,7 +189,9 @@ window.onclick = function(event) {
 		                	<c:if test="${sessionScope.level == '관리자'}">
 		                    	<span>No.${productDto.productNo}</span>
 		                	</c:if>
+
 		                    	${productDto.productName} 
+
 		                	</div>
 		                	<div class="row left productPrice">
 		                    	${productDto.productPrice}원
@@ -230,15 +237,6 @@ window.onclick = function(event) {
     <p id="modalMessage" class="orange pt-50"></p>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
 
 
 
