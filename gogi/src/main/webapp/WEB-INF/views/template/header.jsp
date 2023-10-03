@@ -122,8 +122,8 @@
             <ul class="menu menu-navy center">
                 <li><a href="#"><i class="fa-solid fa-bars "></i> 카테고리</a>
                     <ul>
-                        <li><a class="left" href="/product/iblist">수입산 소고기</a></li>
                         <li><a class="left" href="/product/dblist">국내산 소고기</a></li>
+                        <li><a class="left" href="/product/iblist">수입산 소고기</a></li>
                         <li><a class="left" href="/product/plist">돼지고기</a></li>
                     </ul>
                 </li>
