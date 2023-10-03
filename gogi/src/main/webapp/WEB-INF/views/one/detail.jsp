@@ -23,10 +23,12 @@
                     <th bgcolor="#CCD5DE">제목</th>
                     <td class="left">${oneOnOneDto.oneTitle}</td>
                 </tr>
-                <tr>
-                    <th bgcolor="#CCD5DE">작성자</th>
-                    <td class="left">${oneOnOneDto.oneId}</td>
-                </tr>
+                <c:if test="${sessionScope.level == '관리자'}">
+	                <tr>
+	                    <th bgcolor="#CCD5DE">작성자</th>
+	                    <td class="left">${oneOnOneDto.oneId}</td>
+	                </tr>
+                </c:if>
                 <tr>
                     <th bgcolor="#CCD5DE">작성일</th>
                     <td class="left">${oneOnOneDto.oneDate}</td>
