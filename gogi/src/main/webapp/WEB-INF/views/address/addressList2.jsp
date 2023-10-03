@@ -338,7 +338,7 @@ $(function(){
                             // 서버 응답 처리
                             if (response == "success") {
                                 // 수정 성공 시
-                                showPasswordChangeConfirmPopup();
+                                showAddressEditConfirmPopup();
                             } else {
                                 // 수정 실패 시 오류 메시지 표시
                                 $("#addressEditErrorMessage").text("주소가 올바르지 않습니다.");
@@ -423,82 +423,7 @@ $(function(){
 </script>
 
 
-<script id="address-edit-template" type="text/template">
 
-
-		<form class="address-edit-form edit-container">
-		<input type="hidden" name="addressNo">
-	<input type="hidden" name="addressId" >
-		<div class="container w-400">
-		 <div class="row flex-container">
-                    <div class="row w-25 left">
-                        <label>받으실 분</label>
-                    </div>
-                    <div class="row w-75 pr-30">
-                      <input type="text" name="addressName" value="${addressDto.addressName}" 
-                     class="form-input w-100" required autocomplete="off">
-                    </div>
-                </div>
-			<div class="row flex-container">
-                    <div class="row w-25 left">
-                        <label>연락처</label>
-                    </div>
-                    <div class="row w-75 pr-30">
-                        <input type="tel" name="addressPhone" value="${sessionScope.phone}"
-                                class="form-input w-100"autocomplete="off">
-                        <div class="fail-feedback left">휴대폰 번호를 입력해주세요</div>
-                    </div>
-                </div>
-		<div class="row flex-container">
-
-                    <div class="row w-25 left">
-                        <label style="display: block;">주소</label>
-                    </div>
-                    <div class="row w-75 left">
-                        <input type="text" name="addressPost" class="form-input post-search"
-                                size="6" maxlength="6" 
-value="" autocomplete="off">
-                        <button type="button" class="btn post-search">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="row flex-container">
-                    <div class="w-25"></div>
-                    <div class="w-75 pr-30">
-                        <input type="text" name="addressNormal"autocomplete="off"
-                      class="form-input post-search w-100 " value="addressNormal">
-                    </div>
-                </div>
-                <div class="row flex-container">
-                    <div class="w-25"></div>
-                    <div class="w-75 pr-30">
-                        <input type="text" name="addressDetail"  value="addressDetail"
-                        class="form-input w-100" autocomplete="off">
-                        <div class="fail-feedback left">주소 입력시 모든 주소를 작성해주세요</div>
-                    </div>
-                </div>
-
-
-			<div class="w-25">
-		<div class="row right">
-
-					<a class="btn btn-navy" id="editAddressButton">배송지 수정</a>
-				</div>
-				<div class="row">
-					<button type="button" class="btn btn-orange btn-cancel">
-						<i class="fa-solid fa-xmark"></i>
-						취소
-					</button>
-				</div>
-			</div>
-		</div>
-		</div>
-		</form>
-
-
-
-</script>
 
 
 
@@ -515,6 +440,7 @@ value="" autocomplete="off">
 			<th>받으실 분</th>
 			<th>연락처</th>
 			<th>기본주소</th>
+			<th>수정</th>
 		</tr>
 	</thead>
 	<tbody align="center">
@@ -524,6 +450,8 @@ value="" autocomplete="off">
 				<td>${addressDto.addressName}</td>
 				<td>${sessionScope.phone}</td>
 				<td>${addressDto.addressNormal}</td>
+				<td><a href="edit" id="editAddressButton"> 
+				<i class="fa-solid fa-pen"></i></a></td>
 
 			</tr>
 		</c:forEach>
@@ -532,14 +460,13 @@ value="" autocomplete="off">
 </table>
 
 
-<div class="container address-list w-1000"></div>
+<div class="container address-list w-100"></div>
 
    
    <div id="addressEditPopup" class="popup row container" >
     	<div class="popupContent row w-400">
 		    <h2>배송지 수정</h2>
-		    </div>
-		   <form class="address-edit-form edit-container">
+		   <form id="addressEditForm" action="edit" method="post" autocomplete="off">
 		<input type="hidden" name="addressNo">
 	<input type="hidden" name="addressId" >
 		<div class="container w-400">
@@ -592,7 +519,12 @@ value="" autocomplete="off">
                     </div>
                 </div>
 		</div>
+		 <div class="row pt-10">
+			        <button class="btn btn-orange" type="submit">배송지 수정</button>
+				    <button class="btn btn-navy" id="closeAddressEditPopup">닫기</button>
+		        </div>
 		</form>
+		</div>
 </div>
 
 <div id="addressEditConfirmPopup" class="popup">
