@@ -42,10 +42,10 @@ select.form-input,
 				<a class="menu navy" href="edit?memberId=${memberListDto.memberId}">수정</a>	
 				<c:choose>
 					<c:when test="${memberListDto.block == 'Y'}">
-						<a class="menu navy" href="cancel?memberId=${memberListDto.memberId}">해제</a>
+						<a class="menu orange" href="cancel?memberId=${memberListDto.memberId}">차단</a>
 					</c:when>
 					<c:otherwise>
-						<a class="menu orange" href="block?memberId=${memberListDto.memberId}">차단</a>
+						<a class="menu navy" href="block?memberId=${memberListDto.memberId}">해제</a>
 					</c:otherwise>
 				</c:choose>
 		 	</td>
