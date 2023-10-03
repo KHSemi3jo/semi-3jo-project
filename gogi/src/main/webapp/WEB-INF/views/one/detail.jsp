@@ -15,7 +15,7 @@
 
 <div class="container w-800">
     <div class="row">
-        <h2 class="pt-30 pb-30 navy">1대1 게시판</h2>
+        <h2 class="pt-30 pb-30 navy">1 : 1 게시판</h2>
     </div>
     <div class="row">
         <table class="table table-slit">

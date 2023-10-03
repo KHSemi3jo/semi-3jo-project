@@ -24,7 +24,7 @@ select.form-input, .form-input, .btn.btn-navy {
 
 <div class="container w-800 navy">
 	<div class="row pb-30">
-		<h2>1대1 문의</h2>
+		<h2>1 : 1 문의</h2>
 	</div>
 
 
@@ -33,8 +33,7 @@ select.form-input, .form-input, .btn.btn-navy {
 				<thead>
 					<tr>
 						<th>카테고리</th>
-						<th width="50%">제목</th>
-						<th>작성자</th>
+						<th width="60%">제목</th>
 						<th>작성일</th>
 					</tr>
 				</thead>
@@ -49,7 +48,6 @@ select.form-input, .form-input, .btn.btn-navy {
 							</c:if>
 							<a class="noticeTitle navy "href="detail?oneNo=${OneOnOneDto.oneNo}">${OneOnOneDto.oneTitle}</a>
 						</td>				
-						<td>${OneOnOneDto.oneId}</td>
 						<td>${OneOnOneDto.oneDate}</td>
 					</tr>
 				</c:forEach>
