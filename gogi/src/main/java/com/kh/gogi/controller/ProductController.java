@@ -171,6 +171,8 @@ public class ProductController {
 					model.addAttribute("list",list);
 					return"/WEB-INF/views/product/plist.jsp";
 				}
+				
+
 		
 		//상품 수정 페이지
 		@GetMapping("/edit")

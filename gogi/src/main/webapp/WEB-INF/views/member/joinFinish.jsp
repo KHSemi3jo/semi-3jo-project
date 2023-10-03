@@ -13,8 +13,8 @@
 		<h3 class="orange">진심으로 환영합니다!</h3>
 	</div>
 	<div class="row pt-30">
-		<a href="/main" class="btn btn-navy">메인</a>
 		<a href="login" class="btn btn-orange">로그인</a>
+		<a href="/main" class="btn btn-navy">메인</a>
 	</div>
 </div>
 
