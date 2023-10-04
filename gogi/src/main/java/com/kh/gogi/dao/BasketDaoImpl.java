@@ -9,16 +9,12 @@ import org.springframework.stereotype.Component;
 import com.kh.gogi.dto.BasketDto;
 import com.kh.gogi.dto.BasketListDto;
 import com.kh.gogi.mapper.BasketListMapper;
-import com.kh.gogi.mapper.BasketMapper;
 
 @Component
 public class BasketDaoImpl implements BasketDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	@Autowired
-	private BasketMapper basketMapper;
-
 	@Autowired
 	private BasketListMapper basketListMapper;
 
@@ -30,8 +26,10 @@ public class BasketDaoImpl implements BasketDao {
 
 	@Override
 	public void add(BasketDto basketDto) {
-		String sql = "insert into basket(" + "basket_no, basket_member, " + "basket_listno, basket_count"
-				+ ") values(?, ?, ?, ?)";
+		String sql = "insert into basket(" 
+					+ "basket_no, basket_member, " 
+					+ "basket_listno, basket_count"
+					+ ") values(?, ?, ?, ?)";
 		Object[] data = { basketDto.getBasketNo(), basketDto.getBasketMember(), basketDto.getBasketListNo(),
 				basketDto.getBasketCount() };
 		jdbcTemplate.update(sql, data);
@@ -42,14 +40,6 @@ public class BasketDaoImpl implements BasketDao {
 		String sql = "delete basket where basket_no = ?";
 		Object[] data = { basketNo };
 		return jdbcTemplate.update(sql, data) > 0;
-	}
-
-	@Override
-	public BasketListDto selectOne(int basketNo) {
-		String sql = "select *from basket where basket_no = ?";
-		Object[] data = {basketNo};
-		List<BasketListDto> list = jdbcTemplate.query(sql, basketListMapper, data);
-		return list.isEmpty() ? null : list.get(0);
 	}
 
 	@Override
