@@ -32,28 +32,30 @@ public class OneOnOneController {
 	MemberDao memberDao;
 
 	@RequestMapping("/list")
-	public String list(@ModelAttribute(name = "vo") ShopAfterVO vo, Model model, String oneId,
+	public String list(@ModelAttribute(name = "vo") ShopAfterVO vo, Model model, 
 			@ModelAttribute MemberDto memberDto, @ModelAttribute OneOnOneDto oneOnOneDto, HttpSession session) {
 
 		String oneLevel = (String) session.getAttribute("level");
 		boolean isAdmin = oneLevel.equals("관리자");
-		oneId = (String) session.getAttribute("name");
+		String oneId = (String) session.getAttribute("name");
 		int count = oneOnOneDao.countList(vo);
 		vo.setCount(count);
-		if (isAdmin) {
-			List<OneOnOneDto> list = oneOnOneDao.selectAdminListByPage(vo);
-			model.addAttribute("list", list);
-
-			return "/WEB-INF/views/one/adminList.jsp";
-
-		}
-
-		else {
-			List<OneOnOneDto> list = oneOnOneDao.selectListByPage(vo, oneId);
-			model.addAttribute("list", list);
-
-			return "/WEB-INF/views/one/list.jsp";
-		}
+		
+	
+				if (isAdmin) {
+					List<OneOnOneDto> list = oneOnOneDao.selectAdminListByPage(vo);
+					model.addAttribute("list", list);					
+					return "/WEB-INF/views/one/adminList.jsp";
+					
+				}
+				
+				else {
+					List<OneOnOneDto> list = oneOnOneDao.selectListByPage(vo, oneId);
+					model.addAttribute("list", list);
+					
+					return "/WEB-INF/views/one/list.jsp";
+				}		
+	
 
 	}
 
