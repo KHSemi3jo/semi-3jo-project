@@ -34,11 +34,6 @@ public class BasketRestConrtoller {
 		
 		ProductDto productDto = productDao.selectOne(productNo);
 
-		
-//		BasketListDto basketListDto = basketDao.selectOne(basketNo);
-//		if (장바구니에 있으면) return;//이미 담겨 있는 상품이면 중지
-//		if(productDto == null) return;//없는 상품이면 중지
-
         if (productDto == null) {
             response.put("success", false);
             response.put("message", "상품이 존재하지 않습니다.");
@@ -71,10 +66,6 @@ public class BasketRestConrtoller {
 		
 	}
 
-//	@PostMapping("/selectPrice")
-//	public void selectPrice() {
-//
-//
-//	}
+
 
 }

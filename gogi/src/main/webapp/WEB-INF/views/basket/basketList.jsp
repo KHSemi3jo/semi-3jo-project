@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
  .btn-select{
@@ -18,7 +18,7 @@
   .custom-checkbox {
     display: inline-block;
     font-size: 18px;
-    position: relative;
+    position: relative; 
     padding-top:5px;
 }
 .custom-checkbox > [type=checkbox] {
@@ -37,6 +37,7 @@
 .custom-checkbox > [type=checkbox]:checked + span {
     background-image: url("/images/checkbox/checkbox-check.png");
 }
+
 /* 버튼 스타일 */
         .btn-decrease-quantity,
         .btn-increase-quantity {
@@ -73,6 +74,9 @@
 	background:#D0D9E1;
 	height:1px;
     border:0;
+}
+.image{
+	vertical-align: middle;
 }
 </style>
 
@@ -170,27 +174,7 @@ $(function() {
             reload();
          }
       });
-      
-         
-      
-      
-      
-//       $(".check-item").click(function(){
-   
-//          var checkboxList = document.querySelectorAll(".check-item:checked");
-//          var total = 0;
-//          for (var i = 0; i < checkboxList.length; i++) {
-//             var count = $(checkboxList[i]).parents('tr').find(".count").text();
-//             var price = $(checkboxList[i]).parents('tr').find(".pay").text();
-//             total = count * price;
 
-// //             console.log(count);
-// //             console.log(total);
-            
-	         
-//          }
-		
-//       })
       	     	    
     	
 });
@@ -224,7 +208,16 @@ $(function() {
 								value="${basketListDto.basketNo}" checked> <span></span>
 						</label>
 					</td>
-					
+					<td class="image">
+						<c:choose>
+							<c:when test="${productDto.image}">
+                        		<img src="/product/image?productNo=${productDto.productNo}" width="50" height="50">
+                    		</c:when>
+                    		<c:otherwise>
+                            	<img src="https://dummyimage.com/50x50/000/fff" width="50" height="50">
+                    		</c:otherwise>
+						</c:choose>
+					</td>
 					<td class="left w-60">
 						<!-- 제목을 누르면 상세페이지로 이동 -->
 						<a class="link" href="/product/detail?productNo=${basketListDto.basketListNo}">
@@ -249,15 +242,7 @@ $(function() {
 		</div>
 		
 			<div class="row w-300 ms-30">
-		
-					<%-- <c:forEach var="basketListDto" items="${basketList}" varStatus="i"> --%>
-					<!-- 			<div> -->
-					<!-- 			상품금액 : -->
-					<!-- 				<span class="price">  -->
-					<%-- 					<fmt:formatNumber pattern="###,###,###" value="${basketListDto.productPrice}"/>원 --%>
-					<!-- 				</span> -->
-					<!-- 			</div> -->
-					<%-- 		</c:forEach>	 --%>
+
 					<div class="container totalPrice">
 							<div class="row float-container">
 								<div class="row w-50 float-left left pl-20">
@@ -291,6 +276,7 @@ $(function() {
 	</div>
 </div>
 </form>
+
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
