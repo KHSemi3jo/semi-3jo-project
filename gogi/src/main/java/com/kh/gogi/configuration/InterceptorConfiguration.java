@@ -20,15 +20,15 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		
-	//	registry.addInterceptor(memberInterceptor)
-//				.addPathPatterns("/member/**", "/shopafter/**")
-//				.excludePathPatterns("/member/join*", "/member/login", 
-//						"/member/exitFinish", "/shopafter/list",
-//						"/shopafter/detail");
+		registry.addInterceptor(memberInterceptor)
+				.addPathPatterns("/member/**", "/shopafter/**")
+				.excludePathPatterns("/member/join*", "/member/login", 
+						"/member/exitFinish", "/shopafter/list",
+						"/shopafter/detail");
 			
-		
-	//	registry.addInterceptor(adminOwnerInterceptor)
-		//		.addPathPatterns("/admin/**") 
+		//관리자용 인터셉터 등록
+		registry.addInterceptor(adminOwnerInterceptor)
+				.addPathPatterns("/admin/**");
 
 
 	}

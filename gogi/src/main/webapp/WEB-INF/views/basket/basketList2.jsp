@@ -1,26 +1,239 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
-
-
 <style>
-.noticeTitle {
-	text-decoration: none;
+
+
+ .btn-select{
+ 	border:none;
+ 	background-color: white;
+ 	font-size:16px;
+ }
+  .btn-select:hover{
+  	cursor: pointer;
+  }
+  .top-select{
+   padding-left:26px;
+  }
+  .custom-checkbox {
+    display: inline-block;
+    font-size: 18px;
+    position: relative;
+    padding-top:5px;
+}
+.custom-checkbox > [type=checkbox] {
+    display: none;
+}
+.custom-checkbox > span {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+
+    background-image: url("/images/checkbox/checkbox-empty.png");
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.custom-checkbox > [type=checkbox]:checked + span {
+    background-image: url("/images/checkbox/checkbox-check.png");
+}
+/* 버튼 스타일 */
+        .btn-decrease-quantity,
+        .btn-increase-quantity {
+            font-size: 20px;
+            background-color: white;
+            color: #012D5C;
+            border: none;
+            padding: 4px 12px;
+            cursor: pointer;
+        }
+
+        /* input 스타일 */
+        .quantity{
+            width: 10px;
+            font-size: 16px;
+            border: none;
+            padding-top:8px;
+            }
+            
+        .pCount{
+            border: 1px solid #ddd;
+            border-radius: 3px;
+         	width: 80px; 
+         	height:35px;   
+        }
+.totalPrice{
+	width:300px;
+	align-items:center;
+    border: 1px solid #F4F6F8;
+    border-radius: 3px;
+    background-color:#F4F6F8;
+}
+.w-90.line{
+	background:#D0D9E1;
+	height:1px;
+    border:0;
 }
 
-select.form-input, .form-input, .btn.btn-navy {
-	font-size: 16px;
-	height: 2.8em;
-	border-radius: 0.1em;
-}
+
+
+ 
+
+   
+
+
 </style>
 
- <!--daum 우편 API cdn-->
+<script src="/js/checkbox.js"></script>
+
+<!--daum 우편 API cdn-->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<!--포트원 API cdn-->
+	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<!-- javascript 작성 공간 --> 
+
 <script>
+function clickOnlyOne(itself){
+
+	
+		 var addressId = "${sessionScope.name}";
+		  $.ajax({
+              url: "/rest/address/list",
+              method: "post",
+              data: {
+                  addressId: addressId
+              },
+			success: function(response){
+		var checkboxes = document.getElementsByName("check-list");
+					checkboxes.forEach((checkbox) =>{
+						checkbox.checked =false;
+					})
+				for(var i =0 ; i <response.length ;i++){
+					itself.checked = true;
+					if(itself.checked){
+					 var list=	response[i]
+					 console.log(list)
+					 checkboxes[i] =
+					 console.log( checkboxes[i])
+					}
+	
+		
+					
+				}
+            	  },
+              })
+		  }
+	
+	
+
+
+
+
+
+
+
+
+$(function() {
+    
+
+	
+	
+	
+	
+	  reload();
+	  
+	  // "전체선택" 체크박스 클릭 처리
+ 	  $(".check-all").click(function() {
+ 	        
+ 	      var isChecked = $(this).prop("checked");
+
+ 	      $(".check-item").prop("checked", isChecked);
+
+ 	      // 체크박스가 선택되거나 선택 해제 될 때 총 결제 금액을 계산
+ 	      reload();
+ 	  });
+	  
+ 	 $(".check-item").click(function(){
+ 		 reload();
+ 	 });
+
+
+ 	  // 전체선택 체크박스 상태 변수
+    var isCheckAllChecked = false;
+
+    // "전체선택" 체크박스 클릭 처리
+    $(".check-all").click(function() {
+        isCheckAllChecked = $(this).prop("checked");
+        $(".check-item").prop("checked", isCheckAllChecked);
+        // 체크박스가 선택되거나 선택 해제 될 때 총 결제 금액을 계산
+        reload();
+        // 전체선택 체크박스 상태에 따라 "선택 삭제" 버튼 활성화/비활성화
+        $(".btn-select").prop("disabled", !isCheckAllChecked);
+    });
+
+     // 체크박스 상태 변화 감지
+     $(".check-item").change(function() {
+    	 reload();
+         var checkedItems = $(".check-item:checked");
+         // 체크된 항목이 하나 이상인 경우 버튼을 활성화, 그렇지 않으면 비활성화
+         if (checkedItems.length > 0) {
+             $(".btn-select").prop("disabled", false);
+         } else {
+             $(".btn-select").prop("disabled", true);
+         }
+     });
+
+      //실시간 변경처리
+ function reload(){
+         
+         var checkboxList = document.querySelectorAll(".check-item:checked");
+         var total = 0;
+         for (var i = 0; i < checkboxList.length; i++) {
+
+            var count = $(checkboxList[i]).parents('tr').find(".count").text();
+            var price = $(checkboxList[i]).parents('tr').find(".pay").text();
+            total += count * price;
+         
+         }   $(".productpay").text( total );
+         
+         if (total == 0) {
+	          $(".totalpay").text("0");
+	     } 
+	     else {
+	          $(".totalpay").text(total+3000);
+	          console.log( $(".totalpay").text())
+	     }
+     };
+      
+      
+      
+      $(".btn-plus").click(function() {
+         var count = $(this).parents('tr').find(".count"); // 수량을 표시하는 요소
+         var plusCount = parseInt(count.text()); // 현재 수량 가져오기
+         plusCount++; // 수량 증가
+         count.text(plusCount); // 업데이트된 수량 표시   
+         reload();
+         
+
+      });
+
+      // "-" 버튼 클릭 시
+      $(".btn-minus").click(function() {
+         var count = $(this).parents('tr').find(".count"); // 수량을 표시하는 요소
+         var minusCount = parseInt(count.text()); // 현재 수량 가져오기
+         if (minusCount > 1) {
+            minusCount--; // 수량 감소
+            count.text(minusCount); // 업데이트된 수량 표시
+            reload();
+         }
+      });  	     	    
+    	
+});
+
+
 $(function(){
     //검색버튼, 우편번호 입력창, 기본주소 입력창을 클릭하면 검색 실행
     $(".post-search").click(function(){
@@ -79,8 +292,8 @@ $(function(){
                     var addressNormal = params.get("addressNormal");
                     var addressDetail = params.get("addressDetail");
                     var addressId = "${sessionScope.name}";
-                    var addressName = "${sessionScope.customer}";
-                    var addressPhone = "${sessionScope.phone}";
+                    var addressName = params.get("addressName");
+                    var addressPhone = params.get("addressPhone");
 
                     $.ajax({
                         url: "/rest/address/list",
@@ -91,23 +304,21 @@ $(function(){
                         success: function (response) {
                             $(".address-list").empty();
                             console.log(response)    
-                            var customer = "${sessionScope.customer}";
-                               var phone = "${sessionScope.phone}";
+              
                             for (var i = 0; i < response.length; i++) {
                                 var address = response[i];
                                 var template = $("#address-template").html();
                                 var htmlTemplate = $.parseHTML(template);
                         
-                                console.log(  document.querySelector("[name=addressPost]").value = address.addressPost);    
                                
                                 
                                 $(htmlTemplate).find(".addressId").text(
                                     "회원 아이디 : " + address.addressId || "탈퇴한 사용자");
                                 
                                 $(htmlTemplate).find(".addressName").text(
-                                        "받으실 분 : " + address.addressName);
+                                        "받으실 분 : " +  address.addressName);
                                 $(htmlTemplate).find(".addressPhone").text(
-                                        "연락처 : " + address.addressPhone);
+                                        "연락처 : " +  address.addressPhone);
                                 
                                 $(htmlTemplate).find(".addressPost").text(
                                     "우편번호 : " + address.addressPost);
@@ -147,6 +358,13 @@ $(function(){
                                                 alert("취소하였습니다.")
                                             }
                                         });
+                     
+                                $(htmlTemplate)
+								.find(".btn-edit")
+								.attr("data-address-name", address.addressName)
+								        $(htmlTemplate)
+								.find(".btn-edit")
+								.attr("data-address-phone", address.addressPhone)
                                 $(htmlTemplate)
 								.find(".btn-edit")
 								.attr("data-address-post", address.addressPost)
@@ -167,7 +385,11 @@ $(function(){
 											var editHtmlTemplate = $
 													.parseHTML(editTemplate);	
 											var addressNo = $(this).attr(
-													"data-address-no");
+											"data-address-no");
+											var addressName = $(this).attr(
+											"data-address-name");
+											var addressPhone = $(this).attr(
+											"data-address-phone");
 											var addressPost = $(this).attr(
 											"data-address-post");
 											var addressNormal = $(this).attr(
@@ -175,8 +397,9 @@ $(function(){
 											var addressDetail = $(this).attr(
 											"data-address-detail");
 										
-								
-											
+								console.log(this);
+				                         
+
 											
 				                                
 										
@@ -220,6 +443,12 @@ $(function(){
 															"[name=addressId]")
 													.val(address.addressId);
 											$(editHtmlTemplate).find(
+											"[name=addressName]")
+											.val(address.addressName);
+											$(editHtmlTemplate).find(
+											"[name=addressPhone]")
+											.val(address.addressPhone);
+											$(editHtmlTemplate).find(
 											"[name=addressPost]")
 											.val(address.addressPost);
 											$(editHtmlTemplate).find(
@@ -246,16 +475,17 @@ $(function(){
 																$.ajax({
 																			url : "/rest/address/edit",
 																			method : "post",
-																			data : $(
-																					e.target).serialize(),
+																			data : $(e.target).serialize(),
 																			success : function(response) {
-																				
+																				console.log("재확인"+response)
 																				reloadList();
 																			}
 																		});
 															});
 											$(this).parents(".view-container")
 													.hide().after(editHtmlTemplate);
+											 document.querySelector("[name=addressName]").value = addressName;
+											 document.querySelector("[name=addressPhone]").value = addressPhone;
 											 document.querySelector("[name=addressPost]").value = addressPost;
 												document.querySelector("[name=addressNormal]").value =addressNormal;
 				                 		   document.querySelector("[name=addressDetail]").value =addressDetail;
@@ -273,22 +503,25 @@ $(function(){
                 reloadList();
 
             });
+
             
-         
             
-            
+
         </script>
-<h1>배송지 관리</h1>
-<hr>
 
-<script id="address-template" type="text/template">
-<div class=" flex-container view-container  container w-1000">
 
-<div class="row">
-<input type="checkbox">
+ <script id="address-template" type="text/template">
+ 
+<div class=" flex-container view-container  w-700 left top-select ms-20 " >
+
+<div class="row ">
+
+<label class="custom-checkbox">
+<input type="checkbox" class=" check-item" name="check-list"  
+ onclick="clickOnlyOne(this)"><span></span></label>
 </div>
 
-		<div class="w-75 container">
+		<div class="w-75 container w-300 table table-slit top-select">
 				<div class="row left">
 					<h2 class="addressId">아이디</h2>
 				</div>
@@ -309,8 +542,9 @@ $(function(){
 				</div>
 	
 			</div>
-			<div class="w-25" flex-container>
-				<div class="row right">
+			<div class="w-25 flex-container table table-slit">
+				<div class="row right ">
+
 					<button class="btn btn-edit btn-navy w-100">
 						<i class="fa-solid fa-edit"></i>
 						배송지 수정
@@ -323,15 +557,16 @@ $(function(){
 					</button>
 				</div>
 			</div>
+
 </div>
-<hr>
+
 </script>
 
 
 <script id="address-edit-template" type="text/template">
 
 
-		<form class="address-edit-form edit-container">
+		<form class="address-edit-form edit-container w-700 left top-select   " >
 		<input type="hidden" name="addressNo">
 	<input type="hidden" name="addressId" >
 		<div class="container w-400">
@@ -340,7 +575,7 @@ $(function(){
                         <label>받으실 분</label>
                     </div>
                     <div class="row w-75 pr-30">
-                      <input type="text" name="addressName" value="${addressDto.addressName}" 
+                      <input type="text" name="addressName" value="" 
                      class="form-input w-100" required autocomplete="off">
                     </div>
                 </div>
@@ -349,7 +584,7 @@ $(function(){
                         <label>연락처</label>
                     </div>
                     <div class="row w-75 pr-30">
-                        <input type="tel" name="addressPhone" value="${sessionScope.phone}"
+                        <input type="tel" name="addressPhone" value=""
                                 class="form-input w-100"autocomplete="off">
                         <div class="fail-feedback left">휴대폰 번호를 입력해주세요</div>
                     </div>
@@ -407,65 +642,205 @@ value="" autocomplete="off">
 
 
 </script>
+        
+    
+
+<script>
+const userCode = "imp14397622";
+IMP.init(userCode);
+
+function requestPay() {
+	  IMP.request_pay({
+	    pg: "tosspayments",
+	    pay_method: "card",
+	    escrow: true,
+	    merchant_uid: "test_lnb1yptr",
+	    name: "테스트 결제",
+	    amount: $(".totalpay").text(),
+	    popup: true,
+	    buyer_tel: "010-0000-0000",
+	    buyer_addr: "",
+	    buyer_postcode: "",
+	  });
+	}
+
+function requestCert() {
+	  IMP.certification({
+	    pg: "inicis_unified",
+	    merchant_uid: "test_ln049vhv",
+	    name: "",
+	    phone: "",
+	    carrier: "SKT | KT | LGT | MVNO",
+	    company: "고기어때",
+	    popup: true,
+	  });
+	}
+</script>
 
 
 
+        
+        
+        
 
+<form class="delete-form" action="delete" method="post">
+	<div class="container w-1000">
+		<div class="row left top-select navy">
+		<!-- 전체선택 체크박스 -->
+				<label class="custom-checkbox">
+						<input type="checkbox" class="check-all" checked>
+						<span></span> 
+				</label>  <span class="pl-10 ">전체선택</span>
+						<span class="pl-10 ">|</span>
+						<button type="submit" class="btn-select " >선택삭제</button>
+		</div>
+	<div class="flex-container">
+		<div class="row w-700">
+		
+		<table class="table table-slit" >
+			<tbody>
+			
+<%-- 			<c:if test="${sessionScope.name == '${findDto.getMemberId()}'}"></c:if> --%>
+			<c:forEach var="basketListDto" items="${basketList}">
+				<tr>
+				
+					<td>
+						<label class="custom-checkbox">
+								<!-- 개별항목 체크박스 -->
+								<input type="checkbox" class="check-item" name="basketNoList"  
+								value="${basketListDto.basketNo}" checked> <span></span>
+						</label>
+					</td>
+					
+					<td class="left w-60">
+						<!-- 제목을 누르면 상세페이지로 이동 -->
+						<a class="link" href="/product/detail?productNo=${basketListDto.basketListNo}">
+							${basketListDto.productName}
+						</a>
+					</td>
+					<td class="row right w-10">
+						<div class="row flex-container pCount">
+							<button class="btn-minus btn-decrease-quantity" type="button" name="minus">-</button>
+					<!-- <input type="number" min="1" max="10" name="count"> -->
+							<div class="count quantity" onchange="calculate(this);">${basketListDto.getBasketCount()}</div>					
+							<button class="btn-plus btn-increase-quantity" type="button" name="plus">+</button>
+						</div>
+					</td>
+
+					<td class="right w-16"><span class="pay">${basketListDto.productPrice}</span><span>원</span></td>
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+		      <div class="row left">
 <br>
-<h3>배송지 목록</h3>
+
+</div> 
+	
+<br>
+		
+		</div>
+		</form>
+	
+			<div class="row w-300 ms-30">
+		
+					<%-- <c:forEach var="basketListDto" items="${basketList}" varStatus="i"> --%>
+					<!-- 			<div> -->
+					<!-- 			상품금액 : -->
+					<!-- 				<span class="price">  -->
+					<%-- 					<fmt:formatNumber pattern="###,###,###" value="${basketListDto.productPrice}"/>원 --%>
+					<!-- 				</span> -->
+					<!-- 			</div> -->
+					<%-- 		</c:forEach>	 --%>
+					<div class="container totalPrice">
+							<div class="row float-container">
+								<div class="row w-50 float-left left pl-20">
+									<div>상품금액 ! </div>
+								</div>
+								<div class="row w-50 float-right right pr-20">
+									<span class="productpay" name="total"></span><span>원</span>
+								</div>
+							</div>	
+							<div class="row float-container">
+								<div class="row w-50 float-left left pl-20">
+									<div>배송비  </div>
+								</div>
+								<div class="row w-50 float-right right pr-20">
+									<span  name="deliveryFee"></span>3000<span>원</span>
+								</div>
+							</div> 
+							<div class="row"><hr class="w-90 line"></div>
+							<div class="row float-container">
+								<div class="row w-50 float-left left pl-20">
+									<div>결제예정금액  </div>
+								</div>
+								<div class="row w-50 float-right right pr-20">
+									<span class="totalpay" name="total"></span><span>원</span>
+								</div>
+							</div>	 
+					</div>
+		
+					<div class="row  btn-pay btn btn-orange w-100"    onclick="requestPay()">
+		결재하기</div>				
+			
+
+			</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+<div class="w-700 top-select  ms-50" >
+   <h3>배송지 목록</h3>
 <br>
 <h4>배송지에 따라 상품정보가 달라질 수 있습니다.</h4>
+</div>
+<br>
+  	<div class=" container address-list  ms-50" ></div>
 
-<table border="1" width="800" class=" table table-slit">
-	<thead>
-		<tr>
-			<th>선택</th>
-			<th>받으실 분</th>
-			<th>연락처</th>
-			<th>기본주소</th>
-		</tr>
-	</thead>
-	<tbody align="center">
-		<c:forEach var="addressDto" items="${list}">
-			<tr>
-				<td><input type="checkbox"></td>
-				<td>${addressDto.addressName}</td>
-				<td>${sessionScope.phone}</td>
-				<td>${addressDto.addressNormal}</td>
 
-			</tr>
-		</c:forEach>
-	</tbody>
 
-</table>
 
-<div class="container address-list w-1000"></div>
+
+
 
 
 
 <c:if test="${sessionScope.name != null}">
-	<div class="row container w-800">
-		<form class="address-insert-form" method="post">
+	<div class="container w-500 "style="margin-left: 110px">
+		<form class="address-insert-form w-100 " method="post">
 
 			<input type="hidden" name="addressId" class="form-input" value=" ${sessionScope.name}">
-			<div class="row">
-			이름 : <input name="addressName" class="form-input" value=" ${sessionScope.customer}">
+			
+			<div class=" left row flex-container auto-width" >
+				<div  class="w-25" style="text-align: center; vertical-align: text-bottom;" >이름 :
+				</div>		
+		<div class="w-100">
+			<input name="addressName" class="row form-input flex-container w-50" value=" ${sessionScope.customer}">
 			</div>
-			<div class="row">
+			</div>
+			
+				<div class="row   container w-100 left" >
 			연락처 : <input name="addressPhone" class="form-input" value="${sessionScope.phone}">
 			</div>
-			<div class="row ">
+			
+				<div class="row  left" >
 			우편번호 : <input type="text" name="addressPost" maxlength="6" class="form-input"
 		>
 					<button type="button" class="btn post-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
 			</div>
-			<div class="row"> 
+				<div class="row left" >
 			기본주소 : <input type="text" name="addressNormal" class="form-input"
 					>
 			</div>
-			<div class="row">
+			<div class="row left" >
 			상세주소 : <input type="text" name="addressDetail" class="form-input"
 					>
 			</div>
@@ -480,5 +855,8 @@ value="" autocomplete="off">
 		</form>
 	</div>
 </c:if>
+
+
+
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

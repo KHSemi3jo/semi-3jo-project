@@ -16,4 +16,13 @@ public class AddressDto {
 	private String addressNormal;
 	private String addressDetail;
 
+//	
+//	// 주소 정보를 저장하는 메서드
+//    public void setAddressInfo(String addressName, String addressPhone, String addressPost, String addressNormal, String addressDetail) {
+//        this.addressName = addressName;
+//        this.addressPhone = addressPhone;
+//        this.addressPost = addressPost;
+//        this.addressNormal = addressNormal;
+//        this.addressDetail = addressDetail;
+//    }
 }

@@ -20,9 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.gogi.dao.AddressDao;
 import com.kh.gogi.dao.BasketDao;
+
 import com.kh.gogi.dao.ProductDao;
 import com.kh.gogi.dto.AttachDto;
+
+import com.kh.gogi.dto.AddressDto;
+
 import com.kh.gogi.dto.BasketListDto;
 
 
@@ -32,6 +37,7 @@ import com.kh.gogi.dto.BasketListDto;
 public class BasketController {
 	@Autowired
 	private BasketDao basketDao;
+
 	
 	@Autowired
 	private ProductDao productDao;
@@ -62,6 +68,11 @@ public class BasketController {
 				.body(resource);
 	}
 
+	@Autowired
+	private AddressDao addressDao;
+	
+
+
 	@RequestMapping("/list")
 	public String list(Model model		
 //						,@RequestParam int basketNo
@@ -69,11 +80,20 @@ public class BasketController {
 						) {
 		
 		String basketMember = (String) session.getAttribute("name");
+		
+		AddressDto addressDto = addressDao.selectOne(basketMember);
+		model.addAttribute("addressDto",addressDto);
+		
+	
+		
+		List<AddressDto> list = addressDao.selectAddressList(basketMember);
+		model.addAttribute("list", list);
+		
 
 	    if (basketMember != null) {
 	        List<BasketListDto> basketList = basketDao.selectList(basketMember);
 	        model.addAttribute("basketList", basketList);
-	        return "/WEB-INF/views/basket/basketList.jsp";
+	        return "/WEB-INF/views/basket/basketList2.jsp";
 	    } 
 	    else {//비회원이면 로그인 필요 요청
 	        return "redirect:/member/login";

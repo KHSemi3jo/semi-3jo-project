@@ -116,6 +116,15 @@ public class ProductController {
 				session.setAttribute("productNo", productDto.getProductNo());
 				return"/WEB-INF/views/product/detail.jsp";
 		}
+		//상품 상세 페이지
+				@RequestMapping("/detail1")
+				public String detail1(@RequestParam int productNo, Model model,
+						HttpSession session) {
+						ProductDto productDto = productDao.selectOne(productNo);
+						model.addAttribute("productDto",productDto);
+						session.setAttribute("productNo", productDto.getProductNo());
+						return"/WEB-INF/views/product/detail1.jsp";
+				}
 		
 //		//상품 목록 페이지
 //				@RequestMapping("/list")
