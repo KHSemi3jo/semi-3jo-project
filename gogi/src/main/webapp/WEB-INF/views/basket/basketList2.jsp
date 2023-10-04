@@ -480,11 +480,11 @@ $(function(){
 
  <script id="address-template" type="text/template">
  
-<div class=" flex-container view-container left" >
+<div class=" flex-container view-container left pb-10" >
 
 
 		<div class="flex-container table table-slit">
-			<div class="w-40">
+			<div class="w-30">
 				<div class="row left">
                    <label class="custom-checkbox">
                    <input type="checkbox" class=" check-item" name="check-list"  
@@ -498,7 +498,7 @@ $(function(){
 					<pre class="addressPhone">전화번호</pre>
 				</div>
 			</div>
-			<div class="w-60 pt-10 left">
+			<div class="w-70 pt-10 left">
 				<div class="row left pl-30">
 					<pre class="addressPost">우편번호</pre>
 				</div>
@@ -529,77 +529,75 @@ $(function(){
 <script id="address-edit-template" type="text/template">
 
 
-		<form class="address-edit-form edit-container w-700 left top-select   " >
-		<input type="hidden" name="addressNo">
+<form class="address-edit-form edit-container left container" >
+ 	<div class="pb-10"><hr></div>
+	<input type="hidden" name="addressNo">
 	<input type="hidden" name="addressId" >
-		<div class="container w-400">
-		 <div class="row flex-container">
-                    <div class="row w-25 left">
+		<div class=" flex-container">
+
+			<div class="w-30">
+
+		    <div class="flex-container">
+                    <div class="w-40 left">
                         <label>받으실 분</label>
                     </div>
-                    <div class="row w-75 pr-30">
+                    <div class="w-60">
                       <input type="text" name="addressName" value="" 
-                     class="form-input w-100" required autocomplete="off">
+                     class="form-input  address w-100" required autocomplete="off">
                     </div>
-                </div>
-			<div class="row flex-container">
-                    <div class="row w-25 left">
-                        <label>연락처</label>
-                    </div>
-                    <div class="row w-75 pr-30">
-                        <input type="tel" name="addressPhone" value=""
-                                class="form-input w-100"autocomplete="off">
-                        <div class="fail-feedback left">휴대폰 번호를 입력해주세요</div>
-                    </div>
-                </div>
-		<div class="row flex-container">
+             </div>
 
-                    <div class="row w-25 left">
-                        <label style="display: block;">주소</label>
-                    </div>
-                    <div class="row w-75 left">
-                        <input type="text" name="addressPost" class="form-input post-search"
-                                size="6" maxlength="6" 
-value="" autocomplete="off">
-                        <button type="button" class="btn post-search">
+			 <div class="flex-container">
+                     <div class="row w-40 left">
+                         <label>연락처</label>
+                     </div>
+                     <div class="row w-60 left">
+                         <input type="tel" name="addressPhone" value=""
+                                class="form-input address w-100"autocomplete="off">
+                         <div class="fail-feedback left">휴대폰 번호를 입력해주세요</div>
+                     </div>
+              </div>
+   			  </div>
+
+			<div class="w-70 left">
+
+		     <div class="flex-container pl-10">
+                     <div class="w-15 left pl-10">
+                         <label >주소</label>
+                     </div>
+                     <div class="w-85 left">
+                         <input type="text" name="addressPost" class="form-input address post-search"
+                                size="6" maxlength="6"value="" autocomplete="off">
+                         <button type="button" class="btn post-search form-input address">
                             <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
+                         </button>
+						<div class="row">
+                           <input type="text" name="addressNormal"autocomplete="off"
+                      	    class="form-input address post-search w-100 " value="addressNormal">
+						</div>
+						<div class="row">
+                            <input type="text" name="addressDetail"  value="addressDetail"
+                             class="form-input address w-100" autocomplete="off">
+                         <div class="fail-feedback left">주소 입력시 모든 주소를 작성해주세요</div>
+                    	</div>
                     </div>
-                </div>
-                <div class="row flex-container">
-                    <div class="w-25"></div>
-                    <div class="w-75 pr-30">
-                        <input type="text" name="addressNormal"autocomplete="off"
-                      class="form-input post-search w-100 " value="addressNormal">
-                    </div>
-                </div>
-                <div class="row flex-container">
-                    <div class="w-25"></div>
-                    <div class="w-75 pr-30">
-                        <input type="text" name="addressDetail"  value="addressDetail"
-                        class="form-input w-100" autocomplete="off">
-                        <div class="fail-feedback left">주소 입력시 모든 주소를 작성해주세요</div>
-                    </div>
-                </div>
+             </div>
 
-
-			<div class="w-25">
-		<div class="row right">
-
+				</div>
+			</div>
+			<div class="container">
+				<div class="row right">
 					<button type="submit" class="btn btn-navy">
-						<i class="fa-solid fa-check"></i>
 						수정
 					</button>
-				</div>
-				<div class="row">
 					<button type="button" class="btn btn-orange btn-cancel">
-						<i class="fa-solid fa-xmark"></i>
 						취소
 					</button>
 				</div>
 			</div>
-		</div>
-		</div>
+
+
+		
 		</form>
 
 
@@ -634,7 +632,7 @@ function requestPay() {
 
 </script>
 
-<div class=" container w-1000 top-select  ms-50" >
+<div class=" container w-1100 top-select  ms-50" >
    <div class="row left"><h3>배송지 목록</h3></div>
    <div class="w-100"><hr></div>
    <div class="row left"><span>배송지에 따라 상품정보가 달라질 수 있습니다.</span></div>
@@ -644,50 +642,50 @@ function requestPay() {
 		</div>
 		<div class="row w-40">
 			<c:if test="${sessionScope.name != null}">
-				<div class="container w-300">
+				<div class="container w-400 pl-10">
 					<form class="address-insert-form" method="post">			
 					<input type="hidden" name="addressId" class="form-input address" value=" ${sessionScope.name}">
 						
 						<div class=" flex-container" >
 							<div  class="row w-25 left">
-								<span>이름 :</span>
+								<span>이름 </span>
 							</div>		
 							<div class="row w-75 left">
-								<input name="addressName" class="form-input address" value=" ${sessionScope.customer}">
+								<input name="addressName" class="form-input address w-55" value=" ${sessionScope.customer}">
 							</div>
 						</div>
 						
 						<div class="flex-container" >
 							<div class="row w-25 left" >
-								<span>연락처 : </span>
+								<span>연락처 </span>
 							</div>
 							<div class="row w-75 left">
-								<input name="addressPhone" class="form-input address" value="${sessionScope.phone}">
+								<input name="addressPhone" class="form-input address w-55" value="${sessionScope.phone}">
 							</div>	
 						</div>
 						
 						<div class="flex-container" >
 							<div class="row w-25 left" >
-								<span>우편번호 :</span> 
+								<span>우편번호 </span> 
 							</div>
 							<div class="row w-75 left">	
-								<input type="text" name="addressPost" maxlength="6" size="6"class="form-input address post-search">
+								<input type="text" name="addressPost" maxlength="6" size="6"class="form-input address post-search"readonly>
 								<button type="button" class="btn post-search form-input address"><i class="fa-solid fa-magnifying-glass"></i> </button>	                            
 				            </div>         
 						</div>
 						
 						<div class="flex-container" >
 							<div class="row w-25 left" >
-								<span>기본주소 :</span> 
+								<span>기본주소 </span> 
 							</div>
 							<div class="row w-75 left">
-								<input type="text" name="addressNormal" class="form-input address w-100">
+								<input type="text" name="addressNormal" class="form-input address w-100"readonly>
 							</div>
 						</div>
 						
 						<div class="flex-container" >							
 							<div class="row w-25 left" >
-								<span>상세주소 : </span>
+								<span>상세주소  </span>
 							</div>
 							<div class="row w-75 left">
 								<input type="text" name="addressDetail" class="form-input address w-100">

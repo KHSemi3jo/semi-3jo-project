@@ -127,14 +127,18 @@ ul.menu-navy li:hover {
     - 100부터는 비율(%)로 설정
 */
 .w-10{width:10%;}
+.w-15{width:15%;}
 .w-16, .col-6 {width: 16.66666%; }
 .w-20, .col-5 {width: 20%; }
 .w-25, .col-4 {width: 25%; }
 .w-30{width:30%;}
 .w-33, .col-3 {width: 33.3333%; }
+.w-35{width:35%;}
 .w-40{width: 40%;}
 .w-50, .col-2 {width: 50%; }
+.w-55{width:55%;}
 .w-60{width: 60%;}
+.w-65{width:65%;}
 .w-70{width:70%;}
 .w-75 {width: 75%; }
 .w-80 {width: 80%; }
