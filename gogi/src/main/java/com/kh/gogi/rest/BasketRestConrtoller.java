@@ -33,11 +33,18 @@ public class BasketRestConrtoller {
 		Map<String, Object> response = new HashMap<>();
 		
 		ProductDto productDto = productDao.selectOne(productNo);
+
+		
+//		BasketListDto basketListDto = basketDao.selectOne(basketNo);
+//		if (장바구니에 있으면) return;//이미 담겨 있는 상품이면 중지
+//		if(productDto == null) return;//없는 상품이면 중지
+
         if (productDto == null) {
             response.put("success", false);
             response.put("message", "상품이 존재하지 않습니다.");
             return ResponseEntity.badRequest().body(response);
         }
+
 
         String memberId = (String) session.getAttribute("name");
         boolean isInBasket = basketDao.isInBasket(memberId, productDto.getProductNo());
@@ -61,8 +68,6 @@ public class BasketRestConrtoller {
             return ResponseEntity.badRequest().body(response);
         }
 		
-//		BasketListDto basketListDto = basketDao.selectOne(basketNo);
-//		if (장바구니에 있으면) return;//이미 담겨 있는 상품이면 중지
 		
 	}
 
