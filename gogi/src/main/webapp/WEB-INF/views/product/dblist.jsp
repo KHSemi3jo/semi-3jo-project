@@ -31,7 +31,7 @@
  	border-radius:3px;
 }
 .listContainer.w-1000{
-	    margin-left: auto;
+	    margin-left: 40px;
 }
 select.form-input,
 .form-input,
@@ -84,7 +84,6 @@ select.form-input,
 </style>
 
 <script>
-
     $(function(){
         $(".btn-basket").click(function(e){
         	e.preventDefault();
@@ -142,7 +141,6 @@ select.form-input,
 
 </script>
 
-
 <c:if test="${sessionScope.level == '관리자'}">
 	<div class="row">
 		<form action="list" method="get">
@@ -166,7 +164,7 @@ select.form-input,
 <div class="listContainer w-1000" >
     <div class="flex-container w-250 auto-width">
         <c:forEach var="productDto" items="${list}" varStatus="loopStatus">
-		            <div class="row col-md-4 pr-20">
+		            <div class="row col-md-4 pr-40">
 		                <div class="row">
 		                    <c:choose>
 		                        <c:when test="${productDto.image}">
@@ -189,9 +187,7 @@ select.form-input,
 		                	<c:if test="${sessionScope.level == '관리자'}">
 		                    	<span>No.${productDto.productNo}</span>
 		                	</c:if>
-
-		                    	${productDto.productName} 
-
+		                    	${productDto.productName}
 		                	</div>
 		                	<div class="row left productPrice">
 		                    	${productDto.productPrice}원
@@ -203,12 +199,13 @@ select.form-input,
 		                </div>
 		            </div>
 	            <!-- Start a new row after every 3rd product -->
-	            <c:if test="${loopStatus.index % 3 == 2 or loopStatus.last}">
+	            <c:if test="${loopStatus.index % 4 == 3 or loopStatus.last}">
 	                </div><div class="row flex-container  w-250 auto-width">
 	            </c:if>
         </c:forEach>
     </div>
 </div>
+	
 
 	<div class="row page-navigator mv-30">
 	<!-- 이전 버튼 -->
@@ -229,7 +226,6 @@ select.form-input,
 	</div>
 
 
-
 <!-- 모달 대화상자 -->
 <div id="myModal" class="modal ">
   <div class="modal-content container">
@@ -237,10 +233,6 @@ select.form-input,
     <p id="modalMessage" class="orange pt-50"></p>
   </div>
 </div>
-
-
-
-
 
 
 
