@@ -643,7 +643,7 @@ function requestPay() {
 		<div class="row w-40">
 			<c:if test="${sessionScope.name != null}">
 				<div class="container w-400 pl-10">
-					<form class="address-insert-form" method="post">			
+					<form class="address-insert-form" method="post" autocomplete="off">			
 					<input type="hidden" name="addressId" class="form-input address" value=" ${sessionScope.name}">
 						
 						<div class=" flex-container" >
