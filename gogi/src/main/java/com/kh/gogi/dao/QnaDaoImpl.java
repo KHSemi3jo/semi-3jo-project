@@ -21,17 +21,17 @@ public class QnaDaoImpl implements QnaDao{
 
 	@Override
 	public int sequence() {
-		String sql = "select shopAfter_seq.nextval from dual ";
+		String sql = "select qna_seq.nextval from dual ";
 		return tem.queryForObject(sql, int.class);
 	}
 
 	@Override
 	public void add(QnaDto qnaDto) {
 		String sql = "insert into qna(qna_no,"
-				+ " qna_title ,qna_answer) "
-				+ "values(?,?,?)";
+				+ " qna_title ,qna_answer, qna_category) "
+				+ "values(?,?,?,?)";
 		Object[] data = {qnaDto.getQnaNo(),
-				qnaDto.getQnaTitle(),qnaDto.getQnaAnswer()};
+				qnaDto.getQnaTitle(),qnaDto.getQnaAnswer(), qnaDto.getQnaCategory()};
 	tem.update(sql, data);
 	}
 
@@ -50,9 +50,9 @@ public class QnaDaoImpl implements QnaDao{
 
 	@Override
 	public boolean fix(QnaDto qnaDto) {
-		String sql = "update qna set qna_title = ?, qna_answer = ?  where qna_no = ?";
+		String sql = "update qna set qna_title = ?, qna_answer = ?, qna_category=?  where qna_no = ?";
 		Object[] data = {qnaDto.getQnaTitle(), 
-				qnaDto.getQnaAnswer(), qnaDto.getQnaNo()};
+				qnaDto.getQnaAnswer(),qnaDto.getQnaCategory(),  qnaDto.getQnaNo()};
 		return tem.update(sql, data)>0;
 	}
 

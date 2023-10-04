@@ -47,8 +47,7 @@ public class QnaController {
 	}
 	@PostMapping("/add")
 	private String add(@ModelAttribute QnaDto qnaDto,
-
-			HttpSession session) {
+HttpSession session) {
 		int qnaNo = qnaDao.sequence();
 		qnaDto.setQnaNo(qnaNo);
 		String memberId = (String) session.getAttribute("name");

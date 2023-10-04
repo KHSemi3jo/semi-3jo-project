@@ -23,23 +23,6 @@ select.form-input,
 }
 </style>
 
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-<button onclick="requestPay()"><img src="/images/pay/kakaopay.png"width="100px"height="50px"></button>
-<script>
-const userCode = "imp14397622";
-IMP.init(userCode);
-
-function requestPay() {
-  IMP.request_pay({
-    pg: "kakaopay",
-    pay_method: "card",
-    merchant_uid: "test_lmswa6lo",
-    name: "테스트 결제",
-    amount: 100,
-    buyer_tel: "010-0000-0000",
-  });
-}
-</script>
 
 
 
@@ -80,7 +63,7 @@ function requestPay() {
                 <c:forEach var="qnaDto" items="${list}">				
                     <tr>
                         <td>${qnaDto.qnaNo}</td>
-                        <td>카테고리</td>
+                        <td>${qnaDto.qnaCategory}</td>
                         <td class="left w-70"><a class="qnaTitle navy" href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></td>    
                     </tr>
                 </c:forEach>
