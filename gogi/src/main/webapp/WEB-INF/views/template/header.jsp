@@ -56,7 +56,7 @@
                 <a href="/main"><img src="/images/logo/GogiLogo-main.png"width=150 height="150"></a>
             </div>
             <div class="title flex-container pl-50">
-	            <form action="list" method="get">
+	            <form action="/product/list" method="get">
 	                <div class="row input-search">
 		                <c:choose>
 							<c:when test="${vo.type == 'productName'}"></c:when>
