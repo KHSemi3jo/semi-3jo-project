@@ -21,6 +21,7 @@ public class BasketListMapper implements RowMapper<BasketListDto>{
 		basketListDto.setProductNo(rs.getInt("product_no"));
 		basketListDto.setProductName(rs.getString("product_name"));
 		basketListDto.setProductPrice(rs.getInt("product_price"));
+		basketListDto.setImage(rs.getObject("attach_no")!=null);
 		return basketListDto;
 	}
 

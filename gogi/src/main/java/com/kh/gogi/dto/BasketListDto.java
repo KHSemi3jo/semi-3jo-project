@@ -11,4 +11,5 @@ public class BasketListDto {
 	private int productNo;
 	private String productName;
 	private int productPrice;
+	private boolean image;
 }
