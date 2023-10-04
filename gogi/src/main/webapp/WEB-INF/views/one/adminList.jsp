@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<c:choose>
+	<c:when test="${sessionScope.level == '관리자'}">
+		<jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
+	</c:when>
+	<c:otherwise>
+		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>	
+	</c:otherwise>
+</c:choose>
 <style>
 .noticeTitle {
 	text-decoration: none;
@@ -16,7 +23,7 @@ select.form-input, .form-input, .btn.btn-navy {
 
 <div class="container w-800 navy">
 	<div class="row pb-30">
-		<h2>1대1 목록test</h2>
+		<h2>1 : 1 문의</h2>
 	</div>
 
 

@@ -157,7 +157,8 @@ $(function(){
             status.memberAddr = false;
 		 }
     });
-    //약관동의 전체체크시 가입가능
+    
+   //약관동의 전체체크시 가입가능
      $(".check-all").change(function(){
         var isVaild = $(this).prop("checked");
         if(isVaild){
@@ -180,7 +181,6 @@ $(function(){
             $(window).off("beforeunload")
         }
     });
-
 
 
 });

@@ -48,7 +48,7 @@
     <main>
         <header>
             <div class="logo">
-                <a href="/admin/home"><img src="/images/logo/GogiLogo-main.png"width=150 height="150"></a>
+                <a href="/main"><img src="/images/logo/GogiLogo-main.png"width=150 height="150"></a>
             </div>
             <div class="title flex-container ">
                 <div class="row input-search">
@@ -75,7 +75,6 @@
                     <ul>
                         <li><a class="left" href="/admin/member/list?size=20">회원정보관리</a></li>
                         <li><a class="left" href="/member/addressList">회원배송지관리</a></li>
-                        <li><a class="left" href="#">회원 통계</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><i class="fa-solid fa-bars "></i> 상품 관리</a>

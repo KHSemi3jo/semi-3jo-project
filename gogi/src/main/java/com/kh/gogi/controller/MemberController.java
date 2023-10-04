@@ -21,6 +21,7 @@ import com.kh.gogi.dto.AddressDto;
 import com.kh.gogi.dto.MemberBlockDto;
 import com.kh.gogi.dto.MemberDto;
 import com.kh.gogi.dto.OneOnOneDto;
+import com.kh.gogi.dto.ShopAfterDto;
 
 @Controller
 @RequestMapping("/member")
@@ -84,6 +85,7 @@ public class MemberController {
 			session.setAttribute("post", findDto.getMemberPost());
 			session.setAttribute("addr1", findDto.getMemberAddr1());
 			session.setAttribute("addr2", findDto.getMemberAddr2());
+			session.setAttribute("Gmoney", findDto.getMemberGmoney());
 
 			//로그인시간 갱신
 			memberDao.updateMemberLogin(inputDto.getMemberId());
@@ -171,7 +173,7 @@ public class MemberController {
 			
 			MemberDto memberDto = memberDao.selectOne(memberId);
 			
-			if(memberDto.getMemberPw().equals(memberDto.getMemberPw())) {
+			if(memberDto.getMemberPw().equals(memberPw)) {
 				//삭제
 				memberDao.delete(memberId);
 				//로그아웃
@@ -221,14 +223,19 @@ public class MemberController {
 			return "/WEB-INF/views/member/searchPwFinish.jsp";
 		}
 		
-		@RequestMapping("/addressList")
+		@RequestMapping("/addressList2")
 		public String address( String memberId,
 				Model model, HttpSession session
 				) {
 			memberId =(String) session.getAttribute("name");
-	
+			
+			AddressDto addressDto = addressDao.selectOne(memberId);
+			model.addAttribute("addressDto",addressDto);
+			
+		
+			
 			List<AddressDto> list = addressDao.selectAddressList(memberId);
 			model.addAttribute("list", list);
-			return "/WEB-INF/views/address/addressList.jsp";
+			return "/WEB-INF/views/address/addressList2.jsp";
 		}
 	}

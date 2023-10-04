@@ -1,12 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<c:choose>
+	<c:when test="${sessionScope.level == '관리자'}">
+		<jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
+	</c:when>
+	<c:otherwise>
+		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>	
+	</c:otherwise>
+</c:choose>
 <style>
-select.form-input,
+select.form-input.one,
 .opt{
 	font-size:16px;
-	height:2.8em;
+	height:2.7em;
     border-radius: 0.1em;
 }
 </style>
@@ -36,9 +43,10 @@ select.form-input,
 					</div>
 					<div class="row w-75 pr-30 left selectBox">
 						<select name="oneCategory"   required="required"
-							class="form-input">
+							class="form-input one">
 							<option class="opt" selected>결재</option>
 							<option class="opt">회원</option>
+							<option class="opt">배송</option>
 							<option class="opt">기타문의</option>
 						</select>
 					</div>
@@ -47,7 +55,7 @@ select.form-input,
 
 		<div class="row">
 			<c:if test="${isReply}">
-				<input type="hidden" name="oneParent" value="${oneDto.oneNo}">
+				<input type="hidden" name="oneParent" value="${oneDto.oneNo}" >
 			</c:if>
 			<div class="row flex-container">
 				<c:choose>
@@ -57,7 +65,7 @@ select.form-input,
 							</div>
 							<div class="row w-75 pr-30">
 									<input type="text" name="oneTitle" class="form-input w-100"
-												value="RE: ${oneDto.oneTitle}">
+												value="RE: ${oneDto.oneTitle}"autocomplete="off">
 							</div>
 					</c:when>
 					<c:otherwise>
@@ -65,7 +73,7 @@ select.form-input,
 								<label>제목</label>
 						</div>
 						<div class="row w-75 pr-30">
-							<input type="text" name="oneTitle" class="form-input w-100">				
+							<input type="text" name="oneTitle" class="form-input w-100"autocomplete="off">				
 						</div>
 					</c:otherwise>
 				</c:choose>

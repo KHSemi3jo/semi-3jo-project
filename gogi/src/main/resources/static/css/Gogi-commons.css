@@ -126,6 +126,7 @@ ul.menu-navy li:hover {
     - 최소 300px, 최대 1200px까지 100px 단위로 설정
     - 100부터는 비율(%)로 설정
 */
+.w-10{width:10%;}
 .w-16, .col-6 {width: 16.66666%; }
 .w-20, .col-5 {width: 20%; }
 .w-25, .col-4 {width: 25%; }
@@ -135,8 +136,11 @@ ul.menu-navy li:hover {
 .w-60{width: 60%;}
 .w-70{width:70%;}
 .w-75 {width: 75%; }
+.w-90{width:90%;}
 .w-100 {width: 100%; }
 
+.w-200 { width:200px; }
+.w-250{width:250px;}
 .w-300 { width:300px; }
 .w-400 { width:400px; }
 .w-500 { width:500px; }
@@ -191,7 +195,7 @@ ul.menu-navy li:hover {
     outline: none; /*outline은 입력 창 선택 시 강조 효과 */
     border: 1px solid #012D5C;
     border-radius: 0.1em;
-    line-height: 1.2em;
+    line-height: 1.4em;
 }
 .form-input:focus {/*선택된 상태를 focus라 한다 */
     border-color: #06478b;
@@ -312,6 +316,7 @@ textarea.form-input.fixed {
 .pt-30{padding-top: 30px;}
 .pt-40{padding-top: 40px;}
 .pt-50{padding-top: 50px;}
+.pt-60{padding-top: 60px;}
 
 .pb-10{padding-bottom: 10px;}
 .pb-20{padding-bottom: 20px;}
@@ -319,11 +324,14 @@ textarea.form-input.fixed {
 .pb-40{padding-bottom: 40px;}
 .pb-50{padding-bottom: 50px;}
 
+.pl-5{padding-left: 5px;}
 .pl-10{padding-left: 10px;}
 .pl-20{padding-left: 20px;}
 .pl-30{padding-left: 30px;}
 .pl-40{padding-left: 40px;}
 .pl-50{padding-left: 50px;}
+.pl-60{padding-left: 60px;}
+.pl-70{padding-left: 70px;}
 
 .pr-10{padding-right: 10px;}
 .pr-20{padding-right: 20px;}

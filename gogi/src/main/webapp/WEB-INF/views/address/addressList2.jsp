@@ -15,6 +15,37 @@ select.form-input, .form-input, .btn.btn-navy {
 	height: 2.8em;
 	border-radius: 0.1em;
 }
+
+.popup-content input{
+    border-color: #ADBBCA;
+    border-radius: 3px;
+}
+.popup-content input:focus{
+    border-color: #1A426C;
+}
+.popupContent {
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius:  10px;
+    background-color: white;
+    width: 400px;
+    height: 350px;
+    padding: 20px;
+    border: 1px solid #FA9F5F;
+}
+.popup {
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    background-color: rgba(0,0,0,0.6);
+    display: none;
+    position: fixed;
+}
+
 </style>
 
  <!--daum 우편 API cdn-->
@@ -274,10 +305,75 @@ $(function(){
 
             });
             
-         
+            $(function(){
+           	 
+                // 배송지 수정 버튼을 클릭했을 때 팝업을 보여주는 함수
+                $("#editAddressButton").click(function(e) {
+               	 e.preventDefault();
+                    // 팝업을 보이도록 설정
+               	 showAddressEditPopup();
+                });
+
+                // 팝업 닫기 버튼을 클릭했을 때 팝업을 닫는 함수
+                $("#closeAddressEditPopup").on("click",function() {
+               	 closePopup("addressEditPopup");
+                });
+
+             // 팝업 닫기 버튼 클릭 이벤트 처리
+                $("#closeAddressEditConfirmPopup").on("click", function() {
+                    closePopup("addressEditConfirmPopup");
+                    closePopup("addressEditPopup");
+                });
+                
+                // 배송지 수정 폼을 제출할 때의 처리
+                $("#addressEditForm").submit(function(e) {
+                    e.preventDefault(); // 기본 폼 제출 동작을 막음
+
+                    // 폼을 서버로 제출하는 코드
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:8080/rest/address/edit", 
+                        data: $(this).serialize(), // 폼 데이터 직렬화
+                        success: function(response) {
+                            // 서버 응답 처리
+                            if (response == "success") {
+                                // 수정 성공 시
+                                showAddressEditConfirmPopup();
+                            } else {
+                                // 수정 실패 시 오류 메시지 표시
+                                $("#addressEditErrorMessage").text("주소가 올바르지 않습니다.");
+                            }
+                        },
+                        error: function() {
+                            // AJAX 요청 실패 시 오류 메시지 표시
+                            $("#addressEditErrorMessage").text("서버와의 통신이 원할하지 않습니다.");
+                        }
+                    });
+                });
+                
             
+            // 배송지 수정 팝업
+            function showAddressEditConfirmPopup() {
+                var popup = $("#addressEditConfirmPopup");
+                popup.css("display", "block");
+            }
+
+            // 팝업 닫기
+            function closePopup(popupId) {
+                var popup = $("#" + popupId);
+                popup.css("display", "none");
+            }
+
+            function showAddressEditPopup() {
+                var popup = $("#addressEditPopup");
+                popup.css("display", "block");
+            }
             
+        });
+        
+    
         </script>
+        
 <h1>배송지 관리</h1>
 <hr>
 
@@ -311,10 +407,9 @@ $(function(){
 			</div>
 			<div class="w-25" flex-container>
 				<div class="row right">
-					<button class="btn btn-edit btn-navy w-100">
-						<i class="fa-solid fa-edit"></i>
+					<a class="btn btn-navy" id="editAddressButton">
 						배송지 수정
-					</button>
+					</a>
 				</div>
 				<div class="row right ">
 					<button class="btn btn-orange btn-delete w-100">
@@ -328,10 +423,50 @@ $(function(){
 </script>
 
 
-<script id="address-edit-template" type="text/template">
 
 
-		<form class="address-edit-form edit-container">
+
+
+
+<br>
+<h3>배송지 목록</h3>
+<br>
+<h4>배송지에 따라 상품정보가 달라질 수 있습니다.</h4>
+
+<table border="1" width="800" class=" table table-slit">
+	<thead>
+		<tr>
+			<th>선택</th>
+			<th>받으실 분</th>
+			<th>연락처</th>
+			<th>기본주소</th>
+			<th>수정</th>
+		</tr>
+	</thead>
+	<tbody align="center">
+		<c:forEach var="addressDto" items="${list}">
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>${addressDto.addressName}</td>
+				<td>${sessionScope.phone}</td>
+				<td>${addressDto.addressNormal}</td>
+				<td><a href="edit" id="editAddressButton"> 
+				<i class="fa-solid fa-pen"></i></a></td>
+
+			</tr>
+		</c:forEach>
+	</tbody>
+
+</table>
+
+
+<div class="container address-list w-100"></div>
+
+   
+   <div id="addressEditPopup" class="popup row container" >
+    	<div class="popupContent row w-400">
+		    <h2>배송지 수정</h2>
+		   <form id="addressEditForm" action="edit" method="post" autocomplete="off">
 		<input type="hidden" name="addressNo">
 	<input type="hidden" name="addressId" >
 		<div class="container w-400">
@@ -362,7 +497,7 @@ $(function(){
                     <div class="row w-75 left">
                         <input type="text" name="addressPost" class="form-input post-search"
                                 size="6" maxlength="6" 
-value="" autocomplete="off">
+			value="" autocomplete="off">
                         <button type="button" class="btn post-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -371,7 +506,7 @@ value="" autocomplete="off">
                 <div class="row flex-container">
                     <div class="w-25"></div>
                     <div class="w-75 pr-30">
-                        <input type="text" name="addressNormal"autocomplete="off"
+                        <input type="text" name="addressNormal" autocomplete="off"
                       class="form-input post-search w-100 " value="addressNormal">
                     </div>
                 </div>
@@ -383,65 +518,26 @@ value="" autocomplete="off">
                         <div class="fail-feedback left">주소 입력시 모든 주소를 작성해주세요</div>
                     </div>
                 </div>
-
-
-			<div class="w-25">
-		<div class="row right">
-
-					<button type="submit" class="btn btn-navy">
-						<i class="fa-solid fa-check"></i>
-						수정
-					</button>
-				</div>
-				<div class="row">
-					<button type="button" class="btn btn-orange btn-cancel">
-						<i class="fa-solid fa-xmark"></i>
-						취소
-					</button>
-				</div>
-			</div>
 		</div>
-		</div>
+		 <div class="row pt-10">
+			        <button class="btn btn-orange" type="submit">배송지 수정</button>
+				    <button class="btn btn-navy" id="closeAddressEditPopup">닫기</button>
+		        </div>
 		</form>
+		</div>
+</div>
 
-
-
-</script>
-
-
-
-
-<br>
-<h3>배송지 목록</h3>
-<br>
-<h4>배송지에 따라 상품정보가 달라질 수 있습니다.</h4>
-
-<table border="1" width="800" class=" table table-slit">
-	<thead>
-		<tr>
-			<th>선택</th>
-			<th>받으실 분</th>
-			<th>연락처</th>
-			<th>기본주소</th>
-		</tr>
-	</thead>
-	<tbody align="center">
-		<c:forEach var="addressDto" items="${list}">
-			<tr>
-				<td><input type="checkbox"></td>
-				<td>${addressDto.addressName}</td>
-				<td>${sessionScope.phone}</td>
-				<td>${addressDto.addressNormal}</td>
-
-			</tr>
-		</c:forEach>
-	</tbody>
-
-</table>
-
-<div class="container address-list w-1000"></div>
-
-
+<div id="addressEditConfirmPopup" class="popup">
+    <div class="popupContent row container w-200">
+    	<div class="row pt-30">
+	        <h2 class="orange pt-60" id="addressEditMessage">배송지가 수정되었습니다!</h2>
+    	</div>
+    	<div class="row pt-30">
+    	    <button class="btn btn-navy" id="closeAddressEditConfirmPopup">닫기</button>
+    	</div>
+   
+    </div>
+</div>
 
 <c:if test="${sessionScope.name != null}">
 	<div class="row container w-800">

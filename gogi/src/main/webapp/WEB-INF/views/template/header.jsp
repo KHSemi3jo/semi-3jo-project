@@ -10,6 +10,7 @@
 <!-- 아이콘 사용을 위한 Font Awesome 6 CDN -->
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 
 <!-- 구글 웹 폰트 사용을 위한 CDN -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,6 +33,10 @@
 <style>
 .btn.btn-search{
 	padding: 0.5em 0.7em;
+	    line-height: 1.4em;
+}
+.hidden-select{
+	display: none;
 }
 </style>
 
@@ -51,11 +56,21 @@
                 <a href="/main"><img src="/images/logo/GogiLogo-main.png"width=150 height="150"></a>
             </div>
             <div class="title flex-container pl-50">
-                <div class="row input-search">
-                    <input type="search" name="keyword" class="form-input search-navy" value="${param.keyword}" 
-                                placeholder="검색어를 입력해주세요" autocomplete="off">
-                    <button type="submit" class="btn btn-search"><i class="fa-solid fa-magnifying-glass orange"></i></button>
-                </div>
+	            <form action="list" method="get">
+	                <div class="row input-search">
+		                <c:choose>
+							<c:when test="${vo.type == 'productName'}"></c:when>
+							<c:otherwise>
+							<select class="form-input hidden-select" name="type">
+							<option value="product_name" selected>상품이름</option>
+							</select>
+							</c:otherwise>
+						</c:choose>
+	                    <input type="search" name="keyword" class="form-input search-navy"
+	                                placeholder="검색어를 입력해주세요" autocomplete="off">
+	                    <button type="submit" class="btn btn-search"><i class="fa-solid fa-magnifying-glass orange"></i></button>
+	                </div>
+	             </form>
             </div>
         <div class="etc">
 			      								        	
@@ -110,7 +125,8 @@
 				          <div class="float-container pr-50 pb-10">
 				          		<div class="row col-3"></div>
 				                <div class="row float-left pl-50"><a href="/basket/list"><i class="cart fa-solid fa-cart-shopping fa-xl navy"></i></a></div>
-				                <div class="row float-right"><span class="orange">10,000</span><span class="orange"> G</span></div>      									          
+				                <input type="hidden" name="memberId" value="${memberDto.memberId}">
+				                <div class="row float-right"><span class="orange"> G </span><span class="orange">${sessionScope.Gmoney}</span></div>      									          
 				          </div>
 			         </c:if>									        	
 
@@ -120,9 +136,9 @@
             <ul class="menu menu-navy center">
                 <li><a href="#"><i class="fa-solid fa-bars "></i> 카테고리</a>
                     <ul>
-                        <li><a class="left" href="#">수입산 소고기</a></li>
-                        <li><a class="left" href="#">국내산 소고기</a></li>
-                        <li><a class="left" href="#">돼지고기</a></li>
+                        <li><a class="left" href="/product/dblist">국내산 소고기</a></li>
+                        <li><a class="left" href="/product/iblist">수입산 소고기</a></li>
+                        <li><a class="left" href="/product/plist">돼지고기</a></li>
                     </ul>
                 </li>
                 <li><a href="#">신상품</a></li>

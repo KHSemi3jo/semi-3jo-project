@@ -27,21 +27,6 @@ public class BasketController {
 //						,@RequestParam int basketNo
 						,HttpSession session
 						) {
-//		String basketMember = (String) session.getAttribute("name");
-//		BasketListDto basketDto = basketDao.selectOne(basketNo);
-//		String basketMember = basketListDto.getBasketMember();
-//		model.addAttribute("basketDto", basketDto);
-		
-//		if(memberId != null) {
-//			List<BasketListDto> basketList = basketDao.selectList(null);
-//			model.addAttribute("basketList", basketList);
-//			return "/WEB-INF/views/basket/basketList.jsp";
-//		}
-//		else {
-//			return "redirect:에러";
-//		}
-
-
 		
 		String basketMember = (String) session.getAttribute("name");
 

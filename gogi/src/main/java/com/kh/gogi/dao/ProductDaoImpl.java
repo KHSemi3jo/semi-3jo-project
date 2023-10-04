@@ -1,5 +1,6 @@
 package com.kh.gogi.dao;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,6 +153,79 @@ public class ProductDaoImpl implements ProductDao {
 			return jdbcTemplate.query(sql, productListMapper,data);
 		}
 	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public List<ProductDto> selectByProductType(String productType) {
+		String sql = "SELECT p.*, pd.attach_no "
+	            + "FROM product p "
+	            + "LEFT OUTER JOIN product_image pd ON p.product_no = pd.product_no "
+	            + "WHERE p.product_type = ? "
+	            + "ORDER BY p.product_no ASC";
+		return jdbcTemplate.query(sql,new Object[] {productType}, productListMapper);
+	}
 
+	@Override
+	public List<ProductDto> selectDomesticBeefProduct(ProductVO vo) {
+		vo.setProductType("국내산소고기");
+		return selectByProductType(vo.getProductType());
+	}
 
+	@Override
+	public List<ProductDto> selectImportedBeefProduct(ProductVO vo) {
+		vo.setProductType("수입산소고기");
+		return selectByProductType(vo.getProductType());
+	}
+
+	@Override
+	public List<ProductDto> selectPorkProduct(ProductVO vo) {
+		vo.setProductType("돼지고기");
+		return selectByProductType(vo.getProductType());
+	}
+
+	@Override
+	public int countDomesticBeefProduct(ProductVO vo) {
+		if(vo.isSearch()) {
+			String sql = "select count(*) from product where product_type = '국내산소고기' "
+					+ "and instr("+vo.getType()+",?)>0";
+			Object[]data= {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class,data);
+		}
+		else {
+			String sql = "select count(*) from product where product_type = '국내산소고기'";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
+
+	@Override
+	public int countImportedBeefProduct(ProductVO vo) {
+		if(vo.isSearch()) {
+			String sql = "select count(*) from product where product_type = '수입산소고기' "
+					+ "and instr("+vo.getType()+",?)>0";
+			Object[]data= {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class,data);
+		}
+		else {
+			String sql = "select count(*) from product where product_type = '수입산소고기'";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
+
+	@Override
+	public int countPorkProduct(ProductVO vo) {
+		if(vo.isSearch()) {
+			String sql = "select count(*) from product where product_type = '돼지고기' "
+					+ "and instr("+vo.getType()+",?)>0";
+			Object[]data= {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class,data);
+		}
+		else {
+			String sql = "select count(*) from product where product_type = '돼지고기'";
+			return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	}
+	
+
+	
+	
 }

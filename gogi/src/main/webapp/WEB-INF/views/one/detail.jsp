@@ -1,14 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<c:choose>
+	<c:when test="${sessionScope.level == '관리자'}">
+		<jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
+	</c:when>
+	<c:otherwise>
+		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>	
+	</c:otherwise>
+</c:choose>
 <style>
 
 </style>
 
 <div class="container w-800">
     <div class="row">
-        <h2 class="pt-30 pb-30 navy">1대1 게시판</h2>
+        <h2 class="pt-30 pb-30 navy">1 : 1 게시판</h2>
     </div>
     <div class="row">
         <table class="table table-slit">
@@ -16,10 +23,12 @@
                     <th bgcolor="#CCD5DE">제목</th>
                     <td class="left">${oneOnOneDto.oneTitle}</td>
                 </tr>
-                <tr>
-                    <th bgcolor="#CCD5DE">작성자</th>
-                    <td class="left">${oneOnOneDto.oneId}</td>
-                </tr>
+                <c:if test="${sessionScope.level == '관리자'}">
+	                <tr>
+	                    <th bgcolor="#CCD5DE">작성자</th>
+	                    <td class="left">${oneOnOneDto.oneId}</td>
+	                </tr>
+                </c:if>
                 <tr>
                     <th bgcolor="#CCD5DE">작성일</th>
                     <td class="left">${oneOnOneDto.oneDate}</td>

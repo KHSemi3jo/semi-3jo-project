@@ -171,7 +171,7 @@
 		<input type="hidden" name="replyNo" value="?">
 		<div class="row flex-container">
 			<div class="w-75">
-				<textarea name="replyContent" class="form-input w-100" rows="4">어쩌구저쩌구</textarea>
+				<textarea name="replyContent" class="form-input w-100" rows="4"></textarea>
 			</div>
 			<div class="w-25">
 				<div class="row right">
@@ -267,12 +267,14 @@
 			<input type="hidden" value="${shopAfterDto.shopAfterNo}">
 
 		</table>
+
 		<div class="row right">
-			<a href="/shopafter/list" class="btn btn-navy">목록</a> <a
-				class="btn btn-navy"
-				href="/shopafter/fix?shopAfterNo=${shopAfterDto.shopAfterNo}">수정</a>
+			<a href="/shopafter/list" class="btn btn-navy">목록</a> 
+					<c:if test="${sessionScope.name == shopAfterDto.shopAfterId || sessionScope.level =='관리자'}">
+			<a class="btn btn-navy" href="/shopafter/fix?shopAfterNo=${shopAfterDto.shopAfterNo}">수정</a>
 			<a class="btn btn-navy"
 				href="/shopafter/delete?shopAfterNo=${shopAfterDto.shopAfterNo}">삭제</a>
+		</c:if>
 		</div>
 	</div>
 </div>
@@ -313,32 +315,7 @@
 </div>
 
 
-<%-- 각종 버튼이 위치하는 곳 --%>
-<div class="container w-800 right">
-	<%-- 회원일 때만 글쓰기,수정,삭제가 나와야 한다 --%>
-	<c:if test="${sessionScope.name != null}">
-		<a class="btn btn-navy" href="add"> <i
-			class="fa-solid fa-pen"></i> 새글
-		</a>
 
-
-		<%-- 수정/삭제는 소유자일 경우만 나와야 한다 --%>
-		<c:if test="${sessionScope.name == shopAfterDto.shopAfterId}">
-		<div class="container w-800">
-			<a class="btn btn-navy"
-				href="edit?shopAfterNo=${shopAfterDto.shopAfterNo}"> <i
-				class="fa-solid fa-pen-to-square"></i> 수정
-			</a>
-			<a class="btn btn-navy"
-				href="delete?shopAfterNo=${shopAfterDto.shopAfterNo}"> <i
-				class="fa-solid fa-trash"></i> 삭제
-			</a>
-			</div>
-		</c:if>
-	</c:if>
-	<a class="btn btn-navy" href="list"> <i class="fa-solid fa-list"></i> 목록
-	</a>
-</div>
 
 
 
