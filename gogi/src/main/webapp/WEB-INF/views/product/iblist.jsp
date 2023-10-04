@@ -92,20 +92,15 @@ select.form-input,
             var productNo = $(this).data("product-no");
             
             $.ajax({
-                url: "http://localhost:8080/rest/basket/add",
+                url: "/rest/basket/add",
                 method: "post",
                 data: { productNo: productNo },
                 success: function(response) {
-                    if (response.success) {
-                		$("#modalMessage").text("상품이 장바구니에 추가되었습니다");
+                		$("#modalMessage").text(response.message);
                         openModal(); // 모달 열기
-                    } 
-//                     else {
-//                         alert(response.message);
-//                     }
                 },
                 error: function (xhr, status, error) {
-                	$("#modalMessage").text("이미 장바구니에 있는 상품입니다");
+                	$("#modalMessage").text(xhr.responseJSON.message);
                     openModal(); // 모달 열기
                 },
                 

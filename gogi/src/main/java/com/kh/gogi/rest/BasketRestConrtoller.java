@@ -53,12 +53,12 @@ public class BasketRestConrtoller {
             basketDto.setBasketCount(1);
             basketDao.add(basketDto);
 
-            response.put("success", true);
+//            response.put("success", true);
             response.put("message", "상품이 장바구니에 추가되었습니다");
             return ResponseEntity.ok(response);
         } 
         else {
-            response.put("success", false);
+//            response.put("success", false);
             response.put("message", "이미 장바구니에 있는 상품입니다");
             return ResponseEntity.badRequest().body(response);
         }
