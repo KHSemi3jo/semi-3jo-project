@@ -77,10 +77,9 @@
     border:0;
 }
 
-
-
- 
-
+.image{
+	vertical-align: middle;
+}
    
 
 
@@ -710,6 +709,16 @@ function requestCert() {
 								<input type="checkbox" class="check-item" name="basketNoList"  
 								value="${basketListDto.basketNo}" checked> <span></span>
 						</label>
+					</td>
+					<td class="image">
+						<c:choose>
+							<c:when test="${basketListDto.image}">
+                        		<img src="image?productNo=${basketListDto.productNo}" width="50" height="50">
+                    		</c:when>
+                    		<c:otherwise>
+                            	<img src="https://dummyimage.com/50x50/000/fff" width="50" height="50">
+                    		</c:otherwise>
+						</c:choose>
 					</td>
 					
 					<td class="left w-60">
