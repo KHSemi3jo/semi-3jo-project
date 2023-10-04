@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<c:choose>
+	<c:when test="${sessionScope.level == '관리자'}">
+		<jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
+	</c:when>
+	<c:otherwise>
+		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>	
+	</c:otherwise>
+</c:choose>
         <style>
 .container.w-600 input{
     border-radius: 3px;

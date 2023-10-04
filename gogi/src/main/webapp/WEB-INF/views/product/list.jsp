@@ -33,8 +33,7 @@
 .listContainer.w-1000{
 	    margin-left: 40px;
 }
-select.form-input,
-.form-input,
+select.form-input.product,
 .btn.btn-navy{
 	font-size:16px;
 	height:2.8em;
@@ -141,25 +140,6 @@ select.form-input,
 
 </script>
 
-<c:if test="${sessionScope.level == '관리자'}">
-	<div class="row">
-		<form action="list" method="get">
-			<c:choose>
-				<c:when test="${vo.type == 'productName'}"></c:when>
-				<c:otherwise>
-				<select class="form-input hidden-select" name="type">
-				<option value="product_name" selected>상품이름</option>
-				</select>
-				</c:otherwise>
-			</c:choose>
-			<input  class="form-input" type="search" name="keyword" placeholder="검색어를 입력해주세요"
-			 autocomplete="off">
-			<button type="submit" class="btn btn-navy">
-			<i class="fa-solid fa-magnifying-glass"></i>
-			검색</button>
-		</form>
-	</div>
-</c:if>
 
 <div class="listContainer w-1000" >
     <div class="flex-container w-250 auto-width">

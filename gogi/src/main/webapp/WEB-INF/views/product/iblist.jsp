@@ -33,9 +33,7 @@
 .listContainer.w-1000{
 	    margin-left: 40px;
 }
-select.form-input,
-.form-input,
-.btn.btn-navy{
+select.form-input.product{
 	font-size:16px;
 	height:2.8em;
     border-radius: 0.1em;
@@ -147,12 +145,12 @@ select.form-input,
 			<c:choose>
 				<c:when test="${vo.type == 'productName'}"></c:when>
 				<c:otherwise>
-				<select class="form-input hidden-select" name="type">
+				<select class="form-input product hidden-select" name="type">
 				<option value="product_name" selected>상품이름</option>
 				</select>
 				</c:otherwise>
 			</c:choose>
-			<input  class="form-input" type="search" name="keyword" placeholder="검색어를 입력해주세요"
+			<input  class="form-input product" type="search" name="keyword" placeholder="검색어를 입력해주세요"
 			 autocomplete="off">
 			<button type="submit" class="btn btn-navy">
 			<i class="fa-solid fa-magnifying-glass"></i>
