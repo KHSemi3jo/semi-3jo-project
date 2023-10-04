@@ -81,7 +81,6 @@ select.form-input,
     text-decoration: none;
     cursor: pointer;
 }
-
 </style>
 
 <script>
