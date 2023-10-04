@@ -105,24 +105,18 @@
         	var params = new URLSearchParams(location.search);
         	var productNo = params.get("productNo");
         	
-            $.ajax({
-                url:"http://localhost:8080/rest/basket/add",
-                method:"post",
-                data:{productNo:productNo},
-                success:function(response){
-                	if (response.success) {
-                		$("#modalMessage").text("상품이 장바구니에 추가되었습니다");
+        	$.ajax({
+                url: "/rest/basket/add",
+                method: "post",
+                data: { productNo: productNo },
+                success: function(response) {
+                		$("#modalMessage").text(response.message);
                         openModal(); // 모달 열기
-                    } 
-//                 	else {
-//                         alert("이미 장바구니에 있는 상품입니다");
-//                     }
-//                 	console.log(response);
                 },
                 error: function (xhr, status, error) {
-                	$("#modalMessage").text("이미 장바구니에 있는 상품입니다");
+                	$("#modalMessage").text(xhr.responseJSON.message);
                     openModal(); // 모달 열기
-                }
+                },
             });
         });
         $(".btn-pick").click(function(){

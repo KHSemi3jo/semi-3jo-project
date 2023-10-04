@@ -25,11 +25,11 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 				.excludePathPatterns("/member/join*", "/member/login", 
 						"/member/exitFinish", "/shopafter/list",
 						"/shopafter/detail");
-			
-		//관리자용 인터셉터 등록
-		registry.addInterceptor(adminOwnerInterceptor)
-				.addPathPatterns("/admin/**");
+		
 
+		//관리자용 인터셉터 등록(+상품등록 차단)
+		registry.addInterceptor(adminOwnerInterceptor)
+				.addPathPatterns("/admin/**","/product/add");
 
 	}
 	}

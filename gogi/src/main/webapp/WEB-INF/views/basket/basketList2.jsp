@@ -75,6 +75,7 @@
     border:0;
 }
 
+
 .form-input.address{
  	font-size:14px;
 	height:2.4em;
@@ -612,31 +613,25 @@ const userCode = "imp14397622";
 IMP.init(userCode);
 
 function requestPay() {
-	  IMP.request_pay({
-	    pg: "tosspayments",
-	    pay_method: "card",
-	    escrow: true,
-	    merchant_uid: "test_lnb1yptr",
-	    name: "테스트 결제",
-	    amount: $(".totalpay").text(),
-	    popup: true,
-	    buyer_tel: $(".addressPhone").text(),
-	    buyer_addr: $(".addressNormal").text(),
-	    buyer_postcode: $(".addressPost").text(),
-	  });
-	}
+  IMP.request_pay({
+    pg: "html5_inicis",
+    pay_method: "card",
+    merchant_uid: "test_lnbn6gaw",
+    name: "테스트 결제",
+    amount: $(".totalpay").text(),
+    buyer_name: "포트원",
+    buyer_tel: "010-0000-0000",
+    m_redirect_url: "{http://localhost:8080/main}"
+  }, function (rsp) { // callback
+      if (rsp.success) {
+          console.log(rsp); 
+          
+      } else {
+    	   console.log("결재완료!!");
+      }
+  });
+}
 
-function requestCert() {
-	  IMP.certification({
-	    pg: "inicis_unified",
-	    merchant_uid: "test_ln049vhv",
-	    name: $(".addressName").text(),
-	    phone: $(".addressPhone").text(),
-	    carrier: "SKT | KT | LGT | MVNO",
-	    company: "고기어때",
-	    popup: true,
-	  });
-	}
 </script>
 
 <div class=" container w-1000 top-select  ms-50" >
@@ -744,6 +739,16 @@ function requestCert() {
 								<input type="checkbox" class="check-item" name="basketNoList"  
 								value="${basketListDto.basketNo}" checked> <span></span>
 						</label>
+					</td>
+					<td class="image">
+						<c:choose>
+							<c:when test="${basketListDto.image}">
+                        		<img src="image?productNo=${basketListDto.productNo}" width="50" height="50">
+                    		</c:when>
+                    		<c:otherwise>
+                            	<img src="https://dummyimage.com/50x50/000/fff" width="50" height="50">
+                    		</c:otherwise>
+						</c:choose>
 					</td>
 					
 					<td class="left w-60">
