@@ -27,6 +27,9 @@ public class BasketRestConrtoller {
 	@PostMapping("/add")
 	public void add(@RequestParam int productNo, HttpSession session) {
 		ProductDto productDto = productDao.selectOne(productNo);
+		
+//		BasketListDto basketListDto = basketDao.selectOne(basketNo);
+//		if (장바구니에 있으면) return;//이미 담겨 있는 상품이면 중지
 		if(productDto == null) return;//없는 상품이면 중지
 
 		String memberId = (String) session.getAttribute("name");
@@ -43,8 +46,6 @@ public class BasketRestConrtoller {
 			
 		}
 		
-//		BasketListDto basketListDto = basketDao.selectOne(basketNo);
-//		if (장바구니에 있으면) return;//이미 담겨 있는 상품이면 중지
 		
 	}
 
