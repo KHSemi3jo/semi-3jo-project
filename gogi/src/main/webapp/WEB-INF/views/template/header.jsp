@@ -141,9 +141,9 @@
                         <li><a class="left" href="/product/plist">돼지고기</a></li>
                     </ul>
                 </li>
-                <li><a href="#">신상품</a></li>
-                <li><a href="#">베스트</a></li>
-                <li><a href="#">알뜰쇼핑</a></li>
+                <li><a href="/product/dblist">신상품</a></li>
+                <li><a href="/product/iblist">베스트</a></li>
+                <li><a href="/product/plist">알뜰쇼핑</a></li>
                 <%-- 관리자인 경우 추가 메뉴 출력 --%>
 	   				<c:if test = "${sessionScope.level == '관리자'}">
 	   					<li><a href="/admin/home">관리자메뉴</a></li>
