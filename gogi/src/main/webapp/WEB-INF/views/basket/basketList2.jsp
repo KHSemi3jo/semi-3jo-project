@@ -1,99 +1,100 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
-
-
- .btn-select{
- 	border:none;
- 	background-color: white;
- 	font-size:16px;
- }
-  .btn-select:hover{
-  	cursor: pointer;
-  }
-  .top-select{
-   padding-left:26px;
-  }
-  .custom-checkbox {
-    display: inline-block;
-    font-size: 18px;
-    position: relative;
-    padding-top:5px;
+.btn-select {
+	border: none;
+	background-color: white;
+	font-size: 16px;
 }
-.custom-checkbox > [type=checkbox] {
-    display: none;
-}
-.custom-checkbox > span {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
 
-    background-image: url("/images/checkbox/checkbox-empty.png");
-    background-size: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
+.btn-select:hover {
+	cursor: pointer;
 }
-.custom-checkbox > [type=checkbox]:checked + span {
-    background-image: url("/images/checkbox/checkbox-check.png");
+
+.top-select {
+	padding-left: 26px;
+}
+
+.custom-checkbox {
+	display: inline-block;
+	font-size: 18px;
+	position: relative;
+	padding-top: 5px;
+}
+
+.custom-checkbox>[type=checkbox] {
+	display: none;
+}
+
+.custom-checkbox>span {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	background-image: url("/images/checkbox/checkbox-empty.png");
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.custom-checkbox>[type=checkbox]:checked+span {
+	background-image: url("/images/checkbox/checkbox-check.png");
 }
 /* 버튼 스타일 */
-        .btn-decrease-quantity,
-        .btn-increase-quantity {
-            font-size: 20px;
-            background-color: white;
-            color: #012D5C;
-            border: none;
-            padding: 4px 12px;
-            cursor: pointer;
-        }
-
-        /* input 스타일 */
-        .quantity{
-            width: 10px;
-            font-size: 16px;
-            border: none;
-            padding-top:8px;
-            }
-            
-        .pCount{
-            border: 1px solid #ddd;
-            border-radius: 3px;
-         	width: 80px; 
-         	height:35px;   
-        }
-.totalPrice{
-	width:300px;
-	align-items:center;
-    border: 1px solid #F4F6F8;
-    border-radius: 3px;
-    background-color:#F4F6F8;
-}
-.w-90.line{
-	background:#D0D9E1;
-	height:1px;
-    border:0;
+.btn-decrease-quantity, .btn-increase-quantity {
+	font-size: 20px;
+	background-color: white;
+	color: #012D5C;
+	border: none;
+	padding: 4px 12px;
+	cursor: pointer;
 }
 
+/* input 스타일 */
+.quantity {
+	width: 10px;
+	font-size: 16px;
+	border: none;
+	padding-top: 8px;
+}
 
+.pCount {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	width: 80px;
+	height: 35px;
+}
 
- 
+.totalPrice {
+	width: 300px;
+	align-items: center;
+	border: 1px solid #F4F6F8;
+	border-radius: 3px;
+	background-color: #F4F6F8;
+}
 
-   
+.w-90.line {
+	background: #D0D9E1;
+	height: 1px;
+	border: 0;
+}
 
-
+.image {
+	vertical-align: middle;
+}
 </style>
 
 <script src="/js/checkbox.js"></script>
 
 <!--daum 우편 API cdn-->
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<!--포트원 API cdn-->
-	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-<!-- javascript 작성 공간 --> 
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!--포트원 API cdn-->
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<!-- javascript 작성 공간 -->
 
 <script>
 function clickOnlyOne(itself){
@@ -510,7 +511,7 @@ $(function(){
         </script>
 
 
- <script id="address-template" type="text/template">
+<script id="address-template" type="text/template">
  
 <div class=" flex-container view-container  w-700 left top-select ms-20 " >
 
@@ -642,150 +643,156 @@ value="" autocomplete="off">
 
 
 </script>
-        
-    
+
 
 <script>
 const userCode = "imp14397622";
 IMP.init(userCode);
 
 function requestPay() {
-	  IMP.request_pay({
-	    pg: "tosspayments",
-	    pay_method: "card",
-	    escrow: true,
-	    merchant_uid: "test_lnb1yptr",
-	    name: "테스트 결제",
-	    amount: $(".totalpay").text(),
-	    popup: true,
-	    buyer_tel: $(".addressPhone").text(),
-	    buyer_addr: $(".addressNormal").text(),
-	    buyer_postcode: $(".addressPost").text(),
-	  });
-	}
+  IMP.request_pay({
+    pg: "html5_inicis",
+    pay_method: "card",
+    merchant_uid: "test_lnbn6gaw",
+    name: "테스트 결제",
+    amount: $(".totalpay").text(),
+    buyer_name: "포트원",
+    buyer_tel: "010-0000-0000",
+    m_redirect_url: "{http://localhost:8080/main}"
+  }, function (rsp) { // callback
+      if (rsp.success) {
+          console.log(rsp); 
+          
+      } else {
+    	   console.log("결재완료");
+      }
+  });
+}
 
-function requestCert() {
-	  IMP.certification({
-	    pg: "inicis_unified",
-	    merchant_uid: "test_ln049vhv",
-	    name: $(".addressName").text(),
-	    phone: $(".addressPhone").text(),
-	    carrier: "SKT | KT | LGT | MVNO",
-	    company: "고기어때",
-	    popup: true,
-	  });
-	}
+
 </script>
 
 
 
-        
-        
-        
+
+
+
+
+
+
+
 
 <form class="delete-form" action="delete" method="post">
 	<div class="container w-1000">
 		<div class="row left top-select navy">
-		<!-- 전체선택 체크박스 -->
-				<label class="custom-checkbox">
-						<input type="checkbox" class="check-all" checked>
-						<span></span> 
-				</label>  <span class="pl-10 ">전체선택</span>
-						<span class="pl-10 ">|</span>
-						<button type="submit" class="btn-select " >선택삭제</button>
+			<!-- 전체선택 체크박스 -->
+			<label class="custom-checkbox"> <input type="checkbox"
+				class="check-all" checked> <span></span>
+			</label> <span class="pl-10 ">전체선택</span> <span class="pl-10 ">|</span>
+			<button type="submit" class="btn-select ">선택삭제</button>
 		</div>
-	<div class="flex-container">
-		<div class="row w-700">
-		
-		<table class="table table-slit" >
-			<tbody>
-			
-<%-- 			<c:if test="${sessionScope.name == '${findDto.getMemberId()}'}"></c:if> --%>
-			<c:forEach var="basketListDto" items="${basketList}">
-				<tr>
-				
-					<td>
-						<label class="custom-checkbox">
-								<!-- 개별항목 체크박스 -->
-								<input type="checkbox" class="check-item" name="basketNoList"  
-								value="${basketListDto.basketNo}" checked> <span></span>
-						</label>
-					</td>
-					
-					<td class="left w-60">
-						<!-- 제목을 누르면 상세페이지로 이동 -->
-						<a class="link" href="/product/detail?productNo=${basketListDto.basketListNo}">
-							${basketListDto.productName}
-						</a>
-					</td>
-					<td class="row right w-10">
-						<div class="row flex-container pCount">
-							<button class="btn-minus btn-decrease-quantity" type="button" name="minus">-</button>
-					<!-- <input type="number" min="1" max="10" name="count"> -->
-							<div class="count quantity" onchange="calculate(this);">${basketListDto.getBasketCount()}</div>					
-							<button class="btn-plus btn-increase-quantity" type="button" name="plus">+</button>
-						</div>
-					</td>
+		<div class="flex-container">
+			<div class="row w-700">
 
-					<td class="right w-16"><span class="pay">${basketListDto.productPrice}</span><span>원</span></td>
-				</tr>
-			</c:forEach>
-			</tbody>
-		</table>
-		      <div class="row left">
-<br>
+				<table class="table table-slit">
+					<tbody>
 
-</div> 
-	
-<br>
-		
-		</div>
-		</form>
-	
-			<div class="row w-300 ms-30">
-		
-					<%-- <c:forEach var="basketListDto" items="${basketList}" varStatus="i"> --%>
-					<!-- 			<div> -->
-					<!-- 			상품금액 : -->
-					<!-- 				<span class="price">  -->
-					<%-- 					<fmt:formatNumber pattern="###,###,###" value="${basketListDto.productPrice}"/>원 --%>
-					<!-- 				</span> -->
-					<!-- 			</div> -->
-					<%-- 		</c:forEach>	 --%>
-					<div class="container totalPrice">
-							<div class="row float-container">
-								<div class="row w-50 float-left left pl-20">
-									<div>상품금액 </div>
-								</div>
-								<div class="row w-50 float-right right pr-20">
-									<span class="productpay" name="total"></span><span>원</span>
-								</div>
-							</div>	
-							<div class="row float-container">
-								<div class="row w-50 float-left left pl-20">
-									<div>배송비  </div>
-								</div>
-								<div class="row w-50 float-right right pr-20">
-									<span  name="deliveryFee"></span>3000<span>원</span>
-								</div>
-							</div> 
-							<div class="row"><hr class="w-90 line"></div>
-							<div class="row float-container">
-								<div class="row w-50 float-left left pl-20">
-									<div>결제예정금액  </div>
-								</div>
-								<div class="row w-50 float-right right pr-20">
-									<span class="totalpay" name="total"></span><span>원</span>
-								</div>
-							</div>	 
-					</div>
-		
-					<div class="row  btn-pay btn btn-orange w-100"    onclick="requestPay()">
-		결재하기</div>				
-			
+						<%-- 			<c:if test="${sessionScope.name == '${findDto.getMemberId()}'}"></c:if> --%>
+						<c:forEach var="basketListDto" items="${basketList}">
+							<tr>
+
+								<td><label class="custom-checkbox"> <!-- 개별항목 체크박스 -->
+										<input type="checkbox" class="check-item" name="basketNoList"
+										value="${basketListDto.basketNo}" checked> <span></span>
+								</label></td>
+								<td class="image"><c:choose>
+										<c:when test="${basketListDto.image}">
+											<img src="image?productNo=${basketListDto.productNo}"
+												width="50" height="50">
+										</c:when>
+										<c:otherwise>
+											<img src="https://dummyimage.com/50x50/000/fff" width="50"
+												height="50">
+										</c:otherwise>
+									</c:choose></td>
+
+								<td class="left w-60">
+									<!-- 제목을 누르면 상세페이지로 이동 --> <a class="link"
+									href="/product/detail?productNo=${basketListDto.basketListNo}">
+										${basketListDto.productName} </a>
+								</td>
+								<td class="row right w-10">
+									<div class="row flex-container pCount">
+										<button class="btn-minus btn-decrease-quantity" type="button"
+											name="minus">-</button>
+										<!-- <input type="number" min="1" max="10" name="count"> -->
+										<div class="count quantity" onchange="calculate(this);">${basketListDto.getBasketCount()}</div>
+										<button class="btn-plus btn-increase-quantity" type="button"
+											name="plus">+</button>
+									</div>
+								</td>
+
+								<td class="right w-16"><span class="pay">${basketListDto.productPrice}</span><span>원</span></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<div class="row left">
+					<br>
+
+				</div>
+
+				<br>
 
 			</div>
+</form>
+
+<div class="row w-300 ms-30">
+
+	<%-- <c:forEach var="basketListDto" items="${basketList}" varStatus="i"> --%>
+	<!-- 			<div> -->
+	<!-- 			상품금액 : -->
+	<!-- 				<span class="price">  -->
+	<%-- 					<fmt:formatNumber pattern="###,###,###" value="${basketListDto.productPrice}"/>원 --%>
+	<!-- 				</span> -->
+	<!-- 			</div> -->
+	<%-- 		</c:forEach>	 --%>
+	<div class="container totalPrice">
+		<div class="row float-container">
+			<div class="row w-50 float-left left pl-20">
+				<div>상품금액</div>
+			</div>
+			<div class="row w-50 float-right right pr-20">
+				<span class="productpay" name="total"></span><span>원</span>
+			</div>
+		</div>
+		<div class="row float-container">
+			<div class="row w-50 float-left left pl-20">
+				<div>배송비</div>
+			</div>
+			<div class="row w-50 float-right right pr-20">
+				<span name="deliveryFee"></span>3000<span>원</span>
+			</div>
+		</div>
+		<div class="row">
+			<hr class="w-90 line">
+		</div>
+		<div class="row float-container">
+			<div class="row w-50 float-left left pl-20">
+				<div>결제예정금액</div>
+			</div>
+			<div class="row w-50 float-right right pr-20">
+				<span class="totalpay" name="total"></span><span>원</span>
+			</div>
+		</div>
 	</div>
+
+	<div class="row  btn-pay btn btn-orange w-100" onclick="requestPay()">
+		결재하기</div>
+
+
+</div>
+</div>
 </div>
 
 
@@ -795,13 +802,13 @@ function requestCert() {
 
 
 
-<div class="w-700 top-select  ms-50" >
-   <h3>배송지 목록</h3>
-<br>
-<h4>배송지에 따라 상품정보가 달라질 수 있습니다.</h4>
+<div class="w-700 top-select  ms-50">
+	<h3>배송지 목록</h3>
+	<br>
+	<h4>배송지에 따라 상품정보가 달라질 수 있습니다.</h4>
 </div>
 <br>
-  	<div class=" container address-list  ms-50" ></div>
+<div class=" container address-list  ms-50"></div>
 
 
 
@@ -812,46 +819,48 @@ function requestCert() {
 
 
 <c:if test="${sessionScope.name != null}">
-	<div class="container w-500 "style="margin-left: 110px">
+	<div class="container w-500 " style="margin-left: 110px">
 		<form class="address-insert-form w-100 " method="post">
 
-			<input type="hidden" name="addressId" class="form-input" value=" ${sessionScope.name}">
-			
-			<div class=" left row flex-container auto-width" >
-				<div  class="w-25" style="text-align: center; vertical-align: text-bottom;" >이름 :
-				</div>		
-		<div class="w-100">
-			<input name="addressName" class="row form-input flex-container w-50" value=" ${sessionScope.customer}">
+			<input type="hidden" name="addressId" class="form-input"
+				value=" ${sessionScope.name}">
+
+			<div class=" left row flex-container auto-width">
+				<div class="w-25"
+					style="text-align: center; vertical-align: text-bottom;">이름 :</div>
+				<div class="w-100">
+					<input name="addressName"
+						class="row form-input flex-container w-50"
+						value=" ${sessionScope.customer}">
+				</div>
 			</div>
+
+			<div class="row   container w-100 left">
+				연락처 : <input name="addressPhone" class="form-input"
+					value="${sessionScope.phone}">
 			</div>
-			
-				<div class="row   container w-100 left" >
-			연락처 : <input name="addressPhone" class="form-input" value="${sessionScope.phone}">
+
+			<div class="row  left">
+				우편번호 : <input type="text" name="addressPost" maxlength="6"
+					class="form-input">
+				<button type="button" class="btn post-search">
+					<i class="fa-solid fa-magnifying-glass"></i>
+				</button>
 			</div>
-			
-				<div class="row  left" >
-			우편번호 : <input type="text" name="addressPost" maxlength="6" class="form-input"
-		>
-					<button type="button" class="btn post-search">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
+			<div class="row left">
+				기본주소 : <input type="text" name="addressNormal" class="form-input">
 			</div>
-				<div class="row left" >
-			기본주소 : <input type="text" name="addressNormal" class="form-input"
-					>
+			<div class="row left">
+				상세주소 : <input type="text" name="addressDetail" class="form-input">
 			</div>
-			<div class="row left" >
-			상세주소 : <input type="text" name="addressDetail" class="form-input"
-					>
-			</div>
-		
+
 
 			<div class="row">
 				<button class="btn btn-orange ">
 					<i class="fa-solid fa-plus"></i> 새 배송지 추가
 				</button>
 			</div>
-			
+
 		</form>
 	</div>
 </c:if>

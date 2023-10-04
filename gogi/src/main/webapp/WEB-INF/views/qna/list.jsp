@@ -9,6 +9,8 @@
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>	
 	</c:otherwise>
 </c:choose>
+
+
 <style>
 .qnaTitle{
 	text-decoration: none;
