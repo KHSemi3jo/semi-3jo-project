@@ -664,7 +664,7 @@ function requestPay() {
           console.log(rsp); 
           
       } else {
-    	   console.log("결재완료");
+    	   console.log("결재완료!");
       }
   });
 }
