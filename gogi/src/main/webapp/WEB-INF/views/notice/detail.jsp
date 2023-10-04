@@ -15,6 +15,9 @@
 <link rel="stylesheet" type="text/css" href="/css/Gogi-commons.css">
 <style>
 
+.hidden-select{
+	display: none;
+}
 </style>
 <div class="container w-800">
     <div class="row">

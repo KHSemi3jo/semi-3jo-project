@@ -14,9 +14,7 @@
 	text-decoration: none;
 }
 
-select.form-input,
-.form-input,
-.btn.btn-navy{
+select.form-input.notice{
 	font-size:16px;
 	height:2.8em;
     border-radius: 0.1em;
@@ -112,14 +110,14 @@ select.form-input,
     <c:choose>
         <c:when test="${param.type == 'shopAfterId'}">
             <select name="type" 
-                required="required"  class="form-input">
+                required="required"  class="form-input notice">
                 <option value="qna_title">제목</option>
                 <option value="qna_category" selected="selected">카테고리</option>
             </select>
         </c:when>
         <c:otherwise>
             <select name="type" 
-                required="required"  class="form-input">
+                required="required"  class="form-input notice">
                 <option value="qna_title" selected="selected">제목</option>
                 <option value="qna_category">카테고리</option>
             </select>
@@ -128,7 +126,7 @@ select.form-input,
 
 
 
-    <input class="form-input" type="search" name="keyword" required="required"
+    <input class="form-input notice" type="search" name="keyword" required="required"
          placeholder="검색어를 입력해주세요"
         >
     <button class="btn btn-navy" type="submit">검색</button>

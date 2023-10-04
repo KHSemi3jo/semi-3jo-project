@@ -14,11 +14,6 @@
 	text-decoration: none;
 }
 
-select.form-input, .form-input, .btn.btn-navy {
-	font-size: 16px;
-	height: 2.8em;
-	border-radius: 0.1em;
-}
 </style>
 
 
