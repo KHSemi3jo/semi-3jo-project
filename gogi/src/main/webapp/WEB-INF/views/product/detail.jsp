@@ -245,9 +245,9 @@
                 <hr class="line">
                 <div class="row right">총상품금액: <span class="total">0</span>원</div>
                 <div class="row flex-container">
-                    <div class="row w-25"><a href="/shopafter/add">후기작성</a></div>
-                    <div class="row w-50 ">
-                        <button class="btn btn-orange btn-basket w-100">장바구니담기</button>
+                    <div class="row w-25"><a href="/shopafter/list" class="btn btn-orange">후기목록</a></div>
+                    <div class="row w-35 pl-20 ">
+                        <button class="btn btn-orange btn-basket">장바구니담기</button>
                     </div>
                     <div class="row w-25">
                         <a class="btn btn-navy" href="list?productNo=${productDto.productNo}">목록</a>
@@ -261,7 +261,7 @@
         	<hr>
         		<img src="/images/product/pig.png" width="1000" height="800">
         	<hr>
-        		<img src="/images/product/pd-image.png" width="1000" height="800">
+        		<img src="/images/product/pd-image2.png" width="1000" height="800">
         </div>
         </c:when>
         <c:otherwise>
@@ -269,7 +269,7 @@
         	<hr>
         		<img src="/images/product/cow.png" width="1000" height="800">
         			<hr>
-        		<img src="/images/product/pd-image.png" width="1000" height="800">
+        		<img src="/images/product/pd-image2.png" width="1000" height="800">
         </div>
         </c:otherwise>
         </c:choose>
