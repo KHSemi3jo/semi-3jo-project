@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-
 <c:choose>
 	<c:when test="${sessionScope.level == '관리자'}">
 		<jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
@@ -12,6 +11,9 @@
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>	
 	</c:otherwise>
 </c:choose>
+<!-- swiper cdn -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <style>
 .btn-basket{
 	background-color:white;
@@ -112,6 +114,21 @@ select.form-input,
                 
             });
         });
+        
+        var swiper = new Swiper('.swiper', {//아래의 객체에 옵션이 적용
+            //direction: 'vertical',//슬라이드 방향
+            loop: true,//슬라이드의 순환설정(끝에서 다시 첨으로)
+
+            //자동재생
+             autoplay:{
+                delay: 3000,//재생간격(ms)
+                pauseOnMouseEnter:true,//마우스 진입 시 멈춤 여부
+               },
+
+            //이펙트(전환효과) 설정
+            effect:"slide",//(slide,fade,cube,coverflow,flip,creative)
+        });
+        
      });
     // 모달 열기------------------------------
     function openModal() {
@@ -139,7 +156,7 @@ select.form-input,
         }
     }
     //----------------------------
-
+       
 </script>
 
 <c:if test="${sessionScope.level == '관리자'}">
@@ -161,6 +178,32 @@ select.form-input,
 		</form>
 	</div>
 </c:if>
+    <div class="container w-1000">
+        <div class="row">
+            <!-- Slider main container -->
+            <div class="swiper">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide">
+                        <img src="/images/main/main-1.jpg" width="100%" height="250px">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="/images/main/main-2.png" width="100%" height="250px">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="/images/main/main3.png" width="100%" height="250px">
+                    </div>
+                </div>
+
+            
+                <!-- If we need scrollbar -->
+                <!-- <div class="swiper-scrollbar"></div> -->
+            </div>
+        </div>
+    </div>
+
+
 
 <div class="listContainer w-1000" >
     <div class="flex-container w-250 auto-width">
