@@ -755,7 +755,7 @@ function requestCert() {
 					<div class="container totalPrice">
 							<div class="row float-container">
 								<div class="row w-50 float-left left pl-20">
-									<div>상품금액  </div>
+									<div>상품금액 ! </div>
 								</div>
 								<div class="row w-50 float-right right pr-20">
 									<span class="productpay" name="total"></span><span>원</span>
