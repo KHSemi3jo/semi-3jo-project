@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import com.kh.gogi.dto.AttachDto;
 import com.kh.gogi.dto.BasketDto;
 import com.kh.gogi.dto.BasketListDto;
+import com.kh.gogi.mapper.AttachMapper;
 import com.kh.gogi.mapper.BasketListMapper;
-import com.kh.gogi.mapper.BasketMapper;
 
 @Component
 public class BasketDaoImpl implements BasketDao {
@@ -17,10 +18,10 @@ public class BasketDaoImpl implements BasketDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	private BasketMapper basketMapper;
-
-	@Autowired
 	private BasketListMapper basketListMapper;
+	
+	@Autowired
+	private AttachMapper attachMapper;
 
 	@Override
 	public int sequence() {
@@ -30,8 +31,10 @@ public class BasketDaoImpl implements BasketDao {
 
 	@Override
 	public void add(BasketDto basketDto) {
-		String sql = "insert into basket(" + "basket_no, basket_member, " + "basket_listno, basket_count"
-				+ ") values(?, ?, ?, ?)";
+		String sql = "insert into basket(" 
+					+ "basket_no, basket_member, " 
+					+ "basket_listno, basket_count"
+					+ ") values(?, ?, ?, ?)";
 		Object[] data = { basketDto.getBasketNo(), basketDto.getBasketMember(), basketDto.getBasketListNo(),
 				basketDto.getBasketCount() };
 		jdbcTemplate.update(sql, data);
@@ -43,12 +46,16 @@ public class BasketDaoImpl implements BasketDao {
 		Object[] data = { basketNo };
 		return jdbcTemplate.update(sql, data) > 0;
 	}
-
+	
+//	상품 이미지 찾기
 	@Override
-	public BasketListDto selectOne(int basketNo) {
-		String sql = "select *from basket where basket_no = ?";
-		Object[] data = {basketNo};
-		List<BasketListDto> list = jdbcTemplate.query(sql, basketListMapper, data);
+	public AttachDto findImage(int productNo) {
+		String sql="select * from attach "
+				+ "where attach_no = ( "
+				+ "select attach_no from product_image "
+				+ "where product_no = ?)";
+		Object[] data = {productNo};
+		List<AttachDto>list=jdbcTemplate.query(sql, attachMapper,data);
 		return list.isEmpty() ? null : list.get(0);
 	}
 
@@ -56,11 +63,13 @@ public class BasketDaoImpl implements BasketDao {
 	public List<BasketListDto> selectList(String basketMember) {
 		String sql = "select " 
 				+ "basket_member," 
-				+ "product_no, product_name, product_price,"
-				+ "basket_no, basket_listno, basket_count " 
+				+ "p.product_no, p.product_name, p.product_price,"
+				+ "basket_no, basket_listno, basket_count , product_image.attach_no " 
 				+ "from basket " 
-				+ "left outer join product "
-				+ "on product.product_no = basket.basket_listno "
+				+ "left outer join product p "
+				+ "on p.product_no = basket.basket_listno "
+				+ "left outer join product_image "
+				+ "on p.product_no = product_image.product_no "
 				+ "where basket.basket_member = ? " 
 				+ "order by basket.basket_member asc";
 		Object[] data = {basketMember};
@@ -69,7 +78,7 @@ public class BasketDaoImpl implements BasketDao {
 
 	@Override
 	public boolean isInBasket(String basketMember, int productNo) {
-		String sql = "SELECT COUNT(*) FROM basket WHERE basket_member = ? AND basket_listno = ?";
+		String sql = "select count(*) from basket where basket_member = ? and basket_listno = ?";
         Object[] data = { basketMember, productNo };
         int count = jdbcTemplate.queryForObject(sql, Integer.class, data);
         return count > 0;

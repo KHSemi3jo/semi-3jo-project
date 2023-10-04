@@ -229,10 +229,30 @@
                 </div>                  
                 <hr class="line">
 
-                <div class="row flex-container pt-20">
-                    <div class="row w-25"><a href="/shopafter/add">후기작성</a></div>
-                    <div class="row w-50 ">
-                        <button class="btn btn-orange btn-basket w-100">장바구니담기</button>
+                <div class="row flex-container">
+                    <div class="row left w-25">상품선택</div>
+                    <div class="row right w-75 count">
+                        <div class="row left sTitle pt-10">${productDto.productName}</div>
+                        <div class="row float-container">
+                            <div class="row col-3 left">
+                            	<div class="row flex-container pCount ">
+									<button class="btn-decrease-quantity">-</button>
+							        <input type="text" class="quantity" value="1" readonly>
+							        <button class="btn-increase-quantity">+</button>
+						        </div>
+							</div>
+							<div class="row col-3 right"></div>
+                            <div class="row col-3 right pt-20">${productDto.productPrice} 원</div>
+                        </div>
+                    </div>
+                </div>  
+                <hr class="line">
+                <div class="row right">총상품금액: <span class="total">0</span>원</div>
+                <div class="row flex-container">
+                    <div class="row w-25"><a href="/shopafter/list" class="btn btn-orange">후기목록</a></div>
+                    <div class="row w-35 pl-20 ">
+                        <button class="btn btn-orange btn-basket">장바구니담기</button>
+
                     </div>
                     <div class="row w-25">
                         <a class="btn btn-navy" href="list?productNo=${productDto.productNo}">목록</a>
@@ -240,6 +260,24 @@
                 </div>
             </div>
         </div>
+        <c:choose>
+        	<c:when test="${productDto.productType eq '돼지고기'}">
+        <div class= "row">
+        	<hr>
+        		<img src="/images/product/pig.png" width="1000" height="800">
+        	<hr>
+        		<img src="/images/product/pd-image2.png" width="1000" height="800">
+        </div>
+        </c:when>
+        <c:otherwise>
+         <div class= "row">
+        	<hr>
+        		<img src="/images/product/cow.png" width="1000" height="800">
+        			<hr>
+        		<img src="/images/product/pd-image2.png" width="1000" height="800">
+        </div>
+        </c:otherwise>
+        </c:choose>
     </div>
 
 
