@@ -22,6 +22,7 @@
 	$(function() {
 		$('[name=qnaAnswer]')
 				.summernote(
+						
 						{
 							placeholder : '내용을 작성하세요.',
 							tabsize : 2, //탭을 누르면
@@ -33,15 +34,9 @@
 											'style',
 											[ 'bold', 'italic', 'underline',
 													'style' ] ],
-									[ 'font', [ 'bold', 'underline', 'clear' ] ],
-									[ 'color', [ 'forecolor', 'backcolor' ] ],
 									[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
-
-									[ 'table', [ 'table' ] ],
-									[ 'insert', [ 'link' ] ],
-									[
-											'view',
-											[ 'fullscreen', 'codeview', 'help' ] ] ]
+		
+									]
 						});
 	});
 </script>
