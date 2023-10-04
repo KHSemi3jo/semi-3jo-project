@@ -22,16 +22,22 @@
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
 <link rel="stylesheet" type="text/css" href="/css/Gogi-layout.css">
 <link rel="stylesheet" type="text/css" href="/css/Gogi-commons.css">
+
+
 <!-- kakao map cdn -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3709f5830a9a640bad10f7d345d86cb5"></script>
+<!-- jquery cdn -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <!-- swiper cdn -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<!-- jquery cdn -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <style>
 .btn.btn-search{
 	padding: 0.5em 0.7em;
+	    line-height: 1.4em;
+}
+.hidden-select{
+	display: none;
 }
 </style>
 
@@ -51,11 +57,21 @@
                 <a href="/main"><img src="/images/logo/GogiLogo-main.png"width=150 height="150"></a>
             </div>
             <div class="title flex-container ">
-                <div class="row input-search">
-                    <input type="search" name="keyword" class="form-input search-navy" value="" 
-                                placeholder="검색어를 입력해주세요" autocomplete="off">
-                    <button class="btn btn-search"><i class="fa-solid fa-magnifying-glass navy"></i></button>
-                </div>
+                <form action="/product/list" method="get">
+	                <div class="row input-search">
+		                <c:choose>
+							<c:when test="${vo.type == 'productName'}"></c:when>
+							<c:otherwise>
+							<select class="form-input hidden-select" name="type">
+							<option value="product_name" selected>상품이름</option>
+							</select>
+							</c:otherwise>
+						</c:choose>
+	                    <input type="search" name="keyword" class="form-input search-navy"
+	                                placeholder="검색어를 입력해주세요" autocomplete="off">
+	                    <button type="submit" class="btn btn-search"><i class="fa-solid fa-magnifying-glass orange"></i></button>
+	                </div>
+	             </form>
             </div>
             <div class="etc flex-container">
                 <div class="row pr-20 navy">${sessionScope.name} 님</div>

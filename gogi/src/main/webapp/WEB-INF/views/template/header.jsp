@@ -25,11 +25,11 @@
 <link rel="stylesheet" type="text/css" href="/css/Gogi-commons.css">
 <!-- kakao map cdn -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3709f5830a9a640bad10f7d345d86cb5"></script>
+<!-- jquery cdn -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <!-- swiper cdn -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<!-- jquery cdn -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <style>
 .btn.btn-search{
 	padding: 0.5em 0.7em;
@@ -56,7 +56,7 @@
                 <a href="/main"><img src="/images/logo/GogiLogo-main.png"width=150 height="150"></a>
             </div>
             <div class="title flex-container pl-50">
-	            <form action="list" method="get">
+	            <form action="/product/list" method="get">
 	                <div class="row input-search">
 		                <c:choose>
 							<c:when test="${vo.type == 'productName'}"></c:when>

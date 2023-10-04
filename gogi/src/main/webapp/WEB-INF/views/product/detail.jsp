@@ -13,7 +13,10 @@
     box-shadow : 0px 0px 0px 1px #E5EAEE;
     border-radius: 3px;
 }
-.name,
+.name{
+    font-size: 26px;
+    font-weight: bold;
+}
 .price{
     font-size: 22px;
     font-weight: bold;
@@ -211,9 +214,9 @@
                 </c:choose>
             </div>
             <div class="row w-500 pl-30">
-                <div class="row left name">${productDto.productName}</div>
-                <div class="row left price">${productDto.productPrice}원</div>
-                <div class="row left origin">원산지: ${productDto.productOrigin}</div>
+                <div class="row left name pb-10">${productDto.productName}</div>
+                <div class="row left price pb-10">${productDto.productPrice}원</div>
+                <div class="row left origin pb-10">원산지: ${productDto.productOrigin}</div>
                 <hr class="line">
                 <div class="row flex-container">
                     <div class="row left w-25">중량/용량</div>
@@ -225,6 +228,7 @@
                     <div class="row left w-75">${productDto.productExpire}</div>
                 </div>                  
                 <hr class="line">
+
                 <div class="row flex-container">
                     <div class="row left w-25">상품선택</div>
                     <div class="row right w-75 count">
@@ -248,6 +252,7 @@
                     <div class="row w-25"><a href="/shopafter/list" class="btn btn-orange">후기목록</a></div>
                     <div class="row w-35 pl-20 ">
                         <button class="btn btn-orange btn-basket">장바구니담기</button>
+
                     </div>
                     <div class="row w-25">
                         <a class="btn btn-navy" href="list?productNo=${productDto.productNo}">목록</a>
