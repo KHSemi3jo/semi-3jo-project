@@ -1,17 +1,28 @@
 package com.kh.gogi.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.gogi.dao.BasketDao;
+import com.kh.gogi.dao.ProductDao;
+import com.kh.gogi.dto.AttachDto;
 import com.kh.gogi.dto.BasketListDto;
 
 
@@ -21,6 +32,35 @@ import com.kh.gogi.dto.BasketListDto;
 public class BasketController {
 	@Autowired
 	private BasketDao basketDao;
+	
+	@Autowired
+	private ProductDao productDao;
+	
+	@ResponseBody
+	@RequestMapping("/image")
+	public ResponseEntity<ByteArrayResource> image(@RequestParam int productNo) throws IOException{
+		
+		AttachDto attachDto = productDao.findImage(productNo);//상품번호로 파일번호 찾기
+//		if(attachDto == null) {
+//			return ResponseEntity.notFound().build();//파일번호가 없으면 404 반환
+//		}
+		String home=System.getProperty("user.home");
+		File dir = new File(home, "Gogi");
+		File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
+		
+		
+		byte[] data = FileUtils.readFileToByteArray(target);//실제 파일 불러오기
+		ByteArrayResource resource = new ByteArrayResource(data);
+		
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_ENCODING,StandardCharsets.UTF_8.name())
+				.contentLength(attachDto.getAttachSize())
+				.header(HttpHeaders.CONTENT_TYPE, attachDto.getAttachType())
+				.header(HttpHeaders.CONTENT_DISPOSITION,
+						ContentDisposition.attachment().filename(attachDto.getAttachName(),StandardCharsets.UTF_8).build().toString()
+						)
+				.body(resource);
+	}
 
 	@RequestMapping("/list")
 	public String list(Model model		
