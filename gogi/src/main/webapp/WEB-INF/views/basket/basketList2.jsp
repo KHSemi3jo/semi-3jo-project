@@ -658,9 +658,9 @@ function requestPay() {
 	    name: "테스트 결제",
 	    amount: $(".totalpay").text(),
 	    popup: true,
-	    buyer_tel: "010-0000-0000",
-	    buyer_addr: "",
-	    buyer_postcode: "",
+	    buyer_tel: $(".addressPhone").text(),
+	    buyer_addr: $(".addressNormal").text(),
+	    buyer_postcode: $(".addressPost").text(),
 	  });
 	}
 
@@ -668,8 +668,8 @@ function requestCert() {
 	  IMP.certification({
 	    pg: "inicis_unified",
 	    merchant_uid: "test_ln049vhv",
-	    name: "",
-	    phone: "",
+	    name: $(".addressName").text(),
+	    phone: $(".addressPhone").text(),
 	    carrier: "SKT | KT | LGT | MVNO",
 	    company: "고기어때",
 	    popup: true,
@@ -755,7 +755,7 @@ function requestCert() {
 					<div class="container totalPrice">
 							<div class="row float-container">
 								<div class="row w-50 float-left left pl-20">
-									<div>상품금액 ! </div>
+									<div>상품금액 </div>
 								</div>
 								<div class="row w-50 float-right right pr-20">
 									<span class="productpay" name="total"></span><span>원</span>

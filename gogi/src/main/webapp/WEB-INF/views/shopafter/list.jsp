@@ -22,16 +22,11 @@ select.form-input, .form-input, .btn.btn-navy {
 		<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
 		<c:if test="${sessionScope.name != null}">
 			<div class="row right ">
-				<c:if test="${sessionScope.level =='관리자' }">
-					<button type="submit" class="btn upBtn delete-btn">
-						<i class="fa-solid fa-trash"></i> 일괄삭제
-					</button>
-				</c:if>
+		
 				<a href="add" class="btn upBtn"> <i class="fa-solid fa-pen"></i>
 					글쓰기
 				</a>
 			</div>
-		</c:if>
 
 
 		<c:if test="${vo.search}">
@@ -42,11 +37,6 @@ select.form-input, .form-input, .btn.btn-navy {
 			<table class=" table table-slit">
 				<thead>
 					<tr>
-						<%--체크박스 일괄 삭제 --%>
-						<c:if test="${sessionScope.level =='관리자' }">
-							<th><input type="checkbox" class="check-all"></th>
-						</c:if>
-
 						<th>번호</th>
 						<th width="50%">제목</th>
 						<th>아이디</th>
@@ -61,8 +51,7 @@ select.form-input, .form-input, .btn.btn-navy {
 						<td>${shopAfterDto.shopAfterNo}</td>
 									
 						
-						<td><a class="noticeTitle navy left"
-							href="detail?shopAfterNo=${shopAfterDto.shopAfterNo}">${shopAfterDto.shopAfterName}
+						<td><a class="noticeTitle navy left" href="detail?shopAfterNo=${shopAfterDto.shopAfterNo}">${shopAfterDto.shopAfterName}
 							<c:if test="${shopAfterDto.shopReplycount > 0}">
 							[${shopAfterDto.shopReplycount}]
 							</c:if></a>
