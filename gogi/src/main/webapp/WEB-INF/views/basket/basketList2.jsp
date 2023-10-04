@@ -14,9 +14,7 @@
   .btn-select:hover{
   	cursor: pointer;
   }
-  .top-select{
-   padding-left:26px;
-  }
+
   .custom-checkbox {
     display: inline-block;
     font-size: 18px;
@@ -77,8 +75,10 @@
     border:0;
 }
 
-
-
+.form-input.address{
+ 	font-size:14px;
+	height:2.4em;
+}
  
 
    
@@ -127,21 +127,8 @@ function clickOnlyOne(itself){
               })
 		  }
 	
-	
-
-
-
-
-
-
-
 
 $(function() {
-    
-
-	
-	
-	
 	
 	  reload();
 	  
@@ -208,15 +195,13 @@ $(function() {
 	     }
      };
       
-      
-      
+
       $(".btn-plus").click(function() {
          var count = $(this).parents('tr').find(".count"); // 수량을 표시하는 요소
          var plusCount = parseInt(count.text()); // 현재 수량 가져오기
          plusCount++; // 수량 증가
          count.text(plusCount); // 업데이트된 수량 표시   
-         reload();
-         
+         reload();       
 
       });
 
@@ -263,7 +248,6 @@ $(function(){
 });
 
 
-     
             $(function () {
             	  
                 $(".address-insert-form").submit(function (e) {
@@ -308,12 +292,10 @@ $(function(){
                             for (var i = 0; i < response.length; i++) {
                                 var address = response[i];
                                 var template = $("#address-template").html();
-                                var htmlTemplate = $.parseHTML(template);
-                        
-                               
+                                var htmlTemplate = $.parseHTML(template);             
                                 
                                 $(htmlTemplate).find(".addressId").text(
-                                    "회원 아이디 : " + address.addressId || "탈퇴한 사용자");
+                                    "아이디 : " + address.addressId || "탈퇴한 사용자");
                                 
                                 $(htmlTemplate).find(".addressName").text(
                                         "받으실 분 : " +  address.addressName);
@@ -323,13 +305,9 @@ $(function(){
                                 $(htmlTemplate).find(".addressPost").text(
                                     "우편번호 : " + address.addressPost);
                                 $(htmlTemplate).find(".addressNormal").text(
-                                    "기본주소 : " + address.addressNormal);
+                                    "기본 주소 : " + address.addressNormal);
                                 $(htmlTemplate).find(".addressDetail").text(
-                                    "상세 주소 : " + address.addressDetail);
-
-                          
-                        
-                                
+                                    "상세 주소 : " + address.addressDetail);  
                                 
                                 if (addressId.length == 0
                                     || addressId != address.addressId) {
@@ -398,11 +376,6 @@ $(function(){
 											"data-address-detail");
 										
 								console.log(this);
-				                         
-
-											
-				                                
-										
 								
 											
 											$(editHtmlTemplate).find(".post-search").click(function(){
@@ -432,9 +405,7 @@ $(function(){
 											
 											
 											  var addressId = "${sessionScope.name}";
-									
-				
-											
+			
 											$(editHtmlTemplate).find(
 													"[name=addressNo]")
 													.val(addressNo);
@@ -491,9 +462,7 @@ $(function(){
 				                 		   document.querySelector("[name=addressDetail]").value =addressDetail;
 											
 										});
-                                
-                                
-                                
+                                            
                                   $(".address-list").append(htmlTemplate);
                             }
                           
@@ -504,56 +473,49 @@ $(function(){
 
             });
 
-            
-            
 
         </script>
 
 
  <script id="address-template" type="text/template">
  
-<div class=" flex-container view-container  w-700 left top-select ms-20 " >
+<div class=" flex-container view-container left" >
 
-<div class="row ">
 
-<label class="custom-checkbox">
-<input type="checkbox" class=" check-item" name="check-list"  
- onclick="clickOnlyOne(this)"><span></span></label>
-</div>
-
-		<div class="w-75 container w-300 table table-slit top-select">
+		<div class="flex-container table table-slit">
+			<div class="w-40">
 				<div class="row left">
-					<h2 class="addressId">아이디</h2>
+                   <label class="custom-checkbox">
+                   <input type="checkbox" class=" check-item" name="check-list"  
+                   onclick="clickOnlyOne(this)"><span></span></label>
+					<span class="addressId pl-10">아이디</span>
 				</div>
-				<div class="row left">
-					<h3 class="addressName">성함</h3>
+				<div class="row left pl-30">
+					<pre class="addressName">성함</pre>
 				</div>
-				<div class="row left">
-					<h3 class="addressPhone">전화번호</h3>
+				<div class="row left pl-30">
+					<pre class="addressPhone">전화번호</pre>
 				</div>
-				<div class="row left">
+			</div>
+			<div class="w-60 pt-10 left">
+				<div class="row left pl-30">
 					<pre class="addressPost">우편번호</pre>
 				</div>
-				<div class="row left">
+				<div class="row left pl-30">
 					<pre class="addressNormal">기본주소</pre>
 				</div>
-				<div class="row left">
+				<div class="row left pl-30">
 					<pre class="addressDetail">상세주소</pre>
 				</div>
-	
+			<div>
 			</div>
-			<div class="w-25 flex-container table table-slit">
-				<div class="row right ">
-
-					<button class="btn btn-edit btn-navy w-100">
-						<i class="fa-solid fa-edit"></i>
-						배송지 수정
+			<div class="container">
+				<div class="row address-btn right">
+					<button class="btn btn-edit btn-navy">
+						 수정
 					</button>
-				</div>
-				<div class="row right ">
-					<button class="btn btn-orange btn-delete w-100">
-						<i class="fa-solid fa-trash"></i>
-						 배송지 삭제
+					<button class="btn btn-orange btn-delete">
+						삭제
 					</button>
 				</div>
 			</div>
@@ -677,6 +639,78 @@ function requestCert() {
 	}
 </script>
 
+<div class=" container w-1000 top-select  ms-50" >
+   <div class="row left"><h3>배송지 목록</h3></div>
+   <div class="w-100"><hr></div>
+   <div class="row left"><span>배송지에 따라 상품정보가 달라질 수 있습니다.</span></div>
+	<div class="row flex-container">
+		<div class="row w-60">
+		  	<div class="address-list " ></div>
+		</div>
+		<div class="row w-40">
+			<c:if test="${sessionScope.name != null}">
+				<div class="container w-300">
+					<form class="address-insert-form" method="post">			
+					<input type="hidden" name="addressId" class="form-input address" value=" ${sessionScope.name}">
+						
+						<div class=" flex-container" >
+							<div  class="row w-25 left">
+								<span>이름 :</span>
+							</div>		
+							<div class="row w-75 left">
+								<input name="addressName" class="form-input address" value=" ${sessionScope.customer}">
+							</div>
+						</div>
+						
+						<div class="flex-container" >
+							<div class="row w-25 left" >
+								<span>연락처 : </span>
+							</div>
+							<div class="row w-75 left">
+								<input name="addressPhone" class="form-input address" value="${sessionScope.phone}">
+							</div>	
+						</div>
+						
+						<div class="flex-container" >
+							<div class="row w-25 left" >
+								<span>우편번호 :</span> 
+							</div>
+							<div class="row w-75 left">	
+								<input type="text" name="addressPost" maxlength="6" size="6"class="form-input address post-search">
+								<button type="button" class="btn post-search form-input address"><i class="fa-solid fa-magnifying-glass"></i> </button>	                            
+				            </div>         
+						</div>
+						
+						<div class="flex-container" >
+							<div class="row w-25 left" >
+								<span>기본주소 :</span> 
+							</div>
+							<div class="row w-75 left">
+								<input type="text" name="addressNormal" class="form-input address w-100">
+							</div>
+						</div>
+						
+						<div class="flex-container" >							
+							<div class="row w-25 left" >
+								<span>상세주소 : </span>
+							</div>
+							<div class="row w-75 left">
+								<input type="text" name="addressDetail" class="form-input address w-100">
+							</div>
+						</div>	
+							
+						<div class="row">
+							<button class="btn btn-orange ">
+								<i class="fa-solid fa-plus"></i> 새 배송지 추가
+							</button>
+						</div>			
+					</form>
+				</div>
+			</c:if>
+		</div>
+	</div>
+
+</div>
 
 
         
@@ -795,66 +829,7 @@ function requestCert() {
 
 
 
-<div class="w-700 top-select  ms-50" >
-   <h3>배송지 목록</h3>
-<br>
-<h4>배송지에 따라 상품정보가 달라질 수 있습니다.</h4>
-</div>
-<br>
-  	<div class=" container address-list  ms-50" ></div>
 
-
-
-
-
-
-
-
-
-<c:if test="${sessionScope.name != null}">
-	<div class="container w-500 "style="margin-left: 110px">
-		<form class="address-insert-form w-100 " method="post">
-
-			<input type="hidden" name="addressId" class="form-input" value=" ${sessionScope.name}">
-			
-			<div class=" left row flex-container auto-width" >
-				<div  class="w-25" style="text-align: center; vertical-align: text-bottom;" >이름 :
-				</div>		
-		<div class="w-100">
-			<input name="addressName" class="row form-input flex-container w-50" value=" ${sessionScope.customer}">
-			</div>
-			</div>
-			
-				<div class="row   container w-100 left" >
-			연락처 : <input name="addressPhone" class="form-input" value="${sessionScope.phone}">
-			</div>
-			
-				<div class="row  left" >
-			우편번호 : <input type="text" name="addressPost" maxlength="6" class="form-input"
-		>
-					<button type="button" class="btn post-search">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-			</div>
-				<div class="row left" >
-			기본주소 : <input type="text" name="addressNormal" class="form-input"
-					>
-			</div>
-			<div class="row left" >
-			상세주소 : <input type="text" name="addressDetail" class="form-input"
-					>
-			</div>
-		
-
-			<div class="row">
-				<button class="btn btn-orange ">
-					<i class="fa-solid fa-plus"></i> 새 배송지 추가
-				</button>
-			</div>
-			
-		</form>
-	</div>
-</c:if>
 
 
 
