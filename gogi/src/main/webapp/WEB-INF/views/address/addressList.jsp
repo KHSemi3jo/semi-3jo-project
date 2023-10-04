@@ -105,9 +105,9 @@ $(function(){
                                     "회원 아이디 : " + address.addressId || "탈퇴한 사용자");
                                 
                                 $(htmlTemplate).find(".addressName").text(
-                                        "받으실 분 : " + customer);
+                                        "받으실 분 : " + address.addressName);
                                 $(htmlTemplate).find(".addressPhone").text(
-                                        "연락처 : " + phone);
+                                        "연락처 : " + address.addressPhone);
                                 
                                 $(htmlTemplate).find(".addressPost").text(
                                     "우편번호 : " + address.addressPost);

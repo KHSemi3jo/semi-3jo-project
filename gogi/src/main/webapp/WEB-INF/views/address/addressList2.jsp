@@ -30,8 +30,8 @@ select.form-input, .form-input, .btn.btn-navy {
     transform: translate(-50%, -50%);
     border-radius:  10px;
     background-color: white;
-    width: 400px;
-    height: 350px;
+    width: 600px;
+    height: 500px;
     padding: 20px;
     border: 1px solid #FA9F5F;
 }
@@ -308,7 +308,7 @@ $(function(){
             $(function(){
            	 
                 // 배송지 수정 버튼을 클릭했을 때 팝업을 보여주는 함수
-                $("#editAddressButton").click(function(e) {
+                $(".editAddressButton").click(function(e) {
                	 e.preventDefault();
                     // 팝업을 보이도록 설정
                	 showAddressEditPopup();
@@ -450,7 +450,7 @@ $(function(){
 				<td>${addressDto.addressName}</td>
 				<td>${sessionScope.phone}</td>
 				<td>${addressDto.addressNormal}</td>
-				<td><a href="edit" id="editAddressButton"> 
+				<td><a href="edit" id="editAddressButton" class="editAddressButton"> 
 				<i class="fa-solid fa-pen"></i></a></td>
 
 			</tr>
@@ -464,7 +464,7 @@ $(function(){
 
    
    <div id="addressEditPopup" class="popup row container" >
-    	<div class="popupContent row w-400">
+    	<div class="popupContent row w-800">
 		    <h2>배송지 수정</h2>
 		   <form id="addressEditForm" action="edit" method="post" autocomplete="off">
 		<input type="hidden" name="addressNo">
@@ -484,7 +484,7 @@ $(function(){
                         <label>연락처</label>
                     </div>
                     <div class="row w-75 pr-30">
-                        <input type="tel" name="addressPhone" value="${sessionScope.phone}"
+                        <input type="tel" name="addressPhone" value="${addressDto.addressPhone}"
                                 class="form-input w-100"autocomplete="off">
                         <div class="fail-feedback left">휴대폰 번호를 입력해주세요</div>
                     </div>
@@ -507,13 +507,13 @@ $(function(){
                     <div class="w-25"></div>
                     <div class="w-75 pr-30">
                         <input type="text" name="addressNormal" autocomplete="off"
-                      class="form-input post-search w-100 " value="addressNormal">
+                      class="form-input post-search w-100 " value="${addressDto.addressNormal}">
                     </div>
                 </div>
                 <div class="row flex-container">
                     <div class="w-25"></div>
                     <div class="w-75 pr-30">
-                        <input type="text" name="addressDetail"  value="addressDetail"
+                        <input type="text" name="addressDetail"  value="${addressDto.addressDetail}"
                         class="form-input w-100" autocomplete="off">
                         <div class="fail-feedback left">주소 입력시 모든 주소를 작성해주세요</div>
                     </div>

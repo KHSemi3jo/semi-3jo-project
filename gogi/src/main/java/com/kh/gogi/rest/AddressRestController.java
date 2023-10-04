@@ -47,9 +47,8 @@ public class AddressRestController {
 		String addressId = (String) session.getAttribute("name");
 		addressDto.setAddressId(addressId);
 		String addressPhone = (String) session.getAttribute("phone");
-		addressDto.setAddressPhone(addressPhone);
 		String addressName = (String) session.getAttribute("customer");
-		addressDto.setAddressName(addressName);
+
 		
 		addressDao.insert(addressDto);
 
@@ -64,6 +63,7 @@ public class AddressRestController {
 	@PostMapping("/edit")
 	public void edit(@ModelAttribute AddressDto addressDto) {
 		addressDao.edit(addressDto);
+	
 	}
 	
 	
