@@ -210,8 +210,8 @@ $(function() {
 					</td>
 					<td class="image">
 						<c:choose>
-							<c:when test="${productDto.image}">
-                        		<img src="/product/image?productNo=${productDto.productNo}" width="50" height="50">
+							<c:when test="${basketListDto.image}">
+                        		<img src="image?productNo=${basketListDto.productNo}" width="50" height="50">
                     		</c:when>
                     		<c:otherwise>
                             	<img src="https://dummyimage.com/50x50/000/fff" width="50" height="50">

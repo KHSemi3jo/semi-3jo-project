@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import com.kh.gogi.dto.AttachDto;
 import com.kh.gogi.dto.BasketDto;
 import com.kh.gogi.dto.BasketListDto;
+import com.kh.gogi.mapper.AttachMapper;
 import com.kh.gogi.mapper.BasketListMapper;
 
 @Component
@@ -17,6 +19,9 @@ public class BasketDaoImpl implements BasketDao {
 	
 	@Autowired
 	private BasketListMapper basketListMapper;
+	
+	@Autowired
+	private AttachMapper attachMapper;
 
 	@Override
 	public int sequence() {
@@ -41,16 +46,30 @@ public class BasketDaoImpl implements BasketDao {
 		Object[] data = { basketNo };
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	
+//	상품 이미지 찾기
+	@Override
+	public AttachDto findImage(int productNo) {
+		String sql="select * from attach "
+				+ "where attach_no = ( "
+				+ "select attach_no from product_image "
+				+ "where product_no = ?)";
+		Object[] data = {productNo};
+		List<AttachDto>list=jdbcTemplate.query(sql, attachMapper,data);
+		return list.isEmpty() ? null : list.get(0);
+	}
 
 	@Override
 	public List<BasketListDto> selectList(String basketMember) {
 		String sql = "select " 
 				+ "basket_member," 
-				+ "product_no, product_name, product_price,"
-				+ "basket_no, basket_listno, basket_count " 
+				+ "p.product_no, p.product_name, p.product_price,"
+				+ "basket_no, basket_listno, basket_count , product_image.attach_no " 
 				+ "from basket " 
-				+ "left outer join product "
-				+ "on product.product_no = basket.basket_listno "
+				+ "left outer join product p "
+				+ "on p.product_no = basket.basket_listno "
+				+ "left outer join product_image "
+				+ "on p.product_no = product_image.product_no "
 				+ "where basket.basket_member = ? " 
 				+ "order by basket.basket_member asc";
 		Object[] data = {basketMember};
