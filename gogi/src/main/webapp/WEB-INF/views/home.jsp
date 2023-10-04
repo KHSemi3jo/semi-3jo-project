@@ -178,7 +178,7 @@ select.form-input,
 		</form>
 	</div>
 </c:if>
-    <div class="container w-1000">
+    <div class="container w-1100">
         <div class="row">
             <!-- Slider main container -->
             <div class="swiper">
