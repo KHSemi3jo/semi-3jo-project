@@ -7,6 +7,15 @@
     border-radius: 3px;
     width: 200px;
 }
+.btn-send.btn.btn-navy,
+.btn-cert.btn.btn-navy{
+	border-radius: 3px;
+    width: 100px;
+    height: 46.5px;
+    font-size:16px;
+}
+
+
 .container.w-600 input{
     border-radius: 3px;
 }
@@ -182,7 +191,7 @@ textarea:focus{
 
                  $(".btn-send").prop("disabled", true);
                  $(".btn-send").find(".fa-spinner").show();
-                 $(".btn-send").find("span").text("이메일발송중");
+                 $(".btn-send").find("span").text("전송중");
                  $.ajax({
                      url:"http://localhost:8080/rest/cert/send",
                      method:"post",
@@ -190,7 +199,7 @@ textarea:focus{
                      success:function(){
                          $(".btn-send").prop("disabled", false);
                          $(".btn-send").find(".fa-spinner").hide();
-                         $(".btn-send").find("span").text("인증번호 전송");
+                         $(".btn-send").find("span").text("전송완료");
                          // window.alert("이메일 확인하세요!");
 
                          $(".cert-wrapper").show();
@@ -296,23 +305,24 @@ textarea:focus{
                     <div class="row w-25 left">
                         <label>이메일<span class="red">*</span></label>
                     </div>
-                    <div class="row w-75 pr-30">
+                    <div class="row w-75 pr-30 left">
                         <input type="text" name="memberEmail" placeholder="예: test@kh.com"
-                                class="form-input w-100">
-                    </div>
-                    
+                                class="form-input w-70">
                          <button class="btn-send btn btn-navy">
     			<i class="fa-solid fa-spinner fa-spin"></i>
-    					<span>전송</span>
+    					<span>인증</span>
 								</button>
-						
+                        <div class="cert-wrapper pt-10">
+       					 <input type="text" class="cert-input form-input w-70">
+       					 <button class="btn-cert btn btn-navy">확인완료</button>
+       					 </div>
+   					</div>
+
+                    
+							
                         <div class="fail-feedback left">이메일 형식으로 입력해주세요</div>
                         <div class="fail2-feedback left">이미 사용중인 이메일입니다</div>
                         <br>
-                        <div class="cert-wrapper">
-       					 <input type="text" class="cert-input">
-       					 <button class="btn-cert">확인</button>
-   						 </div>
                 </div>
                 <div class="row flex-container">
                     <div class="row w-25 left">
