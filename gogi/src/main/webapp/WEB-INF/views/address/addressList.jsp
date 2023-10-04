@@ -451,7 +451,64 @@ value="" autocomplete="off">
 
 
 <c:if test="${sessionScope.name != null}">
-	<div class="row container w-800">
+<form class="address-edit-form edit-container">
+		<input type="hidden" name="addressNo">
+	<input type="hidden" name="addressId" >
+		<div class="container w-400">
+		 <div class="row flex-container">
+                    <div class="row w-25 left">
+                        <label>받으실 분</label>
+                    </div>
+                    <div class="row w-75 pr-30">
+                      <input type="text" name="addressName" value="${addressDto.addressName}" 
+                     class="form-input w-100" required autocomplete="off">
+                    </div>
+                </div>
+			<div class="row flex-container">
+                    <div class="row w-25 left">
+                        <label>연락처</label>
+                    </div>
+                    <div class="row w-75 pr-30">
+                        <input type="tel" name="addressPhone" value="${sessionScope.phone}"
+                                class="form-input w-100"autocomplete="off">
+                        <div class="fail-feedback left">휴대폰 번호를 입력해주세요</div>
+                    </div>
+                </div>
+		<div class="row flex-container">
+
+                    <div class="row w-25 left">
+                        <label style="display: block;">주소</label>
+                    </div>
+                    <div class="row w-75 left">
+                        <input type="text" name="addressPost" class="form-input post-search"
+                                size="6" maxlength="6" 
+				value="" autocomplete="off">
+                        <button type="button" class="btn post-search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row flex-container">
+                    <div class="w-25"></div>
+                    <div class="w-75 pr-30">
+                        <input type="text" name="addressNormal"autocomplete="off"
+                      class="form-input post-search w-100 " value="addressNormal">
+                    </div>
+                </div>
+                <div class="row flex-container">
+                    <div class="w-25"></div>
+                    <div class="w-75 pr-30">
+                        <input type="text" name="addressDetail"  value="addressDetail"
+                        class="form-input w-100" autocomplete="off">
+                        <div class="fail-feedback left">주소 입력시 모든 주소를 작성해주세요</div>
+                    </div>
+                </div>
+                <div class="row">
+				<button class="btn btn-orange ">
+					<i class="fa-solid fa-plus"></i> 새 배송지 추가
+				</button>
+			</div>
+	<%-- <div class="row container w-800">
 		<form class="address-insert-form" method="post">
 
 			<input type="hidden" name="addressId" class="form-input" value=" ${sessionScope.name}">
@@ -482,10 +539,9 @@ value="" autocomplete="off">
 				<button class="btn btn-orange ">
 					<i class="fa-solid fa-plus"></i> 새 배송지 추가
 				</button>
+			</div> --%>
 			</div>
-			
 		</form>
-	</div>
 </c:if>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
