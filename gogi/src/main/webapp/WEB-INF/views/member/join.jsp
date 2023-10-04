@@ -7,6 +7,15 @@
     border-radius: 3px;
     width: 200px;
 }
+.btn-send.btn.btn-navy,
+.btn-cert.btn.btn-navy{
+	border-radius: 3px;
+    width: 100px;
+    height: 46.5px;
+    font-size:16px;
+}
+
+
 .container.w-600 input{
     border-radius: 3px;
 }
@@ -166,10 +175,70 @@ textarea:focus{
         $(".popup .close-btn").click(function(){
             $(".popup").hide();
         });
-        
 
-        
     });
+         
+         $(function(){
+             //처음 로딩아이콘 숨김
+             $(".btn-send").find(".fa-spinner").hide();
+             $(".cert-wrapper").hide();
+
+             //인증번호 보내기 버튼을 누르면
+             //서버로 비동기 통신을 보내 인증 메일 발송 요청
+             $(".btn-send").click(function(){
+                 var email = $("[name=memberEmail]").val();
+                 if(email.length == 0) return;
+
+                 $(".btn-send").prop("disabled", true);
+                 $(".btn-send").find(".fa-spinner").show();
+                 $(".btn-send").find("span").text("전송중");
+                 $.ajax({
+                     url:"http://localhost:8080/rest/cert/send",
+                     method:"post",
+                     data:{certEmail: email},
+                     success:function(){
+                         $(".btn-send").prop("disabled", false);
+                         $(".btn-send").find(".fa-spinner").hide();
+                         $(".btn-send").find("span").text("전송완료");
+                         // window.alert("이메일 확인하세요!");
+
+                         $(".cert-wrapper").show();
+                         window.email = email;
+                     },
+                 });
+             });
+
+             //확인 버튼을 누르면 이메일과 인증번호를 서버로 전달하여 검사
+             $(".btn-cert").click(function(){
+                 // var email = $("[name=memberEmail]").val();
+                 var email = window.email;
+                 var number = $(".cert-input").val();
+                 if(email.length == 0 || number.length == 0) return;
+
+                 $.ajax({
+                     url:"http://localhost:8080/rest/cert/check",
+                     method:"post",
+                     data:{
+                         certEmail:email,
+                         certNumber:number
+                     },
+                     success:function(response){
+                         // console.log(response);
+                         if(response.result){ //인증성공
+                             $(".cert-input").removeClass("success fail")
+                                             .addClass("success");
+                             $(".btn-cert").prop("disabled", true);
+                             //상태객체에 상태 저장하는 코드
+                         }
+                         else{
+                             $(".cert-input").removeClass("success fail")
+                                             .addClass("fail");
+                             //상태객체에 상태 저장하는 코드
+                         }
+                     },
+                 });
+             });
+         });
     </script>
 
     <form class="join-form" action="join" method="post" autocomplete="off">
@@ -236,12 +305,24 @@ textarea:focus{
                     <div class="row w-25 left">
                         <label>이메일<span class="red">*</span></label>
                     </div>
-                    <div class="row w-75 pr-30">
+                    <div class="row w-75 pr-30 left">
                         <input type="text" name="memberEmail" placeholder="예: test@kh.com"
-                                class="form-input w-100">
+                                class="form-input w-70">
+                         <button class="btn-send btn btn-navy">
+    			<i class="fa-solid fa-spinner fa-spin"></i>
+    					<span>인증</span>
+								</button>
+                        <div class="cert-wrapper pt-10">
+       					 <input type="text" class="cert-input form-input w-70">
+       					 <button class="btn-cert btn btn-navy">확인완료</button>
+       					 </div>
+   					</div>
+
+                    
+							
                         <div class="fail-feedback left">이메일 형식으로 입력해주세요</div>
                         <div class="fail2-feedback left">이미 사용중인 이메일입니다</div>
-                    </div>
+                        <br>
                 </div>
                 <div class="row flex-container">
                     <div class="row w-25 left">

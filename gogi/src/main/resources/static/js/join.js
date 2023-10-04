@@ -89,7 +89,31 @@ $(function(){
 		 }
          
     });
-    $("[name=memberEmail]").blur(function(e){
+    $("[name=memberEmail]").blur(function(e) {
+    var emailValue = $(this).val();
+    var isValid = false;
+
+    // 이메일 형식 검사
+    if (emailValue) {
+        var regex = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+        isValid = regex.test(emailValue);
+    }
+
+    // 클래스 제거
+    $(e.target).removeClass("success fail fail2");
+
+    // 이메일 형식이 유효하고 null이 아니면 success 클래스 추가
+    if (isValid) {
+        $(e.target).addClass("success");
+        status.memberEmail = true;
+    } else {
+        // 이메일 형식이 유효하지 않거나 null이면 fail 클래스 추가
+        $(e.target).addClass("fail");
+        status.memberEmail = false;
+    }
+});
+
+/*    $("[name=memberEmail]").blur(function(e){
         var regex =  /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
         var isValid =regex.test($(this).val());
         
@@ -120,6 +144,9 @@ $(function(){
 			status.memberEmail = false;
 		}
     });
+    */
+    
+    
     $("[name=memberContact]").blur(function(){
         var regex = /^01([0|1|6|7|8|9])([1-9]{3,4})([0-9]{4})$/;
         var contact = $(this).val();
@@ -134,6 +161,8 @@ $(function(){
             status.memberContact = false;
 		 }
     });
+    
+    
     $("[name=memberBirth]").blur(function(){
         var regex =  /^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[01])$/;
         var isValid =$(this).val().length == 0 || regex.test($(this).val());
