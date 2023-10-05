@@ -113,7 +113,6 @@
 										                    <div class="custom-service">
 										                        <a class="left" href="/notice/list">공지사항</a>
 										                        <a class="left" href="/qna/list">자주하는 질문</a>
-										                        <a class="left" href="/one/list">1:1 문의</a>
 										                    </div>
 				                						</div>
 				                					</div>									                
