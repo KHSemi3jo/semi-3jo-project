@@ -29,7 +29,6 @@ select.form-input, .form-input, .btn.btn-navy {
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 $(function(){
-	  $("[name=addressPost]").empty();
     //검색버튼, 우편번호 입력창, 기본주소 입력창을 클릭하면 검색 실행
     $(".post-search").click(function(){
         new daum.Postcode({
@@ -48,7 +47,6 @@ $(function(){
                     addr = data.jibunAddress;
                 }
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-   
                 document.querySelector("[name=addressPost]").value = data.zonecode;
                 document.querySelector("[name=addressNormal]").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
@@ -72,8 +70,10 @@ $(function(){
                         method: "post",
                         data: $(e.target).serialize(),
                         success: function (response) {
-                        	 console.log("더하기"+response)
                              reloadList();
+                        	 $("[name=addressPost]").empty();
+                        	 $("[name=addressNormal]").empty();
+                        	 $("[name=addressDetail]").empty();
 
                         }
                     });
@@ -81,7 +81,7 @@ $(function(){
                 });
                 reloadList();
                 function reloadList() {
-                
+
                     var params = new URLSearchParams(location.search);
                     var addressNo = params.get("addressNo");
                     var addressPost = params.get("addressPost");
@@ -98,10 +98,7 @@ $(function(){
                             addressId: addressId
                         },
                         success: function (response) {
-                            $(".address-list").empty();
-                           
-                            
-                            console.log(  "확인"+ $("[name=addressPost]").val())    
+                            $(".address-list").empty(); 
                             var customer = "${sessionScope.customer}";
                                var phone = "${sessionScope.phone}";
                             for (var i = 0; i < response.length; i++) {
@@ -109,7 +106,7 @@ $(function(){
                                 var template = $("#address-template").html();
                                 var htmlTemplate = $.parseHTML(template);
                         
-                                console.log(  document.querySelector("[name=addressPost]").value = address.addressPost);    
+                           
                                
                                 
                                 $(htmlTemplate).find(".addressId").text(
@@ -289,263 +286,201 @@ $(function(){
             
             
         </script>
-<h1>배송지 관리</h1>
-<hr>
+
 
 <script id="address-template" type="text/template">
-<div class=" flex-container view-container  container w-1000">
+<div class=" flex-container view-container left pb-10" >
 
-<div class="row">
-<input type="checkbox">
-</div>
 
-		<div class="w-75 container">
+		<div class="flex-container table table-slit">
+			<div class="w-30">
 				<div class="row left">
-					<h2 class="addressId">아이디</h2>
+                   <label class="custom-checkbox">
+                   <input type="checkbox" class=" check-item" name="check-list"  
+                   onclick="clickOnlyOne(this)"><span></span></label>
+					<span class="addressId pl-10">아이디</span>
 				</div>
-				<div class="row left">
-					<h3 class="addressName">성함</h3>
+				<div class="row left pl-30">
+					<pre class="addressName">성함</pre>
 				</div>
-				<div class="row left">
-					<h3 class="addressPhone">전화번호</h3>
+				<div class="row left pl-30">
+					<pre class="addressPhone">전화번호</pre>
 				</div>
-				<div class="row left">
+			</div>
+			<div class="w-70 pt-10 left">
+				<div class="row left pl-30">
 					<pre class="addressPost">우편번호</pre>
 				</div>
-				<div class="row left">
+				<div class="row left pl-30">
 					<pre class="addressNormal">기본주소</pre>
 				</div>
-				<div class="row left">
+				<div class="row left pl-30">
 					<pre class="addressDetail">상세주소</pre>
 				</div>
-	
+			<div>
 			</div>
-			<div class="w-25" flex-container>
-				<div class="row right">
-					<button class="btn btn-edit btn-navy w-100">
-						<i class="fa-solid fa-edit"></i>
-						배송지 수정
+			<div class="container">
+				<div class="row address-btn right">
+					<button class="btn btn-edit btn-navy">
+						 수정
 					</button>
-				</div>
-				<div class="row right ">
-					<button class="btn btn-orange btn-delete w-100">
-						<i class="fa-solid fa-trash"></i>
-						 배송지 삭제
+					<button class="btn btn-orange btn-delete">
+						삭제
 					</button>
 				</div>
 			</div>
-</div>
-<hr>
-</script>
 
+</div>
+</script>
 
 <script id="address-edit-template" type="text/template">
 
 
-		<form class="address-edit-form edit-container">
-		<input type="hidden" name="addressNo">
+<form class="address-edit-form edit-container left container" >
+ 	<div class="pb-10"><hr></div>
+	<input type="hidden" name="addressNo">
 	<input type="hidden" name="addressId" >
-		<div class="container w-400">
-		 <div class="row flex-container">
-                    <div class="row w-25 left">
+		<div class=" flex-container">
+
+			<div class="w-35">
+
+		    <div class="flex-container">
+                    <div class="w-40 left">
                         <label>받으실 분</label>
                     </div>
-                    <div class="row w-75 pr-30">
+                    <div class="w-60">
                       <input type="text" name="addressName" value="${addressDto.addressName}" 
-                     class="form-input w-100" required autocomplete="off">
+                     class="form-input  address w-100" required autocomplete="off">
                     </div>
-                </div>
-			<div class="row flex-container">
-                    <div class="row w-25 left">
-                        <label>연락처</label>
-                    </div>
-                    <div class="row w-75 pr-30">
-                        <input type="tel" name="addressPhone" value="${sessionScope.phone}"
-                                class="form-input w-100"autocomplete="off">
-                        <div class="fail-feedback left">휴대폰 번호를 입력해주세요</div>
-                    </div>
-                </div>
-		<div class="row flex-container">
+             </div>
 
-                    <div class="row w-25 left">
-                        <label style="display: block;">주소</label>
-                    </div>
-                    <div class="row w-75 left">
-                        <input type="text" name="addressPost" class="form-input post-search"
-                                size="6" maxlength="6" 
-value="" autocomplete="off">
-                        <button type="button" class="btn post-search">
+			 <div class="flex-container">
+                     <div class="row w-40 left">
+                         <label>연락처</label>
+                     </div>
+                     <div class="row w-60 left">
+                         <input type="tel" name="addressPhone" value="${sessionScope.phone}"
+                                class="form-input address w-100"autocomplete="off">
+                         <div class="fail-feedback left">휴대폰 번호를 입력해주세요</div>
+                     </div>
+              </div>
+   			  </div>
+
+			<div class="w-65 left">
+
+		     <div class="flex-container pl-10">
+                     <div class="w-15 left pl-10">
+                         <label >주소</label>
+                     </div>
+                     <div class="w-85 left">
+                         <input type="text" name="addressPost" class="form-input address post-search"
+                                size="6" maxlength="6"value="" autocomplete="off">
+                         <button type="button" class="btn post-search form-input address">
                             <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
+                         </button>
+						<div class="row">
+                           <input type="text" name="addressNormal"autocomplete="off"
+                      	    class="form-input address post-search w-100 " value="addressNormal">
+						</div>
+						<div class="row">
+                            <input type="text" name="addressDetail"  value="addressDetail"
+                             class="form-input address w-100" autocomplete="off">
+                         <div class="fail-feedback left">주소 입력시 모든 주소를 작성해주세요</div>
+                    	</div>
                     </div>
-                </div>
-                <div class="row flex-container">
-                    <div class="w-25"></div>
-                    <div class="w-75 pr-30">
-                        <input type="text" name="addressNormal"autocomplete="off"
-                      class="form-input post-search w-100 " value="addressNormal">
-                    </div>
-                </div>
-                <div class="row flex-container">
-                    <div class="w-25"></div>
-                    <div class="w-75 pr-30">
-                        <input type="text" name="addressDetail"  value="addressDetail"
-                        class="form-input w-100" autocomplete="off">
-                        <div class="fail-feedback left">주소 입력시 모든 주소를 작성해주세요</div>
-                    </div>
-                </div>
+             </div>
 
-
-			<div class="w-25">
-		<div class="row right">
-
+				</div>
+			</div>
+			<div class="container">
+				<div class="row right">
 					<button type="submit" class="btn btn-navy">
-						<i class="fa-solid fa-check"></i>
 						수정
 					</button>
-				</div>
-				<div class="row">
 					<button type="button" class="btn btn-orange btn-cancel">
-						<i class="fa-solid fa-xmark"></i>
 						취소
 					</button>
 				</div>
 			</div>
-		</div>
-		</div>
+
 		</form>
 
 
 
 </script>
 
+<div class=" container w-1100 top-select  ms-50" >
+   <div class="row left"><h3>배송지 목록</h3></div>
+   <div class="w-100"><hr></div>
+   <div class="row left"><span>배송지에 따라 상품정보가 달라질 수 있습니다.</span></div>
+	<div class="row flex-container">
+		<div class="row w-60">
+		  	<div class="address-list " ></div>
+		</div>
+		<div class="row w-40">
+			<c:if test="${sessionScope.name != null}">
+				<div class="container w-400 pl-10">
+					<form class="address-insert-form" method="post" autocomplete="off">			
+					<input type="hidden" name="addressId" class="form-input address" value=" ${sessionScope.name}">
+						
+						<div class=" flex-container" >
+							<div  class="row w-25 left">
+								<span>이름 </span>
+							</div>		
+							<div class="row w-75 left">
+								<input name="addressName" class="form-input address w-55" value=" ${sessionScope.customer}">
+							</div>
+						</div>
+						
+						<div class="flex-container" >
+							<div class="row w-25 left" >
+								<span>연락처 </span>
+							</div>
+							<div class="row w-75 left">
+								<input name="addressPhone" class="form-input address  w-55" value="${sessionScope.phone}">
+							</div>	
+						</div>
+						
+						<div class="flex-container" >
+							<div class="row w-25 left" >
+								<span>우편번호 </span> 
+							</div>
+							<div class="row w-75 left">	
+								<input type="text" name="addressPost" maxlength="6" size="6"class="form-input address post-search"readonly>
+								<button type="button" class="btn post-search form-input address"><i class="fa-solid fa-magnifying-glass"></i> </button>	                            
+				            </div>         
+						</div>
+						
+						<div class="flex-container" >
+							<div class="row w-25 left" >
+								<span>기본주소 </span> 
+							</div>
+							<div class="row w-75 left">
+								<input type="text" name="addressNormal" class="form-input address w-100"readonly>
+							</div>
+						</div>
+						
+						<div class="flex-container" >							
+							<div class="row w-25 left" >
+								<span>상세주소  </span>
+							</div>
+							<div class="row w-75 left">
+								<input type="text" name="addressDetail" class="form-input address w-100">
+							</div>
+						</div>	
+							
+						<div class="row">
+							<button class="btn btn-orange ">
+								<i class="fa-solid fa-plus"></i> 새 배송지 추가
+							</button>
+						</div>			
+					</form>
+				</div>
+			</c:if>
+		</div>
+	</div>
 
+</div>
 
-
-<br>
-<h3>배송지 목록</h3>
-<br>
-<h4>배송지에 따라 상품정보가 달라질 수 있습니다.</h4>
-
-<table border="1" width="800" class=" table table-slit">
-	<thead>
-		<tr>
-			<th>선택</th>
-			<th>받으실 분</th>
-			<th>연락처</th>
-			<th>기본주소</th>
-		</tr>
-	</thead>
-	<tbody align="center">
-		<c:forEach var="addressDto" items="${list}">
-			<tr>
-				<td><input type="checkbox"></td>
-				<td>${addressDto.addressName}</td>
-				<td>${sessionScope.phone}</td>
-				<td>${addressDto.addressNormal}</td>
-
-			</tr>
-		</c:forEach>
-	</tbody>
-
-</table>
-
-<div class="container address-list w-1000"></div>
-
-
-
-<c:if test="${sessionScope.name != null}">
-<form class="address-insert-form edit-container">
-		<input type="hidden" name="addressNo">
-	<input type="hidden" name="addressId" >
-		<div class="container w-400">
-		 <div class="row flex-container">
-                    <div class="row w-25 left">
-                        <label>받으실 분</label>
-                    </div>
-                    <div class="row w-75 pr-30">
-                      <input type="text" name="addressName" value="${sessionScope.customer}" 
-                     class="form-input w-100" required autocomplete="off">
-                    </div>
-                </div>
-			<div class="row flex-container">
-                    <div class="row w-25 left">
-                        <label>연락처</label>
-                    </div>
-                    <div class="row w-75 pr-30">
-                        <input type="tel" name="addressPhone" value="${sessionScope.phone}"
-                                class="form-input w-100"autocomplete="off">
-                        <div class="fail-feedback left">휴대폰 번호를 입력해주세요</div>
-                    </div>
-                </div>
-		<div class="row flex-container">
-
-                    <div class="row w-25 left">
-                        <label style="display: block;">주소</label>
-                    </div>
-                    <div class="row w-75 left">
-                        <input type="text" name="addressPost" class="form-input post-search"
-                                size="6" maxlength="6" 
-				autocomplete="off">
-                        <button type="button" class="btn post-search">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="row flex-container">
-                    <div class="w-25"></div>
-                    <div class="w-75 pr-30">
-                        <input type="text" name="addressNormal"autocomplete="off"
-                      class="form-input post-search w-100 ">
-                    </div>
-                </div>
-                <div class="row flex-container">
-                    <div class="w-25"></div>
-                    <div class="w-75 pr-30">
-                        <input type="text" name="addressDetail" 
-                        class="form-input w-100" autocomplete="off">
-                        <div class="fail-feedback left">주소 입력시 모든 주소를 작성해주세요</div>
-                    </div>
-                </div>
-                <div class="row">
-				<button class="btn btn-orange " type="submit">
-					<i class="fa-solid fa-plus"></i> 새 배송지 추가
-				</button>
-			</div>
-	<%-- <div class="row container w-800">
-		<form class="address-insert-form" method="post">
-
-			<input type="hidden" name="addressId" class="form-input" value=" ${sessionScope.name}">
-			<div class="row">
-			이름 : <input name="addressName" class="form-input" value=" ${sessionScope.customer}">
-			</div>
-			<div class="row">
-			연락처 : <input name="addressPhone" class="form-input" value="${sessionScope.phone}">
-			</div>
-			<div class="row ">
-			우편번호 : <input type="text" name="addressPost" maxlength="6" class="form-input"
-		>
-					<button type="button" class="btn post-search">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-			</div>
-			<div class="row"> 
-			기본주소 : <input type="text" name="addressNormal" class="form-input"
-					>
-			</div>
-			<div class="row">
-			상세주소 : <input type="text" name="addressDetail" class="form-input"
-					>
-			</div>
-		
-
-			<div class="row">
-				<button class="btn btn-orange ">
-					<i class="fa-solid fa-plus"></i> 새 배송지 추가
-				</button>
-			</div> --%>
-			</div>
-		</form>
-</c:if>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
