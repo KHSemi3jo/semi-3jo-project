@@ -102,7 +102,7 @@ public class BasketController {
 	
 	}
 	
-	@PostMapping("/delete")
+	@RequestMapping("/delete")
 	public String delete(
 			@RequestParam List<Integer> basketNoList) {
 		for(int basketNo : basketNoList) {
