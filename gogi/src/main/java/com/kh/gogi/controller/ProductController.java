@@ -62,7 +62,7 @@ public class ProductController {
 				int attachNo = attachDao.sequence();
 				
 				String home=System.getProperty("user.home");
-				File dir = new File(home, "Gogi");
+				File dir = new File(home, "/git/semi-3jo-project/gogi/src/main/resources/static/images/kh12c");
 				dir.mkdirs();
 				File target = new File(dir, String.valueOf(attachNo));
 				attach.transferTo(target);
@@ -90,7 +90,7 @@ public class ProductController {
 //				return ResponseEntity.notFound().build();//파일번호가 없으면 404 반환
 //			}
 			String home=System.getProperty("user.home");
-			File dir = new File(home, "Gogi");
+			File dir = new File(home, "/git/semi-3jo-project/gogi/src/main/resources/static/images/kh12c");
 			File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
 			
 			
@@ -202,7 +202,7 @@ public class ProductController {
 				 //파일 삭제
 				 AttachDto attachDto = productDao.findImage(productDto.getProductNo());
 				 String home = System.getProperty("user.home");
-				 File dir = new File(home, "Gogi");
+				 File dir = new File(home, "/git/semi-3jo-project/gogi/src/main/resources/static/images/kh12c");
 				 
 				 if(attachDto != null) {
 					 attachDao.delete(attachDto.getAttachNo());
@@ -240,7 +240,7 @@ public class ProductController {
 			if(attachDto != null) {
 				
 				String home = System.getProperty("user.home");
-				File dir = new File(home, "Gogi");
+				File dir = new File(home, "/git/semi-3jo-project/gogi/src/main/resources/static/images/kh12c");
 				File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
 				target.delete();
 				
