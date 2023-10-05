@@ -32,6 +32,14 @@ public class BasketRestConrtoller {
 	public ResponseEntity<Map<String, Object>> add(@RequestParam int productNo, HttpSession session) {
 		Map<String, Object> response = new HashMap<>();
 		
+		String memberId = (String) session.getAttribute("name");
+		if (memberId == null) {
+	        response.put("loggedOut", true);
+	        response.put("message", "로그인이 필요합니다.");
+	        return ResponseEntity.status(401).body(response);
+	    }
+
+		
 		ProductDto productDto = productDao.selectOne(productNo);
 
         if (productDto == null) {
@@ -41,7 +49,6 @@ public class BasketRestConrtoller {
         }
 
 
-        String memberId = (String) session.getAttribute("name");
         boolean isInBasket = basketDao.isInBasket(memberId, productDto.getProductNo());
 
         if (!isInBasket) {
