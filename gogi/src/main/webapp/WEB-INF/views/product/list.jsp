@@ -95,15 +95,9 @@ select.form-input.product,
                 method: "post",
                 data: { productNo: productNo },
                 success: function(response) {
-                	if (response.loggedOut) {
-                        // 로그인되지 않았을 때
                         $("#modalMessage").text(response.message);
                         openModal(); // 모달 열기
-                    } else {
-                        // 로그인되어 있을 때
-                        $("#modalMessage").text(response.message);
-                        openModal(); // 모달 열기
-                    }
+
                 },
                 error: function (xhr) {
                     // 에러 처리
