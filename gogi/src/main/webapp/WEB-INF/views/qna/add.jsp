@@ -9,6 +9,10 @@
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 	</c:otherwise>
 </c:choose>
+<style>
+
+   p { text-align: left; }
+</style>
 
 
 <!-- SummerNote cdn -->

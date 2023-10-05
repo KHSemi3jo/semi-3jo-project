@@ -108,7 +108,7 @@ public class ShopAfterController {
 		HttpSession session) {
  
 		Integer productNo = (Integer) session.getAttribute("productNo");
-	
+		String productName = (String) session.getAttribute("productName");
 		
 		if(productNo !=null) 
 		{
@@ -118,7 +118,7 @@ public class ShopAfterController {
 
 		List<ShopAfterDto> list = shopAfterDao.selectProductListByPage(vo,productNo);
 		model.addAttribute("list", list);
-		return "/WEB-INF/views/shopafter/productList.jsp";
+		return "/WEB-INF/views/shopafter/list.jsp";
 
 	}
 	else {
@@ -127,7 +127,7 @@ public class ShopAfterController {
 
 		List<ShopAfterDto> list = shopAfterDao.selectListByPage(vo);
 		model.addAttribute("list", list);
-		return "/WEB-INF/views/shopafter/list.jsp";
+		return "/WEB-INF/views/shopafter/productList.jsp";
 	}
 	}
 	

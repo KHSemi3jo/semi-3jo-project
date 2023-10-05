@@ -18,6 +18,8 @@
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 
+
+
 <style>
 select.form-input.one,
 .opt{
@@ -25,7 +27,9 @@ select.form-input.one,
 	height:2.7em;
     border-radius: 0.1em;
 }
+   p { text-align: left; }
 </style>
+
 
 <script>
 	$(function() {
@@ -122,7 +126,7 @@ select.form-input.one,
 					<label>내용</label>
 				</div>
 				<div class="row w-75 pr-30">
-					<textarea name="oneContent" class="form-input w-100" cols="30"
+					<textarea name="oneContent" class="form-input w-100 left" cols="30"
 						rows="10"></textarea>
 				</div>
 			</div>
