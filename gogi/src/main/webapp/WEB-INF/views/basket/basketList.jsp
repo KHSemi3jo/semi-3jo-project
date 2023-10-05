@@ -102,43 +102,26 @@
 <script>
 function clickOnlyOne(itself){
 
-	
-		 var addressId = "${sessionScope.name}";
-		  $.ajax({
-              url: "/rest/address/list",
-              method: "post",
-              data: {
-                  addressId: addressId
-              },
-			success: function(response){
-		var checkboxes = document.getElementsByName("check-list");
-					checkboxes.forEach((checkbox) =>{
-						checkbox.checked =false;
-					})
-					
-		
-				for(var i =0 ; i <response.length ;i++){
-					itself.checked = true;
-					if(itself.checked){
-			
-					 var template = $(".address-list").html();
-                     var htmlTemplate = $.parseHTML(template);     
-                  var addressName=  $(htmlTemplate).find(".btn-edit").attr("data-address-name");
-                console.log(addressName)
 
-                
-                 
-
-			
-			
-					}
-	
-		
-					
-				}
-            	  },
-              })
-		  }
+	var addressId = "${sessionScope.name}";
+	 $.ajax({
+		 url: "/rest/address/list",
+		 method: "post",
+		 data: {
+			 addressId: addressId
+		 },
+	   success: function(response){
+	var checkboxes = document.getElementsByName("check-list");
+			   checkboxes.forEach((checkbox) =>{
+				   checkbox.checked =false;
+			   })
+			   
+				   itself.checked = true;
+			  
+				
+		   }	 
+		   }
+	 )}
 	
 
 $(function() {
@@ -622,30 +605,49 @@ $(function(){
     
 
 <script>
-const userCode = "imp14397622";
-IMP.init(userCode);
+	const userCode = "imp14397622";
+	IMP.init(userCode);
 
-function requestPay() {
-  IMP.request_pay({
-    pg: "html5_inicis",
-    pay_method: "card",
-    merchant_uid: "test_lnbn6gaw",
-    name: "테스트 결제",
-    amount: $(".totalpay").text(),
-    buyer_name: "포트원",
-    buyer_tel: "010-0000-0000",
-    m_redirect_url: "{http://localhost:8080/main}"
-  }, function (rsp) { // callback
-      if (rsp.success) {
-          console.log(rsp); 
-          
-      } else {
-    	   console.log("결재완료!!");
-      }
-  });
-}
+	 
+	
+	function requestPay() {
+	
+		
+		
+		
+			if($("[name=check-list]").is(":checked") == false){
+		return	alert("배송지를 체크해주세요.")
+		}
+		else{
+			var addressName=	$("[name=check-list]:checked").parents(".view-container").find(".btn-edit").attr("data-address-name");
+			 var addressPost=	$("[name=check-list]:checked").parents(".view-container").find(".btn-edit").attr("data-address-post");
+			 var addressNormal=	$("[name=check-list]:checked").parents(".view-container").find(".btn-edit").attr("data-address-normal");
+			 var addressDetail=	$("[name=check-list]:checked").parents(".view-container").find(".btn-edit").attr("data-address-detail");
+			 var addressPhone=	$("[name=check-list]:checked").parents(".view-container").find(".btn-edit").attr("data-address-phone");
+			
+			
 
-</script>
+					 IMP.request_pay({
+							pg: "html5_inicis",
+							pay_method: "card",
+							merchant_uid: "test_lnbn6gsr",
+							name: addressName+"님 테스트 결제",
+							amount: $(".totalpay").text(),
+							buyer_name: addressName,
+							buyer_tel: addressPhone,
+							 buyer_addr: addressNormal+addressDetail,
+							    buyer_postcode: addressPost,
+							m_redirect_url: "{http://localhost:8080/basket/finish}"
+						  }, 
+						  function (rsp) { // callback
+							  if (rsp.success) {
+								  location.href = "http://localhost:8080/basket/finish";
+							  } else { alert("사용자의 결재가 취소되었습니다.");}
+						  });
+						}
+	}
+
+	</script>
 
 <div class=" container w-1100 top-select  ms-50" >
    <div class="row left"><h3>배송지 목록</h3></div>

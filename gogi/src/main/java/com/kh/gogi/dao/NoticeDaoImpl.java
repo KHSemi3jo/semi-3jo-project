@@ -28,8 +28,9 @@ public class NoticeDaoImpl implements NoticeDao {
 
 	@Override
 	public void add(NoticeDto noticeDto) {
-		String sql = "insert into notice(notice_no," + " notice_title ,notice_content) " + "values(?,?,?)";
-		Object[] data = { noticeDto.getNoticeNo(), noticeDto.getNoticeTitle(), noticeDto.getNoticeContent() };
+		String sql = "insert into notice(notice_no, notice_writer," 
+	+ " notice_title ,notice_content) " + "values(?,?,?,?)";
+		Object[] data = { noticeDto.getNoticeNo(),noticeDto.getNoticeWriter(), noticeDto.getNoticeTitle(), noticeDto.getNoticeContent() };
 		tem.update(sql, data);
 	}
 
