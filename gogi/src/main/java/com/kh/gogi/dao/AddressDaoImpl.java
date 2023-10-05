@@ -65,9 +65,11 @@ public class AddressDaoImpl implements AddressDao{
 	
 	@Override
 	public boolean edit(AddressDto addressDto) {
-		String sql = "update address set address_post=?, address_normal=?, "
+		String sql = "update address set address_post=?, address_normal=?"
+				+ ", address_phone = ? , address_name = ?, "
 				+ "address_detail =? where address_no = ?";
 		Object[] data = { addressDto.getAddressPost(), addressDto.getAddressNormal(),
+				addressDto.getAddressPhone(), addressDto.getAddressName(),
 				addressDto.getAddressDetail(), addressDto.getAddressNo()};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
