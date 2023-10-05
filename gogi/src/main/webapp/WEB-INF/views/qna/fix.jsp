@@ -10,6 +10,11 @@
 	</c:otherwise>
 </c:choose>
 
+<style>
+
+   p { text-align: left; }
+</style>
+
 <!-- SummerNote cdn -->
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
@@ -47,6 +52,24 @@
         </div>
         <hr>
         <form action="fix" method="post">
+        
+        	<div class="row flex-container">
+        <div class="row w-25  left pl-80">
+					<label>카테고리</label>
+				</div>
+				<div class="row w-75 pr-30 left">
+					<select name="qnaCategory" class="form-input">
+						<option class="form-input">주문/결재/취소</option>
+						<option class="form-input">교환/반품/AS</option>
+						<option class="form-input">배송</option>
+						<option class="form-input">쿠폰/마일리지</option>
+						<option class="form-input">회원정보</option>
+						<option class="form-input">기타</option>
+					</select>
+
+				</div>
+		</div>
+        
             <input type="hidden" name="qnaNo" value="${qnaDto.qnaNo}">
                 <div class="row">
                     <div class="row flex-container">

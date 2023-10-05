@@ -19,6 +19,8 @@
         </div>
         <div class="row">
             <table class="table table-slit">
+            
+            
                     <tr>
                         <th bgcolor="#CCD5DE">제목</th>
                         <td class="left">${qnaDto.qnaTitle}</td>

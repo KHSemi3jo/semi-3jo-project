@@ -15,7 +15,7 @@ select.form-input, .form-input, .btn.btn-navy {
 </style>
 <div class="container w-800 navy">
 	<div class="row">
-		<h2>쇼핑후기</h2>
+		<h2>전체 쇼핑후기</h2>
 	</div>
 	<!-- 폼시작(체크박스) -->
 	<form class="delete-form" action="deleteByAdmin" method="post">
