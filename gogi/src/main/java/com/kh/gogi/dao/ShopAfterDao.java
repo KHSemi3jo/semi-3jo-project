@@ -46,5 +46,14 @@ public interface ShopAfterDao {
 
 	public List<ShopAfterDto> selectProductListByPage(ShopAfterVO vo, int productNo);
 	public int countProductList(ShopAfterVO vo,int productNo);
+	
+	
+	public int countMemberList(ShopAfterVO vo,String memberId);
+	
+	public List<ShopAfterDto> selectMemberListByPage(int page, String memberId);
+
+	public List<ShopAfterDto> selectMemberListByPage(ShopAfterVO vo, String memberId);
+	public List<ShopAfterDto> selectMemberListByPage(String type, 
+			String keyword, int page , String memberId);
 
 }

@@ -48,7 +48,7 @@
 
 <div class="container w-600">
 	<div class="row">
-		<h1>쇼핑후기 등록</h1>
+		<h1>상품후기 등록</h1>
 	</div>
 	<form action="add" method="post">
 		<div class="row">

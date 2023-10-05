@@ -44,7 +44,7 @@
 
 <div class="container w-800">
     <div class="row">
-        <h2 class="pt-30 pb-30">쇼핑후기</h2>
+        <h2 class="pt-30 pb-30">${sessionScope.productName} 상품후기</h2>
     </div>
     <hr>
     <form action="fix" method="post">
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="row right  pr-30">
-                    <a class="btn btn-navy" href="/notice/list">목록</a>
+                    <a class="btn btn-navy" href="/shopafter/list">목록</a>
                     <button type="submit"class="btn btn-navy">등록</button>
                 </div>
             </div>
