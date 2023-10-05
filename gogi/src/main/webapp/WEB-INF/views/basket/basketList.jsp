@@ -171,7 +171,8 @@ $(function() {
          // 체크된 항목이 하나 이상인 경우 버튼을 활성화, 그렇지 않으면 비활성화
          if (checkedItems.length > 0) {
              $(".btn-select").prop("disabled", false);
-         } else {
+         } 
+         else {
              $(".btn-select").prop("disabled", true);
          }
      });
@@ -237,7 +238,8 @@ $(function(){
                 //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
                 if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
                     addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                } 
+                else { // 사용자가 지번 주소를 선택했을 경우(J)
                     addr = data.jibunAddress;
                 }
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
