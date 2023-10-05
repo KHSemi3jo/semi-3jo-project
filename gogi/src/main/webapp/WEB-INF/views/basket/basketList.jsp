@@ -81,7 +81,9 @@
 	height:2.4em;
 }
  
-
+.image{ 
+	vertical-align: middle; 
+} 
    
 
 
