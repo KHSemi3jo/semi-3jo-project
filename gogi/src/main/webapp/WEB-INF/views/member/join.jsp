@@ -198,7 +198,7 @@ textarea:focus{
                      success:function(){
                          $(".btn-send").prop("disabled", false);
                          $(".btn-send").find(".fa-spinner").hide();
-                         $(".btn-send").find("span").text("전송완료");
+                         $(".btn-send").find("span").text("재전송");
                          // window.alert("이메일 확인하세요!");
 
                          $(".cert-wrapper").show();
@@ -209,7 +209,6 @@ textarea:focus{
 
              //확인 버튼을 누르면 이메일과 인증번호를 서버로 전달하여 검사
              $(".btn-cert").click(function(){
-                 // var email = $("[name=memberEmail]").val();
                  var email = window.email;
                  var number = $(".cert-input").val().replace(/\s/g, '');
                  if(email.length == 0 || number.length == 0) return;
@@ -227,6 +226,7 @@ textarea:focus{
                              $(".cert-input").removeClass("success fail")
                                              .addClass("success");
                              $(".btn-cert").prop("disabled", true);
+                             $(".btn-cert").find("span").text("전송중");
                              //상태객체에 상태 저장하는 코드
                          }
                          else{
@@ -337,8 +337,11 @@ textarea:focus{
                     <div class="row w-25 left">
                         <label>이메일<span class="red">*</span></label>
                     </div>
+
+
                     <div class="row w-75 pr-30 left">
                         <input type="email" name="memberEmail" placeholder="예: test@kh.com"
+
                                 class="form-input w-70">
                          <button class="btn-send btn btn-navy">
     			<i class="fa-solid fa-spinner fa-spin"></i>
