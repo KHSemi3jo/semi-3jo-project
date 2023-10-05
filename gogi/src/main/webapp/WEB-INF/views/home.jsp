@@ -166,7 +166,7 @@ select.form-input.product{
                         <img src="/images/main/main-22.png" width="100%" height="250px">
                     </div>
                     <div class="swiper-slide">
-                        <img src="/images/main/main3.png" width="100%" height="250px">
+                        <img src="/images/main/main-33.png" width="100%" height="250px">
                     </div>
                 </div>
 
