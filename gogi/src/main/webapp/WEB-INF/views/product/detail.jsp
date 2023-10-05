@@ -119,19 +119,7 @@
                 },
             });
         });
-        $(".btn-pick").click(function(){
-        	var params = new URLSearchParams(location.search);
-        	var productNo = params.get("productNo");
-        	
-            $.ajax({
-                url:"http://localhost:8080/rest/pick/add",
-                method:"post",
-                data:{productNo:productNo},
-                success:function(){
-                	alert("성공");
-                }
-            });
-        });
+        
     });
     
  // 모달 열기------------------------------
