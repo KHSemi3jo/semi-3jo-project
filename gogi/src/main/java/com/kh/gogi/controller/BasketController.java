@@ -111,6 +111,11 @@ public class BasketController {
 		return "redirect:list";
 	}
 	
+	@RequestMapping("/finish")
+	public String finish() {
+		 return "/WEB-INF/views/basket/basketFinish.jsp";
+	}
+	
 	
 	
 	
