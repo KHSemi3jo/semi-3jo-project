@@ -86,6 +86,7 @@ public class MemberController {
 			session.setAttribute("addr1", findDto.getMemberAddr1());
 			session.setAttribute("addr2", findDto.getMemberAddr2());
 			session.setAttribute("Gmoney", findDto.getMemberGmoney());
+			session.setAttribute("email", findDto.getMemberEmail());
 
 			//로그인시간 갱신
 			memberDao.updateMemberLogin(inputDto.getMemberId());

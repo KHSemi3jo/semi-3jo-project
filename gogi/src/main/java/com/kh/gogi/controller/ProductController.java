@@ -114,6 +114,7 @@ public class ProductController {
 				ProductDto productDto = productDao.selectOne(productNo);
 				model.addAttribute("productDto",productDto);
 				session.setAttribute("productNo", productDto.getProductNo());
+				session.setAttribute("productName", productDto.getProductName());
 				return"/WEB-INF/views/product/detail.jsp";
 		}
 		//상품 상세 페이지
@@ -145,6 +146,7 @@ public class ProductController {
 			List<ProductDto>list = productDao.selectListBypage(vo);
 			model.addAttribute("list",list);
 			session.removeAttribute("productNo");
+			session.removeAttribute("productName");
 			return"/WEB-INF/views/product/list.jsp";
 		}
 				//상품 국내산 소고기 목록 페이지
@@ -156,6 +158,7 @@ public class ProductController {
 					
 					List<ProductDto>list = productDao.selectDomesticBeefProduct(vo);
 					model.addAttribute("list",list);
+					
 					return"/WEB-INF/views/product/dblist.jsp";
 				}
 				//상품 수입산 소고기 목록 페이지

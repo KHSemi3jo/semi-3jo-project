@@ -36,6 +36,9 @@
   <!-- javascript 작성 공간-->
    <script>
    $(function(){
+	  
+	  
+	   
        $(".btn-save").click(function(){
     	   
     	// 입력 필드의 값을 가져와서 길이 확인
@@ -66,7 +69,11 @@
            form.append("attach",input.files[0]);
 
            $.ajax({
+
                url:"http://localhost:8080/kh12c",
+
+              
+
                method:"post",
                processData:false,
                contentType:false,

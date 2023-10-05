@@ -28,6 +28,5 @@ public interface ProductDao {
 	List<ProductDto> selectPorkProduct(ProductVO vo);// 돼지고기
 	int countPorkProduct(ProductVO vo);
 
-	
 
 }

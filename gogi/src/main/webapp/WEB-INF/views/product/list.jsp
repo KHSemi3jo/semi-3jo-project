@@ -95,19 +95,14 @@ select.form-input.product,
                 method: "post",
                 data: { productNo: productNo },
                 success: function(response) {
-//                     if (response.success) {
-//                 		$("#modalMessage").text("상품이 장바구니에 추가되었습니다");
-                		$("#modalMessage").text(response.message);
+                        $("#modalMessage").text(response.message);
                         openModal(); // 모달 열기
-//                     } 
-//                     else {
-//                         alert(response.message);
-//                     }
+
                 },
-                error: function (xhr, status, error) {
-//                 	console.log(arguments);
-//                 	$("#modalMessage").text("이미 장바구니에 있는 상품입니다");
-                	$("#modalMessage").text(xhr.responseJSON.message);
+                error: function (xhr) {
+                    // 에러 처리
+                    console.log(arguments);
+                    $("#modalMessage").text(xhr.responseJSON.message);
                     openModal(); // 모달 열기
                 },
                 

@@ -224,8 +224,7 @@ public class ProductDaoImpl implements ProductDao {
 			return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	}
-	
 
-	
+		
 	
 }
