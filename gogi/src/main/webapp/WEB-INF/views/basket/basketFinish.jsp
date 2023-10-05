@@ -115,6 +115,48 @@
 </div>
 
 
+<table class="table table-slit" >
+			<tbody>
+			<h1>결재 목록</h1>
+			
+			
+<%-- 			<c:if test="${sessionScope.name == '${findDto.getMemberId()}'}"></c:if> --%>
+			<c:forEach var="basketListDto" items="${basketList}">
+				<tr>
+				
+				
+					<td class="image">
+						<c:choose>
+							<c:when test="${basketListDto.image}">
+                        		<img src="image?productNo=${basketListDto.productNo}" width="50" height="50">
+                    		</c:when>
+                    		<c:otherwise>
+                            	<img src="https://dummyimage.com/50x50/000/fff" width="50" height="50">
+                    		</c:otherwise>
+						</c:choose>
+					</td>
+					
+					<td class="left w-60">
+						<!-- 제목을 누르면 상세페이지로 이동 -->
+						<a class="link" href="/product/detail?productNo=${basketListDto.basketListNo}">
+							${basketListDto.productName}
+						</a>
+					</td>
+					<td class="row right w-10">
+						<div class="row flex-container pCount">
+							<button class="btn-minus btn-decrease-quantity" type="button" name="minus">-</button>
+					<!-- <input type="number" min="1" max="10" name="count"> -->
+							<div class="count quantity" onchange="calculate(this);">${basketListDto.getBasketCount()}</div>					
+							<button class="btn-plus btn-increase-quantity" type="button" name="plus">+</button>
+						</div>
+					</td>
+
+					<td class="right w-16"><span class="pay">${basketListDto.productPrice}</span><span>원</span></td>
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+
 
 
 

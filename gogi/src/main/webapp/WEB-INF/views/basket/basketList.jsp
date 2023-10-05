@@ -118,9 +118,7 @@ function clickOnlyOne(itself){
 					itself.checked = true;
 					if(itself.checked){
 					 var list=	response[i]
-					 console.log(list)
-					 checkboxes[i] =
-					 console.log( checkboxes[i])
+			
 					}
 	
 		
@@ -194,7 +192,7 @@ $(function() {
 	     } 
 	     else {
 	          $(".totalpay").text(total+3000);
-	          console.log( $(".totalpay").text())
+	      
 	     }
      };
       
@@ -263,7 +261,7 @@ $(function(){
                         method: "post",
                         data: $(e.target).serialize(),
                         success: function (response) {
-                        	 console.log("더하기"+response)
+         
                              reloadList();
 
                         }
@@ -290,7 +288,7 @@ $(function(){
                         },
                         success: function (response) {
                             $(".address-list").empty();
-                            console.log(response)    
+                    
               
                             for (var i = 0; i < response.length; i++) {
                                 var address = response[i];
@@ -378,7 +376,8 @@ $(function(){
 											var addressDetail = $(this).attr(
 											"data-address-detail");
 										
-								console.log(this);
+
+											
 								
 											
 											$(editHtmlTemplate).find(".post-search").click(function(){
@@ -451,7 +450,7 @@ $(function(){
 																			method : "post",
 																			data : $(e.target).serialize(),
 																			success : function(response) {
-																				console.log("재확인"+response)
+																	
 																				reloadList();
 																			}
 																		});
@@ -626,8 +625,8 @@ function requestPay() {
     m_redirect_url: "{http://localhost:8080/main}"
   }, function (rsp) { // callback
       if (rsp.success) {
-          console.log(rsp); 
-          console.log("결재완료!!");
+          console.log("결재완료"+rsp); 
+          
         	  location.href = "http://localhost:8080/basket/finish";
           
           
