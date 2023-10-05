@@ -59,8 +59,9 @@
         .pCount{
             border: 1px solid #ddd;
             border-radius: 3px;
-         	width: 80px; 
+         	width: 100px; 
          	height:35px;   
+         	justify-content: space-between;
         }
 .totalPrice{
 	width:300px;
@@ -203,9 +204,12 @@ $(function() {
       $(".btn-plus").click(function() {
          var count = $(this).parents('tr').find(".count"); // 수량을 표시하는 요소
          var plusCount = parseInt(count.text()); // 현재 수량 가져오기
+         if(plusCount <10){
          plusCount++; // 수량 증가
          count.text(plusCount); // 업데이트된 수량 표시   
          reload();       
+        	 
+         }
 
       });
 

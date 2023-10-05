@@ -78,7 +78,7 @@
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #FA9F5F;
-    width: 300px;
+    width: 350px;
     height: 180px;
     box-shadow: 0px 0px 1px 0px #000;
     border-radius: 5px;

@@ -98,26 +98,19 @@
 <!-- javascript 작성 공간 -->
 
 
-<div class="container w-700">
-	<div class="row">
-		<br>
-		<h1>${sessionScope.name}회원님 </h1>
-		<br>
-		<h1>고기어때의 상품 구매를 진심으로 축하드립니다.</h1>
-		<br><hr>
+<div class="container w-1000">
+	<div class="row pb-30" >
+		<h2>${sessionScope.name} 님 결제가 완료되었습니다</h2>
 	</div>
 	<div class="row" >
-	<br>	<br>
-		</div>
-	<div class="row" >
-		<a href="http://localhost:8080/main" class="btn btn-navy pt-10">메인 페이지로 이동</a>
+		<hr>
 	</div>
-</div>
+	
 
-
-<table class="table table-slit" >
+<div class="container w-800 pt-20">
+    <table class="table table-slit" >
 			<tbody>
-			<h1>결재 목록</h1>
+			  <div class="row left  pb-10"><h3>결재 목록</h3></div>
 			
 			
 <%-- 			<c:if test="${sessionScope.name == '${findDto.getMemberId()}'}"></c:if> --%>
@@ -126,38 +119,45 @@
 				
 				
 					<td class="image">
-						<c:choose>
-							<c:when test="${basketListDto.image}">
-                        		<img src="image?productNo=${basketListDto.productNo}" width="50" height="50">
-                    		</c:when>
-                    		<c:otherwise>
-                            	<img src="https://dummyimage.com/50x50/000/fff" width="50" height="50">
-                    		</c:otherwise>
-						</c:choose>
+						<div class="row">
+							<c:choose>
+								<c:when test="${basketListDto.image}">
+	                        		<img src="image?productNo=${basketListDto.productNo}" width="50" height="50">
+	                    		</c:when>
+	                    		<c:otherwise>
+	                            	<img src="https://dummyimage.com/50x50/000/fff" width="50" height="50">
+	                    		</c:otherwise>
+							</c:choose>
+						</div>
 					</td>
 					
 					<td class="left w-60">
-						<!-- 제목을 누르면 상세페이지로 이동 -->
-						<a class="link" href="/product/detail?productNo=${basketListDto.basketListNo}">
-							${basketListDto.productName}
-						</a>
-					</td>
-					<td class="row right w-10">
-						<div class="row flex-container pCount">
-							<button class="btn-minus btn-decrease-quantity" type="button" name="minus">-</button>
-					<!-- <input type="number" min="1" max="10" name="count"> -->
-							<div class="count quantity" onchange="calculate(this);">${basketListDto.getBasketCount()}</div>					
-							<button class="btn-plus btn-increase-quantity" type="button" name="plus">+</button>
+						<div class="row pt-10 left">
+							<!-- 제목을 누르면 상세페이지로 이동 -->
+							<a class="link" href="/product/detail?productNo=${basketListDto.basketListNo}">
+								<h4>${basketListDto.productName}</h4>
+							</a>
 						</div>
 					</td>
+					<td class="row right w-10">
+					<!-- <input type="number" min="1" max="10" name="count"> -->
+							<div class="row  count quantity" onchange="calculate(this);">${basketListDto.getBasketCount()}</div>					
+					</td>
 
-					<td class="right w-16"><span class="pay">${basketListDto.productPrice}</span><span>원</span></td>
+					<td class="right w-16">
+						<div class="row right pr-20">
+							<span class="pay">${basketListDto.productPrice}</span><span>원</span>
+						</div>
+					</td>
 				</tr>
 			</c:forEach>
 			</tbody>
 		</table>
-
-
+</div>
+		<div class="row pt-20" >
+			<a href="http://localhost:8080/main" class="btn btn-navy pt-10">메인 페이지로 이동</a>
+		</div>
+</div>
 
 
 
