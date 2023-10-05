@@ -132,6 +132,16 @@ public class ShopAfterController {
 	}
 	
 	
+	@RequestMapping("/memberList")
+	public String memberList(@ModelAttribute(name = "vo") ShopAfterVO vo, Model model,
+			@ModelAttribute ProductDto productDto,
+		HttpSession session) {
+		String memberId = (String) session.getAttribute("name");
+		List<ShopAfterDto> list = shopAfterDao.selectMemberListByPage(vo, memberId);
+		model.addAttribute("list", list);
+		return "/WEB-INF/views/shopafter/memberList.jsp";
+		
+	}
 	
 	
 	

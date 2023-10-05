@@ -15,20 +15,20 @@ select.form-input, .form-input, .btn.btn-navy {
 </style>
 <div class="container w-800 navy">
 	<div class="row">
-		<h2>전체 상품후기</h2>
+	<h2>${sessionScope.name}님 상품 후기</h2>
+
 	</div>
 	<!-- 폼시작(체크박스) -->
 	<form class="delete-form" action="deleteByAdmin" method="post">
 		<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
 		<c:if test="${sessionScope.name != null}">
 			<div class="row right ">
-
+		
 				<a href="add" class="btn upBtn"> <i class="fa-solid fa-pen"></i>
 					글쓰기
 				</a>
 			</div>
-		</c:if>
-
+</c:if>
 
 		<c:if test="${vo.search}">
 			<div class="row left">&quot;${vo.keyword}&quot;에 대한 검색 결과</div>
@@ -38,8 +38,6 @@ select.form-input, .form-input, .btn.btn-navy {
 			<table class=" table table-slit">
 				<thead>
 					<tr>
-
-
 						<th>번호</th>
 						<th width="50%">제목</th>
 						<th>아이디</th>
@@ -54,8 +52,7 @@ select.form-input, .form-input, .btn.btn-navy {
 						<td>${shopAfterDto.shopAfterNo}</td>
 									
 						
-						<td><a class="noticeTitle navy left"
-							href="detail?shopAfterNo=${shopAfterDto.shopAfterNo}">${shopAfterDto.shopAfterName}
+						<td><a class="noticeTitle navy left" href="detail?shopAfterNo=${shopAfterDto.shopAfterNo}">${shopAfterDto.shopAfterName}
 							<c:if test="${shopAfterDto.shopReplycount > 0}">
 							[${shopAfterDto.shopReplycount}]
 							</c:if></a>

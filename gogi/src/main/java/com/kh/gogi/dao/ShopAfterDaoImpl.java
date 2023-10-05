@@ -207,6 +207,57 @@ public class ShopAfterDaoImpl implements ShopAfterDao {
 			return tem.queryForObject(sql, int.class,ob);
 		}
 	}
+	
+	@Override
+	public int countMemberList(ShopAfterVO vo,String memberId) {
+		if (vo.isSearch()) {
+			String sql = "select count(*) from shopAfter where shopAfter_id = ? and instr(" + vo.getType() + ", ?) > 0";
+			Object[] ob = { memberId,vo.getKeyword() };
+			return tem.queryForObject(sql, int.class, ob);
+		} else {
+			String sql = "select count(*) from shopAfter where shopAfter_id = ?";
+			Object[] ob = { memberId };
+			return tem.queryForObject(sql, int.class,ob);
+		}
+	}
 
+	@Override
+	public List<ShopAfterDto> selectMemberListByPage(int page, String memberId) {		
+		String sql = "select * from ("
+			+ "select rownum rn, TMP.* from("
+			+ "select * from shopAfter where shopAfter_id = ? order by shopAfter_no desc"
+			+ ")TMP"
+			+ ") where rn between ? and ?";
+	Object[] ob = { memberId,page * 10 - 9, page * 10 };
+	return tem.query(sql,shopAfterMapper , ob);
+	}
+
+
+	@Override
+	public List<ShopAfterDto> selectMemberListByPage(ShopAfterVO vo, String memberId) {
+		if (vo.isSearch()) {
+			return selectMemberListByPage(vo.getType(), vo.getKeyword(), vo.getPage(),memberId);
+
+		} else {
+			return  selectMemberListByPage(vo.getPage(),memberId);
+		}
+	}
+
+	@Override
+	public List<ShopAfterDto> selectMemberListByPage(String type, String keyword, int page, String memberId) {
+		int begin = page * 10 - 9;
+		int end = page * 10;
+
+
+		String sql =	" SELECT * "
+			     +"FROM (SELECT *  FROM shopAfter"
+			    	     +" where shopAfter_id = ? and instr(" + type + ", ?) > 0 "
+			    	          +" ORDER BY shopAfter_no DESC)"
+			    	    +" WHERE ROWNUM between ? and ?";
+		
+		
+		Object[] ob = { memberId,keyword, begin, end };
+		return tem.query(sql, shopAfterMapper, ob);
+	}
 
 }
