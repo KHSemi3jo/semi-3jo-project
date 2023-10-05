@@ -707,7 +707,7 @@ function requestPay() {
 
 
 <form class="delete-form" action="delete" method="post">
-	<div class="container w-1000">
+	<div class="container w-1100">
 		<div class="row left top-select navy">
 		<!-- 전체선택 체크박스 -->
 				<label class="custom-checkbox">
@@ -718,7 +718,7 @@ function requestPay() {
 						<button type="submit" class="btn-select " >선택삭제</button>
 		</div>
 	<div class="flex-container">
-		<div class="row w-700">
+		<div class="row w-800">
 		
 		<table class="table table-slit" >
 			<tbody>
