@@ -184,10 +184,10 @@ select.form-input.product{
                 <div class="swiper-wrapper">
                     <!-- Slides -->
                     <div class="swiper-slide">
-                        <img src="/images/main/main1.png" width="100%" height="250px">
+                        <img src="/images/main/main-1.png" width="100%" height="250px">
                     </div>
                     <div class="swiper-slide">
-                        <img src="/images/main/main-2.png" width="100%" height="250px">
+                        <img src="/images/main/main-22.png" width="100%" height="250px">
                     </div>
                     <div class="swiper-slide">
                         <img src="/images/main/main3.png" width="100%" height="250px">
