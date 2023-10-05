@@ -708,10 +708,6 @@ function requestPay() {
 </div>
 
 
-        
-        
-        
-
 <form class="delete-form" action="delete" method="post">
 	<div class="container w-1000">
 		<div class="row left top-select navy">
@@ -760,8 +756,7 @@ function requestPay() {
 					<td class="row right w-10">
 						<div class="row flex-container pCount">
 							<button class="btn-minus btn-decrease-quantity" type="button" name="minus">-</button>
-					<!-- <input type="number" min="1" max="10" name="count"> -->
-							<div class="count quantity" onchange="calculate(this);">${basketListDto.getBasketCount()}</div>					
+												<div class="count quantity" onchange="calculate(this);">${basketListDto.getBasketCount()}</div>					
 							<button class="btn-plus btn-increase-quantity" type="button" name="plus">+</button>
 						</div>
 					</td>
@@ -783,14 +778,7 @@ function requestPay() {
 	
 			<div class="row w-300 ms-30">
 		
-					<%-- <c:forEach var="basketListDto" items="${basketList}" varStatus="i"> --%>
-					<!-- 			<div> -->
-					<!-- 			상품금액 : -->
-					<!-- 				<span class="price">  -->
-					<%-- 					<fmt:formatNumber pattern="###,###,###" value="${basketListDto.productPrice}"/>원 --%>
-					<!-- 				</span> -->
-					<!-- 			</div> -->
-					<%-- 		</c:forEach>	 --%>
+					
 					<div class="container totalPrice">
 							<div class="row float-container">
 								<div class="row w-50 float-left left pl-20">
@@ -826,16 +814,6 @@ function requestPay() {
 			</div>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
 
 
 

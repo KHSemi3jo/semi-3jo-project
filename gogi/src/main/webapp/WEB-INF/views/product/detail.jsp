@@ -108,7 +108,7 @@
         	$.ajax({
                 url: "/rest/basket/add",
                 method: "post",
-                data: { productNo: productNo },
+                data: { productNo: productNo},
                 success: function(response) {
                 		$("#modalMessage").text(response.message);
                         openModal(); // 모달 열기
