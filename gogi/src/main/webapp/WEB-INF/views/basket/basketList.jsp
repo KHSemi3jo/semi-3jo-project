@@ -115,13 +115,22 @@ function clickOnlyOne(itself){
 					checkboxes.forEach((checkbox) =>{
 						checkbox.checked =false;
 					})
+					
+		
 				for(var i =0 ; i <response.length ;i++){
 					itself.checked = true;
 					if(itself.checked){
-					 var list=	response[i]
-					 console.log(list)
-					 checkboxes[i] =
-					 console.log( checkboxes[i])
+			
+					 var template = $(".address-list").html();
+                     var htmlTemplate = $.parseHTML(template);     
+                  var addressName=  $(htmlTemplate).find(".btn-edit").attr("data-address-name");
+                console.log(addressName)
+
+                
+                 
+
+			
+			
 					}
 	
 		
@@ -196,7 +205,7 @@ $(function() {
 	     } 
 	     else {
 	          $(".totalpay").text(total+3000);
-	          console.log( $(".totalpay").text())
+	      
 	     }
      };
       
@@ -296,7 +305,7 @@ $(function(){
                         },
                         success: function (response) {
                             $(".address-list").empty();
-                            console.log(response)    
+      
               
                             for (var i = 0; i < response.length; i++) {
                                 var address = response[i];
