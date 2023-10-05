@@ -104,27 +104,43 @@
              // 비밀번호 변경 폼을 제출할 때의 처리
              $("#passwordChangeForm").submit(function(e) {
                  e.preventDefault(); // 기본 폼 제출 동작을 막음
+                 
+              // 비밀번호 필드의 값을 가져옵니다.
+                 var originPw = $("input[name=originPw]").val();
+                 var changePw = $("input[name=changePw]").val();
 
-                 // 폼을 서버로 제출하는 코드
-                 $.ajax({
-                     type: "POST",
-                     url: "http://localhost:8080/rest/member/changePw", 
-                     data: $(this).serialize(), // 폼 데이터 직렬화
-                     success: function(response) {
-                         // 서버 응답 처리
-                         if (response == "success") {
-                             // 변경 성공 시
-                             showPasswordChangeConfirmPopup();
-                         } else {
-                             // 변경 실패 시 오류 메시지 표시
-                             $("#passwordChangeErrorMessage").text("비밀번호 변경에 실패했습니다.");
-                         }
-                     },
-                     error: function() {
-                         // AJAX 요청 실패 시 오류 메시지 표시
-                         $("#passwordChangeErrorMessage").text("서버와의 통신이 원할하지 않습니다.");
-                     }
-                 });
+              // 비밀번호 필드가 비어 있는지 확인합니다.
+                 if (originPw === "" || changePw === "") {
+                     // 비밀번호 필드가 비어 있을 때 오류 메시지를 표시합니다.
+                     $("#passwordChangeErrorMessage").text("");
+                 } 
+                 else {
+                 		// 폼을 서버로 제출하는 코드
+		                 $.ajax({
+		                     type: "POST",
+		                     url: "http://localhost:8080/rest/member/changePw", 
+		                     data: $(this).serialize(), // 폼 데이터 직렬화
+		                     success: function(response) {
+			                         // 서버 응답 처리
+			                         if (response == "success") {
+			                             // 변경 성공 시
+			                             showPasswordChangeConfirmPopup();
+			                         }
+			                         else {
+			                        	 
+			                             // 변경 실패 시 오류 메시지 표시
+			                             $("#passwordChangeErrorMessage").text("비밀번호 변경에 실패했습니다.");
+			                         }
+		                     },
+		                     error: function() {
+		                         // AJAX 요청 실패 시 오류 메시지 표시
+		                         $("#passwordChangeErrorMessage").text("서버와의 통신이 원할하지 않습니다.");
+		                     }
+		                 });
+                	 
+                	 
+                 }
+
              });
              
              // 비밀번호 변경 확인 팝업 열기
@@ -133,13 +149,13 @@
                  popup.css("display", "block");
              }
 
-             // 팝업 닫기 함수 수정
+             // 팝업 닫기 
              function closePopup(popupId) {
                  var popup = $("#" + popupId);
                  popup.css("display", "none");
              }
 
-             // 비밀번호 변경 팝업 열기 함수 수정
+             // 비밀번호 변경 팝업 열기 
              function showPasswordChangePopup() {
                  var popup = $("#passwordChangePopup");
                  popup.css("display", "block");
