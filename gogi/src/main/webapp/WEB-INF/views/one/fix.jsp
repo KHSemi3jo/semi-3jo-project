@@ -43,7 +43,7 @@
 		<h2 class="pt-30 pb-30">1 : 1 문의 답변 수정</h2>
 	</div>
 	    <hr>
-	<form action="fix" method="post">
+	<form action="fix" method="post"autocomplete="off">
 		<input type="hidden" name="oneNo" value="${oneOnOneDto.oneNo}">
 	
 	 	<div class="row flex-container">

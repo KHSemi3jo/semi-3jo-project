@@ -30,16 +30,10 @@ textarea.form-input{
         height: 300,
         maxHeight : 300,
         minHeight :300,
-        toolbar: [
-          ['style', ['bold','italic','underline','style']],
-          ['font', ['bold', 'underline', 'clear']],
-          ['color', ['forecolor','backcolor']],
-          ['para', ['ul', 'ol', 'paragraph']],
-       
-          ['table', ['table']],
-          ['insert', ['link']],
-          ['view', ['fullscreen', 'codeview', 'help']]
-        ]
+        toolbar : [
+			['style',	[ 'bold', 'italic', 'underline' ] ],
+			[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+		]
       });
     });  
   </script>
@@ -50,7 +44,7 @@ textarea.form-input{
         <h2 class="pt-30 pb-30">공지사항 수정</h2>
     </div>
     <hr>
-    <form action="fix" method="post">
+    <form action="fix" method="post"autocomplete="off">
         <input type="hidden" name="noticeNo" value="${noticeDto.noticeNo}">
             <div class="row">
                 <div class="row flex-container">
