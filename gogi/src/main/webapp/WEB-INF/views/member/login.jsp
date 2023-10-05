@@ -53,6 +53,9 @@ a.link:hover {
     padding: 20px;
     border: 1px solid #FA9F5F;
 }
+.btn.btn-orange.btn-send{
+	width:10em;
+}
 </style>
 
  <script>
@@ -80,7 +83,7 @@ a.link:hover {
                 event.preventDefault(); // 기본 제출 동작 방지
                 $(".btn-send").prop("disabled",true);
                 $(".btn-send").find(".fa-spinner").show();
-                $(".btn-send").find("span").text("이메일 전송중");
+           		$(".btn-send").find("span").text("이메일 전송중");
 
                 // 폼을 서버로 제출하는 코드
                 $.ajax({
@@ -160,7 +163,7 @@ a.link:hover {
 <!-- 비밀번호 찾기 팝업 -->
 <div id="passwordRecoveryPopup" class="popup row container">
     <div class="popup-content row w-200">
-        <form id="passwordRecoveryForm" method="post" action="searchPw">
+        <form id="passwordRecoveryForm" method="post" action="searchPw" autocomplete="off">
             <!-- 아이디와 이메일 주소를 입력받는 폼 -->
             <div class="row left">
             	<span class="navy">아이디</span>

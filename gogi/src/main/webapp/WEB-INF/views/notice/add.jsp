@@ -28,16 +28,10 @@
         height: 300,
         maxHeight : 300,
         minHeight :300,
-        toolbar: [
-          ['style', ['bold','italic','underline','style']],
-          ['font', ['bold', 'underline', 'clear']],
-          ['color', ['forecolor','backcolor']],
-          ['para', ['ul', 'ol', 'paragraph']],
-       
-          ['table', ['table']],
-          ['insert', ['link']],
-          ['view', ['fullscreen', 'codeview', 'help']]
-        ]
+        toolbar : [
+			['style',	[ 'bold', 'italic', 'underline' ] ],
+			[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+		]
       });
     });  
   </script>
