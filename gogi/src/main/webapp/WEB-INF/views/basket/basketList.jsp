@@ -81,9 +81,7 @@
 	height:2.4em;
 }
  
-.image{
-	vertical-align: middle;
-}
+
    
 
 
@@ -118,7 +116,9 @@ function clickOnlyOne(itself){
 					itself.checked = true;
 					if(itself.checked){
 					 var list=	response[i]
-			
+					 console.log(list)
+					 checkboxes[i] =
+					 console.log( checkboxes[i])
 					}
 	
 		
@@ -192,7 +192,7 @@ $(function() {
 	     } 
 	     else {
 	          $(".totalpay").text(total+3000);
-	      
+	          console.log( $(".totalpay").text())
 	     }
      };
       
@@ -261,7 +261,7 @@ $(function(){
                         method: "post",
                         data: $(e.target).serialize(),
                         success: function (response) {
-         
+                        	 console.log("더하기"+response)
                              reloadList();
 
                         }
@@ -288,7 +288,7 @@ $(function(){
                         },
                         success: function (response) {
                             $(".address-list").empty();
-                    
+                            console.log(response)    
               
                             for (var i = 0; i < response.length; i++) {
                                 var address = response[i];
@@ -376,8 +376,7 @@ $(function(){
 											var addressDetail = $(this).attr(
 											"data-address-detail");
 										
-
-											
+								console.log(this);
 								
 											
 											$(editHtmlTemplate).find(".post-search").click(function(){
@@ -450,7 +449,7 @@ $(function(){
 																			method : "post",
 																			data : $(e.target).serialize(),
 																			success : function(response) {
-																	
+																				console.log("재확인"+response)
 																				reloadList();
 																			}
 																		});
@@ -597,8 +596,6 @@ $(function(){
 				</div>
 			</div>
 
-
-		
 		</form>
 
 
@@ -615,31 +612,24 @@ function requestPay() {
   IMP.request_pay({
     pg: "html5_inicis",
     pay_method: "card",
-    merchant_uid: "test_lnbn6gaa",
+    merchant_uid: "test_lnbn6gaw",
     name: "테스트 결제",
     amount: $(".totalpay").text(),
-    buyer_name: "${sessionScope.customer}",
-    buyer_tel: "${sessionScope.phone}",
-    buyer_email: "${sessionScope.email}",
-    popup : true,
+    buyer_name: "포트원",
+    buyer_tel: "010-0000-0000",
     m_redirect_url: "{http://localhost:8080/main}"
   }, function (rsp) { // callback
       if (rsp.success) {
-          console.log("결재완료"+rsp); 
-          
-        	  location.href = "http://localhost:8080/basket/finish";
-          
-          
+          console.log(rsp); 
           
       } else {
-          console.log(rsp); 
-
-
+    	   console.log("결재완료!!");
       }
   });
 }
 
 </script>
+
 <div class=" container w-1100 top-select  ms-50" >
    <div class="row left"><h3>배송지 목록</h3></div>
    <div class="w-100"><hr></div>
