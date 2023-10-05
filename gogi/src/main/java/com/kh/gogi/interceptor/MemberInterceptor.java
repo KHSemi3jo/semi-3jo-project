@@ -25,7 +25,7 @@ public class MemberInterceptor implements HandlerInterceptor{
 			return true;
 		}
 		else { 
-			throw new AuthorityException("로그인 후 이용 가능");
+			throw new AuthorityException("로그인 후 이용 가능합니다.");
 		}
 	}
 }
