@@ -616,24 +616,31 @@ function requestPay() {
   IMP.request_pay({
     pg: "html5_inicis",
     pay_method: "card",
-    merchant_uid: "test_lnbn6gaw",
+    merchant_uid: "test_lnbn6gaa",
     name: "테스트 결제",
     amount: $(".totalpay").text(),
-    buyer_name: "포트원",
-    buyer_tel: "010-0000-0000",
+    buyer_name: "${sessionScope.customer}",
+    buyer_tel: "${sessionScope.phone}",
+    buyer_email: "${sessionScope.email}",
+    popup : true,
     m_redirect_url: "{http://localhost:8080/main}"
   }, function (rsp) { // callback
       if (rsp.success) {
           console.log(rsp); 
+          console.log("결재완료!!");
+        	  location.href = "http://localhost:8080/basket/finish";
+          
+          
           
       } else {
-    	   console.log("결재완료!!");
+          console.log(rsp); 
+
+
       }
   });
 }
 
 </script>
-
 <div class=" container w-1100 top-select  ms-50" >
    <div class="row left"><h3>배송지 목록</h3></div>
    <div class="w-100"><hr></div>
