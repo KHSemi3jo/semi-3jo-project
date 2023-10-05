@@ -596,8 +596,6 @@ $(function(){
 				</div>
 			</div>
 
-
-		
 		</form>
 
 

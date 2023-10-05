@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:choose>
-	<c:when test="${sessionScope.level == '관리자'}">
-		<jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
-	</c:when>
-	<c:otherwise>
-		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>	
-	</c:otherwise>
-</c:choose>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
 
@@ -558,14 +551,14 @@ $(function(){
 			연락처 : <input name="addressPhone" class="form-input" value="${sessionScope.phone}">
 			</div>
 			<div class="row ">
-			우편번호 : <input type="text" name="addressPost" maxlength="6" class="form-input"
+			우편번호 : <input type="text" name="addressPost" maxlength="6" class="form-input post-search"
 		>
 					<button type="button" class="btn post-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
 			</div>
 			<div class="row"> 
-			기본주소 : <input type="text" name="addressNormal" class="form-input"
+			기본주소 : <input type="text" name="addressNormal" class="form-input post-search"
 					>
 			</div>
 			<div class="row">
