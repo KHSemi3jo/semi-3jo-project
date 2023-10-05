@@ -93,7 +93,7 @@ public class BasketController {
 	    if (basketMember != null) {
 	        List<BasketListDto> basketList = basketDao.selectList(basketMember);
 	        model.addAttribute("basketList", basketList);
-	        return "/WEB-INF/views/basket/basketList2.jsp";
+	        return "/WEB-INF/views/basket/basketList.jsp";
 	    } 
 	    else {//비회원이면 로그인 필요 요청
 	        return "redirect:/member/login";

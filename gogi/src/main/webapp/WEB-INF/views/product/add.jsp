@@ -36,6 +36,9 @@
   <!-- javascript 작성 공간-->
    <script>
    $(function(){
+	  
+	  
+	   
        $(".btn-save").click(function(){
     	   
     	// 입력 필드의 값을 가져와서 길이 확인
