@@ -136,7 +136,6 @@ textarea:focus{
     </style>
     <!--jquery CDN-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="/js/checkbox.js"></script>
      <script src="/js/join.js"></script>
     <!--daum 우편 API cdn-->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -212,7 +211,7 @@ textarea:focus{
              $(".btn-cert").click(function(){
                  // var email = $("[name=memberEmail]").val();
                  var email = window.email;
-                 var number = $(".cert-input").val();
+                 var number = $(".cert-input").val().replace(/\s/g, '');
                  if(email.length == 0 || number.length == 0) return;
 
                  $.ajax({
@@ -239,6 +238,39 @@ textarea:focus{
                  });
              });
          });
+         
+         $(function(){
+        	    //전체선택과 개별체크박스에 대한 이벤트 구현
+
+        	 
+			    // 전체선택
+			    $(".check-all").change(function () {
+			        var check = $(this).prop("checked");
+			        $(".check-all, .check-item").prop("checked", check);
+			        if (check) {
+			            // 전체 선택이 체크되었을 때
+			            $(".check-item").each(function () {
+			                $(this).data("prev-state", $(this).prop("checked"));
+			                $(this).prop("checked", true).change();
+			            });
+			        } else {
+			            // 전체 선택이 해제되었을 때
+			            $(".check-item").each(function () {
+			                var prev = $(this).data("prev-state");
+			                $(this).prop("checked", prev).change();
+			            });
+			        }
+			    });
+        	    //개별체크박스
+        	    $(".check-item").change(function(){
+        	        //개별체크박스개수 == 체크된개별체크박스개수;
+        	        // var allCheck = $(".check-item").length == $(".check-item:ckecked").length;//checked는 js명령이라..
+        	        var allCheck = $(".check-item").length == $(".check-item").filter(":checked").length;//
+        	        $(".check-all").prop("checked",allCheck);
+
+        	    });
+
+        	});
     </script>
 
     <form class="join-form" action="join" method="post" autocomplete="off">
@@ -306,7 +338,7 @@ textarea:focus{
                         <label>이메일<span class="red">*</span></label>
                     </div>
                     <div class="row w-75 pr-30 left">
-                        <input type="text" name="memberEmail" placeholder="예: test@kh.com"
+                        <input type="email" name="memberEmail" placeholder="예: test@kh.com"
                                 class="form-input w-70">
                          <button class="btn-send btn btn-navy">
     			<i class="fa-solid fa-spinner fa-spin"></i>
@@ -316,12 +348,12 @@ textarea:focus{
        					 <input type="text" class="cert-input form-input w-70">
        					 <button class="btn-cert btn btn-navy">확인완료</button>
        					 </div>
+                        <div class="fail-feedback left">인증번호를 확인해주세요</div>
    					</div>
 
                     
 							
-                        <div class="fail-feedback left">이메일 형식으로 입력해주세요</div>
-                        <div class="fail2-feedback left">이미 사용중인 이메일입니다</div>
+
                         <br>
                 </div>
                 <div class="row flex-container">

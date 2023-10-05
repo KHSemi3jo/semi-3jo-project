@@ -69,7 +69,7 @@
            form.append("attach",input.files[0]);
 
            $.ajax({
-               url:"http://localhost:8080/Gogi",
+               url:"http://localhost:8080/product/add",
                method:"post",
                processData:false,
                contentType:false,

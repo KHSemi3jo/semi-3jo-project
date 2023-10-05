@@ -26,8 +26,8 @@
                         <td class="left">${qnaDto.qnaTitle}</td>
                     </tr>
                     <tr>
-                        <th bgcolor="#CCD5DE">번호</th>
-                        <td class="left">${qnaDto.qnaNo}</td>
+                        <th bgcolor="#CCD5DE">카테고리</th>
+                        <td class="left">${qnaDto.qnaCategory}</td>
                     </tr>
                     <tr>
                         <td colspan="2" class="left">${qnaDto.qnaAnswer}</td>

@@ -83,6 +83,7 @@
 										        	<%-- 회원일시 로그인된 회원이름(로그인자리) --%>
 											                <div class="row pr-20 member-menu navy"><span>${sessionScope.name} 님 <i class="fa-solid fa-angle-down"></i></span>
 											                    <div class="member-service">
+
 											                        <a class="left" href="/payment/list">주문내역</a>
 											                        <a class="left" href="/shopafter/memberList">상품후기</a>
 											                        <a class="left" href="/member/change">개인정보수정</a>
@@ -114,7 +115,6 @@
 										                    <div class="custom-service">
 										                        <a class="left" href="/notice/list">공지사항</a>
 										                        <a class="left" href="/qna/list">자주하는 질문</a>
-										                        <a class="left" href="/one/list">1:1 문의</a>
 										                    </div>
 				                						</div>
 				                					</div>									                
