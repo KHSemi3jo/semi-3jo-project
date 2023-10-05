@@ -54,8 +54,8 @@ public class NoticeController {
 		noticeDto.setNoticeNo(noticeNo);
 		
 		
-		String memberId = (String) session.getAttribute("name");
-		noticeDto.setNoticeWriter(memberId);
+		String memberlevel = (String) session.getAttribute("level");
+		noticeDto.setNoticeWriter(memberlevel);
 		
 		noticeDao.add(noticeDto);
 		return "redirect:detail?noticeNo="+noticeNo;

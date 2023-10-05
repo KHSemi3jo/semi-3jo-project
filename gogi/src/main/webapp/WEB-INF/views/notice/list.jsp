@@ -46,16 +46,9 @@ select.form-input.notice{
 					<c:forEach var="noticeDto" items="${list}">				
 						<tr>
 							<td>${noticeDto.noticeNo}</td>
-							<td class="left"><a class="noticeTitle navy " href="detail?noticeNo=${noticeDto.noticeNo}">${noticeDto.noticeTitle}</a></td>
-							<%--관리자 누가 작성하든 작성자 이름은 고기어때로 출력 --%>
-							<c:choose>
-								<c:when test="${noticeDto.noticeWriter != null}">
-									<td>고기어때</td>
-								</c:when>
-								<c:otherwise>
-									<td>고기어때</td>
-								</c:otherwise>
-							</c:choose>
+							<td class="left"><a class="noticeTitle navy " href="detail?noticeNo=${noticeDto.noticeNo}">${noticeDto.noticeTitle}</a></td>					
+									<td>관리자</td>
+		
 							<td>${noticeDto.noticeDate}</td>
 						</tr>
 					</c:forEach>	            

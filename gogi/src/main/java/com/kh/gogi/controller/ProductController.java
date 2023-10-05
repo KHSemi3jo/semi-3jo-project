@@ -152,22 +152,27 @@ public class ProductController {
 				//상품 국내산 소고기 목록 페이지
 				@RequestMapping("/dblist")
 				public String dblist(Model model,
-										@ModelAttribute(name = "vo") ProductVO vo) {
+										@ModelAttribute(name = "vo") ProductVO vo,
+										HttpSession session) {
 					int count=productDao.countDomesticBeefProduct(vo);
 					vo.setCount(count);
-					
+					session.removeAttribute("productNo");
+					session.removeAttribute("productName");
 					List<ProductDto>list = productDao.selectDomesticBeefProduct(vo);
 					model.addAttribute("list",list);
+				
 					
 					return"/WEB-INF/views/product/dblist.jsp";
 				}
 				//상품 수입산 소고기 목록 페이지
 				@RequestMapping("/iblist")
 				public String iblist(Model model,
-										@ModelAttribute(name = "vo") ProductVO vo) {
+										@ModelAttribute(name = "vo") ProductVO vo,
+										HttpSession session) {
 					int count=productDao.countImportedBeefProduct(vo);
 					vo.setCount(count);
-					
+					session.removeAttribute("productNo");
+					session.removeAttribute("productName");
 					List<ProductDto>list = productDao.selectImportedBeefProduct(vo);
 					model.addAttribute("list",list);
 					return"/WEB-INF/views/product/iblist.jsp";
@@ -175,10 +180,12 @@ public class ProductController {
 				//상품 돼지고기 목록 페이지
 				@RequestMapping("/plist")
 				public String plist(Model model,
-										@ModelAttribute(name = "vo") ProductVO vo) {
+										@ModelAttribute(name = "vo") ProductVO vo,
+										HttpSession session) {
 					int count=productDao.countPorkProduct(vo);
 					vo.setCount(count);
-					
+					session.removeAttribute("productNo");
+					session.removeAttribute("productName");
 					List<ProductDto>list = productDao.selectPorkProduct(vo);
 					model.addAttribute("list",list);
 					return"/WEB-INF/views/product/plist.jsp";
