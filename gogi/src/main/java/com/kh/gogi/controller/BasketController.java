@@ -111,6 +111,32 @@ public class BasketController {
 		return "redirect:list";
 	}
 	
+	@RequestMapping("/finish")
+	public String finish(
+			Model model,HttpSession session
+			) {
+		
+String basketMember = (String) session.getAttribute("name");
+		
+		AddressDto addressDto = addressDao.selectOne(basketMember);
+		model.addAttribute("addressDto",addressDto);
+		
+		List<AddressDto> list = addressDao.selectAddressList(basketMember);
+		model.addAttribute("list", list);
+		
+	    if (basketMember != null) {
+	        List<BasketListDto> basketList = basketDao.selectList(basketMember);
+	        model.addAttribute("basketList", basketList);
+	        return "/WEB-INF/views/basket/basketFinish.jsp";
+	    } 
+	    else {//비회원이면 로그인 필요 요청
+	        return "redirect:/member/login";
+	    }
+		
+		
+		
+	}
+	
 	
 	
 	
