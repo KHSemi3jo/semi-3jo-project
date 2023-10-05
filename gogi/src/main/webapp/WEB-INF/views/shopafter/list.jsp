@@ -27,7 +27,7 @@ select.form-input, .form-input, .btn.btn-navy {
 					글쓰기
 				</a>
 			</div>
-
+</c:if>
 
 		<c:if test="${vo.search}">
 			<div class="row left">&quot;${vo.keyword}&quot;에 대한 검색 결과</div>

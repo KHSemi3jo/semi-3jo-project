@@ -29,6 +29,7 @@ select.form-input, .form-input, .btn.btn-navy {
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 $(function(){
+	  $("[name=addressPost]").empty();
     //검색버튼, 우편번호 입력창, 기본주소 입력창을 클릭하면 검색 실행
     $(".post-search").click(function(){
         new daum.Postcode({
@@ -47,6 +48,7 @@ $(function(){
                     addr = data.jibunAddress;
                 }
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
+   
                 document.querySelector("[name=addressPost]").value = data.zonecode;
                 document.querySelector("[name=addressNormal]").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
@@ -79,7 +81,7 @@ $(function(){
                 });
                 reloadList();
                 function reloadList() {
-
+                
                     var params = new URLSearchParams(location.search);
                     var addressNo = params.get("addressNo");
                     var addressPost = params.get("addressPost");
@@ -97,7 +99,9 @@ $(function(){
                         },
                         success: function (response) {
                             $(".address-list").empty();
-                            console.log(response)    
+                           
+                            
+                            console.log(  "확인"+ $("[name=addressPost]").val())    
                             var customer = "${sessionScope.customer}";
                                var phone = "${sessionScope.phone}";
                             for (var i = 0; i < response.length; i++) {
@@ -451,7 +455,7 @@ value="" autocomplete="off">
 
 
 <c:if test="${sessionScope.name != null}">
-<form class="address-edit-form edit-container">
+<form class="address-insert-form edit-container">
 		<input type="hidden" name="addressNo">
 	<input type="hidden" name="addressId" >
 		<div class="container w-400">
@@ -460,7 +464,7 @@ value="" autocomplete="off">
                         <label>받으실 분</label>
                     </div>
                     <div class="row w-75 pr-30">
-                      <input type="text" name="addressName" value="${addressDto.addressName}" 
+                      <input type="text" name="addressName" value="${sessionScope.customer}" 
                      class="form-input w-100" required autocomplete="off">
                     </div>
                 </div>
@@ -482,7 +486,7 @@ value="" autocomplete="off">
                     <div class="row w-75 left">
                         <input type="text" name="addressPost" class="form-input post-search"
                                 size="6" maxlength="6" 
-				value="" autocomplete="off">
+				autocomplete="off">
                         <button type="button" class="btn post-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -492,19 +496,19 @@ value="" autocomplete="off">
                     <div class="w-25"></div>
                     <div class="w-75 pr-30">
                         <input type="text" name="addressNormal"autocomplete="off"
-                      class="form-input post-search w-100 " value="addressNormal">
+                      class="form-input post-search w-100 ">
                     </div>
                 </div>
                 <div class="row flex-container">
                     <div class="w-25"></div>
                     <div class="w-75 pr-30">
-                        <input type="text" name="addressDetail"  value="addressDetail"
+                        <input type="text" name="addressDetail" 
                         class="form-input w-100" autocomplete="off">
                         <div class="fail-feedback left">주소 입력시 모든 주소를 작성해주세요</div>
                     </div>
                 </div>
                 <div class="row">
-				<button class="btn btn-orange ">
+				<button class="btn btn-orange " type="submit">
 					<i class="fa-solid fa-plus"></i> 새 배송지 추가
 				</button>
 			</div>
