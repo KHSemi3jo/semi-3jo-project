@@ -93,20 +93,15 @@ select.form-input.product{
             var productNo = $(this).data("product-no");
             
             $.ajax({
-                url: "http://localhost:8080/rest/basket/add",
+                url: "/rest/basket/add",
                 method: "post",
                 data: { productNo: productNo },
                 success: function(response) {
-                    if (response.success) {
-                		$("#modalMessage").text("상품이 장바구니에 추가되었습니다");
+                		$("#modalMessage").text(response.message);
                         openModal(); // 모달 열기
-                    } 
-//                     else {
-//                         alert(response.message);
-//                     }
                 },
                 error: function (xhr, status, error) {
-                	$("#modalMessage").text("이미 장바구니에 있는 상품입니다");
+                	$("#modalMessage").text(xhr.responseJSON.message);
                     openModal(); // 모달 열기
                 },
                 
@@ -157,25 +152,6 @@ select.form-input.product{
        
 </script>
 
-<c:if test="${sessionScope.level == '관리자'}">
-	<div class="row">
-		<form action="list" method="get">
-			<c:choose>
-				<c:when test="${vo.type == 'productName'}"></c:when>
-				<c:otherwise>
-				<select class="form-input product hidden-select" name="type">
-				<option value="product_name" selected>상품이름</option>
-				</select>
-				</c:otherwise>
-			</c:choose>
-			<input  class="form-input product" type="search" name="keyword" placeholder="검색어를 입력해주세요"
-			 autocomplete="off">
-			<button type="submit" class="btn btn-navy">
-			<i class="fa-solid fa-magnifying-glass"></i>
-			검색</button>
-		</form>
-	</div>
-</c:if>
     <div class="container w-1100">
         <div class="row">
             <!-- Slider main container -->

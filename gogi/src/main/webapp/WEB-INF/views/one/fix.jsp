@@ -16,31 +16,23 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
-
+<style>
+   p { text-align: left; }
+</style>
 <script>
 	$(function() {
 		$('[name=oneContent]')
 				.summernote(
 						{
-							placeholder : '내용을 작성하세요.',
+							placeholder : ' 1000자 이내로 작성해주세요.',
 							tabsize : 2, //탭을 누르면
 							height : 300,
 							maxHeight : 300,
 							minHeight : 300,
 							toolbar : [
-									[
-											'style',
-											[ 'bold', 'italic', 'underline',
-													'style' ] ],
-									[ 'font', [ 'bold', 'underline', 'clear' ] ],
-									[ 'color', [ 'forecolor', 'backcolor' ] ],
+									['style',	[ 'bold', 'italic', 'underline' ] ],
 									[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
-
-									[ 'table', [ 'table' ] ],
-									[ 'insert', [ 'link' ] ],
-									[
-											'view',
-											[ 'fullscreen', 'codeview', 'help' ] ] ]
+ 							]
 						});
 	});
 </script>
@@ -51,7 +43,7 @@
 		<h2 class="pt-30 pb-30">1 : 1 문의 답변 수정</h2>
 	</div>
 	    <hr>
-	<form action="fix" method="post">
+	<form action="fix" method="post"autocomplete="off">
 		<input type="hidden" name="oneNo" value="${oneOnOneDto.oneNo}">
 	
 	 	<div class="row flex-container">

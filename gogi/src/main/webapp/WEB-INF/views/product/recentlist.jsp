@@ -84,34 +84,29 @@ select.form-input,
 </style>
 
 <script>
-    $(function(){
-        $(".btn-basket").click(function(e){
-        	e.preventDefault();
-            
-            // 상품 번호 가져오기
-            var productNo = $(this).data("product-no");
-            
-            $.ajax({
-                url: "http://localhost:8080/rest/basket/add",
-                method: "post",
-                data: { productNo: productNo },
-                success: function(response) {
-                    if (response.success) {
-                		$("#modalMessage").text("상품이 장바구니에 추가되었습니다");
-                        openModal(); // 모달 열기
-                    } 
-//                     else {
-//                         alert(response.message);
-//                     }
-                },
-                error: function (xhr, status, error) {
-                	$("#modalMessage").text("이미 장바구니에 있는 상품입니다");
+$(function(){
+    $(".btn-basket").click(function(e){
+    	e.preventDefault();
+        
+        // 상품 번호 가져오기
+        var productNo = $(this).data("product-no");
+        
+        $.ajax({
+            url: "/rest/basket/add",
+            method: "post",
+            data: { productNo: productNo },
+            success: function(response) {
+            		$("#modalMessage").text(response.message);
                     openModal(); // 모달 열기
-                },
-                
-            });
+            },
+            error: function (xhr, status, error) {
+            	$("#modalMessage").text(xhr.responseJSON.message);
+                openModal(); // 모달 열기
+            },
+            
         });
-     });
+    });
+ });
     // 모달 열기------------------------------
     function openModal() {
         var modal = document.getElementById("myModal");

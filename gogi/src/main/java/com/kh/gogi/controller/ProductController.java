@@ -62,7 +62,7 @@ public class ProductController {
 				int attachNo = attachDao.sequence();
 				
 				String home=System.getProperty("user.home");
-				File dir = new File(home, "Gogi");
+				File dir = new File(home, "/git/semi-3jo-project/gogi/src/main/resources/static/images/kh12c");
 				dir.mkdirs();
 				File target = new File(dir, String.valueOf(attachNo));
 				attach.transferTo(target);
@@ -90,7 +90,7 @@ public class ProductController {
 //				return ResponseEntity.notFound().build();//파일번호가 없으면 404 반환
 //			}
 			String home=System.getProperty("user.home");
-			File dir = new File(home, "Gogi");
+			File dir = new File(home, "/git/semi-3jo-project/gogi/src/main/resources/static/images/kh12c");
 			File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
 			
 			
@@ -114,6 +114,7 @@ public class ProductController {
 				ProductDto productDto = productDao.selectOne(productNo);
 				model.addAttribute("productDto",productDto);
 				session.setAttribute("productNo", productDto.getProductNo());
+				session.setAttribute("productName", productDto.getProductName());
 				return"/WEB-INF/views/product/detail.jsp";
 		}
 		//상품 상세 페이지
@@ -145,6 +146,7 @@ public class ProductController {
 			List<ProductDto>list = productDao.selectListBypage(vo);
 			model.addAttribute("list",list);
 			session.removeAttribute("productNo");
+			session.removeAttribute("productName");
 			return"/WEB-INF/views/product/list.jsp";
 		}
 				//상품 국내산 소고기 목록 페이지
@@ -156,6 +158,7 @@ public class ProductController {
 					
 					List<ProductDto>list = productDao.selectDomesticBeefProduct(vo);
 					model.addAttribute("list",list);
+					
 					return"/WEB-INF/views/product/dblist.jsp";
 				}
 				//상품 수입산 소고기 목록 페이지
@@ -199,7 +202,7 @@ public class ProductController {
 				 //파일 삭제
 				 AttachDto attachDto = productDao.findImage(productDto.getProductNo());
 				 String home = System.getProperty("user.home");
-				 File dir = new File(home, "Gogi");
+				 File dir = new File(home, "/git/semi-3jo-project/gogi/src/main/resources/static/images/kh12c");
 				 
 				 if(attachDto != null) {
 					 attachDao.delete(attachDto.getAttachNo());
@@ -237,7 +240,7 @@ public class ProductController {
 			if(attachDto != null) {
 				
 				String home = System.getProperty("user.home");
-				File dir = new File(home, "Gogi");
+				File dir = new File(home, "/git/semi-3jo-project/gogi/src/main/resources/static/images/kh12c");
 				File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
 				target.delete();
 				

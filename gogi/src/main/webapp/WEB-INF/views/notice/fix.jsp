@@ -13,7 +13,30 @@
 textarea.form-input{
     resize: none;
 }
+   p { text-align: left; }
 </style>
+
+
+<!-- SummerNote cdn -->
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+
+<script>
+    $(function () {
+      $('[name=noticeContent]').summernote({
+        placeholder: '내용을 작성하세요.',
+        tabsize: 2, //탭을 누르면
+        height: 300,
+        maxHeight : 300,
+        minHeight :300,
+        toolbar : [
+			['style',	[ 'bold', 'italic', 'underline' ] ],
+			[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+		]
+      });
+    });  
+  </script>
 
 
 <div class="container w-800">
@@ -21,7 +44,7 @@ textarea.form-input{
         <h2 class="pt-30 pb-30">공지사항 수정</h2>
     </div>
     <hr>
-    <form action="fix" method="post">
+    <form action="fix" method="post"autocomplete="off">
         <input type="hidden" name="noticeNo" value="${noticeDto.noticeNo}">
             <div class="row">
                 <div class="row flex-container">

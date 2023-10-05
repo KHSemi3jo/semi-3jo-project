@@ -10,6 +10,11 @@
 	</c:otherwise>
 </c:choose>
 
+<style>
+
+   p { text-align: left; }
+</style>
+
 <!-- SummerNote cdn -->
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -23,16 +28,10 @@
         height: 300,
         maxHeight : 300,
         minHeight :300,
-        toolbar: [
-          ['style', ['bold','italic','underline','style']],
-          ['font', ['bold', 'underline', 'clear']],
-          ['color', ['forecolor','backcolor']],
-          ['para', ['ul', 'ol', 'paragraph']],
-       
-          ['table', ['table']],
-          ['insert', ['link']],
-          ['view', ['fullscreen', 'codeview', 'help']]
-        ]
+        toolbar : [
+			['style',	[ 'bold', 'italic', 'underline' ] ],
+			[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+		]
       });
     });  
   </script>

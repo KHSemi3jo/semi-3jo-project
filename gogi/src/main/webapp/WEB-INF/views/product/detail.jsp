@@ -108,7 +108,7 @@
         	$.ajax({
                 url: "/rest/basket/add",
                 method: "post",
-                data: { productNo: productNo },
+                data: { productNo: productNo},
                 success: function(response) {
                 		$("#modalMessage").text(response.message);
                         openModal(); // 모달 열기
@@ -119,19 +119,7 @@
                 },
             });
         });
-        $(".btn-pick").click(function(){
-        	var params = new URLSearchParams(location.search);
-        	var productNo = params.get("productNo");
-        	
-            $.ajax({
-                url:"http://localhost:8080/rest/pick/add",
-                method:"post",
-                data:{productNo:productNo},
-                success:function(){
-                	alert("성공");
-                }
-            });
-        });
+        
     });
     
  // 모달 열기------------------------------
@@ -159,39 +147,6 @@
             closeModal();
         }
     }
-    //----------------------------
-    
-    $(function(){//상품 수량 증가시 합계 금액 증가
-        // 초기 수량을 1로 설정
-        var quantity = 1;
-
-        // 수량 증가 버튼을 클릭할 때
-        $(".btn-increase-quantity").click(function(){
-        	if (quantity < 10) {
-                quantity++;
-                updateTotal();
-            }
-        });
-
-        // 수량 감소 버튼을 클릭할 때
-        $(".btn-decrease-quantity").click(function(){
-            if (quantity > 1) {
-                quantity--;
-                updateTotal();
-            }
-        });
-
-        // 총상품금액 업데이트 함수
-        function updateTotal() {
-        	 $(".quantity").val(quantity);
-            var productPrice = ${productDto.productPrice}; // 상품 가격을 가져옴
-            var total = productPrice * quantity; // 총상품금액 계산
-            $(".total").text(total); // 총상품금액 업데이트
-
-        }
-    });
-
-
 
 </script>
 

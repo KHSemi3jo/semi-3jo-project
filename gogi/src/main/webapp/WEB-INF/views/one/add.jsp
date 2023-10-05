@@ -18,6 +18,8 @@
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 
+
+
 <style>
 select.form-input.one,
 .opt{
@@ -25,32 +27,24 @@ select.form-input.one,
 	height:2.7em;
     border-radius: 0.1em;
 }
+   p { text-align: left; }
 </style>
+
 
 <script>
 	$(function() {
 		$('[name=oneContent]')
 				.summernote(
 						{
-							placeholder : '내용을 작성하세요.',
+							placeholder : ' 1000자 이내로 작성해주세요.',
 							tabsize : 2, //탭을 누르면
 							height : 300,
 							maxHeight : 300,
 							minHeight : 300,
 							toolbar : [
-									[
-											'style',
-											[ 'bold', 'italic', 'underline',
-													'style' ] ],
-									[ 'font', [ 'bold', 'underline', 'clear' ] ],
-									[ 'color', [ 'forecolor', 'backcolor' ] ],
+									['style',	[ 'bold', 'italic', 'underline' ] ],
 									[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
-
-									[ 'table', [ 'table' ] ],
-									[ 'insert', [ 'link' ] ],
-									[
-											'view',
-											[ 'fullscreen', 'codeview', 'help' ] ] ]
+ 							]
 						});
 	});
 </script>
@@ -72,7 +66,7 @@ select.form-input.one,
 
 	<hr>
 
-	<form action="add" method="post">
+	<form action="add" method="post" autocomplete="off">
 	
 			<c:if test="${!isReply}" >
 				<div class="row flex-container">
@@ -122,7 +116,7 @@ select.form-input.one,
 					<label>내용</label>
 				</div>
 				<div class="row w-75 pr-30">
-					<textarea name="oneContent" class="form-input w-100" cols="30"
+					<textarea name="oneContent" class="form-input w-100 left" cols="30"
 						rows="10"></textarea>
 				</div>
 			</div>
