@@ -858,7 +858,7 @@ $(function(){
 						  <label class="custom-checkbox">		<div><input type="checkbox" name="pay-list"  data-pay-list="trans" onclick="clickOnlyOne1(this)">계좌이체<span></span></div></label>
 						  <label class="custom-checkbox">		<div><input type="checkbox" name="pay-list"  data-pay-list="vbank" onclick="clickOnlyOne1(this)">가상계좌이체<span></span></div></label>
 								  <label class="custom-checkbox">			<div><input type="checkbox" name="pay-list"  data-pay-list="phone" onclick="clickOnlyOne1(this)">핸드폰결재<span></span></div></label>
-						  <label class="custom-checkbox">			<div><input type="checkbox" name="pay-list"  data-pay-list="cultureland" onclick="clickOnlyOne1(this)">핸드폰결재<span></span></div></label>
+						  <label class="custom-checkbox">			<div><input type="checkbox" name="pay-list"  data-pay-list="cultureland" onclick="clickOnlyOne1(this)">상품권결재<span></span></div></label>
 								</div>
 							</div>	 
 					</div>
