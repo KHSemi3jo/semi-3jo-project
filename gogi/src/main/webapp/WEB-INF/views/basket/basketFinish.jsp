@@ -155,7 +155,7 @@
 		</table>
 </div>
 		<div class="row pt-20" >
-			<a href="http://localhost:8080/main" class="btn btn-navy pt-10">메인 페이지로 이동</a>
+			<a href="/main" class="btn btn-navy pt-10">메인 페이지로 이동</a>
 		</div>
 </div>
 
