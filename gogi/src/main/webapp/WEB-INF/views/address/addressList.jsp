@@ -293,7 +293,7 @@ $(function(){
 
 
 		<div class="flex-container table table-slit">
-			<div class="w-30">
+			<div class="w-35">
 				<div class="row left">
                    <label class="custom-checkbox">
                    <input type="checkbox" class=" check-item" name="check-list"  
@@ -307,7 +307,7 @@ $(function(){
 					<pre class="addressPhone">전화번호</pre>
 				</div>
 			</div>
-			<div class="w-70 pt-10 left">
+			<div class="w-65 pt-10 left">
 				<div class="row left pl-30">
 					<pre class="addressPost">우편번호</pre>
 				</div>
@@ -349,7 +349,7 @@ $(function(){
                         <label>받으실 분</label>
                     </div>
                     <div class="w-60">
-                      <input type="text" name="addressName" value="${addressDto.addressName}" 
+                      <input type="text" name="addressName" value="${sessionScope.customer}" 
                      class="form-input  address w-100" required autocomplete="off">
                     </div>
              </div>
