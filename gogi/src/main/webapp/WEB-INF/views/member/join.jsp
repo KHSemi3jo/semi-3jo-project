@@ -177,67 +177,7 @@ textarea:focus{
 
     });
          
-         $(function(){
-             //처음 로딩아이콘 숨김
-             $(".btn-send").find(".fa-spinner").hide();
-             $(".cert-wrapper").hide();
-
-             //인증번호 보내기 버튼을 누르면
-             //서버로 비동기 통신을 보내 인증 메일 발송 요청
-             $(".btn-send").click(function(){
-                 var email = $("[name=memberEmail]").val();
-                 if(email.length == 0) return;
-
-                 $(".btn-send").prop("disabled", true);
-                 $(".btn-send").find(".fa-spinner").show();
-                 $(".btn-send").find("span").text("전송중");
-                 $.ajax({
-                     url:"http://localhost:8080/rest/cert/send",
-                     method:"post",
-                     data:{certEmail: email},
-                     success:function(){
-                         $(".btn-send").prop("disabled", false);
-                         $(".btn-send").find(".fa-spinner").hide();
-                         $(".btn-send").find("span").text("재전송");
-                         // window.alert("이메일 확인하세요!");
-
-                         $(".cert-wrapper").show();
-                         window.email = email;
-                     },
-                 });
-             });
-
-             //확인 버튼을 누르면 이메일과 인증번호를 서버로 전달하여 검사
-             $(".btn-cert").click(function(){
-                 var email = window.email;
-                 var number = $(".cert-input").val().replace(/\s/g, '');
-                 if(email.length == 0 || number.length == 0) return;
-
-                 $.ajax({
-                     url:"http://localhost:8080/rest/cert/check",
-                     method:"post",
-                     data:{
-                         certEmail:email,
-                         certNumber:number
-                     },
-                     success:function(response){
-                         // console.log(response);
-                         if(response.result){ //인증성공
-                             $(".cert-input").removeClass("success fail")
-                                             .addClass("success");
-                             $(".btn-cert").prop("disabled", true);
-                             $(".btn-cert").find("span").text("전송중");
-                             //상태객체에 상태 저장하는 코드
-                         }
-                         else{
-                             $(".cert-input").removeClass("success fail")
-                                             .addClass("fail");
-                             //상태객체에 상태 저장하는 코드
-                         }
-                     },
-                 });
-             });
-         });
+       
          
          $(function(){
         	    //전체선택과 개별체크박스에 대한 이벤트 구현
