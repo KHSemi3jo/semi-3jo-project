@@ -110,7 +110,7 @@
 <div class="container w-800 pt-20">
     <table class="table table-slit" >
 			<tbody>
-			  <div class="row left  pb-10"><h3>결재 목록</h3></div>
+			  <div class="row left  pb-10"><h3>결제 목록</h3></div>
 			
 			
 <%-- 			<c:if test="${sessionScope.name == '${findDto.getMemberId()}'}"></c:if> --%>
