@@ -24,7 +24,7 @@ select.form-input, .form-input, .btn.btn-navy {
 		<c:if test="${sessionScope.name != null}">
 			<div class="row right ">
 		
-				<a href="add" class="btn upBtn"> <i class="fa-solid fa-pen"></i>
+				<a href="add" class="btn upBtn btn btn-orange">
 					글쓰기
 				</a>
 			</div>

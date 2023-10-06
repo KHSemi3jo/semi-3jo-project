@@ -28,20 +28,10 @@
 							height : 300,
 							maxHeight : 300,
 							minHeight : 300,
-							toolbar : [
-									[
-											'style',
-											[ 'bold', 'italic', 'underline',
-													'style' ] ],
-									[ 'font', [ 'bold', 'underline', 'clear' ] ],
-									[ 'color', [ 'forecolor', 'backcolor' ] ],
-									[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
-
-									[ 'table', [ 'table' ] ],
-									[ 'insert', [ 'link' ] ],
-									[
-											'view',
-											[ 'fullscreen', 'codeview', 'help' ] ] ]
+					        toolbar : [
+								['style',	[ 'bold', 'italic', 'underline' ] ],
+								[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+							]
 						});
 	});
 </script>
@@ -282,7 +272,7 @@
 
 <div class="container w-800">
 	<div class="row">
-		<h2 class="pt-30 pb-30 navy">쇼핑후기 목록</h2>
+		<h2 class="pt-30 pb-30 navy">${sessionScope.productName} 후기</h2>
 	</div>
 	<div class="row">
 		<table class="table table-slit">
@@ -307,7 +297,7 @@
 		</table>
 
 		<div class="row right">
-			<a href="/shopafter/list" class="btn btn-navy">목록</a> 
+			<a href="/shopafter/memberList" class="btn btn-navy">목록</a> 
 					<c:if test="${sessionScope.name == shopAfterDto.shopAfterId || sessionScope.level =='관리자'}">
 			<a class="btn btn-navy" href="/shopafter/fix?shopAfterNo=${shopAfterDto.shopAfterNo}">수정</a>
 			<a class="btn btn-navy"
