@@ -187,19 +187,6 @@ textarea:focus{
 			    $(".check-all").change(function () {
 			        var check = $(this).prop("checked");
 			        $(".check-all, .check-item").prop("checked", check);
-			        if (check) {
-			            // 전체 선택이 체크되었을 때
-			            $(".check-item").each(function () {
-			                $(this).data("prev-state", $(this).prop("checked"));
-			                $(this).prop("checked", true).change();
-			            });
-			        } else {
-			            // 전체 선택이 해제되었을 때
-			            $(".check-item").each(function () {
-			                var prev = $(this).data("prev-state");
-			                $(this).prop("checked", prev).change();
-			            });
-			        }
 			    });
         	    //개별체크박스
         	    $(".check-item").change(function(){
