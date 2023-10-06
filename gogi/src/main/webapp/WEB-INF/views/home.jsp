@@ -211,8 +211,8 @@ select.form-input.product{
 		                    	${productDto.productPrice}원
 		                	</div>
 		                	<c:if test="${sessionScope.level == '관리자'}">			         
-			                    <a class="btn btn-navy " href="edit?productNo=${productDto.productNo}">수정</a>
-			                    <a class="btn btn-orange " href="delete?productNo=${productDto.productNo}">삭제</a>
+			                    <a class="btn btn-navy " href="/product/edit?productNo=${productDto.productNo}">수정</a>
+			                    <a class="btn btn-orange " href="/product/delete?productNo=${productDto.productNo}">삭제</a>
 		                	</c:if>
 		                </div>
 		            </div>
