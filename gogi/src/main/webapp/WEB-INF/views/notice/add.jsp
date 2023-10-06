@@ -23,7 +23,7 @@
 <script>
     $(function () {
       $('[name=noticeContent]').summernote({
-        placeholder: '내용을 작성하세요.',
+        placeholder: '1000자 이내로 작성해주세요.',
         tabsize: 2, //탭을 누르면
         height: 300,
         maxHeight : 300,

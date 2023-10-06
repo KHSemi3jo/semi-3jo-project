@@ -14,21 +14,13 @@ select.form-input, .form-input, .btn.btn-navy {
 }
 </style>
 <div class="container w-800 navy">
-	<div class="row">
+	<div class="row pb-20">
 	<h2>${sessionScope.name}님 상품 후기</h2>
 
 	</div>
 	<!-- 폼시작(체크박스) -->
 	<form class="delete-form" action="deleteByAdmin" method="post">
-		<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
-		<c:if test="${sessionScope.name != null}">
-			<div class="row right ">
-		
-				<a href="add" class="btn upBtn"> <i class="fa-solid fa-pen"></i>
-					글쓰기
-				</a>
-			</div>
-</c:if>
+
 
 		<c:if test="${vo.search}">
 			<div class="row left">&quot;${vo.keyword}&quot;에 대한 검색 결과</div>
