@@ -122,6 +122,29 @@ function clickOnlyOne(itself){
 		   }	 
 		   }
 	 )}
+	 
+function clickOnlyOne1(itself){
+
+
+	var addressId = "${sessionScope.name}";
+	 $.ajax({
+		 url: "/rest/address/list",
+		 method: "post",
+		 data: {
+			 addressId: addressId
+		 },
+	   success: function(response){
+	var checkboxes = document.getElementsByName("pay-list");
+			   checkboxes.forEach((checkbox) =>{
+				   checkbox.checked =false;
+			   })
+			   
+				   itself.checked = true;
+			  
+				
+		   }	 
+		   }
+	 )}
 	
 
 $(function() {
@@ -624,12 +647,12 @@ $(function(){
 			 var addressNormal=	$("[name=check-list]:checked").parents(".view-container").find(".btn-edit").attr("data-address-normal");
 			 var addressDetail=	$("[name=check-list]:checked").parents(".view-container").find(".btn-edit").attr("data-address-detail");
 			 var addressPhone=	$("[name=check-list]:checked").parents(".view-container").find(".btn-edit").attr("data-address-phone");
-			
+			 var paymethod=	$("[name=pay-list]:checked").attr("data-pay-list");
 			
 
 					 IMP.request_pay({
 							pg: "html5_inicis",
-							pay_method: "card",
+							pay_method: paymethod,
 							merchant_uid: "test_lnbn6gsr",
 							name: addressName+"님 테스트 결제",
 							amount: $(".totalpay").text(),
@@ -823,6 +846,19 @@ $(function(){
 								</div>
 								<div class="row w-50 float-right right pr-20">
 									<span class="totalpay" name="total"></span><span>원</span>
+								</div>
+							</div>	 
+							<div class="row float-container">
+								<div class="row w-50 float-left left pl-20">
+									<div>결제종류</div>
+								</div>
+								<div class="row w-50 float-right right pr-20">
+							    <label class="custom-checkbox">	
+							<div><input type="checkbox" name="pay-list" data-pay-list="card" onclick="clickOnlyOne1(this)" checked="checked">카드결재<span></span></div></label>
+						  <label class="custom-checkbox">		<div><input type="checkbox" name="pay-list"  data-pay-list="trans" onclick="clickOnlyOne1(this)">계좌이체<span></span></div></label>
+						  <label class="custom-checkbox">		<div><input type="checkbox" name="pay-list"  data-pay-list="vbank" onclick="clickOnlyOne1(this)">가상계좌이체<span></span></div></label>
+								  <label class="custom-checkbox">			<div><input type="checkbox" name="pay-list"  data-pay-list="phone" onclick="clickOnlyOne1(this)">핸드폰결재<span></span></div></label>
+						  <label class="custom-checkbox">			<div><input type="checkbox" name="pay-list"  data-pay-list="cultureland" onclick="clickOnlyOne1(this)">핸드폰결재<span></span></div></label>
 								</div>
 							</div>	 
 					</div>
