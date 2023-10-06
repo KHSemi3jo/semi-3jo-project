@@ -665,7 +665,7 @@ $(function(){
 						  function (rsp) { // callback
 							  if (rsp.success) {
 								  location.href = "/basket/finish";
-							  } else { alert("사용자의 결재가 취소되었습니다.");}
+							  } else { alert("사용자의 결제가 취소되었습니다.");}
 						  });
 						}
 	}
@@ -854,17 +854,17 @@ $(function(){
 								</div>
 								<div class="row w-50 float-right right pr-20">
 							    <label class="custom-checkbox">	
-							<div><input type="checkbox" name="pay-list" data-pay-list="card" onclick="clickOnlyOne1(this)" checked="checked">카드결재<span></span></div></label>
+							<div><input type="checkbox" name="pay-list" data-pay-list="card" onclick="clickOnlyOne1(this)" checked="checked">카드결제<span></span></div></label>
 						  <label class="custom-checkbox">		<div><input type="checkbox" name="pay-list"  data-pay-list="trans" onclick="clickOnlyOne1(this)">계좌이체<span></span></div></label>
 						  <label class="custom-checkbox">		<div><input type="checkbox" name="pay-list"  data-pay-list="vbank" onclick="clickOnlyOne1(this)">가상계좌이체<span></span></div></label>
-								  <label class="custom-checkbox">			<div><input type="checkbox" name="pay-list"  data-pay-list="phone" onclick="clickOnlyOne1(this)">핸드폰결재<span></span></div></label>
-						  <label class="custom-checkbox">			<div><input type="checkbox" name="pay-list"  data-pay-list="cultureland" onclick="clickOnlyOne1(this)">상품권결재<span></span></div></label>
+								  <label class="custom-checkbox">			<div><input type="checkbox" name="pay-list"  data-pay-list="phone" onclick="clickOnlyOne1(this)">핸드폰결제<span></span></div></label>
+						  <label class="custom-checkbox">			<div><input type="checkbox" name="pay-list"  data-pay-list="cultureland" onclick="clickOnlyOne1(this)">상품권결제<span></span></div></label>
 								</div>
 							</div>	 
 					</div>
 		
 					<div class="row  btn-pay btn btn-orange w-100"    onclick="requestPay()">
-		결재하기</div>				
+		결제하기</div>				
 			
 
 			</div>
