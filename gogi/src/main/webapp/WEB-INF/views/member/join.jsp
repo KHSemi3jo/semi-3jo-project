@@ -277,8 +277,10 @@ textarea:focus{
                         <div class="cert-wrapper pt-10">
        					 <input type="text" class="cert-input form-input w-70">
        					 <button class="btn-cert btn btn-navy">확인완료</button>
+       					 
        					 </div>
-                        <div class="fail-feedback left">인증번호를 확인해주세요</div>
+       					 <div class="fail-feedback left">이메일 입력 후 인증해주세요</div>
+                        <div class="fail2-feedback left">이미 사용중인 이메일입니다</div>
    					</div>
 
                     

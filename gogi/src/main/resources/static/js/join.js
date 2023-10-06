@@ -114,7 +114,7 @@ $(function(){
     }
 });
 
-/*    $("[name=memberEmail]").blur(function(e){
+    $("[name=memberEmail]").blur(function(e){
         var regex =  /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
         var isValid =regex.test($(this).val());
         
@@ -145,7 +145,7 @@ $(function(){
 			status.memberEmail = false;
 		}
     });
-    */
+    
     
     
     $("[name=memberContact]").blur(function(){
