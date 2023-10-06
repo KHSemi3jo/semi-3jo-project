@@ -228,17 +228,17 @@ select.form-input.product{
 	<div class="row page-navigator mv-30">
 	<!-- 이전 버튼 -->
 	<c:if test="${!vo.first}">
-	<a href= "list?${vo.prevQueryString}">&lt;</a>
+	<a href= "/product/list?${vo.prevQueryString}">&lt;</a>
 	</c:if>
 	
 	<!-- 숫자 버튼 -->
 	<c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
-	<a href="list?${vo.getQueryString(i)}">${i}</a>
+	<a href="/product/list?${vo.getQueryString(i)}">${i}</a>
 </c:forEach>
 		
 		<!-- 다음 버튼 -->
 	<c:if test="${!vo.last}">
-	<a href= "list?${vo.nextQueryString}">
+	<a href= "/product/list?${vo.nextQueryString}">
 	&gt;</a>
 	</c:if>
 	</div>
