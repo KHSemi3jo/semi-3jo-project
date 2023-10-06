@@ -660,11 +660,11 @@ $(function(){
 							buyer_tel: addressPhone,
 							 buyer_addr: addressNormal+addressDetail,
 							    buyer_postcode: addressPost,
-							m_redirect_url: "{http://localhost:8080/basket/finish}"
+							m_redirect_url: "{/basket/finish}"
 						  }, 
 						  function (rsp) { // callback
 							  if (rsp.success) {
-								  location.href = "http://localhost:8080/basket/finish";
+								  location.href = "/basket/finish";
 							  } else { alert("사용자의 결재가 취소되었습니다.");}
 						  });
 						}
