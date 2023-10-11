@@ -66,7 +66,7 @@ $(function(){
                    var addressPhone = "${sessionScope.phone}";
                     e.preventDefault();
                     $.ajax({
-                        url: "/rest/address/add",
+                        url: window.contextPath+"/rest/address/add",
                         method: "post",
                         data: $(e.target).serialize(),
                         success: function (response) {
@@ -92,7 +92,7 @@ $(function(){
                     var addressPhone = "${sessionScope.phone}";
 
                     $.ajax({
-                        url: "/rest/address/list",
+                        url: window.contextPath+"/rest/address/list",
                         method: "post",
                         data: {
                             addressId: addressId
@@ -141,7 +141,7 @@ $(function(){
                                                 "data-address-no");
                                             if (confirm("정말 삭제하시겠습니까?")) {
                                                 $.ajax({
-                                                    url: "/rest/address/delete",
+                                                    url: window.contextPath+"/rest/address/delete",
                                                     method: "post",
                                                     data: {
                                                         addressNo: addressNo
@@ -252,7 +252,7 @@ $(function(){
 															
 																e.preventDefault();
 																$.ajax({
-																			url : "/rest/address/edit",
+																			url : window.contextPath+"/rest/address/edit",
 																			method : "post",
 																			data : $(
 																					e.target).serialize(),

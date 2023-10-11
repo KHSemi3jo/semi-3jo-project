@@ -106,7 +106,7 @@
         	var productNo = params.get("productNo");
         	
         	$.ajax({
-                url: "/rest/basket/add",
+                url: window.contextPath+"/rest/basket/add",
                 method: "post",
                 data: { productNo: productNo},
                 success: function(response) {

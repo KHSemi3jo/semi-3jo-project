@@ -105,7 +105,7 @@ function clickOnlyOne(itself){
 
 	var addressId = "${sessionScope.name}";
 	 $.ajax({
-		 url: "/rest/address/list",
+		 url: window.contextPath+"/rest/address/list",
 		 method: "post",
 		 data: {
 			 addressId: addressId
@@ -128,7 +128,7 @@ function clickOnlyOne1(itself){
 
 	var addressId = "${sessionScope.name}";
 	 $.ajax({
-		 url: "/rest/address/list",
+		 url: window.contextPath+"/rest/address/list",
 		 method: "post",
 		 data: {
 			 addressId: addressId
@@ -280,7 +280,7 @@ $(function(){
                    var addressPhone = "${sessionScope.phone}";
                     e.preventDefault();
                     $.ajax({
-                        url: "/rest/address/add",
+                        url: window.contextPath+"/rest/address/add",
                         method: "post",
                         data: $(e.target).serialize(),
                         success: function (response) {
@@ -304,7 +304,7 @@ $(function(){
                     var addressPhone = params.get("addressPhone");
 
                     $.ajax({
-                        url: "/rest/address/list",
+                        url: window.contextPath+"/rest/address/list",
                         method: "post",
                         data: {
                             addressId: addressId
@@ -346,7 +346,7 @@ $(function(){
                                                 "data-address-no");
                                             if (confirm("정말 삭제하시겠습니까?")) {
                                                 $.ajax({
-                                                    url: "/rest/address/delete",
+                                                    url: window.contextPath+"/rest/address/delete",
                                                     method: "post",
                                                     data: {
                                                         addressNo: addressNo
@@ -468,7 +468,7 @@ $(function(){
 															
 																e.preventDefault();
 																$.ajax({
-																			url : "/rest/address/edit",
+																			url : window.contextPath+"/rest/address/edit",
 																			method : "post",
 																			data : $(e.target).serialize(),
 																			success : function(response) {
@@ -660,11 +660,11 @@ $(function(){
 							buyer_tel: addressPhone,
 							 buyer_addr: addressNormal+addressDetail,
 							    buyer_postcode: addressPost,
-							m_redirect_url: "{/basket/finish}"
+							m_redirect_url: "{${pageContext.request.contextPath}/basket/finish}"
 						  }, 
 						  function (rsp) { // callback
 							  if (rsp.success) {
-								  location.href = "/basket/finish";
+								  location.href = "${pageContext.request.contextPath}/basket/finish";
 							  } else { alert("사용자의 결제가 취소되었습니다.");}
 						  });
 						}

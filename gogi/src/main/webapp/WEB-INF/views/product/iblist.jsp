@@ -90,7 +90,7 @@ select.form-input.product{
             var productNo = $(this).data("product-no");
             
             $.ajax({
-                url: "/rest/basket/add",
+                url: window.contextPath+"/rest/basket/add",
                 method: "post",
                 data: { productNo: productNo },
                 success: function(response) {

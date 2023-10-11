@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+ <script >
+window.contextPath = "${pageContext.request.contextPath}";
+</script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,9 +25,9 @@
 	rel="stylesheet">
 	
 <!-- 내가 만든 CSS 파일-->
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/Gogi-layout.css">
-<link rel="stylesheet" type="text/css" href="/css/Gogi-commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Gogi-layout.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Gogi-commons.css">
 <!-- kakao map cdn -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3709f5830a9a640bad10f7d345d86cb5"></script>
 <!-- jquery cdn -->
@@ -53,7 +58,7 @@
     <main>
         <header>
             <div class="logo pl-30">
-                <a href="/main"><img src="/images/logo/GogiLogo-main.png"width=150 height="150"></a>
+                <a href="/main"><img src="${pageContext.request.contextPath}/images/logo/GogiLogo-main.png"width=150 height="150"></a>
             </div>
             <div class="title flex-container pl-50">
 	            <form action="/product/list" method="get">
@@ -84,22 +89,22 @@
 											                <div class="row pr-20 member-menu navy"><span>${sessionScope.name} 님 <i class="fa-solid fa-angle-down"></i></span>
 											                    <div class="member-service">
 
-											                        <a class="left" href="/basket/finish">주문내역</a>
-											                        <a class="left" href="/shopafter/memberList">상품후기</a>
-											                        <a class="left" href="/member/change">개인정보수정</a>
+											                        <a class="left" href="${pageContext.request.contextPath}/basket/finish">주문내역</a>
+											                        <a class="left" href="${pageContext.request.contextPath}/shopafter/memberList">상품후기</a>
+											                        <a class="left" href="${pageContext.request.contextPath}/member/change">개인정보수정</a>
 
-                                             						 <a class="left" href="/member/addressList">배송지관리</a>
+                                             						 <a class="left" href="${pageContext.request.contextPath}/member/addressList">배송지관리</a>
 
 
 
-											                        <a class="left" href="/member/logout">로그아웃</a>
+											                        <a class="left" href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
 											                    </div>
 											                </div>				
 											                <div class="row etc-menu custom-menu navy"><span>고객센터 <i class="fa-solid fa-angle-down"></i></span>
 												                    <div class="custom-service">
-												                        <a class="left" href="/notice/list">공지사항</a>
-												                        <a class="left" href="/qna/list">자주하는 질문</a>
-												                        <a class="left" href="/one/list">1:1 문의</a>
+												                        <a class="left" href="${pageContext.request.contextPath}/notice/list">공지사항</a>
+												                        <a class="left" href="${pageContext.request.contextPath}/qna/list">자주하는 질문</a>
+												                        <a class="left" href="${pageContext.request.contextPath}/one/list">1:1 문의</a>
 												                    </div>
 										                		</div>
 						                	</div>					          
@@ -108,13 +113,13 @@
 								        	<%--비회원일시 보이는 etc 메뉴 --%>
 										            <%--비회원이 장바구니를 눌렀을 땐 로그인 화면으로 이동하거나 로그인 필요 팝업 --%>
 										            <div class="flex-container pt-20">
-										                <div class="row pr-30"><a href="/basket/list"><i class="cart fa-solid fa-cart-shopping fa-xl navy"></i></a></div>
-												        <div class="row pr-20"><a href="/member/join" class="orange">회원가입</a></div>
-												        <div class="row pr-20 etc-menu navy"><a href="/member/login">로그인</a></div>	
+										                <div class="row pr-30"><a href="${pageContext.request.contextPath}/basket/list"><i class="cart fa-solid fa-cart-shopping fa-xl navy"></i></a></div>
+												        <div class="row pr-20"><a href="${pageContext.request.contextPath}/member/join" class="orange">회원가입</a></div>
+												        <div class="row pr-20 etc-menu navy"><a href="${pageContext.request.contextPath}/member/login">로그인</a></div>	
 												        <div class="row etc-menu custom-menu navy"><span>고객센터 <i class="fa-solid fa-angle-down"></i></span>
 										                    <div class="custom-service">
-										                        <a class="left" href="/notice/list">공지사항</a>
-										                        <a class="left" href="/qna/list">자주하는 질문</a>
+										                        <a class="left" href="${pageContext.request.contextPath}/notice/list">공지사항</a>
+										                        <a class="left" href="${pageContext.request.contextPath}/qna/list">자주하는 질문</a>
 										                    </div>
 				                						</div>
 				                					</div>									                
@@ -124,7 +129,7 @@
                 	<c:if test = "${sessionScope.name != null}">
 				          <div class="float-container pr-50 pb-10">
 				          		<div class="row col-3"></div>
-				                <div class="row float-left pl-50"><a href="/basket/list"><i class="cart fa-solid fa-cart-shopping fa-xl navy"></i></a></div>
+				                <div class="row float-left pl-50"><a href="${pageContext.request.contextPath}/basket/list"><i class="cart fa-solid fa-cart-shopping fa-xl navy"></i></a></div>
 				                <input type="hidden" name="memberId" value="${memberDto.memberId}">
 				                <div class="row float-right"><span class="orange"> G </span><span class="orange">${sessionScope.Gmoney}</span></div>      									          
 				          </div>
@@ -136,17 +141,17 @@
             <ul class="menu menu-navy center">
                 <li><a href="#"><i class="fa-solid fa-bars "></i> 카테고리</a>
                     <ul>
-                        <li><a class="left" href="/product/dblist">국내산 소고기</a></li>
-                        <li><a class="left" href="/product/iblist">수입산 소고기</a></li>
-                        <li><a class="left" href="/product/plist">돼지고기</a></li>
+                        <li><a class="left" href="${pageContext.request.contextPath}/product/dblist">국내산 소고기</a></li>
+                        <li><a class="left" href="${pageContext.request.contextPath}/product/iblist">수입산 소고기</a></li>
+                        <li><a class="left" href="${pageContext.request.contextPath}/product/plist">돼지고기</a></li>
                     </ul>
                 </li>
-                <li><a href="/product/dblist">신상품</a></li>
-                <li><a href="/product/iblist">베스트</a></li>
-                <li><a href="/product/plist">알뜰쇼핑</a></li>
+                <li><a href="${pageContext.request.contextPath}/product/dblist">신상품</a></li>
+                <li><a href="${pageContext.request.contextPath}/product/iblist">베스트</a></li>
+                <li><a href="${pageContext.request.contextPath}/product/plist">알뜰쇼핑</a></li>
                 <%-- 관리자인 경우 추가 메뉴 출력 --%>
 	   				<c:if test = "${sessionScope.level == '관리자'}">
-	   					<li><a href="/admin/home">관리자메뉴</a></li>
+	   					<li><a href="${pageContext.request.contextPath}/admin/home">관리자메뉴</a></li>
 	   				</c:if>
             </ul>
         </nav>

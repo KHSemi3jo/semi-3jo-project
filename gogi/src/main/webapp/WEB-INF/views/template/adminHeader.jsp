@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
+ <script >
+window.contextPath = "${pageContext.request.contextPath}";
+</script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,9 +25,9 @@
 	rel="stylesheet">
 	
 <!-- 내가 만든 CSS 파일-->
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/Gogi-layout.css">
-<link rel="stylesheet" type="text/css" href="/css/Gogi-commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Gogi-layout.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Gogi-commons.css">
 
 
 <!-- kakao map cdn -->
@@ -54,10 +60,10 @@
     <main>
         <header>
             <div class="logo">
-                <a href="/main"><img src="/images/logo/GogiLogo-main.png"width=150 height="150"></a>
+                <a href="/main"><img src="${pageContext.request.contextPath}/images/logo/GogiLogo-main.png"width=150 height="150"></a>
             </div>
             <div class="title flex-container ">
-                <form action="/product/list" method="get">
+                <form action="${pageContext.request.contextPath}/product/list" method="get">
 	                <div class="row input-search">
 		                <c:choose>
 							<c:when test="${vo.type == 'productName'}"></c:when>
@@ -75,28 +81,28 @@
             </div>
             <div class="etc flex-container">
                 <div class="row pr-20 navy">${sessionScope.name} 님</div>
-                <div class="row pr-20 etc-menu navy"><a class="orange" href="/member/logout">로그아웃</a></div>
+                <div class="row pr-20 etc-menu navy"><a class="orange" href="${pageContext.request.contextPath}/member/logout">로그아웃</a></div>
             </div>
         </header>
         <nav>
             <ul class="menu menu-navy center">
                 <li><a href="#"><i class="fa-solid fa-bars "></i> 고객센터</a>
                     <ul>
-                        <li><a class="left" href="/notice/list">공지사항 관리</a></li>
-                        <li><a class="left" href="/qna/list">QnA 관리</a></li>
-                        <li><a class="left" href="/one/list">1:1 문의</a></li>
+                        <li><a class="left" href="${pageContext.request.contextPath}/notice/list">공지사항 관리</a></li>
+                        <li><a class="left" href="${pageContext.request.contextPath}/qna/list">QnA 관리</a></li>
+                        <li><a class="left" href="${pageContext.request.contextPath}/one/list">1:1 문의</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><i class="fa-solid fa-bars "></i> 회원 관리</a>
                     <ul>
-                        <li><a class="left" href="/admin/member/list?size=20">회원정보관리</a></li>
+                        <li><a class="left" href="${pageContext.request.contextPath}/admin/member/list?size=20">회원정보관리</a></li>
                        
                     </ul>
                 </li>
                 <li><a href="#"><i class="fa-solid fa-bars "></i> 상품 관리</a>
                 	<ul>
-                        <li><a class="left" href="/product/list">상품 목록</a></li>
-                        <li><a class="left" href="/product/add">상품 등록</a></li>
+                        <li><a class="left" href="${pageContext.request.contextPath}/product/list">상품 목록</a></li>
+                        <li><a class="left" href="${pageContext.request.contextPath}/product/add">상품 등록</a></li>
                     </ul>
                 </li>
             </ul>

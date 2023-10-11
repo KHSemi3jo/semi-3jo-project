@@ -24,7 +24,7 @@ $(function(){
         
         if(isValid){//형식이 유효하다면
             $.ajax({
-                url:"http://localhost:8080/rest/member/idCheck",
+                url:window.contextPath+"/rest/member/idCheck",
                 method:"post",
                 //data: {memberId : e.target.value}, //JS
                 data: {memberId : $(e.target).val() },
@@ -120,7 +120,7 @@ $(function(){
         
         if(isValid){//형식이 유효하다면
 			$.ajax({
-				url:"http://localhost:8080/rest/member/emailCheck",
+				url:window.contextPath+"/rest/member/emailCheck",
 				method:"post",
 				data : {memberEmail : $(e.target).val()},
 				success: function(response){
@@ -211,7 +211,7 @@ $(function(){
                  $(".btn-send").find(".fa-spinner").show();
                  $(".btn-send").find("span").text("전송중");
                  $.ajax({
-                     url:"http://localhost:8080/rest/cert/send",
+                     url:window.contextPath+"/rest/cert/send",
                      method:"post",
                      data:{certEmail: email},
                      success:function(){
@@ -233,7 +233,7 @@ $(function(){
         		
 
                  $.ajax({
-                     url:"http://localhost:8080/rest/cert/check",
+                     url:window.contextPath+"/rest/cert/check",
                      method:"post",
                      data:{
                          certEmail:email,
