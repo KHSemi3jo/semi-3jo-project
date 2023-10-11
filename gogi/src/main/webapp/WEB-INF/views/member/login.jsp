@@ -88,7 +88,7 @@ a.link:hover {
                 // 폼을 서버로 제출하는 코드
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8080/rest/member/searchPw", 
+                    url: "${pageContext.request.contextPath}/rest/member/searchPw", 
                     data: $(this).serialize(), // 폼 데이터 직렬화
                     success: function(response) {
                         // 서버 응답에 따른 처리

@@ -70,7 +70,7 @@
 
            $.ajax({
 
-               url:"http://localhost:8080/kh12c",
+               url:window.contextPath+"/kh12c",
 
               
 
@@ -79,7 +79,7 @@
                contentType:false,
                data:form,
                success:function(response){
-                   $("img").attr("src", "http://localhost:8080/download?attachNo="+response.attachNo);
+                   $("img").attr("src", window.contextPath+"/download?attachNo="+response.attachNo);
                    $("[name=attachNo]").val(response.attachNo);
                },
            });

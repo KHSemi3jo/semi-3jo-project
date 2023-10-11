@@ -118,7 +118,7 @@
                  		// 폼을 서버로 제출하는 코드
 		                 $.ajax({
 		                     type: "POST",
-		                     url: "http://localhost:8080/rest/member/changePw", 
+		                     url: window.contextPath+"/rest/member/changePw", 
 		                     data: $(this).serialize(), // 폼 데이터 직렬화
 		                     success: function(response) {
 			                         // 서버 응답 처리

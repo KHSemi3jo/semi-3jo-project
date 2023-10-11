@@ -36,7 +36,7 @@ $(function(){
         var isValid = email != "" || regex.test($(e.target).val());
          if(isValid){//형식이 유효하다면
 			$.ajax({
-				url:"http://localhost:8080/rest/member/emailCheck",
+				url: window.contextPath+"/rest/member/emailCheck",
 				method:"post",
 				data : {memberEmail : email },
 				success: function(response){

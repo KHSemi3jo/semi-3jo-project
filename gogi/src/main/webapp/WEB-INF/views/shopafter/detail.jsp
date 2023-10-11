@@ -43,7 +43,7 @@
 		$(".reply-insert-form").submit(function(e) {	
 			e.preventDefault();
 			$.ajax({	
-				url : "/rest/reply/add",
+				url : window.contextPath+"/rest/reply/add",
 				method : "post",
 				data : $(e.target).serialize(),
 				success : function(response) {
@@ -64,7 +64,7 @@
 			
 
 			$.ajax({
-						url : "/rest/reply/list",
+						url : window.contextPath+"/rest/reply/list",
 						method : "post",
 						data : {
 							replyOrigin : no
@@ -96,7 +96,7 @@
 											var replyNo = $(this).attr(
 													"data-reply-no");
 											$.ajax({
-												url : "/rest/reply/delete",
+												url : window.contextPath+"/rest/reply/delete",
 												method : "post",
 												data : {
 													replyNo : replyNo
@@ -146,7 +146,7 @@
 																	
 																		e.preventDefault();
 																		$.ajax({
-																					url : "/rest/reply/edit",
+																					url : window.contextPath+"/rest/reply/edit",
 																					method : "post",
 																					data : $(
 																							e.target).serialize(),
@@ -226,7 +226,7 @@
 			var shopAfterNo = params.get("shopAfterNo");
 
 			$.ajax({
-				url : "/rest/like/check",
+				url : window.contextPath+"/rest/like/check",
 				method : "post",
 				data : {
 					shopAfterNo : shopAfterNo
@@ -246,7 +246,7 @@
 			$(".fa-heart").click(
 					function() {
 						$.ajax({
-							url : "/rest/like/action",
+							url : window.contextPath+"/rest/like/action",
 							method : "post",
 							data : {
 								shopAfterNo : shopAfterNo

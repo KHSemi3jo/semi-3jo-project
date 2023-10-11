@@ -97,7 +97,7 @@ $(function(){
                    var addressPhone = "${sessionScope.phone}";
                     e.preventDefault();
                     $.ajax({
-                        url: "/rest/address/add",
+                        url: window.contextPath+"/rest/address/add",
                         method: "post",
                         data: $(e.target).serialize(),
                         success: function (response) {
@@ -121,7 +121,7 @@ $(function(){
                     var addressPhone = "${sessionScope.phone}";
 
                     $.ajax({
-                        url: "/rest/address/list",
+                        url: window.contextPath+"/rest/address/list",
                         method: "post",
                         data: {
                             addressId: addressId
@@ -171,7 +171,7 @@ $(function(){
                                                 "data-address-no");
                                             if (confirm("정말 삭제하시겠습니까?")) {
                                                 $.ajax({
-                                                    url: "/rest/address/delete",
+                                                    url: window.contextPath+"/rest/address/delete",
                                                     method: "post",
                                                     data: {
                                                         addressNo: addressNo
@@ -282,7 +282,7 @@ $(function(){
 															
 																e.preventDefault();
 																$.ajax({
-																			url : "/rest/address/edit",
+																			url : window.contextPath+"/rest/address/edit",
 																			method : "post",
 																			data : $(
 																					e.target).serialize(),
@@ -339,7 +339,7 @@ $(function(){
                     // 폼을 서버로 제출하는 코드
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8080/rest/address/edit", 
+                        url: window.contextPath+"/rest/address/edit", 
                         data: $(this).serialize(), // 폼 데이터 직렬화
                         success: function(response) {
                             // 서버 응답 처리
