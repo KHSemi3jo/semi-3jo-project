@@ -46,8 +46,8 @@ public class BasketController {
 //		if(attachDto == null) {
 //			return ResponseEntity.notFound().build();//파일번호가 없으면 404 반환
 //		}
-		String home=System.getProperty("user.home");
-		File dir = new File(home, "/git/semi-3jo-project/gogi/src/main/resources/static/images/kh12c");
+		String home=System.getProperty("D:/upload");
+		File dir = new File(home, "kh12c");
 		File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
 		
 		
