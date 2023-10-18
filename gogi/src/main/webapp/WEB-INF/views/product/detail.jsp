@@ -155,7 +155,7 @@
             <div class="row w-40 pt-10">
                 <c:choose>
                     <c:when test="${productDto.image}">
-                        <img src="image?productNo=${productDto.productNo}" width="300" height="400">
+                        <img src="${pageContext.request.contextPath}/product/image?${productDto.productNo}" width="300" height="400">
                     </c:when>
                         <c:otherwise>
                             <img src="https://dummyimage.com/200x200/000/fff" width="300" height="400">
@@ -195,17 +195,17 @@
         	<c:when test="${productDto.productType eq '돼지고기'}">
         <div class= "row">
         	<hr>
-        		<img src="**/images/product/pig.png" width="1000" height="800">
+        		<img src="${pageContext.request.contextPath}/images/product/pig.png" width="1000" height="800">
         	<hr>
-        		<img src="**/images/product/pd-image2.png" width="1000" height="800">
+        		<img src="${pageContext.request.contextPath}/images/product/pd-image2.png" width="1000" height="800">
         </div>
         </c:when>
         <c:otherwise>
          <div class= "row">
         	<hr>
-        		<img src="**/images/product/cow.png" width="1000" height="800">
+        		<img src="${pageContext.request.contextPath}/images/product/cow.png" width="1000" height="800">
         			<hr>
-        		<img src="**/images/product/pd-image2.png" width="1000" height="800">
+        		<img src="${pageContext.request.contextPath}/images/product/pd-image2.png" width="1000" height="800">
         </div>
         </c:otherwise>
         </c:choose>

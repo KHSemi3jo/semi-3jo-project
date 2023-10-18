@@ -89,7 +89,7 @@ public class ProductController {
 //			if(attachDto == null) {
 //				return ResponseEntity.notFound().build();//파일번호가 없으면 404 반환
 //			}
-			String home=System.getProperty("D:/upload");
+			String home=System.getProperty("C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\webapps\\gogi\\WEB-INF\\classes\\static\\images");
 			File dir = new File(home, "kh12c");
 			File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
 			
