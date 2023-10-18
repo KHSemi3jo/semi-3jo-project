@@ -195,17 +195,17 @@
         	<c:when test="${productDto.productType eq '돼지고기'}">
         <div class= "row">
         	<hr>
-        		<img src="/images/product/pig.png" width="1000" height="800">
+        		<img src="**/images/product/pig.png" width="1000" height="800">
         	<hr>
-        		<img src="/images/product/pd-image2.png" width="1000" height="800">
+        		<img src="**/images/product/pd-image2.png" width="1000" height="800">
         </div>
         </c:when>
         <c:otherwise>
          <div class= "row">
         	<hr>
-        		<img src="/images/product/cow.png" width="1000" height="800">
+        		<img src="**/images/product/cow.png" width="1000" height="800">
         			<hr>
-        		<img src="/images/product/pd-image2.png" width="1000" height="800">
+        		<img src="**/images/product/pd-image2.png" width="1000" height="800">
         </div>
         </c:otherwise>
         </c:choose>

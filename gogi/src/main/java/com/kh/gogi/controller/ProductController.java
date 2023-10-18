@@ -61,8 +61,8 @@ public class ProductController {
 			if(!attach.isEmpty()) { //파일이 있으면
 				int attachNo = attachDao.sequence();
 				
-				String home=System.getProperty("user.home");
-				File dir = new File(home, "/git/semi-3jo-project/gogi/src/main/resources/static/images/kh12c");
+				String home=System.getProperty("D:/upload");
+				File dir = new File(home, "kh12c");
 				dir.mkdirs();
 				File target = new File(dir, String.valueOf(attachNo));
 				attach.transferTo(target);
@@ -89,8 +89,8 @@ public class ProductController {
 //			if(attachDto == null) {
 //				return ResponseEntity.notFound().build();//파일번호가 없으면 404 반환
 //			}
-			String home=System.getProperty("user.home");
-			File dir = new File(home, "/git/semi-3jo-project/gogi/src/main/resources/static/images/kh12c");
+			String home=System.getProperty("D:/upload");
+			File dir = new File(home, "kh12c");
 			File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
 			
 			
@@ -208,8 +208,8 @@ public class ProductController {
 			 if(!attach.isEmpty()) { //파일이 있으면
 				 //파일 삭제
 				 AttachDto attachDto = productDao.findImage(productDto.getProductNo());
-				 String home = System.getProperty("user.home");
-				 File dir = new File(home, "/git/semi-3jo-project/gogi/src/main/resources/static/images/kh12c");
+				 String home = System.getProperty("D:/upload");
+				 File dir = new File(home, "kh12c");
 				 
 				 if(attachDto != null) {
 					 attachDao.delete(attachDto.getAttachNo());
@@ -246,8 +246,8 @@ public class ProductController {
 			//이미지가 있을 경우에만 이미지 삭제
 			if(attachDto != null) {
 				
-				String home = System.getProperty("user.home");
-				File dir = new File(home, "/git/semi-3jo-project/gogi/src/main/resources/static/images/kh12c");
+				String home = System.getProperty("D:/upload");
+				File dir = new File(home, "kh12c");
 				File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
 				target.delete();
 				
