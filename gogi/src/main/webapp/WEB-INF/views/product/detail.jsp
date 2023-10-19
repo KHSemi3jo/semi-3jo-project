@@ -155,7 +155,7 @@
             <div class="row w-40 pt-10">
                 <c:choose>
                     <c:when test="${productDto.image}">
-                        <img src="${pageContext.request.contextPath}/product/image?${productDto.productNo}" width="300" height="400">
+                        <img src="${pageContext.request.contextPath}/product/image?productNo=${productDto.productNo}" width="300" height="400">
                     </c:when>
                         <c:otherwise>
                             <img src="https://dummyimage.com/200x200/000/fff" width="300" height="400">
