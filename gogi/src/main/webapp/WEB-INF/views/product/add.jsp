@@ -102,7 +102,7 @@
                     </div>
                     <div class="row w-75 pr-30">
                         <label><input type="file" name="attach" class="w-100 file-chooser"
-                            style="display:none;"accept="image/*"><img src="/images/product/no-image.png" 
+                            style="display:none;"accept="image/*"><img src="${pageContext.request.contextPath}/images/product/no-image.png" 
                             width="300"height="300"></label>
                     </div>
                 </div>
