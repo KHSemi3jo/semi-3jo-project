@@ -61,7 +61,7 @@ public class ProductController {
 			if(!attach.isEmpty()) { //파일이 있으면
 				int attachNo = attachDao.sequence();
 				
-				String home="C:\\Program Files";
+				String home="D:\\upload";
 				File dir = new File(home, "kh12c");
 				dir.mkdirs();
 				File target = new File(dir, String.valueOf(attachNo));
@@ -89,7 +89,7 @@ public class ProductController {
 //			if(attachDto == null) {
 //				return ResponseEntity.notFound().build();//파일번호가 없으면 404 반환
 //			}
-			String home="C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\webapps\\images";
+			String home="D:\\upload";
 			File dir = new File(home, "kh12c");
 			File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
 			
@@ -208,7 +208,7 @@ public class ProductController {
 			 if(!attach.isEmpty()) { //파일이 있으면
 				 //파일 삭제
 				 AttachDto attachDto = productDao.findImage(productDto.getProductNo());
-				 String home = System.getProperty("D:/upload");
+				 String home = "D:\\upload";
 				 File dir = new File(home, "kh12c");
 				 
 				 if(attachDto != null) {
@@ -246,7 +246,7 @@ public class ProductController {
 			//이미지가 있을 경우에만 이미지 삭제
 			if(attachDto != null) {
 				
-				String home = System.getProperty("D:/upload");
+				String home = "D:\\upload";
 				File dir = new File(home, "kh12c");
 				File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
 				target.delete();
