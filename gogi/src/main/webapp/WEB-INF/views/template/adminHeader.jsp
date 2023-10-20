@@ -60,7 +60,7 @@ window.contextPath = "${pageContext.request.contextPath}";
     <main>
         <header>
             <div class="logo">
-                <a href="${pageContext.request.contextPath}/main"><img src="${pageContext.request.contextPath}/images/logo/GogiLogo-main.png"width=150 height="150"></a>
+                <a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/images/logo/GogiLogo-main.png"width=150 height="150"></a>
             </div>
             <div class="title flex-container ">
                 <form action="${pageContext.request.contextPath}/product/list" method="get">

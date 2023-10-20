@@ -31,7 +31,7 @@ public class HomeController {
 	
 	
 	//상품 목록 페이지
-			@RequestMapping("/main")
+			@RequestMapping("/")
 			public String listMain(Model model,
 									@ModelAttribute(name = "vo") ProductVO vo,
 									HttpSession session) {
