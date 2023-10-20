@@ -78,7 +78,7 @@ public class ProductController {
 				productDao.connect(productNo, attachNo);
 			}
 			
-			return "redirect:/product/add";
+			return "redirect:/product/list";
 		}
 		
 		@ResponseBody
