@@ -62,7 +62,7 @@ public class ProductController {
 				int attachNo = attachDao.sequence();
 				
 				String home="D:\\upload";
-				File dir = new File(home, "kh12c");
+				File dir = new File(home, "gogi");
 				dir.mkdirs();
 				File target = new File(dir, String.valueOf(attachNo));
 				attach.transferTo(target);
@@ -90,7 +90,7 @@ public class ProductController {
 //				return ResponseEntity.notFound().build();//파일번호가 없으면 404 반환
 //			}
 			String home="D:\\upload";
-			File dir = new File(home, "kh12c");
+			File dir = new File(home, "gogi");
 			File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
 			
 			
@@ -247,7 +247,7 @@ public class ProductController {
 			if(attachDto != null) {
 				
 				String home = "D:\\upload";
-				File dir = new File(home, "kh12c");
+				File dir = new File(home, "gogi");
 				File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
 				target.delete();
 				
