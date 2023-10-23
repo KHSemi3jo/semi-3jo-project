@@ -259,7 +259,7 @@
 	                            회원정보수정
 	                        </button>
 	                        <a class="btn btn-navy" id="changePasswordButton">비밀번호변경</a>
-	                        <a class="btn" href="exit" >탈퇴하기</a>
+	                        <a class="btn" href="${pageContext.request.contextPath}/member/exit" >탈퇴하기</a>
                 </div>
         </div> 
     </form>

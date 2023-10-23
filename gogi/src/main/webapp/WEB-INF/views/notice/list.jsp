@@ -28,7 +28,7 @@ select.form-input.notice{
 			<%-- 작성은 관리자가 로그인한 경우에만 출력 --%>
 			<c:if test="${sessionScope.level =='관리자' }">
 				<div class="row right">
-					 <a href="/notice/add" class="btn btn-orange">작성</a>
+					 <a href="${pageContext.request.contextPath}/notice/add" class="btn btn-orange">작성</a>
 				</div>						
 			</c:if>
 						
@@ -46,7 +46,7 @@ select.form-input.notice{
 					<c:forEach var="noticeDto" items="${list}">				
 						<tr>
 							<td>${noticeDto.noticeNo}</td>
-							<td class="left"><a class="noticeTitle navy " href="detail?noticeNo=${noticeDto.noticeNo}">${noticeDto.noticeTitle}</a></td>					
+							<td class="left"><a class="noticeTitle navy " href="${pageContext.request.contextPath}/notice/detail?noticeNo=${noticeDto.noticeNo}">${noticeDto.noticeTitle}</a></td>					
 									<td>관리자</td>
 		
 							<td>${noticeDto.noticeDate}</td>
@@ -59,7 +59,7 @@ select.form-input.notice{
  		<div class="row page-navigator mv-30">
                 <!-- 이전 버튼 -->
                 <c:if test="${!vo.first}">
-                    <a href="list?${vo.prevQueryString}">
+                    <a href="${pageContext.request.contextPath}/notice/list?${vo.prevQueryString}">
                         <i class="fa-solid fa-angle-left"></i>
                     </a>
                 </c:if>
@@ -71,14 +71,14 @@ select.form-input.notice{
                             <a class="on">${i}</a>
                         </c:when>
                         <c:otherwise>
-                            <a href="list?${vo.getQueryString(i)}">${i}</a> 
+                            <a href="${pageContext.request.contextPath}/notice/list?${vo.getQueryString(i)}">${i}</a> 
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
             
                 <!-- 다음 버튼 -->
                 <c:if test="${!vo.last}">
-                    <a href="list?${vo.nextQueryString}">
+                    <a href="${pageContext.request.contextPath}/notice/list?${vo.nextQueryString}">
                         <i class="fa-solid fa-angle-right"></i>
                     </a>
                 </c:if>

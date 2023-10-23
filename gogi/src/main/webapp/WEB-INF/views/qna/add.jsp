@@ -95,7 +95,7 @@
 			</div>
 			<div class="row right  pr-30">
 				<button type="submit" class="btn btn-orange">등록</button>
-				<a class="btn btn-navy" href="/qna/list">목록</a>
+				<a class="btn btn-navy" href="${pageContext.request.contextPath}/qna/list">목록</a>
 			</div>
 		</div>
 	</form>

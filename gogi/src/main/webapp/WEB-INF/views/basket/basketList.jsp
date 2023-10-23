@@ -790,7 +790,7 @@ $(function(){
 						
 						<td class="left w-60">
 							<!-- 제목을 누르면 상세페이지로 이동 -->
-							<a class="link" href="/product/detail?productNo=${basketListDto.basketListNo}">
+							<a class="link" href="${pageContext.request.contextPath}/product/detail?productNo=${basketListDto.basketListNo}">
 								${basketListDto.productName}
 							</a>
 						</td>

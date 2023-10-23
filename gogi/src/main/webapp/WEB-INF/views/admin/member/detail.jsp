@@ -64,8 +64,8 @@
                     </tr>
             </table>
             <div class="row right">
-                <a href="/admin/member/list"class="btn btn-navy">목록</a>
-               <a class="btn btn-orange" href="edit?memberId=${memberDto.memberId}">수정</a>
+                <a href="${pageContext.request.contextPath}/admin/member/list"class="btn btn-navy">목록</a>
+               <a class="btn btn-orange" href="${pageContext.request.contextPath}/member/edit?memberId=${memberDto.memberId}">수정</a>
                 
             </div>
         </div>

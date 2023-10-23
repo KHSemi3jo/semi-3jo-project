@@ -180,13 +180,13 @@
 
                 <div class="row flex-container pt-10">
                     <div class="row w-20 pt-10 pl-10">
-                    	<a href="/shopafter/list" ><i class="fa-regular fa-comment-dots fa-flip-horizontal fa-2xl orange"></i></a>
+                    	<a href="${pageContext.request.contextPath}/shopafter/list" ><i class="fa-regular fa-comment-dots fa-flip-horizontal fa-2xl orange"></i></a>
                     </div>
                     <div class="row w-30">
                         <button class="btn btn-orange btn-basket">장바구니담기</button>
                     </div>
                     <div class="row w-25">
-                        <a class="btn btn-navy" href="list?productNo=${productDto.productNo}">목록</a>
+                        <a class="btn btn-navy" href="${pageContext.request.contextPath}/product/list?productNo=${productDto.productNo}">목록</a>
                     </div>
                 </div>
             </div>

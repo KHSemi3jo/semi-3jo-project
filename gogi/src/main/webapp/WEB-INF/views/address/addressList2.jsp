@@ -457,7 +457,7 @@ $(function(){
 				<td>${addressDto.addressName}</td>
 				<td>${sessionScope.phone}</td>
 				<td>${addressDto.addressNormal}</td>
-				<td><a href="edit" id="editAddressButton" class="editAddressButton"> 
+				<td><a href="${pageContext.request.contextPath}/edit" id="editAddressButton" class="editAddressButton"> 
 				<i class="fa-solid fa-pen"></i></a></td>
 
 			</tr>

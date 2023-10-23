@@ -41,14 +41,14 @@
 								<img src="/images/shopAfter/bottonArrow.png" width="15" height="15"
 								style="background-color: ;">						
 							</c:if>
-							<a class="noticeTitle navy "href="detail?oneNo=${OneOnOneDto.oneNo}">${OneOnOneDto.oneTitle}</a>
+							<a class="noticeTitle navy "href="${pageContext.request.contextPath}/one/detail?oneNo=${OneOnOneDto.oneNo}">${OneOnOneDto.oneTitle}</a>
 						</td>				
 						<td>${OneOnOneDto.oneDate}</td>
 					</tr>
 				</c:forEach>
 			</table>
 			<div class="row right">
-							<a href="/one/add" class="btn btn-navy pt-10">문의하기</a>
+							<a href="${pageContext.request.contextPath}/one/add" class="btn btn-navy pt-10">문의하기</a>
 			</div>
 		</div>
 </div>
@@ -58,7 +58,7 @@
 <div class="row page-navigator mv-30">
 	<!-- 이전 버튼 -->
 	<c:if test="${!vo.first}">
-		<a href="list?${vo.prevQueryString}"> <i
+		<a href="${pageContext.request.contextPath}/one/list?${vo.prevQueryString}"> <i
 			class="fa-solid fa-angle-left"></i>
 		</a>
 	</c:if>
@@ -70,14 +70,14 @@
 				<a class="on">${i}</a>
 			</c:when>
 			<c:otherwise>
-				<a href="list?${vo.getQueryString(i)}">${i}</a>
+				<a href="${pageContext.request.contextPath}/one/list?${vo.getQueryString(i)}">${i}</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
 
 	<!-- 다음 버튼 -->
 	<c:if test="${!vo.last}">
-		<a href="list?${vo.nextQueryString}"> <i
+		<a href="${pageContext.request.contextPath}/one/list?${vo.nextQueryString}"> <i
 			class="fa-solid fa-angle-right"></i>
 		</a>
 	</c:if>

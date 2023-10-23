@@ -167,7 +167,7 @@
                 <hr class="mt-30">               
                 <div class="row pt-10 pr-20">
                     <button type="submit" class="btn btn-orange btn-save w-25">상품 등록</button>
-                    <a href="/product/list"class="btn btn-navy ">목록</a>
+                    <a href="${pageContext.request.contextPath}/product/list"class="btn btn-navy ">목록</a>
                 </div>
 
    	 </form>
