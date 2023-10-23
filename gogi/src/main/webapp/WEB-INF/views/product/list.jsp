@@ -147,7 +147,7 @@ select.form-input.product,
 		                    <c:choose>
 		                        <c:when test="${productDto.image}">
 		                        	<a class="link" href="${pageContext.request.contextPath}/product/detail?productNo=${productDto.productNo}">
-			                            <img src="${pageContext.request.contextPath}/image?productNo=${productDto.productNo}"
+			                            <img src="${pageContext.request.contextPath}/product/image?productNo=${productDto.productNo}"
 			                             class="img-fluid" alt="Product Image" width="250" height="300"></a>
 		                        </c:when>
 		                        <c:otherwise>
