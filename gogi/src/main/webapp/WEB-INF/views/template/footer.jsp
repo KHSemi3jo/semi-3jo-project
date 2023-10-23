@@ -67,10 +67,10 @@
                         </pre>
                     </div>
                     <div class="right">
-                        <a class="# me-10"><img src="/images/footer_icon/ico_instagram.webp"width="30"></a>
-                        <a class="# me-10"><img src="/images/footer_icon/ico_fb.webp"width="30"></a>
-                        <a class="# me-10"><img src="/images/footer_icon/ico_blog.webp"width="30"></a>
-                        <a class="# me-10"><img src="/images/footer_icon/ico_youtube.webp"width="30"></a>
+                        <a class="# me-10"><img src="${pageContext.request.contextPath}/images/footer_icon/ico_instagram.webp"width="30"></a>
+                        <a class="# me-10"><img src="${pageContext.request.contextPath}/images/footer_icon/ico_fb.webp"width="30"></a>
+                        <a class="# me-10"><img src="${pageContext.request.contextPath}/images/footer_icon/ico_blog.webp"width="30"></a>
+                        <a class="# me-10"><img src="${pageContext.request.contextPath}/images/footer_icon/ico_youtube.webp"width="30"></a>
                     </div>
 
                 </div>
