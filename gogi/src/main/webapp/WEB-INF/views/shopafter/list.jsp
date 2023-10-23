@@ -24,7 +24,7 @@ select.form-input, .form-input, .btn.btn-navy {
 		<c:if test="${sessionScope.name != null}">
 			<div class="row right ">
 		
-				<a href="add" class="btn upBtn btn btn-orange">
+				<a href="${pageContext.request.contextPath}/shopafter/add" class="btn upBtn btn btn-orange">
 					글쓰기
 				</a>
 			</div>
@@ -52,7 +52,7 @@ select.form-input, .form-input, .btn.btn-navy {
 						<td>${shopAfterDto.shopAfterNo}</td>
 									
 						
-						<td><a class="noticeTitle navy left" href="detail?shopAfterNo=${shopAfterDto.shopAfterNo}">${shopAfterDto.shopAfterName}
+						<td><a class="noticeTitle navy left" href="${pageContext.request.contextPath}/shopafter/detail?shopAfterNo=${shopAfterDto.shopAfterNo}">${shopAfterDto.shopAfterName}
 							<c:if test="${shopAfterDto.shopReplycount > 0}">
 							[${shopAfterDto.shopReplycount}]
 							</c:if></a>
@@ -72,7 +72,7 @@ select.form-input, .form-input, .btn.btn-navy {
 <div class="row page-navigator mv-30">
 	<!-- 이전 버튼 -->
 	<c:if test="${!vo.first}">
-		<a href="list?${vo.prevQueryString}"> <i
+		<a href="${pageContext.request.contextPath}/shopafter/list?${vo.prevQueryString}"> <i
 			class="fa-solid fa-angle-left"></i>
 		</a>
 	</c:if>
@@ -84,14 +84,14 @@ select.form-input, .form-input, .btn.btn-navy {
 				<a class="on">${i}</a>
 			</c:when>
 			<c:otherwise>
-				<a href="list?${vo.getQueryString(i)}">${i}</a>
+				<a href="${pageContext.request.contextPath}/shopafter/list?${vo.getQueryString(i)}">${i}</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
 
 	<!-- 다음 버튼 -->
 	<c:if test="${!vo.last}">
-		<a href="list?${vo.nextQueryString}"> <i
+		<a href="${pageContext.request.contextPath}/shopafter/list?${vo.nextQueryString}"> <i
 			class="fa-solid fa-angle-right"></i>
 		</a>
 	</c:if>

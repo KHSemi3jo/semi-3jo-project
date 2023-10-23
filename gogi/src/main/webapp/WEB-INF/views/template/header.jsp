@@ -73,7 +73,7 @@ window.contextPath = "${pageContext.request.contextPath}";
 						</c:choose>
 	                    <input type="search" name="keyword" class="form-input search-navy"
 	                                placeholder="검색어를 입력해주세요" autocomplete="off">
-	                    <button type="submit" class="btn btn-search"><i class="fa-solid fa-magnifying-glass orange"></i></button>
+	                    <button type="submit" class="btn btn-search" style="height: 45.19px"><i class="fa-solid fa-magnifying-glass orange"></i></button>
 	                </div>
 	             </form>
             </div>
@@ -113,7 +113,7 @@ window.contextPath = "${pageContext.request.contextPath}";
 								        	<%--비회원일시 보이는 etc 메뉴 --%>
 										            <%--비회원이 장바구니를 눌렀을 땐 로그인 화면으로 이동하거나 로그인 필요 팝업 --%>
 										            <div class="flex-container pt-20">
-										                <div class="row pr-30"><a href="${pageContext.request.contextPath}/basket/list"><i class="cart fa-solid fa-cart-shopping fa-xl navy"></i></a></div>
+										                <div class="row pr-20" style="margin-top: 20px"><a href="${pageContext.request.contextPath}/basket/list"><i class="cart fa-solid fa-cart-shopping fa-xl navy"></i></a></div>
 												        <div class="row pr-20"><a href="${pageContext.request.contextPath}/member/join" class="orange">회원가입</a></div>
 												        <div class="row pr-20 etc-menu navy"><a href="${pageContext.request.contextPath}/member/login">로그인</a></div>	
 												        <div class="row etc-menu custom-menu navy"><span>고객센터 <i class="fa-solid fa-angle-down"></i></span>

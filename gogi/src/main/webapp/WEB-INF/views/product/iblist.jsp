@@ -161,12 +161,12 @@ select.form-input.product{
 		                <div class="row">
 		                    <c:choose>
 		                        <c:when test="${productDto.image}">
-		                        	<a class="link" href="detail?productNo=${productDto.productNo}">
+		                        	<a class="link" href="${pageContext.request.contextPath}/product/detail?productNo=${productDto.productNo}">
 			                            <img src="image?productNo=${productDto.productNo}"
 			                             class="img-fluid" alt="Product Image" width="250" height="300"></a>
 		                        </c:when>
 		                        <c:otherwise>
-		                        	<a class="link" href="detail?productNo=${productDto.productNo}">
+		                        	<a class="link" href="${pageContext.request.contextPath}/product/detail?productNo=${productDto.productNo}">
 		                            	<img src="https://dummyimage.com/250x300/000/fff" class="img-fluid" alt="Default Image"></a>
 		                        </c:otherwise>
 		                    </c:choose>
@@ -186,8 +186,8 @@ select.form-input.product{
 		                    	${productDto.productPrice}원
 		                	</div>
 		                	<c:if test="${sessionScope.level == '관리자'}">			         
-			                    <a class="btn btn-navy " href="edit?productNo=${productDto.productNo}">수정</a>
-			                    <a class="btn btn-orange " href="delete?productNo=${productDto.productNo}">삭제</a>
+			                    <a class="btn btn-navy " href="${pageContext.request.contextPath}/product/edit?productNo=${productDto.productNo}">수정</a>
+			                    <a class="btn btn-orange " href="${pageContext.request.contextPath}/product/delete?productNo=${productDto.productNo}">삭제</a>
 		                	</c:if>
 		                </div>
 		            </div>

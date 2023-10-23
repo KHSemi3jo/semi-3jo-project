@@ -43,16 +43,16 @@ select.form-input,
     <c:forEach var= "memberListDto" items= "${list}">
 		<tr>
 		    <td> ${memberListDto.memberLevel}</td>
-			<td class="left"><a class="listTitle navy" href="detail?memberId=${memberListDto.memberId}">${memberListDto.memberId}</a></td>
+			<td class="left"><a class="listTitle navy" href="${pageContext.request.contextPath}/admin/member/detail?memberId=${memberListDto.memberId}">${memberListDto.memberId}</a></td>
 		    <td class="left"> ${memberListDto.memberName}</td>
 		    <td>
-				<a class="menu navy" href="edit?memberId=${memberListDto.memberId}">수정</a>	
+				<a class="menu navy" href="${pageContext.request.contextPath}/admin/member/edit?memberId=${memberListDto.memberId}">수정</a>	
 				<c:choose>
 					<c:when test="${memberListDto.block == 'Y'}">
-						<a class="menu orange" href="cancel?memberId=${memberListDto.memberId}">차단</a>
+						<a class="menu orange" href="${pageContext.request.contextPath}/admin/member/cancel?memberId=${memberListDto.memberId}">차단</a>
 					</c:when>
 					<c:otherwise>
-						<a class="menu navy" href="block?memberId=${memberListDto.memberId}">해제</a>
+						<a class="menu navy" href="${pageContext.request.contextPath}/admin/member/block?memberId=${memberListDto.memberId}">해제</a>
 					</c:otherwise>
 				</c:choose>
 		 	</td>
@@ -66,7 +66,7 @@ select.form-input,
 		<div class="row page-navigator mv-30">
                 <!-- 이전 버튼 -->
                 <c:if test="${!vo.first}">
-                    <a href="list?${vo.prevQueryString}">
+                    <a href="${pageContext.request.contextPath}/admin/member/list?${vo.prevQueryString}">
                         <i class="fa-solid fa-angle-left"></i>
                     </a>
                 </c:if>
@@ -78,14 +78,14 @@ select.form-input,
                             <a class="on">${i}</a>
                         </c:when>
                         <c:otherwise>
-                            <a href="list?${vo.getQueryString(i)}">${i}</a> 
+                            <a href="${pageContext.request.contextPath}/admin/member/list?${vo.getQueryString(i)}">${i}</a> 
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
             
                 <!-- 다음 버튼 -->
                 <c:if test="${!vo.last}">
-                    <a href="list?${vo.nextQueryString}">
+                    <a href="${pageContext.request.contextPath}/admin/member/list?${vo.nextQueryString}">
                         <i class="fa-solid fa-angle-right"></i>
                     </a>
                 </c:if>

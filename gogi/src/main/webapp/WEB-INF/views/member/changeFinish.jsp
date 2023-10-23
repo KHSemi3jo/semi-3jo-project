@@ -9,8 +9,8 @@
 		<h3 class="navy"><i class="fa-regular fa-face-laugh-beam fa-5x"></i></h3>
 	</div>
 	<div class="row pt-20">
-		<a class="btn btn-navy " href="/main">메인</a>
-		<a class="btn btn-navy " href="change">뒤로가기</a>
+		<a class="btn btn-navy " href="${pageContext.request.contextPath}/">메인</a>
+		<a class="btn btn-navy " href="${pageContext.request.contextPath}/member/change">뒤로가기</a>
 	</div>
 </div>
 

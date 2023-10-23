@@ -10,9 +10,9 @@
 	</c:otherwise>
 </c:choose>
 <!-- 내가 만든 CSS 파일-->
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/Gogi-layout.css">
-<link rel="stylesheet" type="text/css" href="/css/Gogi-commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Gogi-layout.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Gogi-commons.css">
 <style>
 
 .hidden-select{
@@ -42,11 +42,11 @@
                 </tr>
         </table>
         <div class="row right">
-            <a href="/notice/list"class="btn btn-navy">목록</a>
+            <a href="${pageContext.request.contextPath}/notice/list"class="btn btn-navy">목록</a>
             <%-- 수정,삭제는 관리자가 로그인한 경우에만 출력 --%>
 			<c:if test="${sessionScope.level =='관리자' }">
-	            <a class="btn btn-orange" href="/notice/fix?noticeNo=${noticeDto.noticeNo}">수정</a>
-	            <a class="btn btn-orange" href="/notice/delete?noticeNo=${noticeDto.noticeNo}">삭제</a>										
+	            <a class="btn btn-orange" href="${pageContext.request.contextPath}/notice/fix?noticeNo=${noticeDto.noticeNo}">수정</a>
+	            <a class="btn btn-orange" href="${pageContext.request.contextPath}/notice/delete?noticeNo=${noticeDto.noticeNo}">삭제</a>										
 			</c:if>
         </div>
     </div>

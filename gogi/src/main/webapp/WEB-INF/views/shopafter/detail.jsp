@@ -297,11 +297,11 @@
 		</table>
 
 		<div class="row right">
-			<a href="/shopafter/memberList" class="btn btn-navy">목록</a> 
+			<a href="${pageContext.request.contextPath}/shopafter/memberList" class="btn btn-navy">목록</a> 
 					<c:if test="${sessionScope.name == shopAfterDto.shopAfterId || sessionScope.level =='관리자'}">
-			<a class="btn btn-navy" href="/shopafter/fix?shopAfterNo=${shopAfterDto.shopAfterNo}">수정</a>
+			<a class="btn btn-navy" href="${pageContext.request.contextPath}/shopafter/fix?shopAfterNo=${shopAfterDto.shopAfterNo}">수정</a>
 			<a class="btn btn-navy"
-				href="/shopafter/delete?shopAfterNo=${shopAfterDto.shopAfterNo}">삭제</a>
+				href="${pageContext.request.contextPath}/shopafter/delete?shopAfterNo=${shopAfterDto.shopAfterNo}">삭제</a>
 		</c:if>
 		</div>
 	</div>
@@ -317,7 +317,7 @@
 <div class="row page-navigator mv-30">
 	<!-- 이전 버튼 -->
 	<c:if test="${!vo.first}">
-		<a href="list?${vo.prevQueryString}"> <i
+		<a href="${pageContext.request.contextPath}/shopafter/list?${vo.prevQueryString}"> <i
 			class="fa-solid fa-angle-left"></i>
 		</a>
 	</c:if>
@@ -329,14 +329,14 @@
 				<a class="on">${i}</a>
 			</c:when>
 			<c:otherwise>
-				<a href="list?${vo.getQueryString(i)}">${i}</a>
+				<a href="${pageContext.request.contextPath}/shopafter/list?${vo.getQueryString(i)}">${i}</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
 
 	<!-- 다음 버튼 -->
 	<c:if test="${!vo.last}">
-		<a href="list?${vo.nextQueryString}"> <i
+		<a href="${pageContext.request.contextPath}/shopafter/list?${vo.nextQueryString}"> <i
 			class="fa-solid fa-angle-right"></i>
 		</a>
 	</c:if>

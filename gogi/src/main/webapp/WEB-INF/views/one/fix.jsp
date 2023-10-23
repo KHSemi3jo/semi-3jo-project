@@ -64,9 +64,9 @@
                     </div>
          </div>
 		<div class="row right  pr-30">
-                    <a class="btn btn-navy" href="/one/list">목록</a>
+                    <a class="btn btn-navy" href="${pageContext.request.contextPath}/one/list">목록</a>
                     <button type="submit"class="btn btn-orange">등록</button>
-                    <a class="btn btn-orange"href="/one/delete?ontNo=${oneOnOneDto.oneNo}">삭제</a>
+                    <a class="btn btn-orange"href="${pageContext.request.contextPath}/one/delete?ontNo=${oneOnOneDto.oneNo}">삭제</a>
         </div>
 
 	</form>

@@ -33,7 +33,7 @@ select.form-input.notice{
     <%-- 작성은 관리자가 로그인한 경우에만 출력 --%>
 		<c:if test="${sessionScope.level =='관리자' }">
 	        <div class="row right">
-	            <a href="/qna/add" class="btn btn-orange">작성</a>
+	            <a href="${pageContext.request.contextPath}/qna/add" class="btn btn-orange">작성</a>
 	        </div>
 		</c:if>
         
@@ -62,7 +62,7 @@ select.form-input.notice{
                     <tr>
                         <td>${qnaDto.qnaNo}</td>
                         <td>${qnaDto.qnaCategory}</td>
-                        <td class="left w-70"><a class="qnaTitle navy" href="detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></td>    
+                        <td class="left w-70"><a class="qnaTitle navy" href="${pageContext.request.contextPath}/qna/detail?qnaNo=${qnaDto.qnaNo}">${qnaDto.qnaTitle}</a></td>    
                     </tr>
                 </c:forEach>
             
@@ -74,7 +74,7 @@ select.form-input.notice{
 <div class="row page-navigator mv-30">
             <!-- 이전 버튼 -->
             <c:if test="${!vo.first}">
-                <a href="list?${vo.prevQueryString}">
+                <a href="${pageContext.request.contextPath}/qna/list?${vo.prevQueryString}">
                     <i class="fa-solid fa-angle-left"></i>
                 </a>
             </c:if>
@@ -86,14 +86,14 @@ select.form-input.notice{
                         <a class="on">${i}</a>
                     </c:when>
                     <c:otherwise>
-                        <a href="list?${vo.getQueryString(i)}">${i}</a> 
+                        <a href="${pageContext.request.contextPath}/qna/list?${vo.getQueryString(i)}">${i}</a> 
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
         
             <!-- 다음 버튼 -->
             <c:if test="${!vo.last}">
-                <a href="list?${vo.nextQueryString}">
+                <a href="${pageContext.request.contextPath}/qna/list?${vo.nextQueryString}">
                     <i class="fa-solid fa-angle-right"></i>
                 </a>
             </c:if>

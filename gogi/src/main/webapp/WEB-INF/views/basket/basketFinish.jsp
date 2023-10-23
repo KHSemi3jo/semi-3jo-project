@@ -134,7 +134,7 @@
 					<td class="left w-60">
 						<div class="row pt-10 left">
 							<!-- 제목을 누르면 상세페이지로 이동 -->
-							<a class="link" href="/product/detail?productNo=${basketListDto.basketListNo}">
+							<a class="link" href="${pageContext.request.contextPath}/product/detail?productNo=${basketListDto.basketListNo}">
 								<h4>${basketListDto.productName}</h4>
 							</a>
 						</div>
@@ -155,7 +155,7 @@
 		</table>
 </div>
 		<div class="row pt-20" >
-			<a href="/main" class="btn btn-navy pt-10">메인 페이지로 이동</a>
+			<a href="${pageContext.request.contextPath}/" class="btn btn-navy pt-10">메인 페이지로 이동</a>
 		</div>
 </div>
 
