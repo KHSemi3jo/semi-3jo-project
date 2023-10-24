@@ -87,7 +87,7 @@
 }
 </style>
 
-<script src="/js/checkbox.js"></script>
+<script src="${pageContext.request.contextPath}/js/checkbox.js"></script>
 
 <!--daum 우편 API cdn-->
 <script
