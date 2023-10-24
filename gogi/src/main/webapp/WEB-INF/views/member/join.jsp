@@ -32,13 +32,13 @@
     width: 1em;
     height: 1em;
 
-    background-image: url("/images/checkbox/checkbox-empty.png");
+    background-image: url("${pageContext.request.contextPath}/images/checkbox/checkbox-empty.png");
     background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
 }
 .custom-checkbox > [type=checkbox]:checked + span {
-    background-image: url("/images/checkbox/checkbox-check.png");
+    background-image: url("${pageContext.request.contextPath}/images/checkbox/checkbox-check.png");
 }
 .popup {
     top:0;
@@ -276,7 +276,7 @@ textarea:focus{
 								</button>
                         <div class="cert-wrapper pt-10">
        					 <input type="text" class="cert-input form-input w-70">
-       					 <button class="btn-cert btn btn-navy">확인완료</button>
+       					 <button class="btn-cert btn btn-navy" >확인완료</button>
        					 
        					 </div>
        					 <div class="fail-feedback left">이메일 입력 후 인증해주세요</div>
