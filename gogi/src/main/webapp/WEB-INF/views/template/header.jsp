@@ -61,7 +61,7 @@ window.contextPath = "${pageContext.request.contextPath}";
                 <a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/images/logo/GogiLogo-main.png"width=150 height="150"></a>
             </div>
             <div class="title flex-container pl-50">
-	            <form action="/product/list" method="get">
+	            <form action="${pageContext.request.contextPath}/product/list" method="get">
 	                <div class="row input-search">
 		                <c:choose>
 							<c:when test="${vo.type == 'productName'}"></c:when>
