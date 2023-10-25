@@ -90,7 +90,7 @@
 
 </style>
 
-<script src="/js/checkbox.js"></script>
+<script src="${pageContext.request.contextPath}/js/checkbox.js"></script>
 
 <!--daum 우편 API cdn-->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
