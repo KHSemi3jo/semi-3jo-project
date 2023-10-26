@@ -29,13 +29,13 @@
     width: 1em;
     height: 1em;
 
-    background-image: url("/images/checkbox/checkbox-empty.png");
+    background-image: url("${pageContext.request.contextPath}/images/checkbox/checkbox-empty.png");
     background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
 }
 .custom-checkbox > [type=checkbox]:checked + span {
-    background-image: url("/images/checkbox/checkbox-check.png");
+    background-image: url("${pageContext.request.contextPath}/images/checkbox/checkbox-check.png");
 }
 /* 버튼 스타일 */
         .btn-decrease-quantity,
